@@ -1,0 +1,2121 @@
+<!doctype html>
+<!-- J-Lens Explorer — Tiny Mind app #4, Phase 1 prototype (CPU, shipped lens).
+     Copyright (c) 2026 Ken Kahn. MIT License.
+     stories110M model courtesy of Andrej Karpathy's tinyllamas (MIT).
+     Reuses (verbatim where possible) the Tiny Mind bin-reader, tokenizer and
+     capture patterns; the forward pass drops the C-parity fround discipline
+     for a register-blocked fp32/f64-accumulate matmul (see worker source). -->
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>J-Lens Explorer — Tiny Mind</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%277%27%20fill%3D%27%231a1f2b%27/%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2714%27%20r%3D%277%27%20fill%3D%27none%27%20stroke%3D%27%239ecbff%27%20stroke-width%3D%272%27/%3E%3Cline%20x1%3D%2719%27%20y1%3D%2719%27%20x2%3D%2726%27%20y2%3D%2726%27%20stroke%3D%27%239ecbff%27%20stroke-width%3D%272.5%27/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #12141a; --card: #1b1f28; --edge: #2b3140; --ink: #dde3ec; --dim: #8791a3;
+    --green: #8fd3a7; --blue: #9ecbff; --gold: #ffd27f; --pink: #ff9ec2; --red: #ff9c9c;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink);
+         margin: 0; padding: 1rem 1.2rem; font-size: 15px; }
+  h1 { font-size: 20px; margin: 0; color: var(--blue); }
+  .sub { color: var(--dim); margin: .15rem 0 1rem; font-size: 13px; }
+  .card { background: var(--card); border: 1px solid var(--edge); border-radius: 10px;
+          padding: .8rem 1rem; margin-bottom: .9rem; }
+  .card h2 { font-size: 14px; margin: 0 0 .5rem; color: var(--blue); font-weight: 600; }
+  button { background: #2b4a6f; color: #dff0ff; border: 0; border-radius: 6px;
+           padding: .4rem .8rem; margin: .15rem .3rem .15rem 0; cursor: pointer; font: inherit; }
+  button.go { background: #2d5a3d; color: #eaffea; }
+  button.warn { background: #5a2d4a; color: #ffe6f2; }
+  button.small { padding: .15rem .5rem; font-size: 12px; }
+  button:disabled { opacity: .35; cursor: default; }
+  input[type=text], input[type=number], select, textarea {
+    background: #12151c; color: var(--ink); border: 1px solid var(--edge);
+    border-radius: 5px; padding: .25rem .4rem; font: inherit; }
+  textarea { width: 100%; }
+  input[type=range] { accent-color: var(--gold); vertical-align: middle; }
+  .hint { color: var(--dim); font-size: 12.5px; }
+  .ok { color: var(--green); } .warn-t { color: var(--gold); } .err { color: var(--red); }
+  .grid2 { display: grid; grid-template-columns: minmax(340px, 1.15fr) 1fr; gap: .9rem; align-items: start; }
+  @media (max-width: 1100px) { .grid2 { grid-template-columns: 1fr; } }
+  #dropzone { border: 2px dashed #444c5e; border-radius: 10px; padding: .7rem 1rem;
+              text-align: center; color: var(--dim); margin-top: .5rem; }
+  #dropzone.over { border-color: var(--green); color: var(--green); }
+  .prog { height: 9px; background: #262c38; border-radius: 5px; overflow: hidden; margin: .25rem 0; }
+  .prog div { height: 100%; width: 0; background: var(--pink); transition: width .15s; }
+  .filerow { display: flex; align-items: center; gap: .5rem; font-size: 12.5px; margin: .15rem 0; }
+  .filerow .nm { width: 11.5em; color: var(--dim); }
+  .filerow .st { min-width: 5em; }
+  /* story pane */
+  #story { line-height: 2.05; font-size: 16px; max-height: 340px; overflow-y: auto;
+           background: #12151c; border-radius: 8px; padding: .6rem .7rem; }
+  .tok { border-radius: 4px; padding: .05rem .05rem; cursor: pointer; white-space: pre-wrap; }
+  .tok:hover { background: #2b3140; }
+  .tok.sel { background: #2b4a6f; outline: 1px solid var(--blue); }
+  .tok.hot0 { background: rgba(255,210,127,.13); } .tok.hot1 { background: rgba(255,210,127,.32); }
+  .tok.hot2 { background: rgba(255,158,194,.45); } .tok.hot3 { background: rgba(255,158,194,.75); color:#1a0d14; }
+  #heatCaption { font-size: 12.5px; color: var(--gold); min-height: 1.3em; margin-top: .3rem; }
+  /* readout panel */
+  .lrow { display: flex; align-items: flex-start; gap: .5rem; padding: .28rem 0;
+          border-bottom: 1px solid #232936; }
+  .lrow .lname { width: 3.4em; color: var(--gold); font-weight: 600; font-size: 13px;
+                 cursor: default; padding-top: .12rem; flex: none; }
+  .lrow .chips { flex: 1; display: flex; flex-wrap: wrap; gap: .28rem; }
+  .rchip { background: #12151c; border: 1px solid var(--edge); color: var(--ink);
+           border-radius: 999px; padding: .08rem .55rem; font-size: 13px; cursor: pointer; }
+  .rchip:hover { border-color: var(--blue); }
+  .rchip.jonly { border-color: #3f7d55; background: #16241b; color: var(--green); }
+  .rchip.alias { color: var(--pink); }
+  .rchip.heaton { outline: 2px solid var(--gold); }
+  .rchip .rk { color: var(--dim); font-size: 10.5px; margin-left: .25rem; }
+  .mode { display: inline-flex; border: 1px solid var(--edge); border-radius: 6px; overflow: hidden; }
+  .mode button { margin: 0; border-radius: 0; background: #1b1f28; color: var(--dim); }
+  .mode button.on { background: #2b4a6f; color: #dff0ff; }
+  .modelrow { background: #12151c; border-radius: 6px; padding: .3rem .5rem; margin-top: .45rem;
+              font-size: 13px; }
+  .modelrow b { color: var(--gold); }
+  #genOut, .swapcol { background: #12151c; border-radius: 8px; padding: .5rem .6rem;
+             font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+  .swapgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .6rem; }
+  @media (max-width: 900px) { .swapgrid { grid-template-columns: 1fr; } }
+  .swapcol h3 { margin: 0 0 .3rem; font-size: 12.5px; color: var(--dim); font-weight: 600; }
+  .swapcol .changed { color: var(--pink); }
+  #status { color: var(--dim); font-size: 12.5px; min-height: 1.2em; margin-top: .3rem; }
+  .chiprow { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0; }
+  .pchip { background: #262c38; color: var(--blue); border: 0; border-radius: 999px;
+           padding: .05rem .55rem; font-size: 11.5px; cursor: pointer; }
+  .pchip:hover { background: #2b4a6f; }
+  label.inl { color: var(--dim); font-size: 12.5px; margin-right: .6rem; }
+  datalist { display: none; }
+</style>
+</head><body>
+<div id="throttleBanner" style="display:none;background:#4a3a1f;border:1px solid var(--gold);color:var(--gold);border-radius:8px;padding:.5rem .8rem;margin-bottom:.8rem;font-size:13.5px">
+  🐌 your browser slowed this tab while it was hidden — the numbers below took longer than they would in front.
+  <button class="small" style="margin-left:.6rem" onclick="this.parentElement.style.display='none'">ok</button>
+</div>
+<h1>🔍 J-Lens Explorer</h1>
+<div class="sub">watch what a tiny story-writer is holding in mind — layer by layer, word by word.
+  A Tiny Mind instrument (Phase 1 prototype). J-lens = Jacobian lens; the comparison mode is the plain logit lens.</div>
+
+<div class="card" id="loadCard">
+  <h2>1 · model &amp; lens</h2>
+  <div class="filerow"><span class="nm">stories110M.bin (~420 MB)</span><span class="st" id="st-model">—</span><div class="prog" style="flex:1"><div id="pg-model"></div></div></div>
+  <div class="filerow"><span class="nm">tokenizer.bin</span><span class="st" id="st-tok">—</span><div class="prog" style="flex:1"><div id="pg-tok"></div></div></div>
+  <div class="filerow"><span class="nm">stories110M.jlens</span><span class="st" id="st-lens">—</span><div class="prog" style="flex:1"><div id="pg-lens"></div></div></div>
+  <div class="filerow"><span class="nm">vocab.json</span><span class="st" id="st-vocab">—</span><div class="prog" style="flex:1"><div id="pg-vocab"></div></div></div>
+  <button id="fetchBtn" class="go">⬇ fetch files from this folder</button>
+  <span class="hint">or drop them below (works from file://)</span>
+  <div id="dropzone">drop stories110M.bin · tokenizer.bin · stories110M.jlens · vocab.json here</div>
+  <div class="filerow" style="margin-top:.4rem"><span class="nm">readout dictionaries</span><span class="st" id="st-dict">—</span><div class="prog" style="flex:1"><div id="pg-dict"></div></div></div>
+</div>
+
+<div class="grid2">
+<div>
+  <div class="card">
+    <h2>2 · get a story in</h2>
+    <textarea id="promptBox" rows="3">Lily and Max went to the beach. Lily built a castle. Max dug a</textarea>
+    <div class="chiprow" id="promptChips"></div>
+    <div class="chiprow" id="themeChips"></div>
+    <div style="margin-top:.3rem">
+      <button id="analyzeBtn" class="go" disabled>🔬 analyze (read it)</button>
+      <button id="genBtn" disabled>✍️ generate (model writes on)</button>
+      <button id="stopBtn" class="warn" disabled>■ stop</button>
+      <label class="inl">heat <input id="tempSlider" type="range" min="0" max="1.4" step="0.1" value="0.8" style="width:90px"><span id="tempVal">0.8</span></label>
+      <label class="inl">max <input id="maxNew" type="number" value="120" min="10" max="700" style="width:4.5em"></label>
+    </div>
+    <div id="genOut" class="hint" style="margin-top:.4rem">generated text streams here…</div>
+    <div id="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>3 · the story, token by token <span class="hint">(click a word)</span></h2>
+    <div id="story" class="hint">analyze or generate first…</div>
+    <div id="heatCaption"></div>
+    <div class="hint" style="margin-top:.3rem">heat strip: click any readout chip on the right → the story lights up where that
+      word was on the model's mind (mid-layer J-lens rank; brighter = higher).
+      <button id="heatOff" class="small" style="display:none">clear heat</button></div>
+  </div>
+
+  <div class="card">
+    <h2>5 · swap what it's thinking <span class="hint">(then let it keep writing)</span></h2>
+    <div>
+      <label class="inl">take out <input id="swapSrc" type="text" list="vocabList" placeholder=" hole" style="width:8em"></label>
+      <label class="inl">put in <input id="swapTgt" type="text" list="vocabList" placeholder=" castle" style="width:8em"></label>
+      <span class="hint">single-token story words work best (pick from the list)</span>
+      <datalist id="vocabList"></datalist>
+    </div>
+    <div style="margin-top:.25rem">
+      <label class="inl">from the <b id="swapPosLabel">selected token</b> onward</label>
+      <label class="inl">layers <select id="swapL0"></select>–<select id="swapL1"></select></label>
+      <label class="inl">strength <input id="swapStrength" type="range" min="0" max="1.5" step="0.05" value="0.4" style="width:110px"><span id="swapStrVal">0.4</span> <span class="hint">(small models oversteer — keep it low)</span></label>
+      <label class="inl" title="rewrites are deterministic (temperature 0) so the ONLY difference between the two is the swap; tick to use the story heat slider instead"><input type="checkbox" id="swapUseTemp"> use story heat (advanced)</label>
+    </div>
+    <button id="swapBtn" class="go" disabled>🔁 swap &amp; rewrite</button>
+    <span id="swapSpin" style="display:none">⏳</span>
+    <span class="hint" id="swapHint">select a token in the story first</span>
+    <div class="hint" style="margin-top:.35rem">From the anchor, the model rewrites the story twice — the <b>only</b>
+      difference between the two rewrites is the swap. Words already written before the anchor stay
+      as they are (including the swapped word itself, if it's there): the swap changes what the model
+      is <i>thinking</i> from the anchor on, not the text it already wrote.</div>
+    <div class="swapgrid" style="margin-top:.5rem">
+      <div class="swapcol"><h3>original</h3><div id="swapOrig" class="hint">—</div></div>
+      <div class="swapcol"><h3>rewrite (no swap)</h3><div id="swapNoSwap" class="hint">—</div></div>
+      <div class="swapcol"><h3>rewrite (with swap)</h3><div id="swapWith" class="hint">—</div></div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="card">
+    <h2>4 · what it's holding in mind <span class="hint" id="roPos">— no token selected</span></h2>
+    <div style="margin-bottom:.4rem">
+      <span class="mode">
+        <button id="mJ" class="on">J-lens</button><button id="mL">logit lens</button><button id="mD">DIFF</button>
+      </span>
+      <label class="inl" style="margin-left:.6rem"><input type="checkbox" id="rawToggle"> raw (unfiltered — the honest view)</label>
+      <label class="inl"><input type="checkbox" id="top20Toggle"> top-20</label>
+    </div>
+    <div id="readout" class="hint">layers L4–L8 appear here after you select a token.</div>
+    <div class="modelrow" id="modelRow"></div>
+    <div class="hint" style="margin-top:.4rem">
+      J-lens rows show what the middle of the network is <i>disposed to say</i>; the logit lens shows
+      what it would blurt out if it stopped there. DIFF marks words only the J-lens sees
+      (<span class="ok">green</span>). Pink chips are name fragments — “L… (Lily?)” means the model is
+      thinking of a word that starts like Lily. Ranks are within the story vocabulary (~5k words).
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="hint" style="margin:1rem 0">
+  Phase 1 prototype · CPU only · lens fitted offline (1000 TinyStories prompts) · MIT license ·
+  model courtesy of Andrej Karpathy's tinyllamas · <span id="devNote"></span>
+</div>
+
+<!-- ============================ worker source ============================
+     Plain-text script: booted as a Blob Worker by the page, extractable and
+     eval-able by the Node parity harness (test/parity.mjs). DOM-free. -->
+<script id="workerSrc" type="text/plain">
+'use strict';
+// ---- bin-reader (verbatim from Tiny Mind src/bin-reader.js, reader only) ----
+const HEADER_INTS = 7;
+const HEADER_BYTES = HEADER_INTS * 4;
+
+function toArrayBuffer(data) {
+  if (data instanceof ArrayBuffer) return { buf: data, off: 0, len: data.byteLength };
+  if (ArrayBuffer.isView(data)) return { buf: data.buffer, off: data.byteOffset, len: data.byteLength };
+  throw new Error('bin-reader: expected ArrayBuffer or typed array');
+}
+
+function layout(c) {
+  const headSize = c.dim / c.nHeads;
+  const kvDim = (c.dim * c.nKvHeads) / c.nHeads;
+  return [
+    { name: 'tokenEmbedding', size: c.vocabSize * c.dim },
+    { name: 'rmsAtt',         size: c.nLayers * c.dim },
+    { name: 'wq',             size: c.nLayers * c.dim * c.dim },
+    { name: 'wk',             size: c.nLayers * c.dim * kvDim },
+    { name: 'wv',             size: c.nLayers * c.dim * kvDim },
+    { name: 'wo',             size: c.nLayers * c.dim * c.dim },
+    { name: 'rmsFfn',         size: c.nLayers * c.dim },
+    { name: 'w1',             size: c.nLayers * c.hiddenDim * c.dim },
+    { name: 'w2',             size: c.nLayers * c.dim * c.hiddenDim },
+    { name: 'w3',             size: c.nLayers * c.hiddenDim * c.dim },
+    { name: 'rmsFinal',       size: c.dim },
+    { name: 'legacyFreqCis',  size: c.seqLen * headSize },
+    { name: 'wcls',           size: c.sharedWeights ? 0 : c.vocabSize * c.dim },
+  ];
+}
+
+function readCheckpoint(data) {
+  const { buf, off, len } = toArrayBuffer(data);
+  const dv = new DataView(buf, off, len);
+  const raw = [];
+  for (let i = 0; i < HEADER_INTS; i++) raw.push(dv.getInt32(i * 4, true));
+  const [dim, hiddenDim, nLayers, nHeads, nKvHeads, vocabRaw, seqLen] = raw;
+  const config = {
+    dim, hiddenDim, nLayers, nHeads, nKvHeads,
+    vocabSize: Math.abs(vocabRaw),
+    seqLen,
+    sharedWeights: vocabRaw > 0,
+    headSize: dim / nHeads,
+    kvDim: (dim * nKvHeads) / nHeads,
+  };
+  if ((off + HEADER_BYTES) % 4 !== 0) throw new Error('bin-reader: weights not 4-byte aligned');
+  const floats = new Float32Array(buf, off + HEADER_BYTES, (len - HEADER_BYTES) / 4);
+  const weights = {};
+  let p = 0;
+  for (const t of layout(config)) {
+    if (t.name !== 'legacyFreqCis' && t.size > 0) weights[t.name] = floats.subarray(p, p + t.size);
+    p += t.size;
+  }
+  if (config.sharedWeights) weights.wcls = weights.tokenEmbedding;
+  const expectedBytes = HEADER_BYTES + p * 4;
+  if (expectedBytes !== len) throw new Error(`bin-reader: layout consumed ${expectedBytes} bytes but file is ${len}`);
+  return { config, weights, fileBytes: len };
+}
+
+// ---- tokenizer (verbatim from Tiny Mind src/tokenizer.js) ----
+const BOS = 1;
+const EOS = 2;
+const textEncoder = new TextEncoder();
+const textDecoder = new TextDecoder('utf-8');
+
+function bytesToByteString(bytes) {
+  let s = '';
+  for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]);
+  return s;
+}
+
+class Tokenizer {
+  constructor(data, vocabSize) {
+    let buf, off, len;
+    if (data instanceof ArrayBuffer) { buf = data; off = 0; len = data.byteLength; }
+    else if (ArrayBuffer.isView(data)) { buf = data.buffer; off = data.byteOffset; len = data.byteLength; }
+    else throw new Error('Tokenizer: expected ArrayBuffer or typed array');
+    const dv = new DataView(buf, off, len);
+    const bytes = new Uint8Array(buf, off, len);
+    this.vocabSize = vocabSize;
+    this.maxTokenLength = dv.getInt32(0, true);
+    this.vocab = new Array(vocabSize);
+    this.scores = new Float32Array(vocabSize);
+    let p = 4;
+    for (let i = 0; i < vocabSize; i++) {
+      this.scores[i] = dv.getFloat32(p, true); p += 4;
+      const n = dv.getInt32(p, true); p += 4;
+      this.vocab[i] = bytesToByteString(bytes.subarray(p, p + n)); p += n;
+    }
+    if (p !== len) throw new Error(`Tokenizer: consumed ${p} of ${len} bytes`);
+    this.lookup = new Map();
+    for (let i = 0; i < vocabSize; i++) {
+      if (!this.lookup.has(this.vocab[i])) this.lookup.set(this.vocab[i], i);
+    }
+  }
+  encode(text, bos = false, eos = false) {
+    const tokens = [];
+    if (bos) tokens.push(BOS);
+    if (text.length !== 0) {
+      const dummyPrefix = this.lookup.get(' ');
+      if (dummyPrefix === undefined) throw new Error('Tokenizer: no " " piece in vocab');
+      tokens.push(dummyPrefix);
+    }
+    const utf8 = textEncoder.encode(text);
+    let chunk = '';
+    for (let i = 0; i < utf8.length; i++) {
+      const b = utf8[i];
+      if ((b & 0xC0) !== 0x80) chunk = '';
+      chunk += String.fromCharCode(b);
+      const next = utf8[i + 1];
+      if (next !== undefined && (next & 0xC0) === 0x80 && chunk.length < 4) continue;
+      const id = this.lookup.get(chunk);
+      if (id !== undefined) tokens.push(id);
+      else for (let j = 0; j < chunk.length; j++) tokens.push(chunk.charCodeAt(j) + 3);
+      chunk = '';
+    }
+    while (true) {
+      let bestScore = -1e10, bestId = -1, bestIdx = -1;
+      for (let i = 0; i < tokens.length - 1; i++) {
+        const merged = this.vocab[tokens[i]] + this.vocab[tokens[i + 1]];
+        const id = this.lookup.get(merged);
+        if (id !== undefined && this.scores[id] > bestScore) {
+          bestScore = this.scores[id]; bestId = id; bestIdx = i;
+        }
+      }
+      if (bestIdx === -1) break;
+      tokens[bestIdx] = bestId;
+      tokens.splice(bestIdx + 1, 1);
+    }
+    if (eos) tokens.push(EOS);
+    return tokens;
+  }
+  decodePiece(prevToken, token) {
+    let piece = this.vocab[token];
+    if (prevToken === BOS && piece.charCodeAt(0) === 0x20) piece = piece.slice(1);
+    const m = /^<0x([0-9A-Fa-f]{2})>$/.exec(piece);
+    if (m) piece = String.fromCharCode(parseInt(m[1], 16));
+    return piece;
+  }
+  decode(tokens) {
+    let bytes = '';
+    let prev = BOS;
+    for (const tok of tokens) {
+      if (tok === BOS || tok === EOS) { prev = tok; continue; }
+      bytes += this.decodePiece(prev, tok);
+      prev = tok;
+    }
+    const arr = new Uint8Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
+    return textDecoder.decode(arr);
+  }
+}
+
+// ---- fast forward pass ----------------------------------------------------
+// Ported from Tiny Mind src/model.js with the fround/C-parity discipline
+// REMOVED (per the Phase-1 brief: that gate protects the 260K trainee, not
+// this app) and the matmul replaced with the Trainer's register-blocked
+// pattern (4 output rows per pass, f64 accumulators in registers).
+// RoPE / rmsnorm / softmax semantics unchanged; eps = 1e-5 matches both
+// run.c and the HF config (rms_norm_eps=1e-05) the lens was fitted against.
+
+function matmulFast(xout, outOff, x, w, wOff, n, d) {
+  const d4 = d - (d % 4);
+  let i = 0;
+  for (; i < d4; i += 4) {
+    const r0 = wOff + i * n, r1 = r0 + n, r2 = r1 + n, r3 = r2 + n;
+    let a0 = 0, a1 = 0, a2 = 0, a3 = 0;
+    for (let j = 0; j < n; j++) {
+      const xv = x[j];
+      a0 += xv * w[r0 + j]; a1 += xv * w[r1 + j];
+      a2 += xv * w[r2 + j]; a3 += xv * w[r3 + j];
+    }
+    xout[outOff + i] = a0; xout[outOff + i + 1] = a1;
+    xout[outOff + i + 2] = a2; xout[outOff + i + 3] = a3;
+  }
+  for (; i < d; i++) {
+    const row = wOff + i * n;
+    let val = 0;
+    for (let j = 0; j < n; j++) val += w[row + j] * x[j];
+    xout[outOff + i] = val;
+  }
+}
+
+// batched matmul: OUT[N,O] = X[N,C] @ W[O,C]^T, 4 output rows x 2 positions
+// per inner pass so each weight row is streamed once per position-PAIR.
+// Per-element accumulation order (i ascending) is identical to matmulFast,
+// so results are bit-identical; this is purely a memory-traffic optimization.
+function matmulBatch(out, X, W, N, C, O) {
+  const O4 = O - (O % 4);
+  const N2 = N - (N % 2);
+  let n = 0;
+  for (; n < N2; n += 2) {
+    const xa = n * C, xb = xa + C, oa = n * O, ob = oa + O;
+    let o = 0;
+    for (; o < O4; o += 4) {
+      const w0 = o * C, w1 = w0 + C, w2 = w1 + C, w3 = w2 + C;
+      let a0 = 0, a1 = 0, a2 = 0, a3 = 0, b0 = 0, b1 = 0, b2 = 0, b3 = 0;
+      for (let i = 0; i < C; i++) {
+        const wv0 = W[w0 + i], wv1 = W[w1 + i], wv2 = W[w2 + i], wv3 = W[w3 + i];
+        const va = X[xa + i], vb = X[xb + i];
+        a0 += va * wv0; a1 += va * wv1; a2 += va * wv2; a3 += va * wv3;
+        b0 += vb * wv0; b1 += vb * wv1; b2 += vb * wv2; b3 += vb * wv3;
+      }
+      out[oa + o] = a0; out[oa + o + 1] = a1; out[oa + o + 2] = a2; out[oa + o + 3] = a3;
+      out[ob + o] = b0; out[ob + o + 1] = b1; out[ob + o + 2] = b2; out[ob + o + 3] = b3;
+    }
+    for (; o < O; o++) {
+      const wb = o * C;
+      let sa = 0, sb = 0;
+      for (let i = 0; i < C; i++) { sa += X[xa + i] * W[wb + i]; sb += X[xb + i] * W[wb + i]; }
+      out[oa + o] = sa; out[ob + o] = sb;
+    }
+  }
+  for (; n < N; n++) matmulFast(out, n * O, X.subarray(n * C, (n + 1) * C), W, 0, C, O);
+}
+
+function rmsnormFast(o, x, w, wOff, size) {
+  let ss = 0;
+  for (let j = 0; j < size; j++) ss += x[j] * x[j];
+  ss = 1 / Math.sqrt(ss / size + 1e-5);
+  for (let j = 0; j < size; j++) o[j] = w[wOff + j] * (ss * x[j]);
+}
+
+function softmaxFast(x, off, size) {
+  let max = x[off];
+  for (let i = 1; i < size; i++) if (x[off + i] > max) max = x[off + i];
+  let sum = 0;
+  for (let i = 0; i < size; i++) { x[off + i] = Math.exp(x[off + i] - max); sum += x[off + i]; }
+  for (let i = 0; i < size; i++) x[off + i] /= sum;
+}
+
+function createState(c) {
+  return {
+    x: new Float32Array(c.dim),
+    xb: new Float32Array(c.dim),
+    xb2: new Float32Array(c.dim),
+    hb: new Float32Array(c.hiddenDim),
+    hb2: new Float32Array(c.hiddenDim),
+    q: new Float32Array(c.dim),
+    att: new Float32Array(c.nHeads * c.seqLen),
+    logits: new Float32Array(c.vocabSize),
+    keyCache: new Float32Array(c.nLayers * c.seqLen * c.kvDim),
+    valueCache: new Float32Array(c.nLayers * c.seqLen * c.kvDim),
+  };
+}
+
+// forward one token. tapResidual(l, pos, x) fires at each captured layer's
+// OUTPUT (post-ffn residual add) — the same point jlens' ActivationRecorder
+// reads. residEdit(l, pos, x) — the swap/inject hook, applied at the same
+// point BEFORE the tap so downstream layers and the tap both see the edit.
+// wantLogits=false skips final rmsnorm+unembed (over half the per-token
+// FLOPs; capture only needs the final residual, which we tap separately).
+function forwardFast(model, token, pos, opts = {}) {
+  const { tapResidual = null, tapLayers = null, residEdit = null,
+          editLayers = null, wantLogits = true, finalResidualOut = null } = opts;
+  const c = model.config, w = model.weights, s = model.state;
+  const dim = c.dim, kvDim = c.kvDim, hiddenDim = c.hiddenDim, headSize = c.headSize;
+  const kvMul = c.nHeads / c.nKvHeads;
+  const x = s.x;
+
+  x.set(w.tokenEmbedding.subarray(token * dim, (token + 1) * dim));
+
+  for (let l = 0; l < c.nLayers; l++) {
+    rmsnormFast(s.xb, x, w.rmsAtt, l * dim, dim);
+    const loff = l * c.seqLen * kvDim;
+    const kOff = loff + pos * kvDim;
+    matmulFast(s.q, 0, s.xb, w.wq, l * dim * dim, dim, dim);
+    matmulFast(s.keyCache, kOff, s.xb, w.wk, l * dim * kvDim, dim, kvDim);
+    matmulFast(s.valueCache, kOff, s.xb, w.wv, l * dim * kvDim, dim, kvDim);
+
+    const k = s.keyCache;
+    for (let i = 0; i < dim; i += 2) {
+      const headDim = i % headSize;
+      const freq = 1 / Math.pow(10000, headDim / headSize);
+      const val = pos * freq;
+      const fcr = Math.cos(val), fci = Math.sin(val);
+      const rotn = i < kvDim ? 2 : 1;
+      for (let v = 0; v < rotn; v++) {
+        if (v === 0) {
+          const v0 = s.q[i], v1 = s.q[i + 1];
+          s.q[i] = v0 * fcr - v1 * fci;
+          s.q[i + 1] = v0 * fci + v1 * fcr;
+        } else {
+          const v0 = k[kOff + i], v1 = k[kOff + i + 1];
+          k[kOff + i] = v0 * fcr - v1 * fci;
+          k[kOff + i + 1] = v0 * fci + v1 * fcr;
+        }
+      }
+    }
+
+    const sqrtHs = Math.sqrt(headSize);
+    for (let h = 0; h < c.nHeads; h++) {
+      const qOff = h * headSize;
+      const attOff = h * c.seqLen;
+      const kvHeadOff = ((h / kvMul) | 0) * headSize;
+      for (let t = 0; t <= pos; t++) {
+        const kBase = loff + t * kvDim + kvHeadOff;
+        let score = 0;
+        for (let i = 0; i < headSize; i++) score += s.q[qOff + i] * s.keyCache[kBase + i];
+        s.att[attOff + t] = score / sqrtHs;
+      }
+      softmaxFast(s.att, attOff, pos + 1);
+      const xbOff = h * headSize;
+      s.xb.fill(0, xbOff, xbOff + headSize);
+      for (let t = 0; t <= pos; t++) {
+        const vBase = loff + t * kvDim + kvHeadOff;
+        const a = s.att[attOff + t];
+        for (let i = 0; i < headSize; i++) s.xb[xbOff + i] += a * s.valueCache[vBase + i];
+      }
+    }
+
+    matmulFast(s.xb2, 0, s.xb, w.wo, l * dim * dim, dim, dim);
+    for (let i = 0; i < dim; i++) x[i] += s.xb2[i];
+
+    rmsnormFast(s.xb, x, w.rmsFfn, l * dim, dim);
+    matmulFast(s.hb, 0, s.xb, w.w1, l * dim * hiddenDim, dim, hiddenDim);
+    matmulFast(s.hb2, 0, s.xb, w.w3, l * dim * hiddenDim, dim, hiddenDim);
+    for (let i = 0; i < hiddenDim; i++) {
+      const v = s.hb[i];
+      s.hb[i] = (v / (1 + Math.exp(-v))) * s.hb2[i];
+    }
+    matmulFast(s.xb, 0, s.hb, w.w2, l * hiddenDim * dim, hiddenDim, dim);
+    for (let i = 0; i < dim; i++) x[i] += s.xb[i];
+
+    if (residEdit && editLayers && editLayers.has(l)) residEdit(l, pos, x);
+    if (tapResidual && tapLayers && tapLayers.has(l)) tapResidual(l, pos, x);
+  }
+
+  if (finalResidualOut) finalResidualOut.set(x);
+  if (!wantLogits) return null;
+  rmsnormFast(s.xb, x, w.rmsFinal, 0, dim);
+  matmulFast(s.logits, 0, s.xb, w.wcls, 0, dim, c.vocabSize);
+  return s.logits;
+}
+
+// ---- .jlens loader ----------------------------------------------------------
+// Format: 'JLNS' | u32 version | u32 d_model | u32 n_layers | n x u32 layer
+// index | per layer fp32 row-major [d,d], rows = output dims (y = J @ h).
+function readJlens(data) {
+  const { buf, off, len } = toArrayBuffer(data);
+  const dv = new DataView(buf, off, len);
+  const magic = String.fromCharCode(dv.getUint8(0), dv.getUint8(1), dv.getUint8(2), dv.getUint8(3));
+  if (magic !== 'JLNS') throw new Error('not a .jlens file');
+  const version = dv.getUint32(4, true);
+  if (version !== 1) throw new Error(`unsupported .jlens version ${version}`);
+  const d = dv.getUint32(8, true);
+  const nLayers = dv.getUint32(12, true);
+  const layers = [];
+  let p = 16;
+  for (let i = 0; i < nLayers; i++) { layers.push(dv.getUint32(p, true)); p += 4; }
+  const J = {};
+  for (const l of layers) {
+    J[l] = new Float32Array(buf, off + p, d * d);
+    p += d * d * 4;
+  }
+  if (p !== len) throw new Error(`.jlens: consumed ${p} of ${len} bytes`);
+  return { dModel: d, layers, J };
+}
+
+// ---- lens engine ------------------------------------------------------------
+// Semantics copied from the Python pipeline (jlens.lens.JacobianLens.apply +
+// jlens.hf.HFLensModel.unembed), which the fixtures were generated with:
+//   J-lens(h)   = wcls @ ( rmsFinal ⊙ (J_l @ h) / rms(J_l @ h) )
+//   logit-lens(h)= wcls @ ( rmsFinal ⊙ h / rms(h) )
+// where h is the layer-OUTPUT residual and rms(u) = sqrt(mean(u²) + 1e-5).
+// The readout dictionary folds gamma into the unembedding:
+//   D_l = (wcls[pruned] ⊙ gamma) @ J_l    (logit lens: J = I)
+// so a readout is one D_l·h matvec plus the uniform 1/rms(u) scalar (rank-
+// neutral; applied so displayed scores match the Python fixtures).
+
+const Engine = {
+  model: null, tokenizer: null, lens: null, vocabMeta: null,
+  prunedIds: null, prunedIndex: null,       // Int32Array id->row (-1 if absent)
+  G: null,                                   // wcls[pruned] ⊙ gamma  [P, d]
+  D: {},                                     // layer -> D_l [P, d]
+  cap: null,                                 // last capture
+  stopFlag: false,
+
+  loadModel(buffer) {
+    const ckpt = readCheckpoint(buffer);
+    this.model = { config: ckpt.config, weights: ckpt.weights, state: createState(ckpt.config) };
+    this._modelFp = { head: buffer.slice(0, 65536), len: ckpt.fileBytes };
+    return { config: ckpt.config };
+  },
+  loadTokenizer(buffer) {
+    if (!this.model) throw new Error('load model first (vocab size comes from its header)');
+    this.tokenizer = new Tokenizer(buffer, this.model.config.vocabSize);
+    return { vocabSize: this.tokenizer.vocabSize };
+  },
+  loadLens(buffer) {
+    const lens = readJlens(buffer);
+    if (this.model && lens.dModel !== this.model.config.dim)
+      throw new Error(`lens d_model ${lens.dModel} != model dim ${this.model.config.dim}`);
+    this.lens = lens;
+    this._lensBytes = new Uint8Array(buffer);
+    return { layers: lens.layers, dModel: lens.dModel };
+  },
+  loadVocab(meta) {
+    this.vocabMeta = meta;
+    const ids = meta.prunedIds;
+    this.prunedIds = Int32Array.from(ids);
+    this.prunedIndex = new Int32Array(this.model.config.vocabSize).fill(-1);
+    for (let r = 0; r < ids.length; r++) this.prunedIndex[ids[r]] = r;
+    return { pruned: ids.length };
+  },
+
+  // content-addressed cache key over model fingerprint + lens bytes + pruned ids
+  async cacheKey() {
+    if (this._cacheKey) return this._cacheKey;
+    const [a, b, c] = await Promise.all([
+      sha256hex(new Uint8Array(this._modelFp.head)),
+      sha256hex(this._lensBytes),
+      sha256hex(new Uint8Array(this.prunedIds.buffer)),
+    ]);
+    this._cacheKey = `dicts:v1:${a.slice(0, 16)}:${this._modelFp.len}:${b.slice(0, 16)}:${c.slice(0, 16)}`;
+    return this._cacheKey;
+  },
+  async loadDictsFromCache() {
+    try {
+      const hit = await IDB.get(await this.cacheKey());
+      if (!hit) return false;
+      this.G = new Float32Array(hit.G);
+      this.D = {};
+      for (const l of this.lens.layers) {
+        if (!hit.D[l]) return false;
+        this.D[l] = new Float32Array(hit.D[l]);
+      }
+      return true;
+    } catch (e) { return false; }
+  },
+  async saveDictsToCache() {
+    try {
+      const D = {};
+      for (const l of this.lens.layers) D[l] = this.D[l].buffer;
+      await IDB.set(await this.cacheKey(), { G: this.G.buffer, D });
+      return true;
+    } catch (e) { return false; }
+  },
+  // make sure every band dictionary exists: cache-load or build (+cache-store)
+  async ensureDicts(onLayerProgress) {
+    const missing = this.lens.layers.filter(l => !this.D[l]);
+    if (!missing.length) return 'ready';
+    if (await this.loadDictsFromCache()) return 'cached';
+    if (Pool.ready) {
+      await Pool.buildDicts(onLayerProgress);
+    } else {
+      const layers = this.lens.layers;
+      layers.forEach((l, i) => {
+        this.buildD(l, (r, P) => onLayerProgress && onLayerProgress(l, i, layers.length, r / P));
+      });
+    }
+    this.saveDictsToCache();   // fire-and-forget
+    return 'built';
+  },
+
+  // G = wcls[pruned] ⊙ gamma (one row per pruned id). Cheap; D_l per layer is
+  // the expensive part and is built lazily with progress callbacks.
+  buildG() {
+    const c = this.model.config, w = this.model.weights;
+    const P = this.prunedIds.length, d = c.dim;
+    const G = new Float32Array(P * d);
+    for (let r = 0; r < P; r++) {
+      const row = this.prunedIds[r] * d;
+      for (let j = 0; j < d; j++) G[r * d + j] = w.wcls[row + j] * w.rmsFinal[j];
+    }
+    this.G = G;
+    return G;
+  },
+  // D_l[r,:] = G[r,:] @ J_l  (D[r,j] = sum_k G[r,k] J[k,j]). Computed via a
+  // one-time transpose of J so each output row is a register-blocked matvec
+  // over linearly-streamed memory (~4x over streaming J per row).
+  buildD(l, onProgress) {
+    if (this.D[l]) return this.D[l];
+    if (!this.G) this.buildG();
+    const d = this.model.config.dim, P = this.prunedIds.length;
+    const J = this.lens.J[l];
+    const Jt = new Float32Array(d * d);
+    for (let k = 0; k < d; k++)
+      for (let j = 0; j < d; j++) Jt[j * d + k] = J[k * d + j];
+    const D = new Float32Array(P * d);
+    const CHUNK = 512;
+    for (let r0 = 0; r0 < P; r0 += CHUNK) {
+      const r1 = Math.min(P, r0 + CHUNK);
+      for (let r = r0; r < r1; r++) {
+        matmulFast(D, r * d, this.G.subarray(r * d, (r + 1) * d), Jt, 0, d, d);
+      }
+      if (onProgress) onProgress(r1, P);
+    }
+    this.D[l] = D;
+    return D;
+  },
+
+  // ---- capture + precompute --------------------------------------------------
+  // Residuals at the lens band layers + the final layer, per position; then
+  // scores[pos][layerRow][prunedRow] for both lenses (this is what makes token
+  // selection, heat maps and DIFF instant). layerRows: band layers then 'final'.
+  newCapture(nPosMax) {
+    const c = this.model.config, band = this.lens.layers;
+    return {
+      tokens: [],
+      band,
+      nPos: 0, nPosMax,
+      resid: new Float32Array(nPosMax * band.length * c.dim),   // band residuals
+      residFinal: new Float32Array(nPosMax * c.dim),
+      jScores: null, lScores: null,                              // filled by precompute
+      jScale: null, lScale: null,                                // 1/rms per (pos, layerRow)
+      modelTop: [],                                              // per pos: pruned top-5 of final
+    };
+  },
+  captureForward(cap, token, pos, editHook) {
+    const c = this.model.config, band = cap.band;
+    const bandSet = this._bandSet || (this._bandSet = new Set(band));
+    const self = this;
+    const logits = forwardFast(this.model, token, pos, {
+      tapLayers: bandSet,
+      tapResidual(l, p, x) {
+        const row = (p * band.length + band.indexOf(l)) * c.dim;
+        cap.resid.set(x, row);
+      },
+      residEdit: editHook ? editHook.fn : null,
+      editLayers: editHook ? editHook.layers : null,
+      wantLogits: editHook ? true : false,
+      finalResidualOut: cap.residFinal.subarray(pos * c.dim, (pos + 1) * c.dim),
+    });
+    cap.tokens[pos] = token;
+    cap.nPos = pos + 1;
+    return logits;
+  },
+  // full-vocab logits from the final residual of a captured position (used by
+  // generation sampling so we can skip wantLogits during teacher-forcing)
+  logitsFromFinalResidual(cap, pos) {
+    const c = this.model.config, w = this.model.weights, s = this.model.state;
+    const x = cap.residFinal.subarray(pos * c.dim, (pos + 1) * c.dim);
+    rmsnormFast(s.xb, x, w.rmsFinal, 0, c.dim);
+    matmulFast(s.logits, 0, s.xb, w.wcls, 0, c.dim, c.vocabSize);
+    return s.logits;
+  },
+
+  precompute(cap, onProgress) {
+    const c = this.model.config, band = cap.band, P = this.prunedIds.length;
+    const n = cap.nPos, L = band.length, d = c.dim;
+    cap.jScores = new Float32Array(n * L * P);
+    cap.lScores = new Float32Array(n * (L + 1) * P);   // +1 row: final layer (model)
+    cap.jScale = new Float32Array(n * L);
+    cap.lScale = new Float32Array(n * (L + 1));
+    const u = new Float32Array(d);
+    for (let li = 0; li < L; li++) this.buildD(band[li]);   // ensure dicts
+    let done = 0, total = n * (2 * L + 1);
+    for (let p = 0; p < n; p++) {
+      for (let li = 0; li < L; li++) {
+        const h = cap.resid.subarray((p * L + li) * d, (p * L + li + 1) * d);
+        // u = J @ h for the rms scalar (rank-neutral, matches Python scores)
+        matmulFast(u, 0, h, this.lens.J[band[li]], 0, d, d);
+        let ss = 0; for (let j = 0; j < d; j++) ss += u[j] * u[j];
+        cap.jScale[p * L + li] = 1 / Math.sqrt(ss / d + 1e-5);
+        matmulFast(cap.jScores, (p * L + li) * P, h, this.D[band[li]], 0, d, P);
+        done++;
+        // logit lens at the same layer
+        let hs = 0; for (let j = 0; j < d; j++) hs += h[j] * h[j];
+        cap.lScale[p * (L + 1) + li] = 1 / Math.sqrt(hs / d + 1e-5);
+        matmulFast(cap.lScores, (p * (L + 1) + li) * P, h, this.G, 0, d, P);
+        done++;
+      }
+      // final layer (the model's own output, pruned view)
+      const hf = cap.residFinal.subarray(p * d, (p + 1) * d);
+      let fs = 0; for (let j = 0; j < d; j++) fs += hf[j] * hf[j];
+      cap.lScale[p * (L + 1) + L] = 1 / Math.sqrt(fs / d + 1e-5);
+      matmulFast(cap.lScores, (p * (L + 1) + L) * P, hf, this.G, 0, d, P);
+      done++;
+      cap.modelTop.push(this.topOfRow(cap.lScores, (p * (L + 1) + L) * P,
+                                      cap.lScale[p * (L + 1) + L], 5));
+      if (onProgress && (p % 8 === 7 || p === n - 1)) onProgress(done, total);
+    }
+    this.cap = cap;
+  },
+
+  topOfRow(arr, off, scale, k) {
+    const P = this.prunedIds.length;
+    const idx = [];
+    for (let r = 0; r < P; r++) idx.push(r);
+    idx.sort((a, b) => arr[off + b] - arr[off + a]);
+    return idx.slice(0, k).map(r => ({ id: this.prunedIds[r], score: arr[off + r] * scale }));
+  },
+
+  // top-K readout rows for one position, both lenses, with pruned-vocab ranks
+  readout(pos, k) {
+    const cap = this.cap, band = cap.band, L = band.length, P = this.prunedIds.length;
+    const layers = [];
+    for (let li = 0; li < L; li++) {
+      const j = this.topOfRow(cap.jScores, (pos * L + li) * P, cap.jScale[pos * L + li], k);
+      const lg = this.topOfRow(cap.lScores, (pos * (L + 1) + li) * P, cap.lScale[pos * (L + 1) + li], k);
+      layers.push({ layer: band[li], jlens: j, logit: lg });
+    }
+    return { pos, layers, model: cap.modelTop[pos] };
+  },
+
+  // rank of one token id across every (position, band layer): the heat map.
+  heat(tokenId) {
+    const cap = this.cap, band = cap.band, L = band.length, P = this.prunedIds.length;
+    const row = this.prunedIndex[tokenId];
+    if (row < 0) return null;
+    const n = cap.nPos;
+    const ranks = new Int32Array(n).fill(P);
+    for (let p = 0; p < n; p++) {
+      let best = P;
+      for (let li = 0; li < L; li++) {
+        const off = (p * L + li) * P;
+        const mine = cap.jScores[off + row];
+        let r = 0;
+        for (let q = 0; q < P; q++) if (cap.jScores[off + q] > mine) r++;
+        if (r < best) best = r;
+      }
+      ranks[p] = best;
+    }
+    return ranks;
+  },
+
+  // FULL-vocab readout at (pos, layerIndexInBand) — the fixture-parity path
+  // and the honest "raw, whole vocabulary" view. lens: 'jlens' | 'logit'.
+  readoutFull(pos, li, lens, k) {
+    const cap = this.cap, c = this.model.config, w = this.model.weights;
+    const d = c.dim, V = c.vocabSize, band = cap.band;
+    const h = lens === 'final'
+      ? cap.residFinal.subarray(pos * d, (pos + 1) * d)
+      : cap.resid.subarray((pos * band.length + li) * d, (pos * band.length + li + 1) * d);
+    const u = new Float32Array(d);
+    if (lens === 'jlens') matmulFast(u, 0, h, this.lens.J[band[li]], 0, d, d);
+    else u.set(h);
+    const s = this.model.state;
+    rmsnormFast(s.xb, u, w.rmsFinal, 0, d);
+    matmulFast(s.logits, 0, s.xb, w.wcls, 0, d, V);
+    const idx = [];
+    for (let i = 0; i < V; i++) idx.push(i);
+    idx.sort((a, b) => s.logits[b] - s.logits[a]);
+    return idx.slice(0, k).map(i => ({ id: i, score: s.logits[i] }));
+  },
+
+  // swap/inject: readout-direction edit. At each hooked (layer, pos>=fromPos):
+  //   beta = h · d̂_src ;  h += strength * beta * (d̂_tgt - d̂_src)
+  // directions are the per-layer readout rows d_(l,t) = (wcls[t] ⊙ gamma) @ J_l.
+  makeEditHook(srcId, tgtId, l0, l1, fromPos, strength) {
+    const c = this.model.config, w = this.model.weights, d = c.dim;
+    const layers = new Set();
+    for (const l of this.lens.layers) if (l >= l0 && l <= l1) layers.add(l);
+    const dirs = {};
+    for (const l of layers) {
+      const mk = (tid) => {
+        const g = new Float32Array(d);
+        for (let j = 0; j < d; j++) g[j] = w.wcls[tid * d + j] * w.rmsFinal[j];
+        const out = new Float32Array(d);
+        matmulFast(out, 0, g, this.lens.J[l], 0, d, d);   // (g @ J): out[j] = sum_k g[k] J[k,j]
+        let nn = 0; for (let j = 0; j < d; j++) nn += out[j] * out[j];
+        nn = 1 / Math.sqrt(nn || 1e-30);
+        for (let j = 0; j < d; j++) out[j] *= nn;
+        return out;
+      };
+      dirs[l] = { s: mk(srcId), t: mk(tgtId) };
+    }
+    return {
+      layers,
+      fn(l, pos, x) {
+        if (pos < fromPos) return;
+        const { s, t } = dirs[l];
+        let beta = 0;
+        for (let j = 0; j < d; j++) beta += x[j] * s[j];
+        const g = strength * beta;
+        for (let j = 0; j < d; j++) x[j] += g * (t[j] - s[j]);
+      },
+    };
+  },
+
+  sample(logits, temperature, rng) {
+    const V = this.model.config.vocabSize;
+    if (temperature <= 0) {
+      let best = 0;
+      for (let i = 1; i < V; i++) if (logits[i] > logits[best]) best = i;
+      return best;
+    }
+    let max = -Infinity;
+    for (let i = 0; i < V; i++) if (logits[i] > max) max = logits[i];
+    let sum = 0;
+    const probs = new Float64Array(V);
+    for (let i = 0; i < V; i++) { probs[i] = Math.exp((logits[i] - max) / temperature); sum += probs[i]; }
+    let r = rng() * sum;
+    for (let i = 0; i < V; i++) { r -= probs[i]; if (r <= 0) return i; }
+    return V - 1;
+  },
+};
+
+// ---- IndexedDB cache (worker-side) -----------------------------------------
+// Readout dictionaries keyed by content hashes of model+lens+vocab, so a
+// revisit (or a discarded-tab recovery) skips the ~30 s dictionary build.
+const IDB = {
+  open() {
+    return new Promise((res, rej) => {
+      const r = indexedDB.open('jlens-cache', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('kv');
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    });
+  },
+  async get(k) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv').objectStore('kv').get(k);
+      t.onsuccess = () => res(t.result);
+      t.onerror = () => rej(t.error);
+    });
+  },
+  async set(k, v) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k);
+      t.onsuccess = () => res();
+      t.onerror = () => rej(t.error);
+    });
+  },
+};
+async function sha256hex(view) {
+  const d = await crypto.subtle.digest('SHA-256', view);
+  return Array.from(new Uint8Array(d), b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// xorshift32 — seedable so swap rewrites are reproducible
+function makeRng(seed) {
+  let s = seed >>> 0 || 88675123;
+  return () => {
+    s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0;
+    return s / 4294967296;
+  };
+}
+
+// ---- multi-worker compute pool (Phase 1.5 item 5) ---------------------------
+// The Engine worker spawns K nested workers from its own source; each holds a
+// row-shard (output dims) of every big weight matrix, so total weight memory
+// stays ~1x the model. Analyze runs layer-BATCHED over the whole token
+// sequence: per layer, five postMessage barriers (qkv / attention / wo /
+// w1+w3+SwiGLU / w2). Per-element arithmetic and loop order are identical to
+// the sequential path, so residuals are bit-identical and fixture parity is
+// untouched. Generation stays sequential in the Engine (it has full weights).
+// Falls back to the sequential path wherever the pool can't start.
+
+function splitRange(R, K) {
+  const b = [0];
+  for (let k = 1; k <= K; k++) b.push(Math.round((R * k) / K));
+  return b;
+}
+
+// rmsnorm over each row of X[N,d] -> OUT[N,d] (same math as rmsnormFast)
+function rmsRows(out, X, w, wOff, N, d) {
+  for (let p = 0; p < N; p++) {
+    const o = p * d;
+    let ss = 0;
+    for (let j = 0; j < d; j++) ss += X[o + j] * X[o + j];
+    ss = 1 / Math.sqrt(ss / d + 1e-5);
+    for (let j = 0; j < d; j++) out[o + j] = w[wOff + j] * (ss * X[o + j]);
+  }
+}
+
+const Pool = {
+  workers: null, K: 0, bD: null, bKV: null, bH: null, bP: null,
+  ready: false, dictsShipped: false, _id: 0,
+
+  async init(src) {
+    if (this.ready) return true;
+    if (typeof Worker === 'undefined' || !src || !Engine.model) return false;
+    try {
+      const K = Math.min(6, Math.max(2, ((typeof navigator !== 'undefined' && navigator.hardwareConcurrency) || 4) - 2));
+      const url = URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
+      const c = Engine.model.config, w = Engine.model.weights;
+      this.K = K;
+      this.bD = splitRange(c.dim, K);
+      this.bKV = splitRange(c.kvDim, K);
+      this.bH = splitRange(c.hiddenDim, K);
+      this.workers = Array.from({ length: K }, () => new Worker(url));
+      await Promise.all(this.workers.map((wk, k) => {
+        const layers = [];
+        const transfers = [];
+        const cut = (src_, r0, r1, n, off) => {
+          const a = src_.slice(off + r0 * n, off + r1 * n);
+          transfers.push(a.buffer);
+          return a;
+        };
+        for (let l = 0; l < c.nLayers; l++) {
+          layers.push({
+            wq: cut(w.wq, this.bD[k], this.bD[k + 1], c.dim, l * c.dim * c.dim),
+            wk: cut(w.wk, this.bKV[k], this.bKV[k + 1], c.dim, l * c.dim * c.kvDim),
+            wv: cut(w.wv, this.bKV[k], this.bKV[k + 1], c.dim, l * c.dim * c.kvDim),
+            wo: cut(w.wo, this.bD[k], this.bD[k + 1], c.dim, l * c.dim * c.dim),
+            w1: cut(w.w1, this.bH[k], this.bH[k + 1], c.dim, l * c.hiddenDim * c.dim),
+            w3: cut(w.w3, this.bH[k], this.bH[k + 1], c.dim, l * c.hiddenDim * c.dim),
+            w2: cut(w.w2, this.bD[k], this.bD[k + 1], c.hiddenDim, l * c.dim * c.hiddenDim),
+          });
+        }
+        return this.call(wk, {
+          op: 'init', role: 'pool', k, K, config: c,
+          d0: this.bD[k], d1: this.bD[k + 1],
+          kv0: this.bKV[k], kv1: this.bKV[k + 1],
+          h0: this.bH[k], h1: this.bH[k + 1],
+          layers,
+        }, transfers);
+      }));
+      this.ready = true;
+      return true;
+    } catch (e) {
+      this.dispose();
+      return false;
+    }
+  },
+  dispose() {
+    if (this.workers) for (const w of this.workers) { try { w.terminate(); } catch (e) {} }
+    this.workers = null; this.ready = false; this.dictsShipped = false;
+  },
+  call(w, msg, transfers) {
+    return new Promise((res, rej) => {
+      const id = ++this._id;
+      msg.id = id;
+      const h = (e) => {
+        if (!e.data || e.data.id !== id) return;
+        w.removeEventListener('message', h);
+        e.data.error ? rej(new Error(e.data.error)) : res(e.data);
+      };
+      w.addEventListener('message', h);
+      w.postMessage(msg, transfers || []);
+    });
+  },
+  all(msgFor) {
+    return Promise.all(this.workers.map((w, k) => this.call(w, msgFor(k))));
+  },
+
+  // ship G / D / J row-stripes so score precompute runs in the pool.
+  async shipDicts() {
+    if (this.dictsShipped || !this.ready) return;
+    if (!Engine.G) Engine.buildG();
+    const c = Engine.model.config, d = c.dim, P = Engine.prunedIds.length;
+    this.bP = splitRange(P, this.K);
+    await Promise.all(this.workers.map((wk, k) => {
+      const p0 = this.bP[k], p1 = this.bP[k + 1];
+      const transfers = [];
+      const g = Engine.G.slice(p0 * d, p1 * d); transfers.push(g.buffer);
+      const D = {}, J = {};
+      for (const l of Engine.lens.layers) {
+        D[l] = Engine.D[l].slice(p0 * d, p1 * d); transfers.push(D[l].buffer);
+        J[l] = Engine.lens.J[l].slice(this.bD[k] * d, this.bD[k + 1] * d); transfers.push(J[l].buffer);
+      }
+      return this.call(wk, { op: 'set-dicts', p0, p1, g, D, J }, transfers);
+    }));
+    this.dictsShipped = true;
+  },
+
+  // parallel dictionary build (cold cache): each worker builds + keeps its
+  // pruned-row stripe of D_l and returns a copy for Engine assembly / IDB.
+  async buildDicts(onLayerProgress) {
+    if (!Engine.G) Engine.buildG();
+    const c = Engine.model.config, d = c.dim, P = Engine.prunedIds.length;
+    this.bP = splitRange(P, this.K);
+    await Promise.all(this.workers.map((wk, k) => {
+      const p0 = this.bP[k], p1 = this.bP[k + 1];
+      const g = Engine.G.slice(p0 * d, p1 * d);
+      return this.call(wk, { op: 'set-g', p0, p1, g }, [g.buffer]);
+    }));
+    const layers = Engine.lens.layers;
+    for (let i = 0; i < layers.length; i++) {
+      const l = layers[i];
+      const parts = await this.all(() => ({ op: 'buildD', l, J: Engine.lens.J[l] }));
+      const D = new Float32Array(P * d);
+      for (let k = 0; k < this.K; k++) D.set(parts[k].D, this.bP[k] * d);
+      Engine.D[l] = D;
+      // ship the J row-stripe now so scores can also use the pool
+      await Promise.all(this.workers.map((wk, k) => {
+        const j = Engine.lens.J[l].slice(this.bD[k] * d, this.bD[k + 1] * d);
+        return this.call(wk, { op: 'set-j', l, J: j }, [j.buffer]);
+      }));
+      if (onLayerProgress) onLayerProgress(l, i, layers.length, 1);
+    }
+    this.dictsShipped = true;
+  },
+
+  // batched teacher-forced forward over all tokens; fills cap exactly like
+  // the sequential captureForward loop (bit-identical residuals).
+  async forwardBatched(cap, ids, onProgress) {
+    const c = Engine.model.config, w = Engine.model.weights;
+    const d = c.dim, kv = c.kvDim, hd = c.hiddenDim, N = ids.length;
+    const band = cap.band, Lb = band.length;
+    const X = new Float32Array(N * d);
+    for (let p = 0; p < N; p++) X.set(w.tokenEmbedding.subarray(ids[p] * d, (ids[p] + 1) * d), p * d);
+    const LN = new Float32Array(N * d);
+    const Q = new Float32Array(N * d), Kc = new Float32Array(N * kv), Vc = new Float32Array(N * kv);
+    const buf = new Float32Array(N * Math.max(d, hd));
+
+    for (let l = 0; l < c.nLayers; l++) {
+      rmsRows(LN, X, w.rmsAtt, l * d, N, d);
+      let parts = await this.all(() => ({ op: 'qkv', l, X: LN, N }));
+      for (let k = 0; k < this.K; k++) {
+        const { q, kk, v } = parts[k];
+        const d0 = this.bD[k], dn = this.bD[k + 1] - d0;
+        const kv0 = this.bKV[k], kvn = this.bKV[k + 1] - kv0;
+        for (let p = 0; p < N; p++) {
+          Q.set(q.subarray(p * dn, (p + 1) * dn), p * d + d0);
+          Kc.set(kk.subarray(p * kvn, (p + 1) * kvn), p * kv + kv0);
+          Vc.set(v.subarray(p * kvn, (p + 1) * kvn), p * kv + kv0);
+        }
+      }
+      // RoPE — identical formula/order to the sequential path
+      const headSize = c.headSize;
+      for (let p = 0; p < N; p++) {
+        const qo = p * d, ko = p * kv;
+        for (let i = 0; i < d; i += 2) {
+          const headDim = i % headSize;
+          const freq = 1 / Math.pow(10000, headDim / headSize);
+          const val = p * freq;
+          const fcr = Math.cos(val), fci = Math.sin(val);
+          const q0 = Q[qo + i], q1 = Q[qo + i + 1];
+          Q[qo + i] = q0 * fcr - q1 * fci;
+          Q[qo + i + 1] = q0 * fci + q1 * fcr;
+          if (i < kv) {
+            const k0 = Kc[ko + i], k1 = Kc[ko + i + 1];
+            Kc[ko + i] = k0 * fcr - k1 * fci;
+            Kc[ko + i + 1] = k0 * fci + k1 * fcr;
+          }
+        }
+      }
+      // attention: positions interleaved across workers (p % K === k)
+      parts = await this.all(() => ({ op: 'att', Q, K: Kc, V: Vc, N }));
+      for (let k = 0; k < this.K; k++) {
+        const out = parts[k].out;
+        let i = 0;
+        for (let p = k; p < N; p += this.K) { buf.set(out.subarray(i * d, (i + 1) * d), p * d); i++; }
+      }
+      parts = await this.all(() => ({ op: 'mm', l, which: 'wo', X: buf.subarray(0, N * d), N }));
+      for (let k = 0; k < this.K; k++) {
+        const o = parts[k].out, d0 = this.bD[k], dn = this.bD[k + 1] - d0;
+        for (let p = 0; p < N; p++)
+          for (let j = 0; j < dn; j++) X[p * d + d0 + j] += o[p * dn + j];
+      }
+      rmsRows(LN, X, w.rmsFfn, l * d, N, d);
+      parts = await this.all(() => ({ op: 'ffn13', l, X: LN, N }));
+      for (let k = 0; k < this.K; k++) {
+        const hb = parts[k].hb, h0 = this.bH[k], hn = this.bH[k + 1] - h0;
+        for (let p = 0; p < N; p++) buf.set(hb.subarray(p * hn, (p + 1) * hn), p * hd + h0);
+      }
+      parts = await this.all(() => ({ op: 'mm', l, which: 'w2', X: buf.subarray(0, N * hd), N }));
+      for (let k = 0; k < this.K; k++) {
+        const o = parts[k].out, d0 = this.bD[k], dn = this.bD[k + 1] - d0;
+        for (let p = 0; p < N; p++)
+          for (let j = 0; j < dn; j++) X[p * d + d0 + j] += o[p * dn + j];
+      }
+      const li = band.indexOf(l);
+      if (li >= 0) for (let p = 0; p < N; p++)
+        cap.resid.set(X.subarray(p * d, (p + 1) * d), (p * Lb + li) * d);
+      if (onProgress) onProgress(l + 1, c.nLayers);
+    }
+    cap.residFinal.set(X.subarray(0, N * d));
+    for (let p = 0; p < N; p++) cap.tokens[p] = ids[p];
+    cap.nPos = N;
+  },
+
+  // parallel score precompute: same outputs as Engine.precompute
+  async precompute(cap, onProgress) {
+    await this.shipDicts();
+    const c = Engine.model.config, d = c.dim, P = Engine.prunedIds.length;
+    const band = cap.band, L = band.length, N = cap.nPos;
+    cap.jScores = new Float32Array(N * L * P);
+    cap.lScores = new Float32Array(N * (L + 1) * P);
+    cap.jScale = new Float32Array(N * L);
+    cap.lScale = new Float32Array(N * (L + 1));
+    const H = new Float32Array(N * d);
+    let step = 0;
+    const total = 2 * L + 1;
+    for (let li = 0; li < L; li++) {
+      for (let p = 0; p < N; p++)
+        H.set(cap.resid.subarray((p * L + li) * d, (p * L + li + 1) * d), p * d);
+      // one fused barrier per layer: J-lens stripe + logit-lens stripe + the
+      // partial sum-of-squares of u = J@h for the J-scale
+      const parts = await this.all(() => ({ op: 'scores2', l: band[li], H, N }));
+      const ss = new Float64Array(N);
+      for (let k = 0; k < this.K; k++) {
+        const sj = parts[k].j, sg = parts[k].g, p0 = this.bP[k], pn = this.bP[k + 1] - p0;
+        for (let p = 0; p < N; p++) {
+          cap.jScores.set(sj.subarray(p * pn, (p + 1) * pn), (p * L + li) * P + p0);
+          cap.lScores.set(sg.subarray(p * pn, (p + 1) * pn), (p * (L + 1) + li) * P + p0);
+          ss[p] += parts[k].ss[p];
+        }
+      }
+      for (let p = 0; p < N; p++) {
+        cap.jScale[p * L + li] = 1 / Math.sqrt(ss[p] / d + 1e-5);
+        const h = cap.resid.subarray((p * L + li) * d, (p * L + li + 1) * d);
+        let hs = 0; for (let j = 0; j < d; j++) hs += h[j] * h[j];
+        cap.lScale[p * (L + 1) + li] = 1 / Math.sqrt(hs / d + 1e-5);
+      }
+      step += 2;
+      if (onProgress) onProgress(step, total);
+    }
+    // final layer (the model's own output, pruned view)
+    const parts = await this.all(() => ({ op: 'scores', lens: 'g', H: cap.residFinal.subarray(0, N * d), N }));
+    for (let k = 0; k < this.K; k++) {
+      const s = parts[k].scores, p0 = this.bP[k], pn = this.bP[k + 1] - p0;
+      for (let p = 0; p < N; p++)
+        cap.lScores.set(s.subarray(p * pn, (p + 1) * pn), (p * (L + 1) + L) * P + p0);
+    }
+    cap.modelTop.length = 0;
+    for (let p = 0; p < N; p++) {
+      const hf = cap.residFinal.subarray(p * d, (p + 1) * d);
+      let fs = 0; for (let j = 0; j < d; j++) fs += hf[j] * hf[j];
+      cap.lScale[p * (L + 1) + L] = 1 / Math.sqrt(fs / d + 1e-5);
+      cap.modelTop.push(Engine.topOfRow(cap.lScores, (p * (L + 1) + L) * P,
+                                        cap.lScale[p * (L + 1) + L], 5));
+    }
+    if (onProgress) onProgress(total, total);
+    Engine.cap = cap;
+  },
+};
+
+// ---- pool-worker role: replaces the app RPC handler on 'init' --------------
+function becomePoolWorker(m) {
+  const c = m.config;
+  const S = {
+    k: m.k, K: m.K, c,
+    d0: m.d0, d1: m.d1, kv0: m.kv0, kv1: m.kv1, h0: m.h0, h1: m.h1,
+    layers: m.layers,
+    att: new Float32Array(c.seqLen),
+    g: null, p0: 0, p1: 0, D: {}, J: {},
+  };
+  self.onmessage = (e) => {
+    const q = e.data;
+    try {
+      switch (q.op) {
+        case 'qkv': {
+          const N = q.N, d = c.dim, L = S.layers[q.l];
+          const dn = S.d1 - S.d0, kvn = S.kv1 - S.kv0;
+          const qOut = new Float32Array(N * dn);
+          const kOut = new Float32Array(N * kvn);
+          const vOut = new Float32Array(N * kvn);
+          matmulBatch(qOut, q.X, L.wq, N, d, dn);
+          matmulBatch(kOut, q.X, L.wk, N, d, kvn);
+          matmulBatch(vOut, q.X, L.wv, N, d, kvn);
+          postMessage({ id: q.id, q: qOut, kk: kOut, v: vOut },
+            [qOut.buffer, kOut.buffer, vOut.buffer]);
+          break;
+        }
+        case 'att': {
+          // positions interleaved: this worker handles p ≡ k (mod K).
+          // Same per-position loop order as the sequential path.
+          const N = q.N, d = c.dim, kv = c.kvDim, hs = c.headSize;
+          const kvMul = c.nHeads / c.nKvHeads;
+          const sqrtHs = Math.sqrt(hs);
+          const mine = [];
+          for (let p = S.k; p < N; p += S.K) mine.push(p);
+          const out = new Float32Array(mine.length * d);
+          for (let mi = 0; mi < mine.length; mi++) {
+            const p = mine[mi];
+            const qo = p * d;
+            for (let h = 0; h < c.nHeads; h++) {
+              const qOff = qo + h * hs;
+              const kvHeadOff = ((h / kvMul) | 0) * hs;
+              for (let t = 0; t <= p; t++) {
+                const kBase = t * kv + kvHeadOff;
+                let score = 0;
+                for (let i = 0; i < hs; i++) score += q.Q[qOff + i] * q.K[kBase + i];
+                S.att[t] = score / sqrtHs;
+              }
+              softmaxFast(S.att, 0, p + 1);
+              const oOff = mi * d + h * hs;
+              for (let t = 0; t <= p; t++) {
+                const vBase = t * kv + kvHeadOff;
+                const a = S.att[t];
+                for (let i = 0; i < hs; i++) out[oOff + i] += a * q.V[vBase + i];
+              }
+            }
+          }
+          postMessage({ id: q.id, out }, [out.buffer]);
+          break;
+        }
+        case 'mm': {
+          const N = q.N, L = S.layers[q.l];
+          const W = q.which === 'wo' ? L.wo : L.w2;
+          const n = q.which === 'wo' ? c.dim : c.hiddenDim;
+          const dn = S.d1 - S.d0;
+          const out = new Float32Array(N * dn);
+          matmulBatch(out, q.X, W, N, n, dn);
+          postMessage({ id: q.id, out }, [out.buffer]);
+          break;
+        }
+        case 'ffn13': {
+          const N = q.N, d = c.dim, L = S.layers[q.l];
+          const hn = S.h1 - S.h0;
+          const hb = new Float32Array(N * hn);
+          const h3 = new Float32Array(N * hn);
+          matmulBatch(hb, q.X, L.w1, N, d, hn);
+          matmulBatch(h3, q.X, L.w3, N, d, hn);
+          for (let i = 0; i < N * hn; i++) {
+            const v = hb[i];
+            hb[i] = (v / (1 + Math.exp(-v))) * h3[i];
+          }
+          postMessage({ id: q.id, hb }, [hb.buffer]);
+          break;
+        }
+        case 'set-g': S.g = q.g; S.p0 = q.p0; S.p1 = q.p1; postMessage({ id: q.id }); break;
+        case 'set-j': S.J[q.l] = q.J; postMessage({ id: q.id }); break;
+        case 'set-dicts':
+          S.g = q.g; S.p0 = q.p0; S.p1 = q.p1; S.D = q.D; S.J = q.J;
+          postMessage({ id: q.id });
+          break;
+        case 'buildD': {
+          // D stripe from the G stripe: same transpose trick as Engine.buildD
+          const d = c.dim, pn = S.p1 - S.p0;
+          const Jt = new Float32Array(d * d);
+          for (let kk = 0; kk < d; kk++)
+            for (let j = 0; j < d; j++) Jt[j * d + kk] = q.J[kk * d + j];
+          const D = new Float32Array(pn * d);
+          matmulBatch(D, S.g, Jt, pn, d, d);
+          S.D[q.l] = D;
+          const copy = D.slice(0);
+          postMessage({ id: q.id, D: copy }, [copy.buffer]);
+          break;
+        }
+        case 'scores2': {
+          // fused: J-lens stripe + logit-lens stripe + partial ss(u) in one pass
+          const N = q.N, d = c.dim, pn = S.p1 - S.p0;
+          const D = S.D[q.l], rn = S.d1 - S.d0, J = S.J[q.l];
+          const j = new Float32Array(N * pn);
+          const g = new Float32Array(N * pn);
+          const U = new Float32Array(N * rn);
+          const ss = new Float64Array(N);
+          matmulBatch(j, q.H, D, N, d, pn);
+          matmulBatch(g, q.H, S.g, N, d, pn);
+          matmulBatch(U, q.H, J, N, d, rn);
+          for (let p = 0; p < N; p++) {
+            let s = 0;
+            for (let jj = 0; jj < rn; jj++) s += U[p * rn + jj] * U[p * rn + jj];
+            ss[p] = s;
+          }
+          postMessage({ id: q.id, j, g, ss }, [j.buffer, g.buffer, ss.buffer]);
+          break;
+        }
+        case 'scores': {
+          const N = q.N, d = c.dim, pn = S.p1 - S.p0;
+          const W = q.lens === 'j' ? S.D[q.l] : S.g;
+          const scores = new Float32Array(N * pn);
+          for (let p = 0; p < N; p++)
+            matmulFast(scores, p * pn, q.H.subarray(p * d, (p + 1) * d), W, 0, d, pn);
+          if (q.lens === 'j') {
+            // partial sum of squares of u = J@h over this worker's J row-stripe
+            const J = S.J[q.l], rn = S.d1 - S.d0;
+            const u = new Float32Array(rn);
+            const ss = new Float64Array(N);
+            for (let p = 0; p < N; p++) {
+              matmulFast(u, 0, q.H.subarray(p * d, (p + 1) * d), J, 0, d, rn);
+              let s = 0;
+              for (let j = 0; j < rn; j++) s += u[j] * u[j];
+              ss[p] = s;
+            }
+            postMessage({ id: q.id, scores, ss }, [scores.buffer, ss.buffer]);
+          } else {
+            postMessage({ id: q.id, scores }, [scores.buffer]);
+          }
+          break;
+        }
+        default:
+          postMessage({ id: q.id, error: `pool: unknown op ${q.op}` });
+      }
+    } catch (err) {
+      postMessage({ id: q.id, error: String(err && err.stack || err) });
+    }
+  };
+  postMessage({ id: m.id });
+}
+
+// ---- worker RPC (skipped when eval'd by the Node parity harness) ----
+if (typeof self !== 'undefined' && typeof window === 'undefined' && typeof postMessage === 'function') {
+  const post = (m, t) => postMessage(m, t || []);
+  self.onmessage = async (e) => {
+    const m = e.data;
+    // a nested worker's first message turns it into a pool compute worker
+    if (m && m.op === 'init' && m.role === 'pool') { becomePoolWorker(m); return; }
+    try {
+      switch (m.type) {
+        case 'pool-src':
+          Engine.poolSrc = m.src;
+          break;
+        case 'load-model': {
+          const info = Engine.loadModel(m.buffer);
+          post({ type: 'model-ready', config: info.config });
+          break;
+        }
+        case 'load-tokenizer': {
+          Engine.loadTokenizer(m.buffer);
+          post({ type: 'tokenizer-ready' });
+          break;
+        }
+        case 'load-lens': {
+          const info = Engine.loadLens(m.buffer);
+          post({ type: 'lens-ready', layers: info.layers });
+          break;
+        }
+        case 'load-vocab': {
+          const info = Engine.loadVocab(m.meta);
+          post({ type: 'vocab-ready', pruned: info.pruned });
+          break;
+        }
+        case 'build-dicts': {
+          // cache hit -> ready now; miss -> defer to the first analyze/generate
+          // (lazy build keeps the load path interactive)
+          const t0 = Date.now();
+          if (await Engine.loadDictsFromCache()) {
+            post({ type: 'dicts-ready', ms: Date.now() - t0, cached: true });
+          } else {
+            post({ type: 'dicts-ready', ms: 0, lazy: true });
+          }
+          // spin the compute pool up NOW, off the analyze path (weight
+          // sharding + JIT warm-up would otherwise tax the first analyze)
+          Pool.init(Engine.poolSrc);
+          break;
+        }
+        case 'analyze': {
+          const t0 = Date.now();
+          const ids = Engine.tokenizer.encode(m.text, true, false)
+            .slice(0, Engine.model.config.seqLen);
+          const cap = Engine.newCapture(ids.length);
+          const usePool = ids.length >= 16 && await Pool.init(Engine.poolSrc);
+          if (usePool) {
+            await Pool.forwardBatched(cap, ids, (done, total) =>
+              post({ type: 'analyze-progress', stage: 'forward',
+                     done: Math.round(ids.length * done / total), total: ids.length }));
+          } else {
+            for (let p = 0; p < ids.length; p++) {
+              Engine.captureForward(cap, ids[p], p, null);
+              if (p % 10 === 9) post({ type: 'analyze-progress', stage: 'forward', done: p + 1, total: ids.length });
+            }
+          }
+          const tFwd = Date.now() - t0;
+          await Engine.ensureDicts((l, i, n, frac) =>
+            post({ type: 'dict-progress', layer: l, i, n, frac }));
+          const preCb = (done, total) =>
+            post({ type: 'analyze-progress', stage: 'readout', done, total });
+          if (usePool) await Pool.precompute(cap, preCb);
+          else Engine.precompute(cap, preCb);
+          post({ type: 'analyzed', tokens: cap.tokens.slice(0, cap.nPos),
+                 pieces: cap.tokens.slice(0, cap.nPos).map((t, i) =>
+                   Engine.tokenizer.decodePiece(i === 0 ? BOS : cap.tokens[i - 1], t)),
+                 msForward: tFwd, msTotal: Date.now() - t0, nPos: cap.nPos });
+          break;
+        }
+        case 'generate': {
+          const t0 = Date.now();
+          Engine.stopFlag = false;
+          const c = Engine.model.config;
+          // promptIds (analyzed token ids) beats prompt text: regenerating
+          // from the ids the user actually inspected kills token-boundary
+          // drift between the analyzed story and the rewrites.
+          const ids = m.promptIds || Engine.tokenizer.encode(m.prompt, true, false);
+          const maxTotal = Math.min(c.seqLen, ids.length + (m.maxNew || 120));
+          const cap = Engine.newCapture(maxTotal);
+          const rng = makeRng(m.seed || (Date.now() & 0x7fffffff));
+          const editHook = m.edit
+            ? Engine.makeEditHook(m.edit.srcId, m.edit.tgtId, m.edit.l0, m.edit.l1,
+                                  m.edit.fromPos, m.edit.strength)
+            : null;
+          let pos = 0, token = ids[0];
+          const outIds = [ids[0]];
+          while (pos < maxTotal - 1 && !Engine.stopFlag) {
+            Engine.captureForward(cap, token, pos, editHook);
+            let next;
+            if (pos < ids.length - 1) next = ids[pos + 1];
+            else {
+              const logits = Engine.logitsFromFinalResidual(cap, pos);
+              next = Engine.sample(logits, m.temperature ?? 0.8, rng);
+              if (next === BOS || next === EOS) break;
+            }
+            outIds.push(next);
+            if (pos >= ids.length - 1) {
+              post({ type: 'gen-token', tag: m.tag || null,
+                     piece: Engine.tokenizer.decodePiece(token, next), pos: pos + 1 });
+            }
+            token = next;
+            pos++;
+          }
+          Engine.captureForward(cap, token, pos, editHook);   // capture the last token too
+          await Engine.ensureDicts((l, i, n, frac) =>
+            post({ type: 'dict-progress', layer: l, i, n, frac }));
+          const genPreCb = (done, total) =>
+            post({ type: 'analyze-progress', stage: 'readout', done, total });
+          if (await Pool.init(Engine.poolSrc)) await Pool.precompute(cap, genPreCb);
+          else Engine.precompute(cap, genPreCb);
+          post({ type: 'generated', tag: m.tag || null,
+                 tokens: cap.tokens.slice(0, cap.nPos),
+                 pieces: cap.tokens.slice(0, cap.nPos).map((t, i) =>
+                   Engine.tokenizer.decodePiece(i === 0 ? BOS : cap.tokens[i - 1], t)),
+                 text: Engine.tokenizer.decode(cap.tokens.slice(0, cap.nPos)),
+                 promptLen: ids.length, msTotal: Date.now() - t0, nPos: cap.nPos });
+          break;
+        }
+        case 'stop': Engine.stopFlag = true; break;
+        case 'readout': {
+          post({ type: 'readout', ...Engine.readout(m.pos, m.k || 40) });
+          break;
+        }
+        case 'readout-full': {
+          post({ type: 'readout-full', pos: m.pos,
+                 rows: Engine.cap.band.map((l, li) => ({
+                   layer: l,
+                   jlens: Engine.readoutFull(m.pos, li, 'jlens', m.k || 20),
+                   logit: Engine.readoutFull(m.pos, li, 'logit', m.k || 20),
+                 })) });
+          break;
+        }
+        case 'heat': {
+          const ranks = Engine.heat(m.tokenId);
+          post({ type: 'heat', tokenId: m.tokenId,
+                 ranks: ranks ? Array.from(ranks) : null });
+          break;
+        }
+        case 'dev-compare': {
+          // dev check: batched-pool forward must be bit-identical to the
+          // sequential path (same per-element loop order everywhere)
+          const ids = Engine.tokenizer.encode(m.text, true, false);
+          const capA = Engine.newCapture(ids.length);
+          for (let p = 0; p < ids.length; p++) Engine.captureForward(capA, ids[p], p, null);
+          if (!(await Pool.init(Engine.poolSrc))) {
+            post({ type: 'dev-compare', error: 'pool init failed' });
+            break;
+          }
+          const capB = Engine.newCapture(ids.length);
+          await Pool.forwardBatched(capB, ids, null);
+          let maxBand = 0, maxFinal = 0;
+          for (let i = 0; i < capA.resid.length; i++)
+            maxBand = Math.max(maxBand, Math.abs(capA.resid[i] - capB.resid[i]));
+          for (let i = 0; i < capA.residFinal.length; i++)
+            maxFinal = Math.max(maxFinal, Math.abs(capA.residFinal[i] - capB.residFinal[i]));
+          post({ type: 'dev-compare', maxBand, maxFinal, n: ids.length, K: Pool.K });
+          break;
+        }
+        case 'pieces': {
+          // piece strings for every pruned id (chip labels on the main thread).
+          // vocab pieces are byte strings (one char per raw UTF-8 byte, with
+          // sentencepiece's U+2581 already exported as a real space) — decode.
+          const toUtf8 = (bs) => {
+            const arr = new Uint8Array(bs.length);
+            for (let i = 0; i < bs.length; i++) arr[i] = bs.charCodeAt(i);
+            return textDecoder.decode(arr);
+          };
+          const pairs = [];
+          for (const id of Engine.prunedIds) {
+            pairs.push([id, toUtf8(Engine.tokenizer.vocab[id])]);
+          }
+          post({ type: 'pieces-ready', pairs });
+          break;
+        }
+        default: post({ type: 'error', error: `unknown message ${m.type}` });
+      }
+    } catch (err) {
+      post({ type: 'error', error: String(err && err.stack || err) });
+    }
+  };
+}
+</script>
+
+<script>
+'use strict';
+const $ = (id) => document.getElementById(id);
+const statusEl = $('status');
+const setStatus = (t, cls) => { statusEl.textContent = t || ''; statusEl.className = cls || ''; };
+
+// ---- tab-title progress + hidden-tab throttle self-check ----
+const BASE_TITLE = document.title;
+function setTitleProgress(text) { document.title = text ? `⏳ ${text} — J-Lens` : BASE_TITLE; }
+// Compute is timer-free in the worker, so a hidden tab normally runs full
+// speed; what we detect here is the browser actually slowing us (energy
+// saver, discard pressure): keep a foreground items/s baseline and compare.
+const throttle = { baseline: null, hiddenSlow: false, lastT: 0, lastN: 0 };
+window.__forceThroughputBaseline = (v) => { throttle.baseline = v; };   // test hook
+function noteThroughput(done) {
+  const now = performance.now();
+  if (throttle.lastT && done > throttle.lastN) {
+    const rate = (done - throttle.lastN) / ((now - throttle.lastT) / 1000);
+    if (document.hidden) {
+      if (throttle.baseline && rate < throttle.baseline / 3) throttle.hiddenSlow = true;
+    } else if (rate > 0) {
+      throttle.baseline = throttle.baseline ? 0.8 * throttle.baseline + 0.2 * rate : rate;
+    }
+  }
+  throttle.lastT = now; throttle.lastN = done;
+}
+function resetThroughput() { throttle.lastT = 0; throttle.lastN = 0; }
+document.addEventListener('visibilitychange', () => {
+  resetThroughput();               // rates don't compare across a visibility flip
+  if (!document.hidden && throttle.hiddenSlow) {
+    $('throttleBanner').style.display = '';
+    throttle.hiddenSlow = false;
+  }
+});
+
+// ---- main-thread IndexedDB (lens + vocab recovery across reloads) ----
+const idbKV = {
+  open() {
+    return new Promise((res, rej) => {
+      const r = indexedDB.open('jlens-cache', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('kv');
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    });
+  },
+  async get(k) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv').objectStore('kv').get(k);
+      t.onsuccess = () => res(t.result); t.onerror = () => rej(t.error);
+    });
+  },
+  async set(k, v) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k);
+      t.onsuccess = () => res(); t.onerror = () => rej(t.error);
+    });
+  },
+};
+
+// ---- worker boot (Tiny Mind pattern: Blob URL from the inline source) ----
+const workerSrc = $('workerSrc').textContent;
+const worker = new Worker(URL.createObjectURL(new Blob([workerSrc], { type: 'text/javascript' })));
+// the Engine worker spawns its compute pool from this same source (item 5)
+worker.postMessage({ type: 'pool-src', src: workerSrc });
+
+const state = {
+  haveModel: false, haveTok: false, haveLens: false, haveVocab: false, dictsReady: false,
+  tokens: [], pieces: [], selected: -1, mode: 'J', raw: false, top20: false,
+  readout: null, heatToken: null, vocabMeta: null, pieceById: new Map(),
+  lastText: '', generating: false, swapPending: null, lastReadoutMs: 0,
+};
+
+// ---- file ingest: URL fetch with progress + drag-drop ----
+const FILES = {
+  'stories110M.bin': { key: 'model', msg: 'load-model' },
+  'tokenizer.bin': { key: 'tok', msg: 'load-tokenizer' },
+  'stories110M.jlens': { key: 'lens', msg: 'load-lens' },
+  'vocab.json': { key: 'vocab', msg: 'load-vocab' },
+};
+const pending = {};   // ordered delivery: model must reach the worker first
+
+const HAVE_FLAG = { model: 'haveModel', tok: 'haveTok', lens: 'haveLens', vocab: 'haveVocab' };
+function fileArrived(name, buffer, fromCache = false) {
+  const spec = FILES[name];
+  if (!spec) { setStatus(`ignored ${name} (not one of the four expected files)`, 'warn-t'); return; }
+  if (state[HAVE_FLAG[spec.key]] || pending[spec.key]) return;   // already have it
+  // keep a copy of every file so a reload (or a discarded tab) skips the
+  // fetch entirely — this is what makes revisits interactive in seconds.
+  // (~430 MB of origin storage for the model; a prototype trade-off.)
+  if (!fromCache) idbKV.set('file:' + name, buffer.slice(0)).catch(() => {});
+  pending[spec.key] = { name, buffer };
+  $('st-' + spec.key).textContent = fromCache ? 'cached ✓' : 'loaded';
+  $('st-' + spec.key).className = 'st ok';
+  $('pg-' + spec.key).style.width = '100%';
+  deliverPending();
+}
+// startup: restore whatever the cache has (typically all four files)
+(async () => {
+  for (const name of Object.keys(FILES)) {
+    try {
+      const buf = await idbKV.get('file:' + name);
+      if (buf) fileArrived(name, buf, true);
+    } catch (e) { /* no cache — fine */ }
+  }
+})();
+function deliverPending() {
+  // strict order: model -> tokenizer -> lens -> vocab (worker needs vocabSize/dim)
+  if (pending.model && !state.haveModel) {
+    worker.postMessage({ type: 'load-model', buffer: pending.model.buffer }, [pending.model.buffer]);
+    pending.model = null; return;
+  }
+  if (!state.haveModel) return;
+  if (pending.tok && !state.haveTok) {
+    worker.postMessage({ type: 'load-tokenizer', buffer: pending.tok.buffer }, [pending.tok.buffer]);
+    pending.tok = null; return;
+  }
+  if (pending.lens && !state.haveLens) {
+    worker.postMessage({ type: 'load-lens', buffer: pending.lens.buffer }, [pending.lens.buffer]);
+    pending.lens = null; return;
+  }
+  if (state.haveTok && state.haveLens && pending.vocab && !state.haveVocab) {
+    const meta = JSON.parse(new TextDecoder().decode(pending.vocab.buffer));
+    state.vocabMeta = meta;
+    worker.postMessage({ type: 'load-vocab', meta });
+    pending.vocab = null;
+  }
+}
+
+async function fetchWithProgress(name) {
+  const spec = FILES[name];
+  const el = $('pg-' + spec.key), st = $('st-' + spec.key);
+  st.textContent = 'fetching…'; st.className = 'st';
+  const res = await fetch(name);
+  if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
+  const total = +res.headers.get('Content-Length') || 0;
+  const reader = res.body.getReader();
+  const chunks = [];
+  let got = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value); got += value.length;
+    if (total) el.style.width = (100 * got / total) + '%';
+  }
+  const buf = new Uint8Array(got);
+  let o = 0;
+  for (const ch of chunks) { buf.set(ch, o); o += ch.length; }
+  fileArrived(name, buf.buffer);
+}
+
+$('fetchBtn').onclick = async () => {
+  $('fetchBtn').disabled = true;
+  for (const name of Object.keys(FILES)) {
+    const st = $('st-' + FILES[name].key).textContent;
+    if (st === 'cached ✓' || st === 'loaded') continue;
+    try { await fetchWithProgress(name); }
+    catch (e) { setStatus(`fetch failed: ${e.message} — drop the file instead`, 'err'); }
+  }
+};
+const dz = $('dropzone');
+dz.ondragover = (e) => { e.preventDefault(); dz.classList.add('over'); };
+dz.ondragleave = () => dz.classList.remove('over');
+dz.ondrop = async (e) => {
+  e.preventDefault(); dz.classList.remove('over');
+  for (const f of e.dataTransfer.files) fileArrived(f.name, await f.arrayBuffer());
+};
+
+// ---- worker messages ----
+worker.onmessage = (e) => {
+  const m = e.data;
+  switch (m.type) {
+    case 'model-ready':
+      state.haveModel = true;
+      setStatus(`model: ${m.config.nLayers} layers, dim ${m.config.dim}, vocab ${m.config.vocabSize}`);
+      deliverPending(); break;
+    case 'tokenizer-ready': state.haveTok = true; deliverPending(); break;
+    case 'lens-ready':
+      state.haveLens = true;
+      setStatus(`lens layers: L${m.layers.join(', L')}`);
+      deliverPending(); break;
+    case 'vocab-ready':
+      state.haveVocab = true;
+      setStatus(`story vocabulary: ${m.pruned} tokens`);
+      populateVocabUI();
+      worker.postMessage({ type: 'build-dicts' });
+      $('st-dict').textContent = 'building…';
+      break;
+    case 'dict-progress': {
+      const pct = Math.round(100 * (m.i + m.frac) / m.n);
+      $('pg-dict').style.width = pct + '%';
+      $('st-dict').textContent = `L${m.layer}…`;
+      setStatus(`building readout dictionaries (one-time)… L${m.layer}, ${pct}%`);
+      setTitleProgress(`dictionaries ${pct}%`);
+      break;
+    }
+    case 'dicts-ready':
+      state.dictsReady = true;
+      window.__readyAt = performance.now();   // dev metric: time-to-interactive
+      $('st-dict').textContent = m.cached ? 'ready (cached ✓)'
+        : m.lazy ? 'ready (builds on first analyze)'
+        : `ready (${(m.ms / 1000).toFixed(1)} s)`;
+      $('st-dict').className = 'st ok';
+      $('pg-dict').style.width = '100%';
+      $('analyzeBtn').disabled = false;
+      $('genBtn').disabled = false;
+      setStatus('ready — analyze a story or let the model write one', 'ok');
+      break;
+    case 'analyze-progress': {
+      const pct = Math.round(100 * m.done / m.total);
+      if (state.progressStage !== m.stage) { state.progressStage = m.stage; resetThroughput(); }
+      noteThroughput(m.done);
+      setStatus(m.stage === 'forward'
+        ? `reading the story… token ${m.done}/${m.total}`
+        : `computing readouts… ${pct}%`);
+      setTitleProgress(m.stage === 'forward' ? `reading ${pct}%` : `readouts ${pct}%`);
+      break;
+    }
+    case 'analyzed':
+      onCaptured(m, null); break;
+    case 'gen-token': {
+      if (m.tag === 'noswap') $('swapNoSwap').textContent += m.piece;
+      else if (m.tag === 'withswap') $('swapWith').textContent += m.piece;
+      else $('genOut').textContent += m.piece;
+      if (state.progressStage !== 'gen' + (m.tag || '')) {
+        state.progressStage = 'gen' + (m.tag || '');
+        state.genCount = 0;
+        resetThroughput();
+      }
+      state.genCount++;
+      noteThroughput(state.genCount);
+      setTitleProgress(`writing ${state.genCount}`);
+      break;
+    }
+    case 'generated':
+      if (m.tag === 'noswap' || m.tag === 'withswap') onSwapResult(m);
+      else onCaptured(m, m.text);
+      break;
+    case 'readout':
+      state.readout = m; state.lastReadoutMs = performance.now() - state.readoutT0;
+      renderReadout(); break;
+    case 'readout-full':
+      renderFullReadout(m); break;
+    case 'heat':
+      renderHeat(m); break;
+    case 'error':
+      setStatus(m.error, 'err'); console.error(m.error);
+      state.generating = false; $('stopBtn').disabled = true;
+      setTitleProgress(null);
+      setSwapBusy(false);
+      break;
+  }
+};
+
+// ---- prompt pickers ----
+const CANNED = [
+  'Once upon a time there was a little girl named Lily. She had a dog named Max. One day',
+  'Ben broke his mom\'s favorite vase. He heard her coming.',
+  'Lily and Max went to the beach. Lily built a castle. Max dug a',
+  'It was a dark night. Tim heard a strange noise in the garden.',
+  'The little bird could not fly. Every day it tried and tried.',
+];
+CANNED.forEach((p) => {
+  const b = document.createElement('button');
+  b.className = 'pchip'; b.textContent = p.slice(0, 44) + (p.length > 44 ? '…' : '');
+  b.title = p;
+  b.onclick = () => { $('promptBox').value = p; };
+  $('promptChips').appendChild(b);
+});
+function populateVocabUI() {
+  const meta = state.vocabMeta;
+  (meta.themeWords || []).slice(0, 28).forEach((w) => {
+    const b = document.createElement('button');
+    b.className = 'pchip'; b.textContent = w;
+    b.title = 'add to the prompt (a word the lens can see)';
+    b.onclick = () => { const t = $('promptBox'); t.value = (t.value + ' ' + w).trimStart(); };
+    $('themeChips').appendChild(b);
+  });
+  updateSwapDatalist();
+}
+// Swap-word suggestions: the current story's single-token words first
+// (deduped, story order — every analyzed token is single-token by
+// construction; keep the word-like ones), then the theme vocabulary.
+function updateSwapDatalist() {
+  const dl = $('vocabList');
+  dl.innerHTML = '';
+  const seen = new Set();
+  const add = (w, label) => {
+    if (seen.has(w)) return;
+    seen.add(w);
+    const o = document.createElement('option');
+    o.value = ' ' + w;
+    if (label) o.label = label;
+    dl.appendChild(o);
+  };
+  state.pieces.slice(1).forEach((p) => {
+    if (/^ [A-Za-z]+$/.test(p)) add(p.slice(1), 'from this story');
+  });
+  ((state.vocabMeta && state.vocabMeta.themeWords) || []).forEach((w) => add(w));
+}
+
+// ---- analyze / generate ----
+$('tempSlider').oninput = () => { $('tempVal').textContent = $('tempSlider').value; };
+$('analyzeBtn').onclick = () => {
+  const text = $('promptBox').value.trim();
+  if (!text) return;
+  state.lastText = text;
+  $('genOut').textContent = '';
+  worker.postMessage({ type: 'analyze', text });
+  setStatus('reading the story…');
+};
+$('genBtn').onclick = () => {
+  const prompt = $('promptBox').value.trim();
+  if (!prompt) return;
+  state.generating = true;
+  $('stopBtn').disabled = false;
+  $('genOut').textContent = prompt;
+  worker.postMessage({ type: 'generate', prompt,
+    temperature: +$('tempSlider').value, maxNew: +$('maxNew').value });
+  setStatus('the model is writing…');
+};
+$('stopBtn').onclick = () => worker.postMessage({ type: 'stop' });
+
+function onCaptured(m, generatedText, opts = {}) {
+  state.generating = false;
+  $('stopBtn').disabled = true;
+  $('swapBtn').disabled = true;   // selection was reset; re-enabled on selectToken
+  state.tokens = m.tokens; state.pieces = m.pieces;
+  state.selected = -1; state.heatToken = null;
+  if (generatedText) state.lastText = generatedText;
+  updateSwapDatalist();
+  renderStory();
+  $('readout').innerHTML = '<span class="hint">select a token on the left…</span>';
+  $('modelRow').textContent = '';
+  $('roPos').textContent = '— no token selected';
+  setTitleProgress(null);
+  state.progressStage = null;
+  const secs = (m.msTotal / 1000).toFixed(1);
+  setStatus(`done: ${m.nPos} tokens in ${secs} s (forward ${((m.msForward || 0) / 1000).toFixed(1)} s) — click any word in the story below`, 'ok');
+  window.__lastAnalyze = { nPos: m.nPos, msTotal: m.msTotal, msForward: m.msForward };
+}
+
+// ---- story pane ----
+function renderStory() {
+  const el = $('story');
+  el.innerHTML = ''; el.classList.remove('hint');
+  state.pieces.forEach((piece, i) => {
+    if (i === 0) return;                       // BOS — nothing to show
+    const sp = document.createElement('span');
+    sp.className = 'tok';
+    sp.dataset.pos = i;
+    if (piece === '\n') { sp.textContent = '⏎'; el.appendChild(sp); el.appendChild(document.createElement('br')); }
+    else { sp.textContent = piece; el.appendChild(sp); }
+    sp.onclick = () => selectToken(i);
+  });
+}
+function selectToken(pos) {
+  state.selected = pos;
+  document.querySelectorAll('#story .tok').forEach((t) => t.classList.toggle('sel', +t.dataset.pos === pos));
+  $('roPos').textContent = `— token ${pos}: “${state.pieces[pos]}”`;
+  $('swapPosLabel').textContent = `“${state.pieces[pos].trim() || state.pieces[pos]}” (position ${pos})`;
+  $('swapBtn').disabled = false;
+  $('swapHint').textContent = '';
+  state.readoutT0 = performance.now();
+  worker.postMessage({ type: 'readout', pos, k: 40 });
+}
+
+// ---- readout panel ----
+$('mJ').onclick = () => setMode('J'); $('mL').onclick = () => setMode('L'); $('mD').onclick = () => setMode('D');
+function setMode(mode) {
+  state.mode = mode;
+  $('mJ').classList.toggle('on', mode === 'J');
+  $('mL').classList.toggle('on', mode === 'L');
+  $('mD').classList.toggle('on', mode === 'D');
+  renderReadout();
+}
+$('rawToggle').onchange = () => { state.raw = $('rawToggle').checked; renderReadout(); };
+$('top20Toggle').onchange = () => { state.top20 = $('top20Toggle').checked; renderReadout(); };
+
+function pieceOf(id) {
+  if (!state.pieceById.has(id)) return `#${id}`;
+  return state.pieceById.get(id);
+}
+function displayChip(entry, extraClass, rank) {
+  const meta = state.vocabMeta;
+  const chip = document.createElement('span');
+  chip.className = 'rchip' + (extraClass || '');
+  const alias = meta.alias && meta.alias[String(entry.id)];
+  const raw = entry.piece;
+  const label = alias ? alias.display : (raw.trim() === '' ? JSON.stringify(raw) : raw);
+  chip.textContent = label;
+  const heatHint = 'click = heat map: light up the story where this word was on the model’s mind';
+  if (alias) { chip.classList.add('alias'); chip.title = 'name fragment: ' + alias.names.map(n => n.name).join(', ') + ' · ' + heatHint; }
+  else chip.title = `token ${entry.id} · score ${entry.score.toFixed(2)} · ${heatHint}`;
+  if (rank !== undefined) {
+    const rk = document.createElement('span'); rk.className = 'rk'; rk.textContent = '#' + (rank + 1);
+    chip.appendChild(rk);
+  }
+  if (state.heatToken === entry.id) chip.classList.add('heaton');
+  chip.onclick = () => toggleHeat(entry.id, label);
+  return chip;
+}
+
+function renderReadout() {
+  const m = state.readout;
+  if (!m) return;
+  const meta = state.vocabMeta;
+  const wordStart = new Set(meta.wordStartIds);
+  const aliasIds = new Set(Object.keys(meta.alias || {}).map(Number));
+  const keep = (id) => state.raw || wordStart.has(id) || aliasIds.has(id);
+  const K = state.top20 ? 20 : 8;
+  const box = $('readout');
+  box.innerHTML = ''; box.classList.remove('hint');
+
+  for (const row of m.layers.slice().reverse()) {          // top of network on top
+    const div = document.createElement('div');
+    div.className = 'lrow';
+    const nm = document.createElement('span');
+    nm.className = 'lname'; nm.textContent = 'L' + row.layer;
+    nm.title = `layer ${row.layer} of 12`;
+    div.appendChild(nm);
+    const chips = document.createElement('span');
+    chips.className = 'chips';
+
+    const withPieces = (list) => list.map(e => ({ ...e, piece: pieceOf(e.id) }));
+    const jF = withPieces(row.jlens).filter(e => keep(e.id)).slice(0, K);
+    const lF = withPieces(row.logit).filter(e => keep(e.id)).slice(0, K);
+
+    if (state.mode === 'J') jF.forEach((e, i) => chips.appendChild(displayChip(e, '', i)));
+    else if (state.mode === 'L') lF.forEach((e, i) => chips.appendChild(displayChip(e, '', i)));
+    else {
+      const lSet = new Set(lF.map(e => e.id));
+      jF.forEach((e, i) => chips.appendChild(displayChip(e, lSet.has(e.id) ? '' : ' jonly', i)));
+    }
+    div.appendChild(chips);
+    box.appendChild(div);
+  }
+  const model = m.model.map(e => ({ ...e, piece: pieceOf(e.id) }));
+  $('modelRow').innerHTML = '<b>model’s next word:</b> ';
+  model.forEach((e) => $('modelRow').appendChild(displayChip(e)));
+  $('modelRow').appendChild(Object.assign(document.createElement('span'),
+    { className: 'hint', textContent: ` · readout in ${state.lastReadoutMs.toFixed(0)} ms (story vocab)` }));
+}
+
+function renderFullReadout(m) { console.log('full-vocab readout', m); }
+
+// ---- heat view ----
+function toggleHeat(tokenId, label) {
+  if (state.heatToken === tokenId) { clearHeat(); return; }
+  state.heatToken = tokenId;
+  state.heatLabel = label;
+  worker.postMessage({ type: 'heat', tokenId });
+}
+function clearHeat() {
+  state.heatToken = null;
+  document.querySelectorAll('#story .tok').forEach(t => t.classList.remove('hot0', 'hot1', 'hot2', 'hot3'));
+  $('heatCaption').textContent = '';
+  $('heatOff').style.display = 'none';
+  renderReadout();
+}
+$('heatOff').onclick = clearHeat;
+function renderHeat(m) {
+  if (m.ranks === null) { setStatus('that token is outside the story vocabulary', 'warn-t'); return; }
+  document.querySelectorAll('#story .tok').forEach((el) => {
+    const pos = +el.dataset.pos;
+    el.classList.remove('hot0', 'hot1', 'hot2', 'hot3');
+    const r = m.ranks[pos];
+    if (r <= 2) el.classList.add('hot3');
+    else if (r <= 10) el.classList.add('hot2');
+    else if (r <= 40) el.classList.add('hot1');
+    else if (r <= 150) el.classList.add('hot0');
+  });
+  $('heatCaption').textContent = `🔥 where “${(state.heatLabel || '').trim()}” was on the model’s mind (best J-lens rank across L4–L8; bright pink = top-3)`;
+  $('heatOff').style.display = '';
+  renderReadout();
+}
+
+// ---- swap & regenerate ----
+$('swapStrength').oninput = () => { $('swapStrVal').textContent = $('swapStrength').value; };
+(function initSwapLayerSelects() {
+  const l0 = $('swapL0'), l1 = $('swapL1');
+  l0.innerHTML = ''; l1.innerHTML = '';
+  [4, 5, 6, 7, 8].forEach((l) => {
+    l0.appendChild(new Option('L' + l, l, l === 4, l === 4));
+    l1.appendChild(new Option('L' + l, l, l === 8, l === 8));
+  });
+})();
+
+function setSwapBusy(busy) {
+  $('swapBtn').disabled = busy || state.selected < 0;
+  $('swapSpin').style.display = busy ? '' : 'none';
+}
+$('swapBtn').onclick = () => {
+  if (state.selected < 0) return;
+  const enc = (s) => {
+    // resolve a typed word to a single word-start token id via the piece map
+    const w = s.trim();
+    if (!w) return null;
+    for (const [id, piece] of state.pieceById) {
+      if (piece === ' ' + w) return id;
+    }
+    return null;
+  };
+  const srcId = enc($('swapSrc').value), tgtId = enc($('swapTgt').value);
+  if (srcId === null || tgtId === null) {
+    $('swapHint').textContent = 'both words must be single tokens the model knows (pick from the list)';
+    return;
+  }
+  $('swapHint').textContent = '';
+  const anchor = state.selected;
+  // rewrites are deterministic by default so the ONLY difference is the swap
+  const temperature = $('swapUseTemp').checked ? +$('tempSlider').value : 0;
+  const seed = (Math.random() * 0x7fffffff) | 0;
+  state.swapRun = {
+    seed, temperature,
+    // regenerate from the ANALYZED token ids (BOS..anchor inclusive) — not
+    // re-encoded text, so token boundaries can't drift from what's on screen
+    promptIds: state.tokens.slice(0, anchor + 1),
+    edit: { srcId, tgtId, l0: +$('swapL0').value, l1: +$('swapL1').value,
+            strength: +$('swapStrength').value, fromPos: anchor },
+  };
+  state.swapPending = { tag: 'noswap' };
+  setSwapBusy(true);
+  const prefix = state.pieces.slice(1, anchor + 1).join('');
+  $('swapOrig').textContent = state.pieces.slice(1).join('');
+  // seed both rewrite panes with the shared prefix; new tokens stream in after it
+  $('swapNoSwap').textContent = prefix; $('swapWith').textContent = prefix;
+  setStatus('rewriting from the anchor, no swap…');
+  worker.postMessage({ type: 'generate', tag: 'noswap',
+    promptIds: state.swapRun.promptIds, seed, temperature,
+    maxNew: +$('maxNew').value });
+};
+function onSwapResult(m) {
+  state.generating = false; $('stopBtn').disabled = true;
+  if (m.tag === 'noswap') {
+    $('swapNoSwap').textContent = m.text;
+    setStatus('rewriting from the anchor, with the swap…');
+    state.swapPending = { tag: 'withswap' };
+    // same prompt ids & seed & temperature; the ONLY difference is the edit hook
+    worker.postMessage({ type: 'generate', tag: 'withswap',
+      promptIds: state.swapRun.promptIds, seed: state.swapRun.seed,
+      temperature: state.swapRun.temperature, edit: state.swapRun.edit,
+      maxNew: +$('maxNew').value });
+  } else {
+    $('swapWith').textContent = m.text;
+    state.swapPending = null;
+    setSwapBusy(false);
+    setStatus('swap done — compare the two rewrites (readouts now show the with-swap story)', 'ok');
+    // load the with-swap story into the panes so its readouts are inspectable,
+    // but keep the three comparison panes as they are
+    onCaptured(m, m.text, { keepSwapPanes: true });
+  }
+}
+
+// Piece-string bootstrap: once the vocab lands in the worker, fetch the
+// decoded piece of every pruned id so chips render without round-trips.
+(() => {
+  const origOnMessage = worker.onmessage;
+  worker.onmessage = (e) => {
+    const m = e.data;
+    if (m.type === 'vocab-ready') worker.postMessage({ type: 'pieces' });
+    if (m.type === 'pieces-ready') { state.pieceById = new Map(m.pairs); return; }
+    origOnMessage(e);
+  };
+})();
+</script>
+</body></html>

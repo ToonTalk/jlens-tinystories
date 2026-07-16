@@ -1,0 +1,143 @@
+{
+ "A": {
+  "0": {
+   "top10_overlap_mean": 0.08823529411764708,
+   "spearman_mean": 0.10775189364657682,
+   "n_samples": 204
+  },
+  "1": {
+   "top10_overlap_mean": 0.10637254901960785,
+   "spearman_mean": 0.20087766033761642,
+   "n_samples": 204
+  },
+  "2": {
+   "top10_overlap_mean": 0.13333333333333341,
+   "spearman_mean": 0.27664583395509157,
+   "n_samples": 204
+  },
+  "3": {
+   "top10_overlap_mean": 0.1676470588235296,
+   "spearman_mean": 0.3508872690738416,
+   "n_samples": 204
+  },
+  "4": {
+   "top10_overlap_mean": 0.1946078431372551,
+   "spearman_mean": 0.37298058616180046,
+   "n_samples": 204
+  },
+  "5": {
+   "top10_overlap_mean": 0.2661764705882355,
+   "spearman_mean": 0.35849495904118406,
+   "n_samples": 204
+  },
+  "6": {
+   "top10_overlap_mean": 0.28823529411764703,
+   "spearman_mean": 0.442031281543713,
+   "n_samples": 204
+  },
+  "7": {
+   "top10_overlap_mean": 0.33333333333333326,
+   "spearman_mean": 0.5125640610269472,
+   "n_samples": 204
+  },
+  "8": {
+   "top10_overlap_mean": 0.40686274509803916,
+   "spearman_mean": 0.6031944538448372,
+   "n_samples": 204
+  },
+  "9": {
+   "top10_overlap_mean": 0.47990196078431363,
+   "spearman_mean": 0.7232645104328791,
+   "n_samples": 204
+  },
+  "10": {
+   "top10_overlap_mean": 0.6666666666666665,
+   "spearman_mean": 0.8315911442041397,
+   "n_samples": 204
+  }
+ },
+ "B": {
+  "0": {
+   "top10_overlap_mean": 0.09166666666666667,
+   "spearman_mean": 0.10250897296503478,
+   "n_samples": 204
+  },
+  "1": {
+   "top10_overlap_mean": 0.11029411764705883,
+   "spearman_mean": 0.06173190679035935,
+   "n_samples": 204
+  },
+  "2": {
+   "top10_overlap_mean": 0.1294117647058824,
+   "spearman_mean": 0.08142220331173317,
+   "n_samples": 204
+  },
+  "3": {
+   "top10_overlap_mean": 0.14411764705882363,
+   "spearman_mean": 0.17200511840044283,
+   "n_samples": 204
+  },
+  "4": {
+   "top10_overlap_mean": 0.16519607843137274,
+   "spearman_mean": 0.15195720248362599,
+   "n_samples": 204
+  },
+  "5": {
+   "top10_overlap_mean": 0.207843137254902,
+   "spearman_mean": 0.19026720406962375,
+   "n_samples": 204
+  },
+  "6": {
+   "top10_overlap_mean": 0.22941176470588234,
+   "spearman_mean": 0.26291630577807334,
+   "n_samples": 204
+  },
+  "7": {
+   "top10_overlap_mean": 0.26225490196078455,
+   "spearman_mean": 0.32840921919719845,
+   "n_samples": 204
+  },
+  "8": {
+   "top10_overlap_mean": 0.3416666666666666,
+   "spearman_mean": 0.41713390367872577,
+   "n_samples": 204
+  },
+  "9": {
+   "top10_overlap_mean": 0.4328431372549018,
+   "spearman_mean": 0.545261404093574,
+   "n_samples": 204
+  },
+  "10": {
+   "top10_overlap_mean": 0.6279411764705881,
+   "spearman_mean": 0.741315098954182,
+   "n_samples": 204
+  }
+ },
+ "C": {
+  "0": {
+   "top10_overlap_mean": 0.2303921568627453,
+   "spearman_mean": 0.35748691915297043,
+   "n_samples": 204
+  },
+  "1": {
+   "top10_overlap_mean": 0.22990196078431385,
+   "spearman_mean": 0.3874892133708094,
+   "n_samples": 204
+  },
+  "2": {
+   "top10_overlap_mean": 0.2539215686274512,
+   "spearman_mean": 0.41815845843623667,
+   "n_samples": 204
+  },
+  "3": {
+   "top10_overlap_mean": 0.32058823529411773,
+   "spearman_mean": 0.4991198535643372,
+   "n_samples": 204
+  },
+  "4": {
+   "top10_overlap_mean": 0.5352941176470587,
+   "spearman_mean": 0.589082182914603,
+   "n_samples": 204
+  }
+ }
+}

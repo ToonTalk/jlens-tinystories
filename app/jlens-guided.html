@@ -1,0 +1,3505 @@
+<!doctype html>
+<!-- J-Lens Explorer — Tiny Mind app #4, Phase 1 prototype (CPU, shipped lens).
+     Copyright (c) 2026 Ken Kahn. MIT License.
+     stories110M model courtesy of Andrej Karpathy's tinyllamas (MIT).
+     Reuses (verbatim where possible) the Tiny Mind bin-reader, tokenizer and
+     capture patterns; the forward pass drops the C-parity fround discipline
+     for a register-blocked fp32/f64-accumulate matmul (see worker source). -->
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thought Bubble — Tiny Mind</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%277%27%20fill%3D%27%231a1f2b%27/%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2714%27%20r%3D%277%27%20fill%3D%27none%27%20stroke%3D%27%239ecbff%27%20stroke-width%3D%272%27/%3E%3Cline%20x1%3D%2719%27%20y1%3D%2719%27%20x2%3D%2726%27%20y2%3D%2726%27%20stroke%3D%27%239ecbff%27%20stroke-width%3D%272.5%27/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #12141a; --card: #1b1f28; --edge: #2b3140; --ink: #dde3ec; --dim: #8791a3;
+    --green: #8fd3a7; --blue: #9ecbff; --gold: #ffd27f; --pink: #ff9ec2; --red: #ff9c9c;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink);
+         margin: 0; padding: 1rem 1.2rem; font-size: 15px; }
+  h1 { font-size: 20px; margin: 0; color: var(--blue); }
+  .sub { color: var(--dim); margin: .15rem 0 1rem; font-size: 13px; }
+  .card { background: var(--card); border: 1px solid var(--edge); border-radius: 10px;
+          padding: .8rem 1rem; margin-bottom: .9rem; }
+  .card h2 { font-size: 14px; margin: 0 0 .5rem; color: var(--blue); font-weight: 600; }
+  button { background: #2b4a6f; color: #dff0ff; border: 0; border-radius: 6px;
+           padding: .4rem .8rem; margin: .15rem .3rem .15rem 0; cursor: pointer; font: inherit; }
+  button.go { background: #2d5a3d; color: #eaffea; }
+  button.warn { background: #5a2d4a; color: #ffe6f2; }
+  button.small { padding: .15rem .5rem; font-size: 12px; }
+  button:disabled { opacity: .35; cursor: default; }
+  input[type=text], input[type=number], select, textarea {
+    background: #12151c; color: var(--ink); border: 1px solid var(--edge);
+    border-radius: 5px; padding: .25rem .4rem; font: inherit; }
+  textarea { width: 100%; }
+  input[type=range] { accent-color: var(--gold); vertical-align: middle; }
+  .hint { color: var(--dim); font-size: 12.5px; }
+  .ok { color: var(--green); } .warn-t { color: var(--gold); } .err { color: var(--red); }
+  .grid2 { display: grid; grid-template-columns: minmax(340px, 1.15fr) 1fr; gap: .9rem; align-items: start; }
+  @media (max-width: 1100px) { .grid2 { grid-template-columns: 1fr; } }
+  #dropzone { border: 2px dashed #444c5e; border-radius: 10px; padding: .7rem 1rem;
+              text-align: center; color: var(--dim); margin-top: .5rem; }
+  #dropzone.over { border-color: var(--green); color: var(--green); }
+  .prog { height: 9px; background: #262c38; border-radius: 5px; overflow: hidden; margin: .25rem 0; }
+  .prog div { height: 100%; width: 0; background: var(--pink); transition: width .15s; }
+  .filerow { display: flex; align-items: center; gap: .5rem; font-size: 12.5px; margin: .15rem 0; }
+  .filerow .nm { width: 11.5em; color: var(--dim); }
+  .filerow .st { min-width: 5em; }
+  /* story pane */
+  #story { line-height: 2.05; font-size: 16px; max-height: 340px; overflow-y: auto;
+           background: #12151c; border-radius: 8px; padding: .6rem .7rem; }
+  .tok { border-radius: 4px; padding: .05rem .05rem; cursor: pointer; white-space: pre-wrap; }
+  .tok:hover { background: #2b3140; }
+  .tok.sel { background: #2b4a6f; outline: 1px solid var(--blue); }
+  .tok.hot0 { background: rgba(255,210,127,.13); } .tok.hot1 { background: rgba(255,210,127,.32); }
+  .tok.hot2 { background: rgba(255,158,194,.45); } .tok.hot3 { background: rgba(255,158,194,.75); color:#1a0d14; }
+  #heatCaption { font-size: 12.5px; color: var(--gold); min-height: 1.3em; margin-top: .3rem; }
+  /* readout panel */
+  .lrow { display: flex; align-items: flex-start; gap: .5rem; padding: .28rem 0;
+          border-bottom: 1px solid #232936; }
+  .lrow .lname { width: 3.4em; color: var(--gold); font-weight: 600; font-size: 13px;
+                 cursor: default; padding-top: .12rem; flex: none; }
+  .lrow .chips { flex: 1; display: flex; flex-wrap: wrap; gap: .28rem; }
+  .rchip { background: #12151c; border: 1px solid var(--edge); color: var(--ink);
+           border-radius: 999px; padding: .08rem .55rem; font-size: 13px; cursor: pointer; }
+  .rchip:hover { border-color: var(--blue); }
+  .rchip.jonly { border-color: #3f7d55; background: #16241b; color: var(--green); }
+  .rchip.alias { color: var(--pink); }
+  .rchip.heaton { outline: 2px solid var(--gold); }
+  .rchip .rk { color: var(--dim); font-size: 10.5px; margin-left: .25rem; }
+  .mode { display: inline-flex; border: 1px solid var(--edge); border-radius: 6px; overflow: hidden; }
+  .mode button { margin: 0; border-radius: 0; background: #1b1f28; color: var(--dim); }
+  .mode button.on { background: #2b4a6f; color: #dff0ff; }
+  .modelrow { background: #12151c; border-radius: 6px; padding: .3rem .5rem; margin-top: .45rem;
+              font-size: 13px; }
+  .modelrow b { color: var(--gold); }
+  #genOut, .swapcol { background: #12151c; border-radius: 8px; padding: .5rem .6rem;
+             font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+  .swapgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .6rem; }
+  @media (max-width: 900px) { .swapgrid { grid-template-columns: 1fr; } }
+  .swapcol h3 { margin: 0 0 .3rem; font-size: 12.5px; color: var(--dim); font-weight: 600; }
+  .swapcol .changed { color: var(--pink); }
+  #status { color: var(--dim); font-size: 12.5px; min-height: 1.2em; margin-top: .3rem; }
+  .chiprow { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0; }
+  .pchip { background: #262c38; color: var(--blue); border: 0; border-radius: 999px;
+           padding: .05rem .55rem; font-size: 11.5px; cursor: pointer; }
+  .pchip:hover { background: #2b4a6f; }
+  .bandwrap { position: relative; display: inline-block; vertical-align: middle; }
+  .bandwrap .band { position: absolute; left: 13.33%; width: 20%; top: 50%; height: 12px;
+    transform: translateY(-50%); background: rgba(143,211,167,.28);
+    border: 1px solid rgba(143,211,167,.55); border-radius: 4px; pointer-events: none; }
+  .bandwrap input { position: relative; }
+  label.inl { color: var(--dim); font-size: 12.5px; margin-right: .6rem; }
+  datalist { display: none; }
+</style>
+</head><body>
+<div id="throttleBanner" style="display:none;background:#4a3a1f;border:1px solid var(--gold);color:var(--gold);border-radius:8px;padding:.5rem .8rem;margin-bottom:.8rem;font-size:13.5px">
+  🐌 your browser slowed this tab while it was hidden — the numbers below took longer than they would in front.
+  <button class="small" style="margin-left:.6rem" onclick="this.parentElement.style.display='none'">ok</button>
+</div>
+<h1>💭 Thought Bubble</h1>
+<div class="sub">watch what a tiny story-writer is holding in mind — layer by layer, word by word.
+  A Tiny Mind instrument (Phase 1 prototype). J-lens = Jacobian lens; the comparison mode is the plain logit lens.</div>
+
+<div class="card" id="loadCard">
+  <h2>model &amp; lens</h2>
+  <div class="filerow"><span class="nm">stories110M.bin (~420 MB)</span><span class="st" id="st-model">—</span><div class="prog" style="flex:1"><div id="pg-model"></div></div></div>
+  <div class="filerow"><span class="nm">tokenizer.bin</span><span class="st" id="st-tok">—</span><div class="prog" style="flex:1"><div id="pg-tok"></div></div></div>
+  <div class="filerow"><span class="nm">stories110M.jlens</span><span class="st" id="st-lens">—</span><div class="prog" style="flex:1"><div id="pg-lens"></div></div></div>
+  <div class="filerow"><span class="nm">vocab.json</span><span class="st" id="st-vocab">—</span><div class="prog" style="flex:1"><div id="pg-vocab"></div></div></div>
+  <button id="fetchBtn" class="go">⬇ fetch files from this folder</button>
+  <span class="hint">or drop them below (works from file://)</span>
+  <div id="dropzone">drop stories110M.bin · tokenizer.bin · stories110M.jlens · vocab.json here</div>
+  <div class="filerow" style="margin-top:.4rem"><span class="nm">readout dictionaries</span><span class="st" id="st-dict">—</span><div class="prog" style="flex:1"><div id="pg-dict"></div></div></div>
+</div>
+
+<div class="grid2">
+<div>
+  <div class="card">
+    <h2>get a story in</h2>
+    <textarea id="promptBox" rows="3">Lily and Max went to the beach. Lily built a castle. Max dug a</textarea>
+    <div class="chiprow" id="promptChips"></div>
+    <div class="chiprow" id="themeChips"></div>
+    <div style="margin-top:.3rem">
+      <button id="analyzeBtn" class="go" disabled>🔬 analyze (read it)</button>
+      <button id="genBtn" disabled>✍️ generate (model writes on)</button>
+      <button id="stopBtn" class="warn" disabled>■ stop</button>
+      <label class="inl" title="How adventurous the word choices are. 0 = always its top pick (same story every time); higher = more surprises.">surprise <input id="tempSlider" type="range" min="0" max="1.4" step="0.1" value="0.8" style="width:90px"><span id="tempVal">0.8</span></label>
+      <label class="inl" title="How many new tokens the model may add before stopping.">max <input id="maxNew" type="number" value="120" min="10" max="700" style="width:4.5em"></label>
+    </div>
+    <div id="genOut" class="hint" style="margin-top:.4rem">generated text streams here…</div>
+    <div id="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>the story, token by token <span class="hint">(click a word)</span></h2>
+    <div id="story" class="hint">analyze or generate first…</div>
+    <div id="heatCaption"></div>
+    <div class="hint" style="margin-top:.3rem">heat strip: click any readout chip → the story lights up where that
+      word was on the model's mind (mid-layer J-lens rank; brighter = higher).
+      <button id="heatOff" class="small" style="display:none">clear heat</button></div>
+  </div>
+
+  <div class="card">
+    <h2>swap what it's thinking <span class="hint">(then let it keep writing)</span></h2>
+    <div>
+      <label class="inl">take out <input id="swapSrc" type="text" list="vocabList" placeholder=" hole" style="width:8em"></label>
+      <label class="inl">put in <input id="swapTgt" type="text" list="vocabList" placeholder=" castle" style="width:8em"></label>
+      <span class="hint">single-token story words work best (pick from the list)</span>
+      <datalist id="vocabList"></datalist>
+    </div>
+    <div style="margin-top:.25rem">
+      <label class="inl">from the <b id="swapPosLabel">selected token</b> onward</label>
+      <label class="inl">layers <select id="swapL0"></select>–<select id="swapL1"></select></label>
+      <label class="inl" title="How hard to push the swap. Low = a gentle nudge; high = a shove that can break the story. Stay in the green.">strength <span class="bandwrap"><span class="band" title="recommended: 0.2–0.5"></span><input id="swapStrength" type="range" min="0" max="1.5" step="0.05" value="0.4" style="width:110px"></span><span id="swapStrVal">0.4</span> <span class="hint">(stay in the green band, about 0.2–0.5 — push too hard and the story breaks)</span></label>
+      <label class="inl" title="Rewrites normally use surprise 0 so the comparison is exact and repeatable. This uses the story’s surprise setting instead — livelier, but each run differs."><input type="checkbox" id="swapUseTemp"> surprising rewrites (advanced)</label>
+    </div>
+    <button id="swapBtn" class="go" disabled>🔁 swap &amp; rewrite</button>
+    <span id="swapSpin" style="display:none">⏳</span>
+    <span class="hint" id="swapHint">select a token in the story first</span>
+    <div class="hint" style="margin-top:.35rem">From the anchor, the model rewrites the story twice — the <b>only</b>
+      difference between the two rewrites is the swap. Words already written before the anchor stay
+      as they are (including the swapped word itself, if it's there): the swap changes what the model
+      is <i>thinking</i> from the anchor on, not the text it already wrote.</div>
+    <div class="swapgrid" style="margin-top:.5rem">
+      <div class="swapcol"><h3>original</h3><div id="swapOrig" class="hint">—</div></div>
+      <div class="swapcol"><h3>rewrite (no swap)</h3><div id="swapNoSwap" class="hint">—</div></div>
+      <div class="swapcol"><h3>rewrite (with swap)</h3><div id="swapWith" class="hint">—</div></div>
+    </div>
+    <div id="swapAdopt" class="hint" style="display:none;margin-top:.35rem">like a rewrite? <button id="adoptNoSwap" class="small">make “no swap” the story</button> <button id="adoptWith" class="small">make “with swap” the story</button> <span>(until you press one, your story and anchor stay put)</span></div>
+  </div>
+</div>
+
+<div>
+  <div class="card">
+    <h2>what it's holding in mind <span class="hint" id="roPos">— no token selected</span></h2>
+    <div style="margin-bottom:.4rem">
+      <span class="mode">
+        <button id="mJ" class="on">J-lens</button><button id="mL">logit lens</button><button id="mD">DIFF</button>
+      </span>
+      <label class="inl" style="margin-left:.6rem" title="Show everything the lens sees — word-pieces, punctuation — not just whole words. Messier, but nothing hidden."><input type="checkbox" id="rawToggle"> raw (unfiltered — the honest view)</label>
+      <label class="inl" title="20 guesses per layer instead of 8. Interesting things sometimes hide at rank 9–20."><input type="checkbox" id="top20Toggle"> top-20</label>
+    </div>
+    <div id="readout" class="hint">layers L4–L8 appear here after you select a token.</div>
+    <div class="modelrow" id="modelRow"></div>
+    <div class="hint" style="margin-top:.4rem">
+      J-lens rows show what the middle of the network is <i>disposed to say</i>; the logit lens shows
+      what it would blurt out if it stopped there. DIFF marks words only the J-lens sees
+      (<span class="ok">green</span>). Pink chips are name fragments — “L… (Lily?)” means the model is
+      thinking of a word that starts like Lily. Ranks are within the story vocabulary (~5k words).
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="hint" style="margin:1rem 0">
+  Phase 1 prototype · CPU only · lens fitted offline (1000 TinyStories prompts) · MIT license ·
+  model courtesy of Andrej Karpathy's tinyllamas · <span id="devNote"></span>
+</div>
+
+<!-- ============================ worker source ============================
+     Plain-text script: booted as a Blob Worker by the page, extractable and
+     eval-able by the Node parity harness (test/parity.mjs). DOM-free. -->
+<script id="workerSrc" type="text/plain">
+'use strict';
+// ---- bin-reader (verbatim from Tiny Mind src/bin-reader.js, reader only) ----
+const HEADER_INTS = 7;
+const HEADER_BYTES = HEADER_INTS * 4;
+
+function toArrayBuffer(data) {
+  if (data instanceof ArrayBuffer) return { buf: data, off: 0, len: data.byteLength };
+  if (ArrayBuffer.isView(data)) return { buf: data.buffer, off: data.byteOffset, len: data.byteLength };
+  throw new Error('bin-reader: expected ArrayBuffer or typed array');
+}
+
+function layout(c) {
+  const headSize = c.dim / c.nHeads;
+  const kvDim = (c.dim * c.nKvHeads) / c.nHeads;
+  return [
+    { name: 'tokenEmbedding', size: c.vocabSize * c.dim },
+    { name: 'rmsAtt',         size: c.nLayers * c.dim },
+    { name: 'wq',             size: c.nLayers * c.dim * c.dim },
+    { name: 'wk',             size: c.nLayers * c.dim * kvDim },
+    { name: 'wv',             size: c.nLayers * c.dim * kvDim },
+    { name: 'wo',             size: c.nLayers * c.dim * c.dim },
+    { name: 'rmsFfn',         size: c.nLayers * c.dim },
+    { name: 'w1',             size: c.nLayers * c.hiddenDim * c.dim },
+    { name: 'w2',             size: c.nLayers * c.dim * c.hiddenDim },
+    { name: 'w3',             size: c.nLayers * c.hiddenDim * c.dim },
+    { name: 'rmsFinal',       size: c.dim },
+    { name: 'legacyFreqCis',  size: c.seqLen * headSize },
+    { name: 'wcls',           size: c.sharedWeights ? 0 : c.vocabSize * c.dim },
+  ];
+}
+
+function readCheckpoint(data) {
+  const { buf, off, len } = toArrayBuffer(data);
+  const dv = new DataView(buf, off, len);
+  const raw = [];
+  for (let i = 0; i < HEADER_INTS; i++) raw.push(dv.getInt32(i * 4, true));
+  const [dim, hiddenDim, nLayers, nHeads, nKvHeads, vocabRaw, seqLen] = raw;
+  const config = {
+    dim, hiddenDim, nLayers, nHeads, nKvHeads,
+    vocabSize: Math.abs(vocabRaw),
+    seqLen,
+    sharedWeights: vocabRaw > 0,
+    headSize: dim / nHeads,
+    kvDim: (dim * nKvHeads) / nHeads,
+  };
+  if ((off + HEADER_BYTES) % 4 !== 0) throw new Error('bin-reader: weights not 4-byte aligned');
+  const floats = new Float32Array(buf, off + HEADER_BYTES, (len - HEADER_BYTES) / 4);
+  const weights = {};
+  let p = 0;
+  for (const t of layout(config)) {
+    if (t.name !== 'legacyFreqCis' && t.size > 0) weights[t.name] = floats.subarray(p, p + t.size);
+    p += t.size;
+  }
+  if (config.sharedWeights) weights.wcls = weights.tokenEmbedding;
+  const expectedBytes = HEADER_BYTES + p * 4;
+  if (expectedBytes !== len) throw new Error(`bin-reader: layout consumed ${expectedBytes} bytes but file is ${len}`);
+  return { config, weights, fileBytes: len };
+}
+
+// ---- tokenizer (verbatim from Tiny Mind src/tokenizer.js) ----
+const BOS = 1;
+const EOS = 2;
+const textEncoder = new TextEncoder();
+const textDecoder = new TextDecoder('utf-8');
+
+function bytesToByteString(bytes) {
+  let s = '';
+  for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]);
+  return s;
+}
+
+class Tokenizer {
+  constructor(data, vocabSize) {
+    let buf, off, len;
+    if (data instanceof ArrayBuffer) { buf = data; off = 0; len = data.byteLength; }
+    else if (ArrayBuffer.isView(data)) { buf = data.buffer; off = data.byteOffset; len = data.byteLength; }
+    else throw new Error('Tokenizer: expected ArrayBuffer or typed array');
+    const dv = new DataView(buf, off, len);
+    const bytes = new Uint8Array(buf, off, len);
+    this.vocabSize = vocabSize;
+    this.maxTokenLength = dv.getInt32(0, true);
+    this.vocab = new Array(vocabSize);
+    this.scores = new Float32Array(vocabSize);
+    let p = 4;
+    for (let i = 0; i < vocabSize; i++) {
+      this.scores[i] = dv.getFloat32(p, true); p += 4;
+      const n = dv.getInt32(p, true); p += 4;
+      this.vocab[i] = bytesToByteString(bytes.subarray(p, p + n)); p += n;
+    }
+    if (p !== len) throw new Error(`Tokenizer: consumed ${p} of ${len} bytes`);
+    this.lookup = new Map();
+    for (let i = 0; i < vocabSize; i++) {
+      if (!this.lookup.has(this.vocab[i])) this.lookup.set(this.vocab[i], i);
+    }
+  }
+  encode(text, bos = false, eos = false) {
+    const tokens = [];
+    if (bos) tokens.push(BOS);
+    if (text.length !== 0) {
+      const dummyPrefix = this.lookup.get(' ');
+      if (dummyPrefix === undefined) throw new Error('Tokenizer: no " " piece in vocab');
+      tokens.push(dummyPrefix);
+    }
+    const utf8 = textEncoder.encode(text);
+    let chunk = '';
+    for (let i = 0; i < utf8.length; i++) {
+      const b = utf8[i];
+      if ((b & 0xC0) !== 0x80) chunk = '';
+      chunk += String.fromCharCode(b);
+      const next = utf8[i + 1];
+      if (next !== undefined && (next & 0xC0) === 0x80 && chunk.length < 4) continue;
+      const id = this.lookup.get(chunk);
+      if (id !== undefined) tokens.push(id);
+      else for (let j = 0; j < chunk.length; j++) tokens.push(chunk.charCodeAt(j) + 3);
+      chunk = '';
+    }
+    while (true) {
+      let bestScore = -1e10, bestId = -1, bestIdx = -1;
+      for (let i = 0; i < tokens.length - 1; i++) {
+        const merged = this.vocab[tokens[i]] + this.vocab[tokens[i + 1]];
+        const id = this.lookup.get(merged);
+        if (id !== undefined && this.scores[id] > bestScore) {
+          bestScore = this.scores[id]; bestId = id; bestIdx = i;
+        }
+      }
+      if (bestIdx === -1) break;
+      tokens[bestIdx] = bestId;
+      tokens.splice(bestIdx + 1, 1);
+    }
+    if (eos) tokens.push(EOS);
+    return tokens;
+  }
+  decodePiece(prevToken, token) {
+    let piece = this.vocab[token];
+    if (prevToken === BOS && piece.charCodeAt(0) === 0x20) piece = piece.slice(1);
+    const m = /^<0x([0-9A-Fa-f]{2})>$/.exec(piece);
+    if (m) piece = String.fromCharCode(parseInt(m[1], 16));
+    return piece;
+  }
+  decode(tokens) {
+    let bytes = '';
+    let prev = BOS;
+    for (const tok of tokens) {
+      if (tok === BOS || tok === EOS) { prev = tok; continue; }
+      bytes += this.decodePiece(prev, tok);
+      prev = tok;
+    }
+    const arr = new Uint8Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
+    return textDecoder.decode(arr);
+  }
+}
+
+// ---- fast forward pass ----------------------------------------------------
+// Ported from Tiny Mind src/model.js with the fround/C-parity discipline
+// REMOVED (per the Phase-1 brief: that gate protects the 260K trainee, not
+// this app) and the matmul replaced with the Trainer's register-blocked
+// pattern (4 output rows per pass, f64 accumulators in registers).
+// RoPE / rmsnorm / softmax semantics unchanged; eps = 1e-5 matches both
+// run.c and the HF config (rms_norm_eps=1e-05) the lens was fitted against.
+
+function matmulFast(xout, outOff, x, w, wOff, n, d) {
+  const d4 = d - (d % 4);
+  let i = 0;
+  for (; i < d4; i += 4) {
+    const r0 = wOff + i * n, r1 = r0 + n, r2 = r1 + n, r3 = r2 + n;
+    let a0 = 0, a1 = 0, a2 = 0, a3 = 0;
+    for (let j = 0; j < n; j++) {
+      const xv = x[j];
+      a0 += xv * w[r0 + j]; a1 += xv * w[r1 + j];
+      a2 += xv * w[r2 + j]; a3 += xv * w[r3 + j];
+    }
+    xout[outOff + i] = a0; xout[outOff + i + 1] = a1;
+    xout[outOff + i + 2] = a2; xout[outOff + i + 3] = a3;
+  }
+  for (; i < d; i++) {
+    const row = wOff + i * n;
+    let val = 0;
+    for (let j = 0; j < n; j++) val += w[row + j] * x[j];
+    xout[outOff + i] = val;
+  }
+}
+
+// batched matmul: OUT[N,O] = X[N,C] @ W[O,C]^T, 4 output rows x 2 positions
+// per inner pass so each weight row is streamed once per position-PAIR.
+// Per-element accumulation order (i ascending) is identical to matmulFast,
+// so results are bit-identical; this is purely a memory-traffic optimization.
+function matmulBatch(out, X, W, N, C, O) {
+  const O4 = O - (O % 4);
+  const N2 = N - (N % 2);
+  let n = 0;
+  for (; n < N2; n += 2) {
+    const xa = n * C, xb = xa + C, oa = n * O, ob = oa + O;
+    let o = 0;
+    for (; o < O4; o += 4) {
+      const w0 = o * C, w1 = w0 + C, w2 = w1 + C, w3 = w2 + C;
+      let a0 = 0, a1 = 0, a2 = 0, a3 = 0, b0 = 0, b1 = 0, b2 = 0, b3 = 0;
+      for (let i = 0; i < C; i++) {
+        const wv0 = W[w0 + i], wv1 = W[w1 + i], wv2 = W[w2 + i], wv3 = W[w3 + i];
+        const va = X[xa + i], vb = X[xb + i];
+        a0 += va * wv0; a1 += va * wv1; a2 += va * wv2; a3 += va * wv3;
+        b0 += vb * wv0; b1 += vb * wv1; b2 += vb * wv2; b3 += vb * wv3;
+      }
+      out[oa + o] = a0; out[oa + o + 1] = a1; out[oa + o + 2] = a2; out[oa + o + 3] = a3;
+      out[ob + o] = b0; out[ob + o + 1] = b1; out[ob + o + 2] = b2; out[ob + o + 3] = b3;
+    }
+    for (; o < O; o++) {
+      const wb = o * C;
+      let sa = 0, sb = 0;
+      for (let i = 0; i < C; i++) { sa += X[xa + i] * W[wb + i]; sb += X[xb + i] * W[wb + i]; }
+      out[oa + o] = sa; out[ob + o] = sb;
+    }
+  }
+  for (; n < N; n++) matmulFast(out, n * O, X.subarray(n * C, (n + 1) * C), W, 0, C, O);
+}
+
+function rmsnormFast(o, x, w, wOff, size) {
+  let ss = 0;
+  for (let j = 0; j < size; j++) ss += x[j] * x[j];
+  ss = 1 / Math.sqrt(ss / size + 1e-5);
+  for (let j = 0; j < size; j++) o[j] = w[wOff + j] * (ss * x[j]);
+}
+
+function softmaxFast(x, off, size) {
+  let max = x[off];
+  for (let i = 1; i < size; i++) if (x[off + i] > max) max = x[off + i];
+  let sum = 0;
+  for (let i = 0; i < size; i++) { x[off + i] = Math.exp(x[off + i] - max); sum += x[off + i]; }
+  for (let i = 0; i < size; i++) x[off + i] /= sum;
+}
+
+function createState(c) {
+  return {
+    x: new Float32Array(c.dim),
+    xb: new Float32Array(c.dim),
+    xb2: new Float32Array(c.dim),
+    hb: new Float32Array(c.hiddenDim),
+    hb2: new Float32Array(c.hiddenDim),
+    q: new Float32Array(c.dim),
+    att: new Float32Array(c.nHeads * c.seqLen),
+    logits: new Float32Array(c.vocabSize),
+    keyCache: new Float32Array(c.nLayers * c.seqLen * c.kvDim),
+    valueCache: new Float32Array(c.nLayers * c.seqLen * c.kvDim),
+  };
+}
+
+// forward one token. tapResidual(l, pos, x) fires at each captured layer's
+// OUTPUT (post-ffn residual add) — the same point jlens' ActivationRecorder
+// reads. residEdit(l, pos, x) — the swap/inject hook, applied at the same
+// point BEFORE the tap so downstream layers and the tap both see the edit.
+// wantLogits=false skips final rmsnorm+unembed (over half the per-token
+// FLOPs; capture only needs the final residual, which we tap separately).
+function forwardFast(model, token, pos, opts = {}) {
+  const { tapResidual = null, tapLayers = null, residEdit = null,
+          editLayers = null, wantLogits = true, finalResidualOut = null } = opts;
+  const c = model.config, w = model.weights, s = model.state;
+  const dim = c.dim, kvDim = c.kvDim, hiddenDim = c.hiddenDim, headSize = c.headSize;
+  const kvMul = c.nHeads / c.nKvHeads;
+  const x = s.x;
+
+  x.set(w.tokenEmbedding.subarray(token * dim, (token + 1) * dim));
+
+  for (let l = 0; l < c.nLayers; l++) {
+    rmsnormFast(s.xb, x, w.rmsAtt, l * dim, dim);
+    const loff = l * c.seqLen * kvDim;
+    const kOff = loff + pos * kvDim;
+    matmulFast(s.q, 0, s.xb, w.wq, l * dim * dim, dim, dim);
+    matmulFast(s.keyCache, kOff, s.xb, w.wk, l * dim * kvDim, dim, kvDim);
+    matmulFast(s.valueCache, kOff, s.xb, w.wv, l * dim * kvDim, dim, kvDim);
+
+    const k = s.keyCache;
+    for (let i = 0; i < dim; i += 2) {
+      const headDim = i % headSize;
+      const freq = 1 / Math.pow(10000, headDim / headSize);
+      const val = pos * freq;
+      const fcr = Math.cos(val), fci = Math.sin(val);
+      const rotn = i < kvDim ? 2 : 1;
+      for (let v = 0; v < rotn; v++) {
+        if (v === 0) {
+          const v0 = s.q[i], v1 = s.q[i + 1];
+          s.q[i] = v0 * fcr - v1 * fci;
+          s.q[i + 1] = v0 * fci + v1 * fcr;
+        } else {
+          const v0 = k[kOff + i], v1 = k[kOff + i + 1];
+          k[kOff + i] = v0 * fcr - v1 * fci;
+          k[kOff + i + 1] = v0 * fci + v1 * fcr;
+        }
+      }
+    }
+
+    const sqrtHs = Math.sqrt(headSize);
+    for (let h = 0; h < c.nHeads; h++) {
+      const qOff = h * headSize;
+      const attOff = h * c.seqLen;
+      const kvHeadOff = ((h / kvMul) | 0) * headSize;
+      for (let t = 0; t <= pos; t++) {
+        const kBase = loff + t * kvDim + kvHeadOff;
+        let score = 0;
+        for (let i = 0; i < headSize; i++) score += s.q[qOff + i] * s.keyCache[kBase + i];
+        s.att[attOff + t] = score / sqrtHs;
+      }
+      softmaxFast(s.att, attOff, pos + 1);
+      const xbOff = h * headSize;
+      s.xb.fill(0, xbOff, xbOff + headSize);
+      for (let t = 0; t <= pos; t++) {
+        const vBase = loff + t * kvDim + kvHeadOff;
+        const a = s.att[attOff + t];
+        for (let i = 0; i < headSize; i++) s.xb[xbOff + i] += a * s.valueCache[vBase + i];
+      }
+    }
+
+    matmulFast(s.xb2, 0, s.xb, w.wo, l * dim * dim, dim, dim);
+    for (let i = 0; i < dim; i++) x[i] += s.xb2[i];
+
+    rmsnormFast(s.xb, x, w.rmsFfn, l * dim, dim);
+    matmulFast(s.hb, 0, s.xb, w.w1, l * dim * hiddenDim, dim, hiddenDim);
+    matmulFast(s.hb2, 0, s.xb, w.w3, l * dim * hiddenDim, dim, hiddenDim);
+    for (let i = 0; i < hiddenDim; i++) {
+      const v = s.hb[i];
+      s.hb[i] = (v / (1 + Math.exp(-v))) * s.hb2[i];
+    }
+    matmulFast(s.xb, 0, s.hb, w.w2, l * hiddenDim * dim, hiddenDim, dim);
+    for (let i = 0; i < dim; i++) x[i] += s.xb[i];
+
+    if (residEdit && editLayers && editLayers.has(l)) residEdit(l, pos, x);
+    if (tapResidual && tapLayers && tapLayers.has(l)) tapResidual(l, pos, x);
+  }
+
+  if (finalResidualOut) finalResidualOut.set(x);
+  if (!wantLogits) return null;
+  rmsnormFast(s.xb, x, w.rmsFinal, 0, dim);
+  matmulFast(s.logits, 0, s.xb, w.wcls, 0, dim, c.vocabSize);
+  return s.logits;
+}
+
+// ---- .jlens loader ----------------------------------------------------------
+// Format: 'JLNS' | u32 version | u32 d_model | u32 n_layers | n x u32 layer
+// index | per layer fp32 row-major [d,d], rows = output dims (y = J @ h).
+function readJlens(data) {
+  const { buf, off, len } = toArrayBuffer(data);
+  const dv = new DataView(buf, off, len);
+  const magic = String.fromCharCode(dv.getUint8(0), dv.getUint8(1), dv.getUint8(2), dv.getUint8(3));
+  if (magic !== 'JLNS') throw new Error('not a .jlens file');
+  const version = dv.getUint32(4, true);
+  if (version !== 1) throw new Error(`unsupported .jlens version ${version}`);
+  const d = dv.getUint32(8, true);
+  const nLayers = dv.getUint32(12, true);
+  const layers = [];
+  let p = 16;
+  for (let i = 0; i < nLayers; i++) { layers.push(dv.getUint32(p, true)); p += 4; }
+  const J = {};
+  for (const l of layers) {
+    J[l] = new Float32Array(buf, off + p, d * d);
+    p += d * d * 4;
+  }
+  if (p !== len) throw new Error(`.jlens: consumed ${p} of ${len} bytes`);
+  return { dModel: d, layers, J };
+}
+
+// ---- lens engine ------------------------------------------------------------
+// Semantics copied from the Python pipeline (jlens.lens.JacobianLens.apply +
+// jlens.hf.HFLensModel.unembed), which the fixtures were generated with:
+//   J-lens(h)   = wcls @ ( rmsFinal ⊙ (J_l @ h) / rms(J_l @ h) )
+//   logit-lens(h)= wcls @ ( rmsFinal ⊙ h / rms(h) )
+// where h is the layer-OUTPUT residual and rms(u) = sqrt(mean(u²) + 1e-5).
+// The readout dictionary folds gamma into the unembedding:
+//   D_l = (wcls[pruned] ⊙ gamma) @ J_l    (logit lens: J = I)
+// so a readout is one D_l·h matvec plus the uniform 1/rms(u) scalar (rank-
+// neutral; applied so displayed scores match the Python fixtures).
+
+const Engine = {
+  model: null, tokenizer: null, lens: null, vocabMeta: null,
+  prunedIds: null, prunedIndex: null,       // Int32Array id->row (-1 if absent)
+  G: null,                                   // wcls[pruned] ⊙ gamma  [P, d]
+  D: {},                                     // layer -> D_l [P, d]
+  cap: null,                                 // last capture
+  stopFlag: false,
+
+  loadModel(buffer) {
+    const ckpt = readCheckpoint(buffer);
+    this.model = { config: ckpt.config, weights: ckpt.weights, state: createState(ckpt.config) };
+    this._modelFp = { head: buffer.slice(0, 65536), len: ckpt.fileBytes };
+    return { config: ckpt.config };
+  },
+  loadTokenizer(buffer) {
+    if (!this.model) throw new Error('load model first (vocab size comes from its header)');
+    this.tokenizer = new Tokenizer(buffer, this.model.config.vocabSize);
+    return { vocabSize: this.tokenizer.vocabSize };
+  },
+  loadLens(buffer) {
+    const lens = readJlens(buffer);
+    if (this.model && lens.dModel !== this.model.config.dim)
+      throw new Error(`lens d_model ${lens.dModel} != model dim ${this.model.config.dim}`);
+    this.lens = lens;
+    this._lensBytes = new Uint8Array(buffer);
+    return { layers: lens.layers, dModel: lens.dModel };
+  },
+  loadVocab(meta) {
+    this.vocabMeta = meta;
+    const ids = meta.prunedIds;
+    this.prunedIds = Int32Array.from(ids);
+    this.prunedIndex = new Int32Array(this.model.config.vocabSize).fill(-1);
+    for (let r = 0; r < ids.length; r++) this.prunedIndex[ids[r]] = r;
+    return { pruned: ids.length };
+  },
+
+  // content-addressed cache key over model fingerprint + lens bytes + pruned ids
+  async cacheKey() {
+    if (this._cacheKey) return this._cacheKey;
+    const [a, b, c] = await Promise.all([
+      sha256hex(new Uint8Array(this._modelFp.head)),
+      sha256hex(this._lensBytes),
+      sha256hex(new Uint8Array(this.prunedIds.buffer)),
+    ]);
+    this._cacheKey = `dicts:v1:${a.slice(0, 16)}:${this._modelFp.len}:${b.slice(0, 16)}:${c.slice(0, 16)}`;
+    return this._cacheKey;
+  },
+  async loadDictsFromCache() {
+    try {
+      const hit = await IDB.get(await this.cacheKey());
+      if (!hit) return false;
+      this.G = new Float32Array(hit.G);
+      this.D = {};
+      for (const l of this.lens.layers) {
+        if (!hit.D[l]) return false;
+        this.D[l] = new Float32Array(hit.D[l]);
+      }
+      return true;
+    } catch (e) { return false; }
+  },
+  async saveDictsToCache() {
+    try {
+      const D = {};
+      for (const l of this.lens.layers) D[l] = this.D[l].buffer;
+      await IDB.set(await this.cacheKey(), { G: this.G.buffer, D });
+      return true;
+    } catch (e) { return false; }
+  },
+  // make sure every band dictionary exists: cache-load or build (+cache-store)
+  async ensureDicts(onLayerProgress) {
+    const missing = this.lens.layers.filter(l => !this.D[l]);
+    if (!missing.length) return 'ready';
+    if (await this.loadDictsFromCache()) return 'cached';
+    if (Pool.ready) {
+      await Pool.buildDicts(onLayerProgress);
+    } else {
+      const layers = this.lens.layers;
+      layers.forEach((l, i) => {
+        this.buildD(l, (r, P) => onLayerProgress && onLayerProgress(l, i, layers.length, r / P));
+      });
+    }
+    this.saveDictsToCache();   // fire-and-forget
+    return 'built';
+  },
+
+  // G = wcls[pruned] ⊙ gamma (one row per pruned id). Cheap; D_l per layer is
+  // the expensive part and is built lazily with progress callbacks.
+  buildG() {
+    const c = this.model.config, w = this.model.weights;
+    const P = this.prunedIds.length, d = c.dim;
+    const G = new Float32Array(P * d);
+    for (let r = 0; r < P; r++) {
+      const row = this.prunedIds[r] * d;
+      for (let j = 0; j < d; j++) G[r * d + j] = w.wcls[row + j] * w.rmsFinal[j];
+    }
+    this.G = G;
+    return G;
+  },
+  // D_l[r,:] = G[r,:] @ J_l  (D[r,j] = sum_k G[r,k] J[k,j]). Computed via a
+  // one-time transpose of J so each output row is a register-blocked matvec
+  // over linearly-streamed memory (~4x over streaming J per row).
+  buildD(l, onProgress) {
+    if (this.D[l]) return this.D[l];
+    if (!this.G) this.buildG();
+    const d = this.model.config.dim, P = this.prunedIds.length;
+    const J = this.lens.J[l];
+    const Jt = new Float32Array(d * d);
+    for (let k = 0; k < d; k++)
+      for (let j = 0; j < d; j++) Jt[j * d + k] = J[k * d + j];
+    const D = new Float32Array(P * d);
+    const CHUNK = 512;
+    for (let r0 = 0; r0 < P; r0 += CHUNK) {
+      const r1 = Math.min(P, r0 + CHUNK);
+      for (let r = r0; r < r1; r++) {
+        matmulFast(D, r * d, this.G.subarray(r * d, (r + 1) * d), Jt, 0, d, d);
+      }
+      if (onProgress) onProgress(r1, P);
+    }
+    this.D[l] = D;
+    return D;
+  },
+
+  // ---- capture + precompute --------------------------------------------------
+  // Residuals at the lens band layers + the final layer, per position; then
+  // scores[pos][layerRow][prunedRow] for both lenses (this is what makes token
+  // selection, heat maps and DIFF instant). layerRows: band layers then 'final'.
+  newCapture(nPosMax) {
+    const c = this.model.config, band = this.lens.layers;
+    return {
+      tokens: [],
+      band,
+      nPos: 0, nPosMax,
+      resid: new Float32Array(nPosMax * band.length * c.dim),   // band residuals
+      residFinal: new Float32Array(nPosMax * c.dim),
+      jScores: null, lScores: null,                              // filled by precompute
+      jScale: null, lScale: null,                                // 1/rms per (pos, layerRow)
+      modelTop: [],                                              // per pos: pruned top-5 of final
+    };
+  },
+  captureForward(cap, token, pos, editHook) {
+    const c = this.model.config, band = cap.band;
+    const bandSet = this._bandSet || (this._bandSet = new Set(band));
+    const self = this;
+    const logits = forwardFast(this.model, token, pos, {
+      tapLayers: bandSet,
+      tapResidual(l, p, x) {
+        const row = (p * band.length + band.indexOf(l)) * c.dim;
+        cap.resid.set(x, row);
+      },
+      residEdit: editHook ? editHook.fn : null,
+      editLayers: editHook ? editHook.layers : null,
+      wantLogits: editHook ? true : false,
+      finalResidualOut: cap.residFinal.subarray(pos * c.dim, (pos + 1) * c.dim),
+    });
+    cap.tokens[pos] = token;
+    cap.nPos = pos + 1;
+    return logits;
+  },
+  // full-vocab logits from the final residual of a captured position (used by
+  // generation sampling so we can skip wantLogits during teacher-forcing)
+  logitsFromFinalResidual(cap, pos) {
+    const c = this.model.config, w = this.model.weights, s = this.model.state;
+    const x = cap.residFinal.subarray(pos * c.dim, (pos + 1) * c.dim);
+    rmsnormFast(s.xb, x, w.rmsFinal, 0, c.dim);
+    matmulFast(s.logits, 0, s.xb, w.wcls, 0, c.dim, c.vocabSize);
+    return s.logits;
+  },
+
+  precompute(cap, onProgress) {
+    const c = this.model.config, band = cap.band, P = this.prunedIds.length;
+    const n = cap.nPos, L = band.length, d = c.dim;
+    cap.jScores = new Float32Array(n * L * P);
+    cap.lScores = new Float32Array(n * (L + 1) * P);   // +1 row: final layer (model)
+    cap.jScale = new Float32Array(n * L);
+    cap.lScale = new Float32Array(n * (L + 1));
+    const u = new Float32Array(d);
+    for (let li = 0; li < L; li++) this.buildD(band[li]);   // ensure dicts
+    let done = 0, total = n * (2 * L + 1);
+    for (let p = 0; p < n; p++) {
+      for (let li = 0; li < L; li++) {
+        const h = cap.resid.subarray((p * L + li) * d, (p * L + li + 1) * d);
+        // u = J @ h for the rms scalar (rank-neutral, matches Python scores)
+        matmulFast(u, 0, h, this.lens.J[band[li]], 0, d, d);
+        let ss = 0; for (let j = 0; j < d; j++) ss += u[j] * u[j];
+        cap.jScale[p * L + li] = 1 / Math.sqrt(ss / d + 1e-5);
+        matmulFast(cap.jScores, (p * L + li) * P, h, this.D[band[li]], 0, d, P);
+        done++;
+        // logit lens at the same layer
+        let hs = 0; for (let j = 0; j < d; j++) hs += h[j] * h[j];
+        cap.lScale[p * (L + 1) + li] = 1 / Math.sqrt(hs / d + 1e-5);
+        matmulFast(cap.lScores, (p * (L + 1) + li) * P, h, this.G, 0, d, P);
+        done++;
+      }
+      // final layer (the model's own output, pruned view)
+      const hf = cap.residFinal.subarray(p * d, (p + 1) * d);
+      let fs = 0; for (let j = 0; j < d; j++) fs += hf[j] * hf[j];
+      cap.lScale[p * (L + 1) + L] = 1 / Math.sqrt(fs / d + 1e-5);
+      matmulFast(cap.lScores, (p * (L + 1) + L) * P, hf, this.G, 0, d, P);
+      done++;
+      cap.modelTop.push(this.topOfRow(cap.lScores, (p * (L + 1) + L) * P,
+                                      cap.lScale[p * (L + 1) + L], 5));
+      if (onProgress && (p % 8 === 7 || p === n - 1)) onProgress(done, total);
+    }
+    this.cap = cap;
+  },
+
+  topOfRow(arr, off, scale, k) {
+    const P = this.prunedIds.length;
+    const idx = [];
+    for (let r = 0; r < P; r++) idx.push(r);
+    idx.sort((a, b) => arr[off + b] - arr[off + a]);
+    return idx.slice(0, k).map(r => ({ id: this.prunedIds[r], score: arr[off + r] * scale }));
+  },
+
+  // top-K readout rows for one position, both lenses, with pruned-vocab ranks
+  readout(pos, k) {
+    const cap = this.cap, band = cap.band, L = band.length, P = this.prunedIds.length;
+    const layers = [];
+    for (let li = 0; li < L; li++) {
+      const j = this.topOfRow(cap.jScores, (pos * L + li) * P, cap.jScale[pos * L + li], k);
+      const lg = this.topOfRow(cap.lScores, (pos * (L + 1) + li) * P, cap.lScale[pos * (L + 1) + li], k);
+      layers.push({ layer: band[li], jlens: j, logit: lg });
+    }
+    return { pos, layers, model: cap.modelTop[pos] };
+  },
+
+  // rank of one token id across every (position, band layer): the heat map.
+  heat(tokenId) {
+    const cap = this.cap, band = cap.band, L = band.length, P = this.prunedIds.length;
+    const row = this.prunedIndex[tokenId];
+    if (row < 0) return null;
+    const n = cap.nPos;
+    const ranks = new Int32Array(n).fill(P);
+    for (let p = 0; p < n; p++) {
+      let best = P;
+      for (let li = 0; li < L; li++) {
+        const off = (p * L + li) * P;
+        const mine = cap.jScores[off + row];
+        let r = 0;
+        for (let q = 0; q < P; q++) if (cap.jScores[off + q] > mine) r++;
+        if (r < best) best = r;
+      }
+      ranks[p] = best;
+    }
+    return ranks;
+  },
+
+  // FULL-vocab readout at (pos, layerIndexInBand) — the fixture-parity path
+  // and the honest "raw, whole vocabulary" view. lens: 'jlens' | 'logit'.
+  readoutFull(pos, li, lens, k) {
+    const cap = this.cap, c = this.model.config, w = this.model.weights;
+    const d = c.dim, V = c.vocabSize, band = cap.band;
+    const h = lens === 'final'
+      ? cap.residFinal.subarray(pos * d, (pos + 1) * d)
+      : cap.resid.subarray((pos * band.length + li) * d, (pos * band.length + li + 1) * d);
+    const u = new Float32Array(d);
+    if (lens === 'jlens') matmulFast(u, 0, h, this.lens.J[band[li]], 0, d, d);
+    else u.set(h);
+    const s = this.model.state;
+    rmsnormFast(s.xb, u, w.rmsFinal, 0, d);
+    matmulFast(s.logits, 0, s.xb, w.wcls, 0, d, V);
+    const idx = [];
+    for (let i = 0; i < V; i++) idx.push(i);
+    idx.sort((a, b) => s.logits[b] - s.logits[a]);
+    return idx.slice(0, k).map(i => ({ id: i, score: s.logits[i] }));
+  },
+
+  // swap/inject: readout-direction edit. At each hooked (layer, pos>=fromPos):
+  //   beta = h · d̂_src ;  h += strength * beta * (d̂_tgt - d̂_src)
+  // directions are the per-layer readout rows d_(l,t) = (wcls[t] ⊙ gamma) @ J_l.
+  makeEditHook(srcId, tgtId, l0, l1, fromPos, strength) {
+    const c = this.model.config, w = this.model.weights, d = c.dim;
+    const layers = new Set();
+    for (const l of this.lens.layers) if (l >= l0 && l <= l1) layers.add(l);
+    const dirs = {};
+    for (const l of layers) {
+      const mk = (tid) => {
+        const g = new Float32Array(d);
+        for (let j = 0; j < d; j++) g[j] = w.wcls[tid * d + j] * w.rmsFinal[j];
+        const out = new Float32Array(d);
+        matmulFast(out, 0, g, this.lens.J[l], 0, d, d);   // (g @ J): out[j] = sum_k g[k] J[k,j]
+        let nn = 0; for (let j = 0; j < d; j++) nn += out[j] * out[j];
+        nn = 1 / Math.sqrt(nn || 1e-30);
+        for (let j = 0; j < d; j++) out[j] *= nn;
+        return out;
+      };
+      dirs[l] = { s: mk(srcId), t: mk(tgtId) };
+    }
+    return {
+      layers,
+      fn(l, pos, x) {
+        if (pos < fromPos) return;
+        const { s, t } = dirs[l];
+        let beta = 0;
+        for (let j = 0; j < d; j++) beta += x[j] * s[j];
+        const g = strength * beta;
+        for (let j = 0; j < d; j++) x[j] += g * (t[j] - s[j]);
+      },
+    };
+  },
+
+  sample(logits, temperature, rng) {
+    const V = this.model.config.vocabSize;
+    if (temperature <= 0) {
+      let best = 0;
+      for (let i = 1; i < V; i++) if (logits[i] > logits[best]) best = i;
+      return best;
+    }
+    let max = -Infinity;
+    for (let i = 0; i < V; i++) if (logits[i] > max) max = logits[i];
+    let sum = 0;
+    const probs = new Float64Array(V);
+    for (let i = 0; i < V; i++) { probs[i] = Math.exp((logits[i] - max) / temperature); sum += probs[i]; }
+    let r = rng() * sum;
+    for (let i = 0; i < V; i++) { r -= probs[i]; if (r <= 0) return i; }
+    return V - 1;
+  },
+};
+
+// ---- IndexedDB cache (worker-side) -----------------------------------------
+// Readout dictionaries keyed by content hashes of model+lens+vocab, so a
+// revisit (or a discarded-tab recovery) skips the ~30 s dictionary build.
+const IDB = {
+  open() {
+    return new Promise((res, rej) => {
+      const r = indexedDB.open('jlens-cache', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('kv');
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    });
+  },
+  async get(k) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv').objectStore('kv').get(k);
+      t.onsuccess = () => res(t.result);
+      t.onerror = () => rej(t.error);
+    });
+  },
+  async set(k, v) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k);
+      t.onsuccess = () => res();
+      t.onerror = () => rej(t.error);
+    });
+  },
+};
+async function sha256hex(view) {
+  const d = await crypto.subtle.digest('SHA-256', view);
+  return Array.from(new Uint8Array(d), b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// xorshift32 — seedable so swap rewrites are reproducible
+function makeRng(seed) {
+  let s = seed >>> 0 || 88675123;
+  return () => {
+    s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0;
+    return s / 4294967296;
+  };
+}
+
+// ---- multi-worker compute pool (Phase 1.5 item 5) ---------------------------
+// The Engine worker spawns K nested workers from its own source; each holds a
+// row-shard (output dims) of every big weight matrix, so total weight memory
+// stays ~1x the model. Analyze runs layer-BATCHED over the whole token
+// sequence: per layer, five postMessage barriers (qkv / attention / wo /
+// w1+w3+SwiGLU / w2). Per-element arithmetic and loop order are identical to
+// the sequential path, so residuals are bit-identical and fixture parity is
+// untouched. Generation stays sequential in the Engine (it has full weights).
+// Falls back to the sequential path wherever the pool can't start.
+
+function splitRange(R, K) {
+  const b = [0];
+  for (let k = 1; k <= K; k++) b.push(Math.round((R * k) / K));
+  return b;
+}
+
+// rmsnorm over each row of X[N,d] -> OUT[N,d] (same math as rmsnormFast)
+function rmsRows(out, X, w, wOff, N, d) {
+  for (let p = 0; p < N; p++) {
+    const o = p * d;
+    let ss = 0;
+    for (let j = 0; j < d; j++) ss += X[o + j] * X[o + j];
+    ss = 1 / Math.sqrt(ss / d + 1e-5);
+    for (let j = 0; j < d; j++) out[o + j] = w[wOff + j] * (ss * X[o + j]);
+  }
+}
+
+const Pool = {
+  workers: null, K: 0, bD: null, bKV: null, bH: null, bP: null,
+  ready: false, dictsShipped: false, _id: 0,
+
+  async init(src) {
+    if (this.ready) return true;
+    if (typeof Worker === 'undefined' || !src || !Engine.model) return false;
+    try {
+      const K = Math.min(6, Math.max(2, ((typeof navigator !== 'undefined' && navigator.hardwareConcurrency) || 4) - 2));
+      const url = URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
+      const c = Engine.model.config, w = Engine.model.weights;
+      this.K = K;
+      this.bD = splitRange(c.dim, K);
+      this.bKV = splitRange(c.kvDim, K);
+      this.bH = splitRange(c.hiddenDim, K);
+      this.workers = Array.from({ length: K }, () => new Worker(url));
+      await Promise.all(this.workers.map((wk, k) => {
+        const layers = [];
+        const transfers = [];
+        const cut = (src_, r0, r1, n, off) => {
+          const a = src_.slice(off + r0 * n, off + r1 * n);
+          transfers.push(a.buffer);
+          return a;
+        };
+        for (let l = 0; l < c.nLayers; l++) {
+          layers.push({
+            wq: cut(w.wq, this.bD[k], this.bD[k + 1], c.dim, l * c.dim * c.dim),
+            wk: cut(w.wk, this.bKV[k], this.bKV[k + 1], c.dim, l * c.dim * c.kvDim),
+            wv: cut(w.wv, this.bKV[k], this.bKV[k + 1], c.dim, l * c.dim * c.kvDim),
+            wo: cut(w.wo, this.bD[k], this.bD[k + 1], c.dim, l * c.dim * c.dim),
+            w1: cut(w.w1, this.bH[k], this.bH[k + 1], c.dim, l * c.hiddenDim * c.dim),
+            w3: cut(w.w3, this.bH[k], this.bH[k + 1], c.dim, l * c.hiddenDim * c.dim),
+            w2: cut(w.w2, this.bD[k], this.bD[k + 1], c.hiddenDim, l * c.dim * c.hiddenDim),
+          });
+        }
+        return this.call(wk, {
+          op: 'init', role: 'pool', k, K, config: c,
+          d0: this.bD[k], d1: this.bD[k + 1],
+          kv0: this.bKV[k], kv1: this.bKV[k + 1],
+          h0: this.bH[k], h1: this.bH[k + 1],
+          layers,
+        }, transfers);
+      }));
+      this.ready = true;
+      return true;
+    } catch (e) {
+      this.dispose();
+      return false;
+    }
+  },
+  dispose() {
+    if (this.workers) for (const w of this.workers) { try { w.terminate(); } catch (e) {} }
+    this.workers = null; this.ready = false; this.dictsShipped = false;
+  },
+  call(w, msg, transfers) {
+    return new Promise((res, rej) => {
+      const id = ++this._id;
+      msg.id = id;
+      const h = (e) => {
+        if (!e.data || e.data.id !== id) return;
+        w.removeEventListener('message', h);
+        e.data.error ? rej(new Error(e.data.error)) : res(e.data);
+      };
+      w.addEventListener('message', h);
+      w.postMessage(msg, transfers || []);
+    });
+  },
+  all(msgFor) {
+    return Promise.all(this.workers.map((w, k) => this.call(w, msgFor(k))));
+  },
+
+  // ship G / D / J row-stripes so score precompute runs in the pool.
+  async shipDicts() {
+    if (this.dictsShipped || !this.ready) return;
+    if (!Engine.G) Engine.buildG();
+    const c = Engine.model.config, d = c.dim, P = Engine.prunedIds.length;
+    this.bP = splitRange(P, this.K);
+    await Promise.all(this.workers.map((wk, k) => {
+      const p0 = this.bP[k], p1 = this.bP[k + 1];
+      const transfers = [];
+      const g = Engine.G.slice(p0 * d, p1 * d); transfers.push(g.buffer);
+      const D = {}, J = {};
+      for (const l of Engine.lens.layers) {
+        D[l] = Engine.D[l].slice(p0 * d, p1 * d); transfers.push(D[l].buffer);
+        J[l] = Engine.lens.J[l].slice(this.bD[k] * d, this.bD[k + 1] * d); transfers.push(J[l].buffer);
+      }
+      return this.call(wk, { op: 'set-dicts', p0, p1, g, D, J }, transfers);
+    }));
+    this.dictsShipped = true;
+  },
+
+  // parallel dictionary build (cold cache): each worker builds + keeps its
+  // pruned-row stripe of D_l and returns a copy for Engine assembly / IDB.
+  async buildDicts(onLayerProgress) {
+    if (!Engine.G) Engine.buildG();
+    const c = Engine.model.config, d = c.dim, P = Engine.prunedIds.length;
+    this.bP = splitRange(P, this.K);
+    await Promise.all(this.workers.map((wk, k) => {
+      const p0 = this.bP[k], p1 = this.bP[k + 1];
+      const g = Engine.G.slice(p0 * d, p1 * d);
+      return this.call(wk, { op: 'set-g', p0, p1, g }, [g.buffer]);
+    }));
+    const layers = Engine.lens.layers;
+    for (let i = 0; i < layers.length; i++) {
+      const l = layers[i];
+      const parts = await this.all(() => ({ op: 'buildD', l, J: Engine.lens.J[l] }));
+      const D = new Float32Array(P * d);
+      for (let k = 0; k < this.K; k++) D.set(parts[k].D, this.bP[k] * d);
+      Engine.D[l] = D;
+      // ship the J row-stripe now so scores can also use the pool
+      await Promise.all(this.workers.map((wk, k) => {
+        const j = Engine.lens.J[l].slice(this.bD[k] * d, this.bD[k + 1] * d);
+        return this.call(wk, { op: 'set-j', l, J: j }, [j.buffer]);
+      }));
+      if (onLayerProgress) onLayerProgress(l, i, layers.length, 1);
+    }
+    this.dictsShipped = true;
+  },
+
+  // batched teacher-forced forward over all tokens; fills cap exactly like
+  // the sequential captureForward loop (bit-identical residuals).
+  async forwardBatched(cap, ids, onProgress) {
+    const c = Engine.model.config, w = Engine.model.weights;
+    const d = c.dim, kv = c.kvDim, hd = c.hiddenDim, N = ids.length;
+    const band = cap.band, Lb = band.length;
+    const X = new Float32Array(N * d);
+    for (let p = 0; p < N; p++) X.set(w.tokenEmbedding.subarray(ids[p] * d, (ids[p] + 1) * d), p * d);
+    const LN = new Float32Array(N * d);
+    const Q = new Float32Array(N * d), Kc = new Float32Array(N * kv), Vc = new Float32Array(N * kv);
+    const buf = new Float32Array(N * Math.max(d, hd));
+
+    for (let l = 0; l < c.nLayers; l++) {
+      rmsRows(LN, X, w.rmsAtt, l * d, N, d);
+      let parts = await this.all(() => ({ op: 'qkv', l, X: LN, N }));
+      for (let k = 0; k < this.K; k++) {
+        const { q, kk, v } = parts[k];
+        const d0 = this.bD[k], dn = this.bD[k + 1] - d0;
+        const kv0 = this.bKV[k], kvn = this.bKV[k + 1] - kv0;
+        for (let p = 0; p < N; p++) {
+          Q.set(q.subarray(p * dn, (p + 1) * dn), p * d + d0);
+          Kc.set(kk.subarray(p * kvn, (p + 1) * kvn), p * kv + kv0);
+          Vc.set(v.subarray(p * kvn, (p + 1) * kvn), p * kv + kv0);
+        }
+      }
+      // RoPE — identical formula/order to the sequential path
+      const headSize = c.headSize;
+      for (let p = 0; p < N; p++) {
+        const qo = p * d, ko = p * kv;
+        for (let i = 0; i < d; i += 2) {
+          const headDim = i % headSize;
+          const freq = 1 / Math.pow(10000, headDim / headSize);
+          const val = p * freq;
+          const fcr = Math.cos(val), fci = Math.sin(val);
+          const q0 = Q[qo + i], q1 = Q[qo + i + 1];
+          Q[qo + i] = q0 * fcr - q1 * fci;
+          Q[qo + i + 1] = q0 * fci + q1 * fcr;
+          if (i < kv) {
+            const k0 = Kc[ko + i], k1 = Kc[ko + i + 1];
+            Kc[ko + i] = k0 * fcr - k1 * fci;
+            Kc[ko + i + 1] = k0 * fci + k1 * fcr;
+          }
+        }
+      }
+      // attention: positions interleaved across workers (p % K === k)
+      parts = await this.all(() => ({ op: 'att', Q, K: Kc, V: Vc, N }));
+      for (let k = 0; k < this.K; k++) {
+        const out = parts[k].out;
+        let i = 0;
+        for (let p = k; p < N; p += this.K) { buf.set(out.subarray(i * d, (i + 1) * d), p * d); i++; }
+      }
+      parts = await this.all(() => ({ op: 'mm', l, which: 'wo', X: buf.subarray(0, N * d), N }));
+      for (let k = 0; k < this.K; k++) {
+        const o = parts[k].out, d0 = this.bD[k], dn = this.bD[k + 1] - d0;
+        for (let p = 0; p < N; p++)
+          for (let j = 0; j < dn; j++) X[p * d + d0 + j] += o[p * dn + j];
+      }
+      rmsRows(LN, X, w.rmsFfn, l * d, N, d);
+      parts = await this.all(() => ({ op: 'ffn13', l, X: LN, N }));
+      for (let k = 0; k < this.K; k++) {
+        const hb = parts[k].hb, h0 = this.bH[k], hn = this.bH[k + 1] - h0;
+        for (let p = 0; p < N; p++) buf.set(hb.subarray(p * hn, (p + 1) * hn), p * hd + h0);
+      }
+      parts = await this.all(() => ({ op: 'mm', l, which: 'w2', X: buf.subarray(0, N * hd), N }));
+      for (let k = 0; k < this.K; k++) {
+        const o = parts[k].out, d0 = this.bD[k], dn = this.bD[k + 1] - d0;
+        for (let p = 0; p < N; p++)
+          for (let j = 0; j < dn; j++) X[p * d + d0 + j] += o[p * dn + j];
+      }
+      const li = band.indexOf(l);
+      if (li >= 0) for (let p = 0; p < N; p++)
+        cap.resid.set(X.subarray(p * d, (p + 1) * d), (p * Lb + li) * d);
+      if (onProgress) onProgress(l + 1, c.nLayers);
+    }
+    cap.residFinal.set(X.subarray(0, N * d));
+    for (let p = 0; p < N; p++) cap.tokens[p] = ids[p];
+    cap.nPos = N;
+  },
+
+  // parallel score precompute: same outputs as Engine.precompute
+  async precompute(cap, onProgress) {
+    await this.shipDicts();
+    const c = Engine.model.config, d = c.dim, P = Engine.prunedIds.length;
+    const band = cap.band, L = band.length, N = cap.nPos;
+    cap.jScores = new Float32Array(N * L * P);
+    cap.lScores = new Float32Array(N * (L + 1) * P);
+    cap.jScale = new Float32Array(N * L);
+    cap.lScale = new Float32Array(N * (L + 1));
+    const H = new Float32Array(N * d);
+    let step = 0;
+    const total = 2 * L + 1;
+    for (let li = 0; li < L; li++) {
+      for (let p = 0; p < N; p++)
+        H.set(cap.resid.subarray((p * L + li) * d, (p * L + li + 1) * d), p * d);
+      // one fused barrier per layer: J-lens stripe + logit-lens stripe + the
+      // partial sum-of-squares of u = J@h for the J-scale
+      const parts = await this.all(() => ({ op: 'scores2', l: band[li], H, N }));
+      const ss = new Float64Array(N);
+      for (let k = 0; k < this.K; k++) {
+        const sj = parts[k].j, sg = parts[k].g, p0 = this.bP[k], pn = this.bP[k + 1] - p0;
+        for (let p = 0; p < N; p++) {
+          cap.jScores.set(sj.subarray(p * pn, (p + 1) * pn), (p * L + li) * P + p0);
+          cap.lScores.set(sg.subarray(p * pn, (p + 1) * pn), (p * (L + 1) + li) * P + p0);
+          ss[p] += parts[k].ss[p];
+        }
+      }
+      for (let p = 0; p < N; p++) {
+        cap.jScale[p * L + li] = 1 / Math.sqrt(ss[p] / d + 1e-5);
+        const h = cap.resid.subarray((p * L + li) * d, (p * L + li + 1) * d);
+        let hs = 0; for (let j = 0; j < d; j++) hs += h[j] * h[j];
+        cap.lScale[p * (L + 1) + li] = 1 / Math.sqrt(hs / d + 1e-5);
+      }
+      step += 2;
+      if (onProgress) onProgress(step, total);
+    }
+    // final layer (the model's own output, pruned view)
+    const parts = await this.all(() => ({ op: 'scores', lens: 'g', H: cap.residFinal.subarray(0, N * d), N }));
+    for (let k = 0; k < this.K; k++) {
+      const s = parts[k].scores, p0 = this.bP[k], pn = this.bP[k + 1] - p0;
+      for (let p = 0; p < N; p++)
+        cap.lScores.set(s.subarray(p * pn, (p + 1) * pn), (p * (L + 1) + L) * P + p0);
+    }
+    cap.modelTop.length = 0;
+    for (let p = 0; p < N; p++) {
+      const hf = cap.residFinal.subarray(p * d, (p + 1) * d);
+      let fs = 0; for (let j = 0; j < d; j++) fs += hf[j] * hf[j];
+      cap.lScale[p * (L + 1) + L] = 1 / Math.sqrt(fs / d + 1e-5);
+      cap.modelTop.push(Engine.topOfRow(cap.lScores, (p * (L + 1) + L) * P,
+                                        cap.lScale[p * (L + 1) + L], 5));
+    }
+    if (onProgress) onProgress(total, total);
+    Engine.cap = cap;
+  },
+};
+
+// ---- pool-worker role: replaces the app RPC handler on 'init' --------------
+function becomePoolWorker(m) {
+  const c = m.config;
+  const S = {
+    k: m.k, K: m.K, c,
+    d0: m.d0, d1: m.d1, kv0: m.kv0, kv1: m.kv1, h0: m.h0, h1: m.h1,
+    layers: m.layers,
+    att: new Float32Array(c.seqLen),
+    g: null, p0: 0, p1: 0, D: {}, J: {},
+  };
+  self.onmessage = (e) => {
+    const q = e.data;
+    try {
+      switch (q.op) {
+        case 'qkv': {
+          const N = q.N, d = c.dim, L = S.layers[q.l];
+          const dn = S.d1 - S.d0, kvn = S.kv1 - S.kv0;
+          const qOut = new Float32Array(N * dn);
+          const kOut = new Float32Array(N * kvn);
+          const vOut = new Float32Array(N * kvn);
+          matmulBatch(qOut, q.X, L.wq, N, d, dn);
+          matmulBatch(kOut, q.X, L.wk, N, d, kvn);
+          matmulBatch(vOut, q.X, L.wv, N, d, kvn);
+          postMessage({ id: q.id, q: qOut, kk: kOut, v: vOut },
+            [qOut.buffer, kOut.buffer, vOut.buffer]);
+          break;
+        }
+        case 'att': {
+          // positions interleaved: this worker handles p ≡ k (mod K).
+          // Same per-position loop order as the sequential path.
+          const N = q.N, d = c.dim, kv = c.kvDim, hs = c.headSize;
+          const kvMul = c.nHeads / c.nKvHeads;
+          const sqrtHs = Math.sqrt(hs);
+          const mine = [];
+          for (let p = S.k; p < N; p += S.K) mine.push(p);
+          const out = new Float32Array(mine.length * d);
+          for (let mi = 0; mi < mine.length; mi++) {
+            const p = mine[mi];
+            const qo = p * d;
+            for (let h = 0; h < c.nHeads; h++) {
+              const qOff = qo + h * hs;
+              const kvHeadOff = ((h / kvMul) | 0) * hs;
+              for (let t = 0; t <= p; t++) {
+                const kBase = t * kv + kvHeadOff;
+                let score = 0;
+                for (let i = 0; i < hs; i++) score += q.Q[qOff + i] * q.K[kBase + i];
+                S.att[t] = score / sqrtHs;
+              }
+              softmaxFast(S.att, 0, p + 1);
+              const oOff = mi * d + h * hs;
+              for (let t = 0; t <= p; t++) {
+                const vBase = t * kv + kvHeadOff;
+                const a = S.att[t];
+                for (let i = 0; i < hs; i++) out[oOff + i] += a * q.V[vBase + i];
+              }
+            }
+          }
+          postMessage({ id: q.id, out }, [out.buffer]);
+          break;
+        }
+        case 'mm': {
+          const N = q.N, L = S.layers[q.l];
+          const W = q.which === 'wo' ? L.wo : L.w2;
+          const n = q.which === 'wo' ? c.dim : c.hiddenDim;
+          const dn = S.d1 - S.d0;
+          const out = new Float32Array(N * dn);
+          matmulBatch(out, q.X, W, N, n, dn);
+          postMessage({ id: q.id, out }, [out.buffer]);
+          break;
+        }
+        case 'ffn13': {
+          const N = q.N, d = c.dim, L = S.layers[q.l];
+          const hn = S.h1 - S.h0;
+          const hb = new Float32Array(N * hn);
+          const h3 = new Float32Array(N * hn);
+          matmulBatch(hb, q.X, L.w1, N, d, hn);
+          matmulBatch(h3, q.X, L.w3, N, d, hn);
+          for (let i = 0; i < N * hn; i++) {
+            const v = hb[i];
+            hb[i] = (v / (1 + Math.exp(-v))) * h3[i];
+          }
+          postMessage({ id: q.id, hb }, [hb.buffer]);
+          break;
+        }
+        case 'set-g': S.g = q.g; S.p0 = q.p0; S.p1 = q.p1; postMessage({ id: q.id }); break;
+        case 'set-j': S.J[q.l] = q.J; postMessage({ id: q.id }); break;
+        case 'set-dicts':
+          S.g = q.g; S.p0 = q.p0; S.p1 = q.p1; S.D = q.D; S.J = q.J;
+          postMessage({ id: q.id });
+          break;
+        case 'buildD': {
+          // D stripe from the G stripe: same transpose trick as Engine.buildD
+          const d = c.dim, pn = S.p1 - S.p0;
+          const Jt = new Float32Array(d * d);
+          for (let kk = 0; kk < d; kk++)
+            for (let j = 0; j < d; j++) Jt[j * d + kk] = q.J[kk * d + j];
+          const D = new Float32Array(pn * d);
+          matmulBatch(D, S.g, Jt, pn, d, d);
+          S.D[q.l] = D;
+          const copy = D.slice(0);
+          postMessage({ id: q.id, D: copy }, [copy.buffer]);
+          break;
+        }
+        case 'scores2': {
+          // fused: J-lens stripe + logit-lens stripe + partial ss(u) in one pass
+          const N = q.N, d = c.dim, pn = S.p1 - S.p0;
+          const D = S.D[q.l], rn = S.d1 - S.d0, J = S.J[q.l];
+          const j = new Float32Array(N * pn);
+          const g = new Float32Array(N * pn);
+          const U = new Float32Array(N * rn);
+          const ss = new Float64Array(N);
+          matmulBatch(j, q.H, D, N, d, pn);
+          matmulBatch(g, q.H, S.g, N, d, pn);
+          matmulBatch(U, q.H, J, N, d, rn);
+          for (let p = 0; p < N; p++) {
+            let s = 0;
+            for (let jj = 0; jj < rn; jj++) s += U[p * rn + jj] * U[p * rn + jj];
+            ss[p] = s;
+          }
+          postMessage({ id: q.id, j, g, ss }, [j.buffer, g.buffer, ss.buffer]);
+          break;
+        }
+        case 'scores': {
+          const N = q.N, d = c.dim, pn = S.p1 - S.p0;
+          const W = q.lens === 'j' ? S.D[q.l] : S.g;
+          const scores = new Float32Array(N * pn);
+          for (let p = 0; p < N; p++)
+            matmulFast(scores, p * pn, q.H.subarray(p * d, (p + 1) * d), W, 0, d, pn);
+          if (q.lens === 'j') {
+            // partial sum of squares of u = J@h over this worker's J row-stripe
+            const J = S.J[q.l], rn = S.d1 - S.d0;
+            const u = new Float32Array(rn);
+            const ss = new Float64Array(N);
+            for (let p = 0; p < N; p++) {
+              matmulFast(u, 0, q.H.subarray(p * d, (p + 1) * d), J, 0, d, rn);
+              let s = 0;
+              for (let j = 0; j < rn; j++) s += u[j] * u[j];
+              ss[p] = s;
+            }
+            postMessage({ id: q.id, scores, ss }, [scores.buffer, ss.buffer]);
+          } else {
+            postMessage({ id: q.id, scores }, [scores.buffer]);
+          }
+          break;
+        }
+        default:
+          postMessage({ id: q.id, error: `pool: unknown op ${q.op}` });
+      }
+    } catch (err) {
+      postMessage({ id: q.id, error: String(err && err.stack || err) });
+    }
+  };
+  postMessage({ id: m.id });
+}
+
+// ---- worker RPC (skipped when eval'd by the Node parity harness) ----
+if (typeof self !== 'undefined' && typeof window === 'undefined' && typeof postMessage === 'function') {
+  const post = (m, t) => postMessage(m, t || []);
+  self.onmessage = async (e) => {
+    const m = e.data;
+    // a nested worker's first message turns it into a pool compute worker
+    if (m && m.op === 'init' && m.role === 'pool') { becomePoolWorker(m); return; }
+    try {
+      switch (m.type) {
+        case 'pool-src':
+          Engine.poolSrc = m.src;
+          break;
+        case 'load-model': {
+          const info = Engine.loadModel(m.buffer);
+          post({ type: 'model-ready', config: info.config });
+          break;
+        }
+        case 'load-tokenizer': {
+          Engine.loadTokenizer(m.buffer);
+          post({ type: 'tokenizer-ready' });
+          break;
+        }
+        case 'load-lens': {
+          const info = Engine.loadLens(m.buffer);
+          post({ type: 'lens-ready', layers: info.layers });
+          break;
+        }
+        case 'load-vocab': {
+          const info = Engine.loadVocab(m.meta);
+          post({ type: 'vocab-ready', pruned: info.pruned });
+          break;
+        }
+        case 'build-dicts': {
+          // cache hit -> ready now; miss -> defer to the first analyze/generate
+          // (lazy build keeps the load path interactive)
+          const t0 = Date.now();
+          if (await Engine.loadDictsFromCache()) {
+            post({ type: 'dicts-ready', ms: Date.now() - t0, cached: true });
+          } else {
+            post({ type: 'dicts-ready', ms: 0, lazy: true });
+          }
+          // spin the compute pool up NOW, off the analyze path (weight
+          // sharding + JIT warm-up would otherwise tax the first analyze)
+          Pool.init(Engine.poolSrc);
+          break;
+        }
+        case 'analyze': {
+          const t0 = Date.now();
+          const ids = Engine.tokenizer.encode(m.text, true, false)
+            .slice(0, Engine.model.config.seqLen);
+          const cap = Engine.newCapture(ids.length);
+          const usePool = ids.length >= 16 && await Pool.init(Engine.poolSrc);
+          if (usePool) {
+            await Pool.forwardBatched(cap, ids, (done, total) =>
+              post({ type: 'analyze-progress', stage: 'forward',
+                     done: Math.round(ids.length * done / total), total: ids.length }));
+          } else {
+            for (let p = 0; p < ids.length; p++) {
+              Engine.captureForward(cap, ids[p], p, null);
+              if (p % 10 === 9) post({ type: 'analyze-progress', stage: 'forward', done: p + 1, total: ids.length });
+            }
+          }
+          const tFwd = Date.now() - t0;
+          await Engine.ensureDicts((l, i, n, frac) =>
+            post({ type: 'dict-progress', layer: l, i, n, frac }));
+          const preCb = (done, total) =>
+            post({ type: 'analyze-progress', stage: 'readout', done, total });
+          if (usePool) await Pool.precompute(cap, preCb);
+          else Engine.precompute(cap, preCb);
+          post({ type: 'analyzed', tokens: cap.tokens.slice(0, cap.nPos),
+                 pieces: cap.tokens.slice(0, cap.nPos).map((t, i) =>
+                   Engine.tokenizer.decodePiece(i === 0 ? BOS : cap.tokens[i - 1], t)),
+                 msForward: tFwd, msTotal: Date.now() - t0, nPos: cap.nPos });
+          break;
+        }
+        case 'generate': {
+          const t0 = Date.now();
+          Engine.stopFlag = false;
+          const c = Engine.model.config;
+          // promptIds (analyzed token ids) beats prompt text: regenerating
+          // from the ids the user actually inspected kills token-boundary
+          // drift between the analyzed story and the rewrites.
+          const ids = m.promptIds || Engine.tokenizer.encode(m.prompt, true, false);
+          const maxTotal = Math.min(c.seqLen, ids.length + (m.maxNew || 120));
+          const cap = Engine.newCapture(maxTotal);
+          const rng = makeRng(m.seed || (Date.now() & 0x7fffffff));
+          const editHook = m.edit
+            ? Engine.makeEditHook(m.edit.srcId, m.edit.tgtId, m.edit.l0, m.edit.l1,
+                                  m.edit.fromPos, m.edit.strength)
+            : null;
+          let pos = 0, token = ids[0];
+          const outIds = [ids[0]];
+          while (pos < maxTotal - 1 && !Engine.stopFlag) {
+            Engine.captureForward(cap, token, pos, editHook);
+            let next;
+            if (pos < ids.length - 1) next = ids[pos + 1];
+            else {
+              const logits = Engine.logitsFromFinalResidual(cap, pos);
+              next = Engine.sample(logits, m.temperature ?? 0.8, rng);
+              if (next === BOS || next === EOS) break;
+            }
+            outIds.push(next);
+            if (pos >= ids.length - 1) {
+              post({ type: 'gen-token', tag: m.tag || null,
+                     piece: Engine.tokenizer.decodePiece(token, next), pos: pos + 1 });
+            }
+            token = next;
+            pos++;
+          }
+          Engine.captureForward(cap, token, pos, editHook);   // capture the last token too
+          await Engine.ensureDicts((l, i, n, frac) =>
+            post({ type: 'dict-progress', layer: l, i, n, frac }));
+          const genPreCb = (done, total) =>
+            post({ type: 'analyze-progress', stage: 'readout', done, total });
+          if (await Pool.init(Engine.poolSrc)) await Pool.precompute(cap, genPreCb);
+          else Engine.precompute(cap, genPreCb);
+          post({ type: 'generated', tag: m.tag || null,
+                 tokens: cap.tokens.slice(0, cap.nPos),
+                 pieces: cap.tokens.slice(0, cap.nPos).map((t, i) =>
+                   Engine.tokenizer.decodePiece(i === 0 ? BOS : cap.tokens[i - 1], t)),
+                 text: Engine.tokenizer.decode(cap.tokens.slice(0, cap.nPos)),
+                 promptLen: ids.length, msTotal: Date.now() - t0, nPos: cap.nPos });
+          break;
+        }
+        case 'stop': Engine.stopFlag = true; break;
+        case 'readout': {
+          post({ type: 'readout', ...Engine.readout(m.pos, m.k || 40) });
+          break;
+        }
+        case 'readout-full': {
+          post({ type: 'readout-full', pos: m.pos,
+                 rows: Engine.cap.band.map((l, li) => ({
+                   layer: l,
+                   jlens: Engine.readoutFull(m.pos, li, 'jlens', m.k || 20),
+                   logit: Engine.readoutFull(m.pos, li, 'logit', m.k || 20),
+                 })) });
+          break;
+        }
+        case 'heat': {
+          const ranks = Engine.heat(m.tokenId);
+          post({ type: 'heat', tokenId: m.tokenId,
+                 ranks: ranks ? Array.from(ranks) : null });
+          break;
+        }
+        case 'dev-compare': {
+          // dev check: batched-pool forward must be bit-identical to the
+          // sequential path (same per-element loop order everywhere)
+          const ids = Engine.tokenizer.encode(m.text, true, false);
+          const capA = Engine.newCapture(ids.length);
+          for (let p = 0; p < ids.length; p++) Engine.captureForward(capA, ids[p], p, null);
+          if (!(await Pool.init(Engine.poolSrc))) {
+            post({ type: 'dev-compare', error: 'pool init failed' });
+            break;
+          }
+          const capB = Engine.newCapture(ids.length);
+          await Pool.forwardBatched(capB, ids, null);
+          let maxBand = 0, maxFinal = 0;
+          for (let i = 0; i < capA.resid.length; i++)
+            maxBand = Math.max(maxBand, Math.abs(capA.resid[i] - capB.resid[i]));
+          for (let i = 0; i < capA.residFinal.length; i++)
+            maxFinal = Math.max(maxFinal, Math.abs(capA.residFinal[i] - capB.residFinal[i]));
+          post({ type: 'dev-compare', maxBand, maxFinal, n: ids.length, K: Pool.K });
+          break;
+        }
+        case 'pieces': {
+          // piece strings for every pruned id (chip labels on the main thread).
+          // vocab pieces are byte strings (one char per raw UTF-8 byte, with
+          // sentencepiece's U+2581 already exported as a real space) — decode.
+          const toUtf8 = (bs) => {
+            const arr = new Uint8Array(bs.length);
+            for (let i = 0; i < bs.length; i++) arr[i] = bs.charCodeAt(i);
+            return textDecoder.decode(arr);
+          };
+          const pairs = [];
+          for (const id of Engine.prunedIds) {
+            pairs.push([id, toUtf8(Engine.tokenizer.vocab[id])]);
+          }
+          post({ type: 'pieces-ready', pairs });
+          break;
+        }
+        default: post({ type: 'error', error: `unknown message ${m.type}` });
+      }
+    } catch (err) {
+      post({ type: 'error', error: String(err && err.stack || err) });
+    }
+  };
+}
+</script>
+
+<script>
+'use strict';
+const $ = (id) => document.getElementById(id);
+const statusEl = $('status');
+const setStatus = (t, cls) => { statusEl.textContent = t || ''; statusEl.className = cls || ''; };
+
+// ---- tab-title progress + hidden-tab throttle self-check ----
+const BASE_TITLE = document.title;
+function setTitleProgress(text) { document.title = text ? `⏳ ${text} — Thought Bubble` : BASE_TITLE; }
+// Compute is timer-free in the worker, so a hidden tab normally runs full
+// speed; what we detect here is the browser actually slowing us (energy
+// saver, discard pressure): keep a foreground items/s baseline and compare.
+const throttle = { baseline: null, hiddenSlow: false, lastT: 0, lastN: 0 };
+window.__forceThroughputBaseline = (v) => { throttle.baseline = v; };   // test hook
+function noteThroughput(done) {
+  const now = performance.now();
+  if (throttle.lastT && done > throttle.lastN) {
+    const rate = (done - throttle.lastN) / ((now - throttle.lastT) / 1000);
+    if (document.hidden) {
+      if (throttle.baseline && rate < throttle.baseline / 3) throttle.hiddenSlow = true;
+    } else if (rate > 0) {
+      throttle.baseline = throttle.baseline ? 0.8 * throttle.baseline + 0.2 * rate : rate;
+    }
+  }
+  throttle.lastT = now; throttle.lastN = done;
+}
+function resetThroughput() { throttle.lastT = 0; throttle.lastN = 0; }
+document.addEventListener('visibilitychange', () => {
+  resetThroughput();               // rates don't compare across a visibility flip
+  if (!document.hidden && throttle.hiddenSlow) {
+    $('throttleBanner').style.display = '';
+    throttle.hiddenSlow = false;
+  }
+});
+
+// ---- main-thread IndexedDB (lens + vocab recovery across reloads) ----
+const idbKV = {
+  open() {
+    return new Promise((res, rej) => {
+      const r = indexedDB.open('jlens-cache', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('kv');
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    });
+  },
+  async get(k) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv').objectStore('kv').get(k);
+      t.onsuccess = () => res(t.result); t.onerror = () => rej(t.error);
+    });
+  },
+  async set(k, v) {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k);
+      t.onsuccess = () => res(); t.onerror = () => rej(t.error);
+    });
+  },
+};
+
+// ---- worker boot (Tiny Mind pattern: Blob URL from the inline source) ----
+const workerSrc = $('workerSrc').textContent;
+const worker = (() => {
+  const blob = new Blob([workerSrc], { type: 'text/javascript' });
+  try { return new Worker(URL.createObjectURL(blob)); } catch (e1) {}
+  try {
+    // sandboxed host shimmed createObjectURL; borrow a native one from a
+    // same-origin iframe realm (kept attached: removing it would revoke its blob URLs)
+    const f = document.createElement('iframe');
+    f.style.display = 'none';
+    document.body.appendChild(f);
+    const cw = f.contentWindow;
+    if (cw && cw.URL && typeof cw.URL.createObjectURL === 'function')
+      return new Worker(cw.URL.createObjectURL.call(cw.URL, blob));
+    f.remove();
+  } catch (e2) {}
+  // last resort: opaque-origin worker (no worker-side cache, still computes)
+  return new Worker('data:text/javascript;base64,' + btoa(unescape(encodeURIComponent(workerSrc))));
+})();
+// the Engine worker spawns its compute pool from this same source (item 5)
+worker.postMessage({ type: 'pool-src', src: workerSrc });
+
+const state = {
+  haveModel: false, haveTok: false, haveLens: false, haveVocab: false, dictsReady: false,
+  tokens: [], pieces: [], selected: -1, mode: 'J', raw: false, top20: false,
+  readout: null, heatToken: null, vocabMeta: null, pieceById: new Map(),
+  lastText: '', generating: false, swapPending: null, lastReadoutMs: 0,
+};
+
+// ---- file ingest: URL fetch with progress + drag-drop ----
+const FILES = {
+  'stories110M.bin': { key: 'model', msg: 'load-model' },
+  'tokenizer.bin': { key: 'tok', msg: 'load-tokenizer' },
+  'stories110M.jlens': { key: 'lens', msg: 'load-lens' },
+  'vocab.json': { key: 'vocab', msg: 'load-vocab' },
+};
+const pending = {};   // ordered delivery: model must reach the worker first
+
+const HAVE_FLAG = { model: 'haveModel', tok: 'haveTok', lens: 'haveLens', vocab: 'haveVocab' };
+function fileArrived(name, buffer, fromCache = false) {
+  const spec = FILES[name];
+  if (!spec) { setStatus(`ignored ${name} (not one of the four expected files)`, 'warn-t'); return; }
+  if (state[HAVE_FLAG[spec.key]] || pending[spec.key]) return;   // already have it
+  // keep a copy of every file so a reload (or a discarded tab) skips the
+  // fetch entirely — this is what makes revisits interactive in seconds.
+  // (~430 MB of origin storage for the model; a prototype trade-off.)
+  if (!fromCache) idbKV.set('file:' + name, buffer.slice(0)).catch(() => {});
+  pending[spec.key] = { name, buffer };
+  $('st-' + spec.key).textContent = fromCache ? 'cached ✓' : 'loaded';
+  $('st-' + spec.key).className = 'st ok';
+  $('pg-' + spec.key).style.width = '100%';
+  deliverPending();
+}
+// startup: restore whatever the cache has (typically all four files)
+(async () => {
+  for (const name of Object.keys(FILES)) {
+    try {
+      const buf = await idbKV.get('file:' + name);
+      if (buf) fileArrived(name, buf, true);
+    } catch (e) { /* no cache — fine */ }
+  }
+})();
+function deliverPending() {
+  // strict order: model -> tokenizer -> lens -> vocab (worker needs vocabSize/dim)
+  if (pending.model && !state.haveModel) {
+    worker.postMessage({ type: 'load-model', buffer: pending.model.buffer }, [pending.model.buffer]);
+    pending.model = null; return;
+  }
+  if (!state.haveModel) return;
+  if (pending.tok && !state.haveTok) {
+    worker.postMessage({ type: 'load-tokenizer', buffer: pending.tok.buffer }, [pending.tok.buffer]);
+    pending.tok = null; return;
+  }
+  if (pending.lens && !state.haveLens) {
+    worker.postMessage({ type: 'load-lens', buffer: pending.lens.buffer }, [pending.lens.buffer]);
+    pending.lens = null; return;
+  }
+  if (state.haveTok && state.haveLens && pending.vocab && !state.haveVocab) {
+    const meta = JSON.parse(new TextDecoder().decode(pending.vocab.buffer));
+    state.vocabMeta = meta;
+    worker.postMessage({ type: 'load-vocab', meta });
+    pending.vocab = null;
+  }
+}
+
+async function fetchWithProgress(name) {
+  const spec = FILES[name];
+  const el = $('pg-' + spec.key), st = $('st-' + spec.key);
+  st.textContent = 'fetching…'; st.className = 'st';
+  const res = await fetch(name);
+  if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
+  const total = +res.headers.get('Content-Length') || 0;
+  const reader = res.body.getReader();
+  const chunks = [];
+  let got = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value); got += value.length;
+    if (total) el.style.width = (100 * got / total) + '%';
+  }
+  const buf = new Uint8Array(got);
+  let o = 0;
+  for (const ch of chunks) { buf.set(ch, o); o += ch.length; }
+  fileArrived(name, buf.buffer);
+}
+
+$('fetchBtn').onclick = async () => {
+  $('fetchBtn').disabled = true;
+  for (const name of Object.keys(FILES)) {
+    const st = $('st-' + FILES[name].key).textContent;
+    if (st === 'cached ✓' || st === 'loaded') continue;
+    try { await fetchWithProgress(name); }
+    catch (e) { setStatus(`fetch failed: ${e.message} — drop the file instead`, 'err'); }
+  }
+};
+const dz = $('dropzone');
+dz.ondragover = (e) => { e.preventDefault(); dz.classList.add('over'); };
+dz.ondragleave = () => dz.classList.remove('over');
+dz.ondrop = async (e) => {
+  e.preventDefault(); dz.classList.remove('over');
+  for (const f of e.dataTransfer.files) fileArrived(f.name, await f.arrayBuffer());
+};
+
+// ---- worker messages ----
+worker.onmessage = (e) => {
+  const m = e.data;
+  switch (m.type) {
+    case 'model-ready':
+      state.haveModel = true;
+      setStatus(`model: ${m.config.nLayers} layers, dim ${m.config.dim}, vocab ${m.config.vocabSize}`);
+      deliverPending(); break;
+    case 'tokenizer-ready': state.haveTok = true; deliverPending(); break;
+    case 'lens-ready':
+      state.haveLens = true;
+      setStatus(`lens layers: L${m.layers.join(', L')}`);
+      deliverPending(); break;
+    case 'vocab-ready':
+      state.haveVocab = true;
+      setStatus(`story vocabulary: ${m.pruned} tokens`);
+      populateVocabUI();
+      worker.postMessage({ type: 'build-dicts' });
+      $('st-dict').textContent = 'building…';
+      break;
+    case 'dict-progress': {
+      const pct = Math.round(100 * (m.i + m.frac) / m.n);
+      $('pg-dict').style.width = pct + '%';
+      $('st-dict').textContent = `L${m.layer}…`;
+      setStatus(`one-time setup: building the lens's word-directions (cached after today)… L${m.layer}, ${pct}%`);
+      setTitleProgress(`dictionaries ${pct}%`);
+      break;
+    }
+    case 'dicts-ready':
+      state.dictsReady = true;
+      window.__readyAt = performance.now();   // dev metric: time-to-interactive
+      $('st-dict').textContent = m.cached ? 'ready (cached ✓)'
+        : m.lazy ? 'ready (builds on first analyze)'
+        : `ready (${(m.ms / 1000).toFixed(1)} s)`;
+      $('st-dict').className = 'st ok';
+      $('pg-dict').style.width = '100%';
+      $('analyzeBtn').disabled = false;
+      $('genBtn').disabled = false;
+      setStatus('ready — analyze a story or let the model write one', 'ok');
+      break;
+    case 'analyze-progress': {
+      const pct = Math.round(100 * m.done / m.total);
+      if (state.progressStage !== m.stage) { state.progressStage = m.stage; resetThroughput(); }
+      noteThroughput(m.done);
+      setStatus(m.stage === 'forward'
+        ? `reading the story… token ${m.done}/${m.total}`
+        : `computing readouts… ${pct}%`);
+      setTitleProgress(m.stage === 'forward' ? `reading ${pct}%` : `readouts ${pct}%`);
+      break;
+    }
+    case 'analyzed':
+      onCaptured(m, null); break;
+    case 'gen-token': {
+      if (m.tag === 'noswap') $('swapNoSwap').textContent += m.piece;
+      else if (m.tag === 'withswap') $('swapWith').textContent += m.piece;
+      else $('genOut').textContent += m.piece;
+      if (state.progressStage !== 'gen' + (m.tag || '')) {
+        state.progressStage = 'gen' + (m.tag || '');
+        state.genCount = 0;
+        resetThroughput();
+      }
+      state.genCount++;
+      noteThroughput(state.genCount);
+      setTitleProgress(`writing ${state.genCount}`);
+      break;
+    }
+    case 'generated':
+      if (m.tag === 'noswap' || m.tag === 'withswap') onSwapResult(m);
+      else onCaptured(m, m.text);
+      break;
+    case 'readout':
+      state.readout = m; state.lastReadoutMs = performance.now() - state.readoutT0;
+      renderReadout(); break;
+    case 'readout-full':
+      renderFullReadout(m); break;
+    case 'heat':
+      renderHeat(m); break;
+    case 'error':
+      setStatus(m.error, 'err'); console.error(m.error);
+      state.generating = false; $('stopBtn').disabled = true;
+      setTitleProgress(null);
+      setSwapBusy(false);
+      break;
+  }
+};
+
+// ---- prompt pickers ----
+const CANNED = [
+  'Once upon a time there was a little girl named Lily. She had a dog named Max. One day',
+  'Ben broke his mom\'s favorite vase. He heard her coming.',
+  'Lily and Max went to the beach. Lily built a castle. Max dug a',
+  'It was a dark night. Tim heard a strange noise in the garden.',
+  'The little bird could not fly. Every day it tried and tried.',
+];
+CANNED.forEach((p) => {
+  const b = document.createElement('button');
+  b.className = 'pchip'; b.textContent = p.slice(0, 44) + (p.length > 44 ? '…' : '');
+  b.title = p;
+  b.onclick = () => { $('promptBox').value = p; };
+  $('promptChips').appendChild(b);
+});
+function populateVocabUI() {
+  const meta = state.vocabMeta;
+  (meta.themeWords || []).slice(0, 28).forEach((w) => {
+    const b = document.createElement('button');
+    b.className = 'pchip'; b.textContent = w;
+    b.title = 'add to the prompt (a word the lens can see)';
+    b.onclick = () => { const t = $('promptBox'); t.value = (t.value + ' ' + w).trimStart(); };
+    $('themeChips').appendChild(b);
+  });
+  updateSwapDatalist();
+}
+// Swap-word suggestions: the current story's single-token words first
+// (deduped, story order — every analyzed token is single-token by
+// construction; keep the word-like ones), then the theme vocabulary.
+function updateSwapDatalist() {
+  const dl = $('vocabList');
+  dl.innerHTML = '';
+  const seen = new Set();
+  const add = (w, label) => {
+    if (seen.has(w)) return;
+    seen.add(w);
+    const o = document.createElement('option');
+    o.value = ' ' + w;
+    if (label) o.label = label;
+    dl.appendChild(o);
+  };
+  state.pieces.slice(1).forEach((p) => {
+    if (/^ [A-Za-z]+$/.test(p)) add(p.slice(1), 'from this story');
+  });
+  ((state.vocabMeta && state.vocabMeta.themeWords) || []).forEach((w) => add(w));
+}
+
+// ---- analyze / generate ----
+$('tempSlider').oninput = () => { $('tempVal').textContent = $('tempSlider').value; };
+$('analyzeBtn').onclick = () => {
+  const text = $('promptBox').value.trim();
+  if (!text) return;
+  state.lastText = text;
+  $('genOut').textContent = '';
+  worker.postMessage({ type: 'analyze', text });
+  setStatus('reading the story…');
+};
+$('genBtn').onclick = () => {
+  const prompt = $('promptBox').value.trim();
+  if (!prompt) return;
+  state.generating = true;
+  $('stopBtn').disabled = false;
+  $('genOut').textContent = prompt;
+  worker.postMessage({ type: 'generate', prompt,
+    temperature: +$('tempSlider').value, maxNew: +$('maxNew').value });
+  setStatus('the model is writing…');
+};
+$('stopBtn').onclick = () => worker.postMessage({ type: 'stop' });
+
+function onCaptured(m, generatedText, opts = {}) {
+  state.generating = false;
+  $('stopBtn').disabled = true;
+  $('swapBtn').disabled = true;   // selection was reset; re-enabled on selectToken
+  state.tokens = m.tokens; state.pieces = m.pieces;
+  state.selected = -1; state.heatToken = null;
+  if (generatedText) state.lastText = generatedText;
+  if (!opts.keepSwapPanes) { state.swapResults = null; $('swapAdopt').style.display = 'none'; }
+  updateSwapDatalist();
+  renderStory();
+  $('readout').innerHTML = '<span class="hint">select a token in the story panel…</span>';
+  $('modelRow').textContent = '';
+  $('roPos').textContent = '— no token selected';
+  setTitleProgress(null);
+  state.progressStage = null;
+  const secs = (m.msTotal / 1000).toFixed(1);
+  setStatus(`done: ${m.nPos} tokens in ${secs} s (forward ${((m.msForward || 0) / 1000).toFixed(1)} s) — click any word in the story below`, 'ok');
+  window.__lastAnalyze = { nPos: m.nPos, msTotal: m.msTotal, msForward: m.msForward };
+}
+
+// ---- story pane ----
+function renderStory() {
+  const el = $('story');
+  el.innerHTML = ''; el.classList.remove('hint');
+  state.pieces.forEach((piece, i) => {
+    if (i === 0) return;                       // BOS — nothing to show
+    const sp = document.createElement('span');
+    sp.className = 'tok';
+    sp.dataset.pos = i;
+    if (piece === '\n') { sp.textContent = '⏎'; el.appendChild(sp); el.appendChild(document.createElement('br')); }
+    else { sp.textContent = piece; el.appendChild(sp); }
+    sp.onclick = () => selectToken(i);
+  });
+}
+function selectToken(pos) {
+  state.selected = pos;
+  document.querySelectorAll('#story .tok').forEach((t) => t.classList.toggle('sel', +t.dataset.pos === pos));
+  $('roPos').textContent = `— token ${pos}: “${state.pieces[pos]}”`;
+  $('swapPosLabel').textContent = `“${state.pieces[pos].trim() || state.pieces[pos]}” (position ${pos})`;
+  $('swapBtn').disabled = false;
+  $('swapHint').textContent = '';
+  state.readoutT0 = performance.now();
+  worker.postMessage({ type: 'readout', pos, k: 40 });
+}
+
+// ---- readout panel ----
+$('mJ').onclick = () => setMode('J'); $('mL').onclick = () => setMode('L'); $('mD').onclick = () => setMode('D');
+function setMode(mode) {
+  state.mode = mode;
+  $('mJ').classList.toggle('on', mode === 'J');
+  $('mL').classList.toggle('on', mode === 'L');
+  $('mD').classList.toggle('on', mode === 'D');
+  renderReadout();
+}
+$('rawToggle').onchange = () => { state.raw = $('rawToggle').checked; renderReadout(); };
+$('top20Toggle').onchange = () => { state.top20 = $('top20Toggle').checked; renderReadout(); };
+
+function pieceOf(id) {
+  if (!state.pieceById.has(id)) return `#${id}`;
+  return state.pieceById.get(id);
+}
+function displayChip(entry, extraClass, rank) {
+  const meta = state.vocabMeta;
+  const chip = document.createElement('span');
+  chip.className = 'rchip' + (extraClass || '');
+  const alias = meta.alias && meta.alias[String(entry.id)];
+  const raw = entry.piece;
+  const label = alias ? alias.display : (raw.trim() === '' ? JSON.stringify(raw) : raw);
+  chip.textContent = label;
+  const heatHint = 'click = heat map: light up the story where this word was on the model’s mind';
+  if (alias) { chip.classList.add('alias'); chip.title = 'name fragment: ' + alias.names.map(n => n.name).join(', ') + ' · ' + heatHint; }
+  else chip.title = `token ${entry.id} · score ${entry.score.toFixed(2)} · ${heatHint}`;
+  if (rank !== undefined) {
+    const rk = document.createElement('span'); rk.className = 'rk'; rk.textContent = '#' + (rank + 1);
+    chip.appendChild(rk);
+  }
+  if (state.heatToken === entry.id) chip.classList.add('heaton');
+  chip.onclick = () => toggleHeat(entry.id, label);
+  return chip;
+}
+
+function renderReadout() {
+  const m = state.readout;
+  if (!m) return;
+  const meta = state.vocabMeta;
+  const wordStart = new Set(meta.wordStartIds);
+  const aliasIds = new Set(Object.keys(meta.alias || {}).map(Number));
+  const keep = (id) => state.raw || wordStart.has(id) || aliasIds.has(id);
+  const K = state.top20 ? 20 : 8;
+  const box = $('readout');
+  box.innerHTML = ''; box.classList.remove('hint');
+
+  for (const row of m.layers.slice().reverse()) {          // top of network on top
+    const div = document.createElement('div');
+    div.className = 'lrow';
+    const nm = document.createElement('span');
+    nm.className = 'lname'; nm.textContent = 'L' + row.layer;
+    nm.title = `layer ${row.layer} of 12`;
+    div.appendChild(nm);
+    const chips = document.createElement('span');
+    chips.className = 'chips';
+
+    const withPieces = (list) => list.map(e => ({ ...e, piece: pieceOf(e.id) }));
+    const jF = withPieces(row.jlens).filter(e => keep(e.id)).slice(0, K);
+    const lF = withPieces(row.logit).filter(e => keep(e.id)).slice(0, K);
+
+    if (state.mode === 'J') jF.forEach((e, i) => chips.appendChild(displayChip(e, '', i)));
+    else if (state.mode === 'L') lF.forEach((e, i) => chips.appendChild(displayChip(e, '', i)));
+    else {
+      const lSet = new Set(lF.map(e => e.id));
+      jF.forEach((e, i) => chips.appendChild(displayChip(e, lSet.has(e.id) ? '' : ' jonly', i)));
+    }
+    div.appendChild(chips);
+    box.appendChild(div);
+  }
+  const model = m.model.map(e => ({ ...e, piece: pieceOf(e.id) }));
+  $('modelRow').innerHTML = '<b>model’s next word:</b> ';
+  model.forEach((e) => $('modelRow').appendChild(displayChip(e)));
+  $('modelRow').appendChild(Object.assign(document.createElement('span'),
+    { className: 'hint', textContent: ` · readout in ${state.lastReadoutMs.toFixed(0)} ms (story vocab)` }));
+}
+
+function renderFullReadout(m) { console.log('full-vocab readout', m); }
+
+// ---- heat view ----
+function toggleHeat(tokenId, label) {
+  if (state.heatToken === tokenId) { clearHeat(); return; }
+  state.heatToken = tokenId;
+  state.heatLabel = label;
+  worker.postMessage({ type: 'heat', tokenId });
+}
+function clearHeat() {
+  state.heatToken = null;
+  document.querySelectorAll('#story .tok').forEach(t => t.classList.remove('hot0', 'hot1', 'hot2', 'hot3'));
+  $('heatCaption').textContent = '';
+  $('heatOff').style.display = 'none';
+  renderReadout();
+}
+$('heatOff').onclick = clearHeat;
+function renderHeat(m) {
+  if (m.ranks === null) { setStatus('that token is outside the story vocabulary', 'warn-t'); return; }
+  document.querySelectorAll('#story .tok').forEach((el) => {
+    const pos = +el.dataset.pos;
+    el.classList.remove('hot0', 'hot1', 'hot2', 'hot3');
+    const r = m.ranks[pos];
+    if (r <= 2) el.classList.add('hot3');
+    else if (r <= 10) el.classList.add('hot2');
+    else if (r <= 40) el.classList.add('hot1');
+    else if (r <= 150) el.classList.add('hot0');
+  });
+  $('heatCaption').textContent = `🔥 where “${(state.heatLabel || '').trim()}” was on the model’s mind (best J-lens rank across L4–L8; bright pink = top-3)`;
+  $('heatOff').style.display = '';
+  renderReadout();
+}
+
+// ---- swap & regenerate ----
+$('swapStrength').oninput = () => { $('swapStrVal').textContent = $('swapStrength').value; };
+(function initSwapLayerSelects() {
+  const l0 = $('swapL0'), l1 = $('swapL1');
+  l0.innerHTML = ''; l1.innerHTML = '';
+  [4, 5, 6, 7, 8].forEach((l) => {
+    l0.appendChild(new Option('L' + l, l, l === 4, l === 4));
+    l1.appendChild(new Option('L' + l, l, l === 8, l === 8));
+  });
+})();
+
+function setSwapBusy(busy) {
+  $('swapBtn').disabled = busy || state.selected < 0;
+  $('swapSpin').style.display = busy ? '' : 'none';
+}
+$('swapBtn').onclick = () => {
+  if (state.selected < 0) return;
+  const enc = (s) => {
+    // resolve a typed word to a single word-start token id via the piece map
+    const w = s.trim();
+    if (!w) return null;
+    for (const [id, piece] of state.pieceById) {
+      if (piece === ' ' + w) return id;
+    }
+    return null;
+  };
+  const srcId = enc($('swapSrc').value), tgtId = enc($('swapTgt').value);
+  if (srcId === null || tgtId === null) {
+    $('swapHint').textContent = 'both words must be single tokens the model knows (pick from the list)';
+    return;
+  }
+  $('swapHint').textContent = '';
+  const anchor = state.selected;
+  // rewrites are deterministic by default so the ONLY difference is the swap
+  const temperature = $('swapUseTemp').checked ? +$('tempSlider').value : 0;
+  const seed = (Math.random() * 0x7fffffff) | 0;
+  state.swapRun = {
+    seed, temperature,
+    // regenerate from the ANALYZED token ids (BOS..anchor inclusive) — not
+    // re-encoded text, so token boundaries can't drift from what's on screen
+    promptIds: state.tokens.slice(0, anchor + 1),
+    edit: { srcId, tgtId, l0: +$('swapL0').value, l1: +$('swapL1').value,
+            strength: +$('swapStrength').value, fromPos: anchor },
+  };
+  state.swapPending = { tag: 'noswap' };
+  setSwapBusy(true);
+  const prefix = state.pieces.slice(1, anchor + 1).join('');
+  $('swapOrig').textContent = state.pieces.slice(1).join('');
+  // seed both rewrite panes with the shared prefix; new tokens stream in after it
+  $('swapNoSwap').textContent = prefix; $('swapWith').textContent = prefix;
+  setStatus('rewriting from the anchor, no swap…');
+  worker.postMessage({ type: 'generate', tag: 'noswap',
+    promptIds: state.swapRun.promptIds, seed, temperature,
+    maxNew: +$('maxNew').value });
+};
+$('adoptNoSwap').onclick = () => { const m = state.swapResults && state.swapResults.noswap;
+  if (m) onCaptured(m, m.text, { keepSwapPanes: true }); };
+$('adoptWith').onclick = () => { const m = state.swapResults && state.swapResults.withswap;
+  if (m) onCaptured(m, m.text, { keepSwapPanes: true }); };
+function onSwapResult(m) {
+  state.generating = false; $('stopBtn').disabled = true;
+  if (m.tag === 'noswap') {
+    $('swapNoSwap').textContent = m.text;
+    state.swapResults = { noswap: m };
+    setStatus('rewriting from the anchor, with the swap…');
+    state.swapPending = { tag: 'withswap' };
+    // same prompt ids & seed & temperature; the ONLY difference is the edit hook
+    worker.postMessage({ type: 'generate', tag: 'withswap',
+      promptIds: state.swapRun.promptIds, seed: state.swapRun.seed,
+      temperature: state.swapRun.temperature, edit: state.swapRun.edit,
+      maxNew: +$('maxNew').value });
+  } else {
+    $('swapWith').textContent = m.text;
+    state.swapPending = null;
+    setSwapBusy(false);
+    (state.swapResults = state.swapResults || {}).withswap = m;
+    // the story and the anchor stay exactly as they were; the player
+    // decides whether a rewrite goes under the lens (buttons below)
+    $('swapAdopt').style.display = '';
+    setStatus('swap done — compare the two rewrites; a “make this the story” button loads one into the lens', 'ok');
+  }
+}
+
+// Piece-string bootstrap: once the vocab lands in the worker, fetch the
+// decoded piece of every pruned id so chips render without round-trips.
+(() => {
+  const origOnMessage = worker.onmessage;
+  worker.onmessage = (e) => {
+    const m = e.data;
+    if (m.type === 'vocab-ready') worker.postMessage({ type: 'pieces' });
+    if (m.type === 'pieces-ready') { state.pieceById = new Map(m.pairs); return; }
+    origOnMessage(e);
+  };
+})();
+</script>
+<script>
+/* ==== voice-guide core (vg-core.js) ==== */
+/* ============================================================
+   vg-core.js — app-agnostic voice-guide core.
+   Extracted from the First Day at the Game Studio layer (which
+   was itself ported from the In-Between voice-demo architecture):
+   docked side panel, transcript log, one generation counter,
+   trusted-event takeover, provenance-correct resume, mic-by-
+   policy, confirm-wrapper, two-tier DO gating, keyless-artifact
+   v1.1: speech mute button (read-along pacing when muted) + the
+   tooltip->guide bridge (adapter topics registry, api.askAbout)
+   v1.2: adapter-owned persona voice (speech.prefer/rate/pitch)
+   LLM chain. Defines exactly ONE global, window.VoiceGuide, and
+   has no side effects until create(adapter) is called.
+   Authoring-time reuse: this file is spliced into a single-file
+   app by the build; it is not a runtime dependency.
+   ============================================================ */
+(function(){
+'use strict';
+const VG_ABORT={vg:'abort'};
+const VG_DEFAULT_KEYLESS=['claude-sonnet-5','claude-sonnet-4-6'];
+
+/* Canonical prompt-rule text. Authoring aids for adapter system
+   prompts — compose with these instead of copying, so the load-
+   bearing policy sentences have one home. Parameterized fragments
+   take the app's own nouns; plain ones are app-free. */
+const fragments={
+  voiceRules:'Your reply is read aloud by speech synthesis, so write plain speakable prose only: no markdown of any kind, no lists, no headings, no code fences, no URLs, no emoji, and write numbers and symbols the way you would say them. Prefer one to three short sentences.',
+  statusRule:"The visitor's message ends with a STATUS RIGHT NOW block. Your advice must match it exactly: if earlier conversation turns disagree with the status, the status wins, and never tell the visitor to do a step the status shows as already done.",
+  selfKnowledge:'You live in a docked panel \u2014 beside the app on wide windows, below it on narrow ones. The app always reflows to fit, so you never cover it; the arrow at the top of your panel hides you if the visitor wants the space back.',
+  doLineMeta:'These ids are for the DO line only; in prose keep using visible names. The DO line is executed by the app and stripped before speaking, so never mention it.',
+  ratifyNotice:'The app will also ask the visitor to confirm these actions, so never claim one is already done \u2014 say you are asking.',
+  consentScope(o){ o=o||{};
+    return '"Please do", "yes", or "go ahead" authorize only the precise action you just offered and nothing more \u2014 if you offered to '+
+      (o.pointExample||'jump to a tab')+', consent to that is consent to jump, never to '+
+      (o.escalations||'do anything state-changing')+'. Never escalate; when in doubt, use '+(o.safeVerb||'SHOW')+'.'; },
+  pointNotDescribe(o){ o=o||{};
+    return "The page is often taller than the window, so when the visitor says they can't see or find something, never just describe where it is: end with a "+
+      (o.pointVerbs||'DO SHOW')+' line, which switches to it, scrolls it into view, and highlights it. Questions like "where is", "I don\'t see", or "how do I get to" should ALWAYS end with a DO line.'; }
+};
+
+function create(A){
+  A=A||{};
+  const ui=A.ui||{}, layout=A.layout||{}, prov=A.provenance||{};
+  const prompts=A.prompts||{}, llm=A.llm||{}, verbs=A.verbs||{};
+  const confirmRules=A.confirmRules||[], strings=A.strings||{};
+  const takeover=A.takeover||{events:['pointerdown']};
+  const steps=(A.tour&&A.tour.steps)||[];
+  const testHook=A.testHook||{};
+  const notify=ui.notify||function(){};
+  const MASCOT=ui.mascot||'\u{1F916}', THINK=ui.thinkFace||'\u{1F914}';
+  const W=layout.panelWidth||300, M=layout.panelMargin||(W+2);
+  const NARROW=('narrowMax' in layout)?layout.narrowMax:700;
+  const APPBP=layout.appBreakpoint||0;
+  const reflow=layout.reflowCSS||{};
+  const BANDS=reflow.bands||[];
+  const STORE_KEY=(A.id||'vg')+'-guide-panel';
+  const MUTE_KEY=(A.id||'vg')+'-guide-muted';
+  const topics=A.topics||[];   // tooltip->guide bridge registry: {id,target,oneLiner,guideQuestion}
+  const speech=A.speech||{};   // {prefer(voices)->voice|null, rate, pitch} — persona voice, adapter-owned
+  const KEYLESS=(llm.keylessModels||VG_DEFAULT_KEYLESS).slice();
+  const extractErr=llm.extractError||((d,r)=>((d&&d.error&&d.error.message)||('HTTP '+(r&&r.status))));
+  const normalize=llm.normalizeReply||(t=>t);
+  const modalCls=Object.assign({backdrop:'modal-backdrop',modal:'modal',row:'button-row',yes:'primary',no:'ghost'},ui.modal||{});
+
+  let vgGen=0, vgState='idle', vgCur=0;
+  let vgPauseSnap=null;
+  let vgQA=[];                 // spoken Q&A history (persists across pauses)
+  let vgSpotted=[], vgSpotSel=null;
+  let vgWordMs=300;            // read-along ms/word when TTS is absent (tests set 0)
+  let vgMuted=false; try{ vgMuted=localStorage.getItem(MUTE_KEY)==='1'; }catch(e){}
+  const vg$=id=>document.getElementById(id);
+
+  /* Where are we running? Artifacts sit in a sandboxed cross-origin
+     iframe whose permissions policy withholds the microphone —
+     detectable directly, no error-string guessing. */
+  const vgMicPolicyBlocked=(()=>{ try{
+      const pp=document.permissionsPolicy||document.featurePolicy;
+      if(pp&&typeof pp.allowsFeature==='function') return !pp.allowsFeature('microphone');
+    }catch(e){} return false; })();
+  const vgInClaude=(()=>{ try{
+      if(/claudeusercontent\.com$/i.test(location.hostname)) return true;
+      return Array.from(location.ancestorOrigins||[]).some(o=>/claude\.(ai|com)/i.test(o));
+    }catch(e){ return false; } })();
+  const VG_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const vgCanListen=!!VG_SR&&!vgMicPolicyBlocked;
+
+  /* ---------- generated stylesheet ----------
+     All generic rules parameterized by {panelWidth, panelMargin,
+     narrowMax}; the app-specific reflow rules arrive as raw CSS in
+     layout.reflowCSS and core wraps them in media queries computed
+     from {appBreakpoint, panelMargin} — mirror the app's stacking
+     breakpoint at (breakpoint + panel margin), softening bands
+     above it. Bands are emitted before the mirror so the mirror's
+     equal-specificity rules win at and below the mirror width. */
+  const css=[
+'.vg-spot{box-shadow:0 0 0 3px var(--gold,#f7d774),0 0 22px 6px rgba(247,215,116,.45)!important;',
+'  border-radius:12px;scroll-margin:130px;animation:vgPulse 1.6s ease-in-out infinite}',
+'@keyframes vgPulse{50%{box-shadow:0 0 0 5px var(--gold,#f7d774),0 0 30px 10px rgba(247,215,116,.6)}}',
+'',
+'#vgTip{position:fixed;display:none;z-index:10004;max-width:290px;gap:10px;align-items:center;',
+'  background:var(--panel,#101623);color:var(--ink,#e8eef7);border:1px solid var(--gold,#f7d774);',
+'  border-radius:9px;padding:8px 11px;font-size:12.5px;line-height:1.45;box-shadow:0 8px 30px rgba(0,0,0,.5)}',
+'#vgTip button{flex:0 0 auto;border:none;border-radius:7px;padding:5px 9px;font-size:12px;font-weight:800;',
+'  cursor:pointer;background:var(--accent,#7bdff2);color:#06111f}',
+'',
+'body{transition:margin-right .25s}',
+`body.vg-open{margin-right:${M}px}`,
+'/* Narrow (artifact preview pane, phones): dock to the bottom',
+'   instead of overlaying — margin-bottom reflows the app above the',
+'   panel, so the guide never covers anything at any width. */',
+`@media (max-width:${NARROW}px){`,
+`  body.vg-open{margin-right:0;margin-bottom:${M}px}`,
+`  #vgPanel{top:auto;left:0;right:0;bottom:0;width:auto;height:${W}px;`,
+'    border-left:none;border-top:1px solid var(--line,rgba(255,255,255,.14));',
+'    box-shadow:0 -8px 26px rgba(0,0,0,.45)}',
+'  body:not(.vg-open) #vgPanel{transform:translateY(102%)}',
+'  #vgTab{top:auto;bottom:0;right:14px;border-radius:12px 12px 0 0;',
+'    border-right:1px solid var(--line,rgba(255,255,255,.14));border-bottom:none;',
+'    padding:8px 12px;flex-direction:row!important;gap:8px}',
+'  .vg-tab-label{writing-mode:horizontal-tb}',
+'}',
+'',
+...BANDS.map(b=>`@media (max-width:${b.max}px){${b.css}}`),
+...(APPBP?[`@media (max-width:${APPBP+M}px){${reflow.mirrored||''}}`]:[]),
+'',
+`#vgPanel{position:fixed;top:0;right:0;bottom:0;width:min(${W}px,88vw);z-index:9999;`,
+'  display:flex;flex-direction:column;font:inherit;',
+'  background:var(--panel,#111a33);border-left:1px solid var(--line,rgba(255,255,255,.14));',
+'  box-shadow:-8px 0 26px rgba(0,0,0,.45);',
+'  transform:translateX(0);transition:transform .25s}',
+'body:not(.vg-open) #vgPanel{transform:translateX(102%)}',
+'',
+'#vgHead{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line,rgba(255,255,255,.14));',
+'  background:rgba(0,0,0,.18);flex:0 0 auto}',
+'#vgFace{font-size:22px;user-select:none;transition:transform .2s}',
+'#vgFace.vg-talk,#vgTab.vg-talk{animation:vgBob .55s ease-in-out infinite}',
+'@keyframes vgBob{50%{transform:translateY(-3px) rotate(-6deg)}}',
+'#vgTitle{font-weight:850;font-size:14px;letter-spacing:-.01em;color:var(--ink,#eef4ff);flex:1}',
+'#vgHide{border:none;background:none;color:var(--muted,#b7c5e8);font-size:17px;cursor:pointer;padding:4px 6px}',
+'#vgHide:hover{color:var(--accent,#7bdff2);transform:none}',
+'',
+'#vgControls{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line,rgba(255,255,255,.14));flex:0 0 auto}',
+'.vg-btn{flex:0 0 auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--line,rgba(255,255,255,.14));',
+'  background:rgba(255,255,255,.06);color:var(--accent,#7bdff2);font-size:15px;cursor:pointer;',
+'  display:flex;align-items:center;justify-content:center;padding:0}',
+'.vg-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(123,223,242,.55);transform:none}',
+'.vg-primary{color:#06111f;background:linear-gradient(180deg,#aaf4ff,#65d4ea);border:none;font-size:16px;font-weight:900}',
+'#vgMic.vg-live{background:#e0483c;color:#fff;border:none;animation:vgPulse 1.2s infinite}',
+'#vgMic.vg-off{opacity:.45}',
+'',
+'#vgLog{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:12px}',
+'.vg-b{max-width:95%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.5;',
+'  white-space:pre-wrap;overflow-wrap:break-word;align-self:flex-start;',
+'  background:rgba(255,255,255,.07);color:var(--ink,#eef4ff);border:1px solid var(--line,rgba(255,255,255,.14));',
+'  border-bottom-left-radius:4px}',
+'.vg-b.vg-user{align-self:flex-end;background:rgba(123,223,242,.16);border-color:rgba(123,223,242,.4);',
+'  border-bottom-left-radius:12px;border-bottom-right-radius:4px}',
+'',
+'#vgStatus{flex:0 0 auto;min-height:18px;padding:2px 12px;font-size:12px;font-style:italic;color:var(--muted,#b7c5e8)}',
+'#vgTypeRow{display:flex;gap:8px;padding:0 12px 12px;flex:0 0 auto}',
+'#vgIn{flex:1;min-width:0;font-size:13.5px;border:1px solid var(--line,rgba(255,255,255,.14));',
+'  border-radius:10px;padding:8px 11px;background:rgba(0,0,0,.25);color:var(--ink,#eef4ff);font-family:inherit;width:auto}',
+'#vgIn:focus{outline:none;border-color:rgba(123,223,242,.6)}',
+'#vgGo{font-weight:850;font-size:13px;color:#06111f;background:linear-gradient(180deg,#aaf4ff,#65d4ea);',
+'  border:none;border-radius:10px;padding:0 15px;cursor:pointer}',
+'',
+'#vgTab{position:fixed;right:0;top:38%;z-index:9998;cursor:pointer;user-select:none;',
+'  background:var(--panel,#111a33);border:1px solid var(--line,rgba(255,255,255,.14));border-right:none;',
+'  border-radius:12px 0 0 12px;box-shadow:-4px 2px 14px rgba(0,0,0,.45);',
+'  padding:10px 8px 10px 10px;font-size:22px;display:none}',
+'body:not(.vg-open) #vgTab{display:flex;flex-direction:column;align-items:center;gap:5px}',
+'.vg-tab-label{writing-mode:vertical-rl;font-size:11px;font-weight:850;letter-spacing:.15em;',
+'  text-transform:uppercase;color:var(--accent,#7bdff2)}',
+'',
+'/* Confirm-dialog fallback for apps with no modal CSS of their own.',
+'   :where() keeps specificity at zero, so any app class rule on the',
+'   dialog wins over these. */',
+':where(#vgConfirm){position:fixed;inset:0;display:none;align-items:center;justify-content:center;',
+'  background:rgba(0,0,0,.55);z-index:10001}',
+':where(#vgConfirm.show){display:flex}'
+  ].join('\n');
+  const styleEl=document.createElement('style');
+  styleEl.id='vgStyle'; styleEl.textContent=css;
+  document.head.appendChild(styleEl);
+
+  /* ---------- panel markup (all ids/classes prefixed vg) ---------- */
+  {
+    const tab=document.createElement('div');
+    tab.id='vgTab'; tab.title=ui.tabTitle||'Bring the guide back';
+    tab.innerHTML='<span></span><span class="vg-tab-label"></span>';
+    tab.firstChild.textContent=MASCOT;
+    tab.lastChild.textContent=ui.tabLabel||'Guide';
+    document.body.appendChild(tab);
+    const aside=document.createElement('aside');
+    aside.id='vgPanel'; aside.setAttribute('role','complementary');
+    aside.setAttribute('aria-label',ui.ariaLabel||ui.title||'Voice guide');
+    aside.innerHTML=
+      '<div id="vgHead"><span id="vgFace"></span><span id="vgTitle"></span>'+
+      '<button id="vgHide" title="Hide the guide">&#10095;</button></div>'+
+      '<div id="vgControls">'+
+      '<button id="vgMain" class="vg-btn vg-primary" title="Start the spoken tour">&#9654;</button>'+
+      '<button id="vgMic"  class="vg-btn" title="Ask a question by voice">&#127908;</button>'+
+      '<button id="vgMute" class="vg-btn"></button>'+
+      '<button id="vgSkip" class="vg-btn" title="Skip to the next stop" style="display:none">&#9197;</button>'+
+      '<button id="vgEnd"  class="vg-btn" title="End the tour" style="display:none">&#10005;</button>'+
+      '</div>'+
+      '<div id="vgLog" aria-live="polite"></div>'+
+      '<div id="vgStatus"></div>'+
+      '<div id="vgTypeRow"><input id="vgIn" spellcheck="false"><button id="vgGo">Ask</button></div>';
+    document.body.appendChild(aside);
+    vg$('vgFace').textContent=MASCOT;
+    vg$('vgTitle').textContent=ui.title||'Guide';
+    vg$('vgIn').placeholder=ui.askPlaceholder||'Type a question\u2026';
+  }
+
+  /* ---------- confirm() done properly ----------
+     Artifact iframes lack allow-modals, so native confirm() is
+     swallowed (returns false instantly) and every "if(confirm(...))"
+     guard silently aborts. confirm is synchronous and a nice dialog
+     is not, so: remember which button was just pressed, answer false,
+     show an in-page dialog styled like the app's own modals, and on
+     Yes pre-approve the message and re-click that button — the
+     handler runs again and the wrapper answers true. Works the same
+     in normal browsers (nicer than the native box). Fallbacks when no
+     trigger button is known: native dialog, then press-again toast.
+     Per-message hints and extra buttons come from adapter confirmRules. */
+  let vgLastClick=null;
+  document.addEventListener('click',e=>{
+    const t=e.target;
+    if(t&&t.closest&&(t.closest('#vgPanel')||t.closest('#vgTab')||t.closest('#vgConfirm'))) return;
+    vgLastClick={el:(t&&t.closest&&t.closest('button'))||t,t:Date.now()};
+  },true);
+  let vgConfirmCb=null, vgConfirmNoCb=null;
+  function vgEnsureConfirmEl(){
+    if(vg$('vgConfirm')) return;
+    const d=document.createElement('div');
+    d.id='vgConfirm'; d.className=modalCls.backdrop; d.style.zIndex='10001';
+    d.innerHTML='<div class="'+modalCls.modal+'" style="max-width:430px"><h2 style="margin:0 0 8px">Just checking</h2>'+
+      '<p id="vgConfirmMsg" style="margin:0 0 10px"></p>'+
+      '<p id="vgConfirmHint" style="margin:0 0 14px;font-size:13px;color:var(--muted,#b7c5e8)"></p>'+
+      '<div class="'+modalCls.row+'"><button id="vgConfirmYes" class="'+modalCls.yes+'">Yes, do it</button>'+
+      '<button id="vgConfirmExtra" class="'+modalCls.no+'" style="display:none"></button>'+
+      '<button id="vgConfirmNo" class="'+modalCls.no+'">Cancel</button></div></div>';
+    document.body.appendChild(d);
+    d.addEventListener('click',e=>{ if(e.target===d) vgHideConfirm(); });
+  }
+  function vgHideConfirm(){ const d=vg$('vgConfirm'); if(d) d.classList.remove('show');
+    const no=vgConfirmNoCb; vgConfirmCb=null; vgConfirmNoCb=null; if(no) no(); }
+  function vgShowConfirm(msg,onYes,opts){
+    opts=opts||{};
+    vgEnsureConfirmEl();
+    vg$('vgConfirmMsg').textContent=msg;
+    const h=vg$('vgConfirmHint'); h.textContent=opts.hint||''; h.style.display=opts.hint?'':'none';
+    const ex=vg$('vgConfirmExtra');
+    if(opts.extraLabel){ ex.style.display=''; ex.textContent=opts.extraLabel;
+      ex.onclick=()=>{ vgHideConfirm(); try{ opts.onExtra&&opts.onExtra(); }catch(e){} }; }
+    else { ex.style.display='none'; ex.onclick=null; }
+    vgConfirmCb=onYes; vgConfirmNoCb=opts.onNo||null;
+    vg$('vgConfirmYes').onclick=()=>{ const cb=vgConfirmCb; vgConfirmCb=null; vgConfirmNoCb=null;
+      vg$('vgConfirm').classList.remove('show'); if(cb) cb(); };
+    vg$('vgConfirmNo').onclick=vgHideConfirm;
+    vg$('vgConfirm').classList.add('show');
+  }
+  function vgRatify(msg){ return new Promise(res=>{ vgShowConfirm(msg,()=>res(true),{onNo:()=>res(false)}); }); }
+  {
+    const vgOrigConfirm=typeof window.confirm==='function'?window.confirm.bind(window):null;
+    const vgApproved=new Map();                    // message -> expiry
+    window.confirm=function(msg){
+      msg=String(msg);
+      const now=Date.now();
+      if(now<(vgApproved.get(msg)||0)){ vgApproved.delete(msg); return true; }
+      const trg=(vgLastClick&&now-vgLastClick.t<3000)?vgLastClick.el:null;
+      if(trg){                                     // caveat per app: handler side effects before the confirm call repeat on re-trigger
+        const rule=confirmRules.find(r=>r.match.test(msg));
+        vgShowConfirm(msg,()=>{ vgApproved.set(msg,Date.now()+3000); try{ trg.click(); }catch(e){} },
+          rule?{hint:rule.hint,extraLabel:rule.extraLabel,
+                onExtra:rule.onExtra&&(()=>rule.onExtra(api))}:{});
+        return false;
+      }
+      if(vgOrigConfirm){                           // no known trigger: let the real dialog handle it
+        const t0=performance.now(); let r=false;
+        try{ r=!!vgOrigConfirm(msg); }catch(e){}
+        if(r) return true;
+        if(performance.now()-t0>150) return false; // a human really pressed Cancel
+      }
+      if(now<(vgApproved.get('arm:'+msg)||0)){ vgApproved.delete('arm:'+msg); return true; }
+      vgApproved.set('arm:'+msg,now+6000);         // swallowed and no trigger: last-resort press-again
+      notify(msg+' \u2014 pop-ups are blocked here, so press the same button again to confirm.');
+      return false;
+    };
+  }
+
+  /* ---------- tiny helpers ---------- */
+  const vgCHK=g=>{ if(vgGen!==g) throw VG_ABORT; };
+  function vgWait(ms,g){ return new Promise((res,rej)=>{ const t0=performance.now();
+    const iv=setInterval(()=>{ if(vgGen!==g){clearInterval(iv);rej(VG_ABORT);}
+      else if(performance.now()-t0>=ms){clearInterval(iv);res();} },60); }); }
+  function vgClickSel(sel){ const b=document.querySelector(sel);
+    if(b&&!b.disabled){ b.click(); vgRespot(); return true; } return false; }
+  function vgTourLive(){ return vgState==='running'||vgState==='paused'; }
+  function vgDemoMs(ms){ return vgWordMs>=100?ms:15; }   // demos shrink with test speed
+
+  /* ---------- panel: transcript log + status line ----------
+     Narration and answers land in the log as full blocks the moment
+     they start; the log scrolls, so no message can outgrow its
+     container. The status line carries the transient stuff only:
+     paused, listening, thinking. */
+  function vgLogAdd(text,who){
+    const log=vg$('vgLog');
+    const d=document.createElement('div');
+    d.className='vg-b'+(who==='user'?' vg-user':'');
+    d.textContent=text; log.appendChild(d);
+    while(log.children.length>60) log.removeChild(log.firstChild);
+    log.scrollTop=log.scrollHeight;
+    return d;
+  }
+  function vgStatus(t){ vg$('vgStatus').textContent=t||''; }
+  function vgSetPanel(open){
+    document.body.classList.toggle('vg-open',open);
+    try{ localStorage.setItem(STORE_KEY,open?'1':'0'); }catch(e){}
+    if(open){ const log=vg$('vgLog'); log.scrollTop=log.scrollHeight; }
+  }
+
+  /* ---------- speech synthesis (chunked; Chrome cuts long utterances) ---------- */
+  let vgVoice=null;
+  function vgPickVoice(){
+    if(!('speechSynthesis' in window)) return;
+    const vs=speechSynthesis.getVoices()||[];
+    let p=null; if(speech.prefer){ try{ p=speech.prefer(vs.slice())||null; }catch(e){} }
+    vgVoice = p
+           || vs.find(v=>/^en/i.test(v.lang)&&/natural|neural/i.test(v.name))
+           || vs.find(v=>/^en/i.test(v.lang))
+           || vs[0]||null;
+  }
+  if('speechSynthesis' in window){ vgPickVoice(); speechSynthesis.onvoiceschanged=vgPickVoice; }
+  function vgSynthCancel(){ try{ speechSynthesis.cancel(); }catch(e){} }
+  async function vgSpeak(text,g,who){
+    const face=vg$('vgFace'), tab=vg$('vgTab');
+    face.classList.add('vg-talk'); tab.classList.add('vg-talk');
+    vgLogAdd(String(text),who);                       // whole message visible at once
+    try{
+      const chunks=(String(text).match(/[^.!?\u2026]+[.!?\u2026]*/g)||[String(text)]).map(s=>s.trim()).filter(Boolean);
+      for(const c of chunks){
+        vgCHK(g);
+        if(!('speechSynthesis' in window)||vgMuted){  // no TTS, or muted: read-along timing
+          await vgWait(Math.max(vgWordMs?600:0,c.split(/\s+/).length*vgWordMs),g); continue;
+        }
+        await new Promise(res=>{
+          const u=new SpeechSynthesisUtterance(c);
+          if(vgVoice) u.voice=vgVoice;
+          u.rate=speech.rate||1.0; u.pitch=speech.pitch||1.0;
+          const iv=setInterval(()=>{ if(vgGen!==g){ clearInterval(iv); res(); } },150); // watchdog: onend is sometimes swallowed after cancel()
+          u.onend=()=>{clearInterval(iv);res();}; u.onerror=()=>{clearInterval(iv);res();};
+          try{ speechSynthesis.resume(); }catch(e){}  // defensive: Chrome can wedge in a paused state
+          speechSynthesis.speak(u);
+        });
+        vgCHK(g);
+      }
+    } finally { face.classList.remove('vg-talk'); tab.classList.remove('vg-talk'); }
+  }
+  function vgFaceThink(on){ vg$('vgFace').textContent=on?THINK:MASCOT; }
+
+  /* ---------- spotlight (selector string or function returning element(s)) ----------
+     Apps often re-render whole panels on state changes, stripping
+     classes; vgRespot() re-resolves the stored target, so guide-
+     driven renders never lose the glow. */
+  function vgUnspot(){ vgSpotted.forEach(el=>{ try{ el.classList.remove('vg-spot'); }catch(e){} }); vgSpotted=[]; vgSpotSel=null; }
+  function vgApplySpot(sel,scroll){
+    vgSpotted.forEach(el=>{ try{ el.classList.remove('vg-spot'); }catch(e){} }); vgSpotted=[];
+    if(!sel) return;
+    let els=[];
+    if(typeof sel==='function'){ try{ els=[].concat(sel()||[]); }catch(e){} }
+    else els=Array.from(document.querySelectorAll(sel));
+    els=els.filter(Boolean); if(!els.length) return;
+    vgSpotted=els; els.forEach(el=>el.classList.add('vg-spot'));
+    if(scroll){ try{ els[0].scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){} }
+  }
+  function vgSpot(sel){ vgSpotSel=sel||null; vgApplySpot(sel,true); }
+  function vgRespot(){ if(vgSpotSel) vgApplySpot(vgSpotSel,false); }
+
+  /* ---------- tooltip -> guide bridge ----------
+     One registry per app ({id, target, oneLiner, guideQuestion})
+     feeds both the hover tooltip and the guide entry point, so
+     control copy and guide knowledge cannot drift apart. Core owns
+     the mechanism (panel opening, tour-pause semantics, the ask
+     pipeline); the CONTENTS are adapter data. Bound elements lose
+     their native title so the two tooltip systems never double up
+     -- the static title stays in the HTML as a no-JS fallback. */
+  function vgTopic(id){ for(const t of topics) if(t.id===id) return t; return null; }
+  function vgAskAbout(id){ const t=vgTopic(id); if(!t) return Promise.resolve();
+    vgHideTip(); vgSetPanel(true); return vgAsk(t.guideQuestion); }
+  let vgTipHideT=null, vgTipFor=null;
+  function vgEnsureTip(){ let d=vg$('vgTip'); if(d) return d;
+    d=document.createElement('div'); d.id='vgTip';
+    d.innerHTML='<span id="vgTipText"></span><button id="vgTipAsk"></button>';
+    document.body.appendChild(d);
+    d.addEventListener('pointerenter',()=>clearTimeout(vgTipHideT));
+    d.addEventListener('pointerleave',vgTipHide2);
+    vg$('vgTipAsk').onclick=()=>{ if(vgTipFor) vgAskAbout(vgTipFor); };
+    return d; }
+  function vgHideTip(){ clearTimeout(vgTipHideT); const d=vg$('vgTip');
+    if(d) d.style.display='none'; vgTipFor=null; }
+  function vgTipHide2(){ clearTimeout(vgTipHideT); vgTipHideT=setTimeout(vgHideTip,350); }
+  function vgShowTip(t,el){ const d=vgEnsureTip(); clearTimeout(vgTipHideT);
+    vg$('vgTipText').textContent=t.oneLiner;
+    vg$('vgTipAsk').textContent='Ask '+(ui.title||'the guide');
+    vgTipFor=t.id; d.style.display='flex';
+    try{ const r=el.getBoundingClientRect();
+      d.style.left=Math.max(8,Math.min(r.left,innerWidth-d.offsetWidth-8))+'px';
+      d.style.top=((r.bottom+8+d.offsetHeight>innerHeight&&r.top-d.offsetHeight-8>0)
+        ? r.top-d.offsetHeight-8 : r.bottom+8)+'px'; }catch(e){} }
+  function vgBindTopics(){ topics.forEach(t=>{
+    let els=[]; try{ els=typeof t.target==='function'?[].concat(t.target()||[])
+      :Array.from(document.querySelectorAll(t.target)); }catch(e){}
+    els.filter(Boolean).forEach(el=>{
+      if(el.dataset.vgTopic===t.id) return;          // rebind-safe
+      el.dataset.vgTopic=t.id;
+      el.removeAttribute('title');                   // the registry replaces the native tooltip
+      el.addEventListener('pointerenter',()=>vgShowTip(t,el));
+      el.addEventListener('pointerleave',vgTipHide2);
+      el.addEventListener('focusin',()=>vgShowTip(t,el));
+      el.addEventListener('focusout',vgTipHide2);
+    }); }); }
+
+  /* ---------- runner over adapter-supplied steps ----------
+     Each stop: {name, spot, text (string|fn), prep()?, action(gen)?,
+     during?, skipIf?}. prep runs before the spotlight (via real
+     buttons — synthetic clicks are untrusted, so the guide never
+     pauses itself). during:true runs the action concurrently with
+     the narration. Actions must be state-aware and safe to re-run,
+     so restarting a stop after a pause never fights the player. */
+  async function vgRunFrom(i){
+    const g=++vgGen; vgState='running'; vgStatus(''); vgUpdateBar();
+    try{
+      for(; i<steps.length; i++){
+        vgCur=i; const st=steps[i];
+        if(st.skipIf&&st.skipIf()) continue;
+        if(st.prep){ try{ st.prep(); }catch(e){} }
+        vgSpot(st.spot);
+        const text=typeof st.text==='function'?st.text():st.text;
+        if(st.during&&st.action) await Promise.all([vgSpeak(text,g), st.action(g)]);
+        else { await vgSpeak(text,g); if(st.action) await st.action(g); }
+        await vgWait(vgDemoMs(450),g);
+      }
+      vgState='done'; vgCur=0; vgUnspot();
+      vgStatus(ui.doneStatus||"Tour's over!");
+      vgUpdateBar();
+    }catch(e){ if(e!==VG_ABORT) console.error('voice guide tour:',e); }
+  }
+
+  /* ---------- pause / resume, aware of what the player did ----------
+     Snapshot on pause; on resume, speak the adapter's one-line diff
+     of what the player changed. Side-effect suppression and remark
+     wording live in the adapter's diffRemark; re-baselining after
+     guide-driven changes lives here. */
+  function vgPauseCore(){ vgGen++; vgSynthCancel(); vgPauseSnap=prov.snapshot(); vgState='paused';
+    vg$('vgFace').classList.remove('vg-talk'); vg$('vgTab').classList.remove('vg-talk'); }
+  function vgPause(){ vgPauseCore();
+    vgStatus("Paused \u2014 explore as much as you like! \u25B6 carries on.");
+    vgUpdateBar(); }
+  async function vgResume(){
+    const remark=prov.diffRemark(vgPauseSnap); vgPauseSnap=null;
+    vgState='running'; vgStatus(''); vgUpdateBar();
+    const g=++vgGen;
+    try{ if(remark) await vgSpeak(remark,g); }catch(e){ if(e===VG_ABORT) return; }
+    if(vgGen!==g) return;
+    vgRunFrom(vgCur);            // restart the interrupted stop; actions are re-run-safe
+  }
+  function vgStart(){
+    vgCur=0; vgPauseSnap=null;
+    if('speechSynthesis' in window && !vgVoice) vgPickVoice();
+    vgRunFrom(0);
+  }
+  function vgEndTour(){ vgGen++; vgSynthCancel(); vgState='idle'; vgCur=0; vgPauseSnap=null; vgUnspot();
+    vgStatus(''); vgUpdateBar(); }
+  function vgSkipStep(){ if(!vgTourLive()) return;
+    vgGen++; vgSynthCancel(); vgPauseSnap=null;
+    vgRunFrom(vgCur+1); }
+
+  /* auto-pause: any trusted interaction with the app while the tour
+     is narrating means the player has taken the wheel. Guide-driven
+     clicks are synthetic, hence untrusted, and pass through. Which
+     event types count is adapter config (keyboard-heavy apps should
+     drop keydown); takeover.ignore(e) is an extra escape hatch. */
+  (takeover.events||[]).forEach(ev=>document.addEventListener(ev,e=>{
+    if(vgState!=='running'||!e.isTrusted) return;
+    const t=e.target;
+    if(t&&t.closest&&(t.closest('#vgPanel')||t.closest('#vgTab')||t.closest('#vgConfirm'))) return;
+    if(takeover.ignore&&takeover.ignore(e)) return;
+    vgPauseCore();
+    vgStatus("You're in charge! \u25B6 carries on the tour.");
+    vgUpdateBar();
+  },true));
+
+  /* ---------- Q&A prompts ----------
+     The system prompt is the adapter's (reuse the app's own grounding
+     builder plus a voice override — never a parallel AI path). Core
+     owns the user-prompt assembly: flattened history, then a fresh
+     STATUS RIGHT NOW block from the adapter's serializer, then the
+     question — recency bias then works for us. */
+  function vgCtx(){ const live=vgTourLive();
+    return {tourLive:live, stopName:(live&&steps[vgCur])?steps[vgCur].name:''}; }
+  function vgSystem(){ return prompts.system(vgCtx()); }
+  function vgUserPrompt(q){
+    const hist=vgQA.slice(-8).map(m=>(m.role==='user'?'Visitor: ':'Guide: ')+m.content);
+    return (hist.length?'Conversation so far between the visitor and you, the guide:\n'+hist.join('\n')+'\n\n':'')+
+      'STATUS RIGHT NOW, fresh from the app this second. The game may have moved on since earlier turns; this status outranks anything the guide said before, and the guide must never advise a step the status already shows as done:\n'+
+      prompts.status()+'\n\n'+
+      'The visitor now asks the guide: '+q;
+  }
+  function vgExtractDo(t){
+    const m=String(t).match(/\n\s*DO:\s*([A-Z_]+)\s*(.*?)\s*$/);
+    if(!m) return {text:String(t).trim(),act:null};
+    return {text:String(t).slice(0,m.index).trim(),act:{verb:m[1],args:m[2].trim()}};
+  }
+
+  /* ---------- DO dispatch over the adapter verb table ----------
+     Entries: {gated?, validate(parts,api)?, ratifyText(parts,ctx,api)?,
+     exec(parts,api,ctx)}. Order is core policy: validate FIRST (so
+     nobody ratifies an impossible act; invalid is a silent no-op),
+     then for gated verbs the in-page ratification dialog — the model
+     proposes, the player countersigns — then exec through the app's
+     real controls. Pointing verbs stay frictionless. */
+  async function vgDo(act){
+    try{
+      const v=(act.verb||'').toUpperCase();
+      const parts=String(act.args||'').trim().split(/\s+/).filter(Boolean);
+      const spec=verbs[v];
+      if(spec){
+        let ctx=true, ok=true;
+        if(spec.validate){ ctx=spec.validate(parts,api); ok=!!ctx; }
+        if(ok){
+          if(spec.gated){
+            if(await vgRatify(spec.ratifyText(parts,ctx,api))) await spec.exec(parts,api,ctx);
+          } else await spec.exec(parts,api,ctx);
+        }
+      }
+      vgRespot();
+    }catch(e){ if(e!==VG_ABORT) console.warn('guide DO failed:',e); }
+    finally{
+      if(vgPauseSnap) vgPauseSnap=prov.snapshot();   // the guide drove; re-baseline so resume remarks only describe what the player did
+    }
+  }
+
+  /* ---------- LLM chain: configured key wins, keyless in artifacts ---------- */
+  async function vgKeylessAnthropic(systemPrompt,userPrompt){
+    let lastErr=null;
+    for(const model of KEYLESS){
+      try{
+        const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({model,max_tokens:1000,system:systemPrompt,messages:[{role:'user',content:userPrompt}]})});
+        const data=await res.json().catch(()=>({}));
+        if(!res.ok) throw new Error(extractErr(data,res));
+        const text=((data.content||[]).map(c=>c.text||'').join('\n')||'').trim();
+        if(text) return text;
+        throw new Error('the AI returned no text');
+      }catch(e){ lastErr=e; }
+    }
+    throw lastErr||new Error('keyless call failed');
+  }
+  async function vgCallLLM(systemPrompt,userPrompt){
+    if(llm.hasKey&&llm.hasKey()) return llm.keyedCall(systemPrompt,userPrompt);   // the app's plumbing, provider and model as configured
+    if(vgInClaude) return vgKeylessAnthropic(systemPrompt,userPrompt);
+    const err=new Error('no live AI connection'); err.vgNoAI=true; throw err;
+  }
+
+  async function vgAsk(q){
+    q=(q||'').trim(); if(!q) return;
+    if(vgState==='running') vgPauseCore();
+    const g=++vgGen; vgSynthCancel(); vgUpdateBar();
+    vgLogAdd(q,'user'); vgFaceThink(true); vgStatus('thinking\u2026');
+    const sys=vgSystem(), usr=vgUserPrompt(q);
+    vgQA.push({role:'user',content:q});
+    try{
+      const raw=await vgCallLLM(sys,usr);
+      if(vgGen!==g) return;
+      vgQA.push({role:'assistant',content:raw||''});
+      const {text,act}=vgExtractDo(raw||'');
+      const prose=normalize(text);          // the app's own cleaner: ids -> visible names; runs AFTER DO extraction or it would corrupt DO arguments
+      vgFaceThink(false); vgStatus('');
+      const jobs=[vgSpeak(prose||"I couldn't put that into words \u2014 try asking another way!",g)];
+      if(act) jobs.push(vgDo(act));
+      await Promise.all(jobs);
+      if(vgGen===g&&vgTourLive()) vgStatus('\u25B6 carries on the tour \u2014 or ask me more!');
+    }catch(e){
+      vgFaceThink(false); vgStatus('');
+      if(e===VG_ABORT) return;
+      if(e&&e.vgNoAI&&llm.noAI){
+        vgSpot(llm.noAI.spot);
+        try{ await vgSpeak(llm.noAI.say,g); }catch(_){}
+        return;
+      }
+      vgLogAdd('Live AI call failed: '+(e&&e.message?e.message:String(e)));
+      try{ await vgSpeak("I hit a snag talking to the AI \u2014 my panel says more.",g); }catch(_){}
+    }
+  }
+
+  /* ---------- microphone: by policy, not by error ---------- */
+  let vgRec=null, vgListening=false;
+  function vgMicUnavailableMsg(){
+    if(vgMicPolicyBlocked){
+      const where=vgInClaude?'inside a Claude artifact':'inside this embedded page';
+      return "I'm not allowed to use the microphone "+where+" \u2014 the sandbox keeps it switched off, so no permission pop-up can ever appear here. "+
+        "Type your question in the box at the bottom of my panel instead! To actually talk with me out loud, save this page's HTML file and open it straight in a normal browser tab. "+
+        "Out there the mic works \u2014 and my answers need an API key you provide"+(strings.micKeyHint||'.');
+    }
+    return "This browser doesn't support speech recognition, so I can't listen here \u2014 but you can type your question in the box below!";
+  }
+  async function vgExplainMic(){
+    if(vgState==='running') vgPauseCore();
+    const g=++vgGen; vgSynthCancel(); vgUpdateBar();
+    vgLogAdd(vgMicUnavailableMsg());
+    try{ vg$('vgIn').focus(); }catch(e){}
+    try{ await vgSpeak(vgMicPolicyBlocked
+      ? "The microphone is switched off inside this sandbox, so type your question in the box below \u2014 or run the standalone file in a normal browser tab, where the mic works with your own API key."
+      : "I can't listen in this browser \u2014 type your question in the box below instead.", g); }catch(e){}
+  }
+  function vgListen(){
+    if(!vgCanListen){ vgExplainMic(); return; }
+    if(vgListening){ try{ vgRec.stop(); }catch(e){} return; }
+    if(vgState==='running') vgPauseCore();
+    vgGen++; vgSynthCancel(); vgUpdateBar();
+    vgRec=new VG_SR();
+    const nl=navigator.language||'en-GB';
+    vgRec.lang=/^en/i.test(nl)?nl:'en-GB';
+    vgRec.interimResults=true; vgRec.continuous=false;
+    vgListening=true; vg$('vgMic').classList.add('vg-live');
+    vgStatus("I'm listening \u2014 ask me anything!");
+    let final='';
+    vgRec.onresult=e=>{ let s=''; for(const r of e.results){ s+=r[0].transcript; if(r.isFinal) final=s; }
+      vgStatus('\u201C'+s+'\u201D'); };
+    vgRec.onerror=e=>{ vgListening=false; vg$('vgMic').classList.remove('vg-live');
+      if(e.error==='not-allowed'){ vgStatus(''); vgLogAdd("The browser blocked the microphone \u2014 check the mic icon in the address bar, or type your question below."); try{ vg$('vgIn').focus(); }catch(_){} }
+      else vgStatus("I didn't catch that \u2014 try the mic again, or type below."); };
+    vgRec.onend=()=>{ vgListening=false; vg$('vgMic').classList.remove('vg-live');
+      if(final.trim()){ vgStatus(''); vgAsk(final.trim()); } };
+    try{ vgRec.start(); }catch(e){ vgListening=false; vg$('vgMic').classList.remove('vg-live'); vgStatus(''); try{ vg$('vgIn').focus(); }catch(_){} }
+  }
+
+  /* ---------- panel wiring ---------- */
+  function vgUpdateBar(){
+    const main=vg$('vgMain');
+    if(vgState==='running'){ main.innerHTML='&#10073;&#10073;'; main.title='Pause the tour'; }
+    else if(vgState==='paused'){ main.innerHTML='&#9654;'; main.title='Resume the tour'; }
+    else if(vgState==='done'){ main.innerHTML='&#8635;'; main.title='Replay the tour'; }
+    else { main.innerHTML='&#9654;'; main.title='Start the spoken tour'; }
+    const live=vgTourLive();
+    vg$('vgSkip').style.display=live?'flex':'none';
+    vg$('vgEnd').style.display=live?'flex':'none';
+  }
+  vg$('vgMain').onclick=()=>{ if(vgState==='running') vgPause();
+    else if(vgState==='paused') vgResume();
+    else vgStart(); };
+  vg$('vgMic').onclick=vgListen;
+  vg$('vgGo').onclick=()=>{ const q=vg$('vgIn').value; vg$('vgIn').value=''; vgAsk(q); };
+  vg$('vgIn').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); vg$('vgGo').click(); } });
+  vg$('vgSkip').onclick=vgSkipStep;
+  vg$('vgEnd').onclick=vgEndTour;
+  vg$('vgHide').onclick=()=>{ vgSetPanel(false);
+    if(ui.hideToast) notify(ui.hideToast);
+    const t=vg$('vgTab'); t.classList.add('vg-talk');
+    setTimeout(()=>t.classList.remove('vg-talk'),4000); };
+  vg$('vgTab').onclick=()=>vgSetPanel(true);
+  function vgUpdateMute(){ const b=vg$('vgMute');
+    b.textContent=vgMuted?'\u{1F507}':'\u{1F50A}';
+    b.title=vgMuted?'Voice is off \u2014 press to turn the spoken voice back on'
+                   :'Voice is on \u2014 press to mute the spoken voice (words still appear in the log)'; }
+  vg$('vgMute').onclick=()=>{ vgMuted=!vgMuted;
+    try{ localStorage.setItem(MUTE_KEY,vgMuted?'1':'0'); }catch(e){}
+    if(vgMuted) vgSynthCancel();       // cut mid-sentence; the read-along path paces the rest
+    vgUpdateMute(); };
+  vgUpdateMute();
+  if(!vgCanListen){ vg$('vgMic').classList.add('vg-off');
+    vg$('vgMic').title=vgMicPolicyBlocked?'The microphone is blocked in this sandbox \u2014 press for details':'No speech recognition here \u2014 press for details'; }
+  vgUpdateBar();
+  let vgWasOpen=true; try{ vgWasOpen=localStorage.getItem(STORE_KEY)!=='0'; }catch(e){}
+  vgSetPanel(vgWasOpen);
+  if(ui.greeting) vgLogAdd(typeof ui.greeting==='function'?ui.greeting(vgCanListen):ui.greeting);
+
+  /* ---------- the api handle (returned; also handed to init,
+     verb execs, and available to step closures) ---------- */
+  const api={
+    wait:vgWait, demoMs:vgDemoMs, clickSel:vgClickSel,
+    spot:vgSpot, respot:vgRespot, unspot:vgUnspot,
+    speak:vgSpeak, logAdd:vgLogAdd, status:vgStatus,
+    ratify:vgRatify, showConfirm:vgShowConfirm, notify,
+    askAbout:vgAskAbout, bindTopics:vgBindTopics,
+    keylessCall:vgKeylessAnthropic,
+    get inClaude(){ return vgInClaude; },
+    get micPolicyBlocked(){ return vgMicPolicyBlocked; },
+    get canListen(){ return vgCanListen; }
+  };
+
+  /* test hook (smoke suites poke internals through here) */
+  window.__guide={ do:vgDo, snap:()=>prov.snapshot(), diff:o=>prov.diffRemark(o),
+    pauseCore:vgPauseCore, ask:vgAsk, askAbout:vgAskAbout,
+    get topics(){ return topics.slice(); }, get muted(){ return vgMuted; },
+    get voice(){ return vgVoice?vgVoice.name:null; },
+    spot:vgSpot, unspot:vgUnspot, steps, system:vgSystem,
+    start:vgStart, end:vgEndTour, skip:vgSkipStep, pause:vgPause, resume:vgResume,
+    setWordMs(ms){ vgWordMs=ms; },
+    get state(){ return vgState; }, get cur(){ return vgCur; },
+    get pauseSnap(){ return vgPauseSnap; }, get qa(){ return vgQA.slice(); },
+    get micPolicyBlocked(){ return vgMicPolicyBlocked; }, get inClaude(){ return vgInClaude; },
+    get keylessModels(){ return KEYLESS.slice(); },
+    get layout(){ return {panelWidth:W,panelMargin:M,narrowMax:NARROW,appBreakpoint:APPBP,
+      bands:BANDS.map(b=>b.max)}; },
+    /* app top-level let/const bindings are global-lexical, not
+       window properties; the adapter surfaces them for headless suites */
+    get app(){ return testHook.app?testHook.app():{}; } };
+
+  vgBindTopics();
+  if(A.init){ try{ A.init(api); }catch(e){ console.error('guide adapter init:',e); } }
+  return api;
+}
+
+window.VoiceGuide={version:1.2,fragments,create};
+})();
+
+</script>
+<script>
+/* ==== J-Lens adapter (jlens-adapter.js) ==== */
+/* ============================================================
+   jlens-adapter.js — J-Lens Explorer adapter for the voice-guide
+   core. Adapter #3 (jlens-guide-kickoff.md). Audience: curious
+   kids and beginners meeting an interpretability instrument.
+   Everything app-named lives here; the machinery is vg-core.js.
+   Spliced after vg-core.js, below the app — drives it only
+   through its real controls and the app's own top-level bindings
+   (state, selectToken, setMode, toggleHeat, clearHeat, setStatus:
+   script-level let/const/function are global-lexical, reachable
+   from a later script without touching the app above the splice).
+   Persona (Ken: a magpie detective with a jeweler's loupe; the
+   name "Maggie" is my pick, veto freely): Maggie the magpie
+   detective — the J-lens is her magnifying glass (kid word for the
+   spec's jeweler's loupe), and readout chips are her shiny clues. App name: Thought
+   Bubble (Ken, this session). Guide storage id stays 'jlens' so
+   existing panel/mute/key prefs survive the rename.
+   ============================================================ */
+let api;                          // assigned by VoiceGuide.create; closures resolve at call time
+const F = VoiceGuide.fragments;
+const qs = s => document.querySelector(s);
+const qsa = s => Array.from(document.querySelectorAll(s));
+const PANEL_W = 300, PANEL_M = 302;
+
+/* the app's hardcoded prompt-box default: the "don't clobber user
+   input" guard must know it (a box holding this is not user work) */
+const DEFAULT_PROMPT = 'Lily and Max went to the beach. Lily built a castle. Max dug a';
+/* curated hide/secret-class starter for the tour (ships in the app's chips) */
+const VASE = "Ben broke his mom's favorite vase. He heard her coming.";
+
+const MODE_NAMES = { J: 'J-lens', L: 'logit lens', D: 'DIFF' };
+
+/* ---------- word <-> token id, via the app's own piece map.
+   Only pruned (story-vocabulary) ids live in pieceById, so a
+   resolve doubles as the in-vocab check. ---------- */
+function resolveWord(w){
+  w = String(w || '').trim().replace(/^["'\u201C\u2018]+|["'\u201D\u2019]+$/g, '');
+  if (!w) return null;
+  let ci = null;
+  for (const [id, piece] of state.pieceById) {
+    if (piece === ' ' + w) return { id, piece };
+    if (!ci && piece.toLowerCase() === (' ' + w).toLowerCase()) ci = { id, piece };
+  }
+  return ci;
+}
+const speakablePiece = p => { p = String(p || ''); const t = p.trim(); return t || JSON.stringify(p); };
+
+/* ---------- adapter stylesheet: core palette mapped from the
+   app's own colors (kickoff: --ink/--gold exist as vars; --panel/
+   --accent/--muted/--line supplied here from the app's card/blue/
+   dim/edge values), confirm + key dialogs dressed like the app's
+   cards, and the guide toast. One <style id="vgAppStyle"> so the
+   suite can assert it. ---------- */
+{
+  const st = document.createElement('style');
+  st.id = 'vgAppStyle';
+  st.textContent = [
+':root{--panel:#1b1f28;--accent:#9ecbff;--muted:#8791a3;--line:#2b3140}',
+'/* confirm + key dialogs, dressed like the app cards */',
+'.vg-jl-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:10001}',
+'.vg-jl-backdrop.show{display:flex}',
+'.vg-jl-modal{background:var(--card,#1b1f28);border:1px solid var(--blue,#9ecbff);border-radius:10px;padding:16px 18px;max-width:430px;',
+'  color:var(--ink,#dde3ec);font-size:13.5px;line-height:1.5;box-shadow:0 10px 40px rgba(0,0,0,.65)}',
+'.vg-jl-modal h2{margin:0 0 8px;font-size:15px;color:var(--blue,#9ecbff)}',
+'.vg-jl-row{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}',
+'.vg-jl-yes{background:#2b4a6f;color:#dff0ff;border:0;border-radius:6px;padding:7px 13px;font-weight:700;cursor:pointer}',
+'.vg-jl-no{background:#262c38;color:var(--ink,#dde3ec);border:1px solid var(--edge,#2b3140);border-radius:6px;padding:7px 13px;cursor:pointer}',
+'#vgKeyDlg{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:10002}',
+'#vgKeyDlg.show{display:flex}',
+'#vgKeyDlg label{display:block;margin:8px 0 3px;color:var(--dim,#8791a3);font-size:12px}',
+'#vgKeyDlg select,#vgKeyDlg input{width:100%;box-sizing:border-box;background:#12141a;color:var(--ink,#dde3ec);',
+'  border:1px solid var(--edge,#2b3140);border-radius:6px;padding:6px 8px;font-size:13px}',
+'#vgToast{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10003;display:none;',
+'  background:var(--card,#1b1f28);border:1px solid var(--gold,#ffd27f);color:var(--ink,#dde3ec);',
+'  border-radius:8px;padding:.5rem .9rem;font-size:13.5px;max-width:min(560px,90vw);box-shadow:0 8px 30px rgba(0,0,0,.5)}'
+  ].join('\n');
+  document.head.appendChild(st);
+}
+
+/* the app has no toast of its own; the guide carries a small one */
+let toastTimer = null;
+function showToast(text){
+  let t = qs('#vgToast');
+  if (!t) { t = document.createElement('div'); t.id = 'vgToast'; document.body.appendChild(t); }
+  t.textContent = text; t.style.display = 'block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.style.display = 'none'; }, 6000);
+}
+
+/* ---------- LLM: keyless in artifacts; a configured key always
+   wins, on the user's own provider (Anthropic / OpenAI / Google).
+   The app's model is a local tinyllama with no chat plumbing, so
+   the guide carries the usual three-provider key dialog. ---------- */
+const LLM_STORE = 'jlens-guide-llm';
+function llmConfig(){ try { return JSON.parse(localStorage.getItem(LLM_STORE) || 'null') || {}; } catch (e) { return {}; } }
+const PROVIDERS = {
+  anthropic: { label: 'Anthropic (Claude)', model: 'claude-sonnet-4-6',
+    async call(cfg, sys, usr){
+      const res = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': cfg.key,
+          'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: cfg.model, max_tokens: 1000, system: sys, messages: [{ role: 'user', content: usr }] }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error((data.error && data.error.message) || ('HTTP ' + res.status));
+      return (data.content || []).map(c => c.text || '').join('\n').trim();
+    } },
+  openai: { label: 'OpenAI', model: 'gpt-5.1',
+    async call(cfg, sys, usr){
+      const res = await fetch('https://api.openai.com/v1/chat/completions', { method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.key },
+        body: JSON.stringify({ model: cfg.model, messages: [{ role: 'system', content: sys }, { role: 'user', content: usr }] }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error((data.error && data.error.message) || ('HTTP ' + res.status));
+      return (((data.choices || [])[0] || {}).message || {}).content ? data.choices[0].message.content.trim() : '';
+    } },
+  google: { label: 'Google (Gemini)', model: 'gemini-3.5-flash',
+    async call(cfg, sys, usr){
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' +
+        encodeURIComponent(cfg.model) + ':generateContent?key=' + encodeURIComponent(cfg.key), { method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ system_instruction: { parts: [{ text: sys }] }, contents: [{ role: 'user', parts: [{ text: usr }] }] }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error((data.error && data.error.message) || ('HTTP ' + res.status));
+      const cand = (data.candidates || [])[0];
+      return (((cand || {}).content || {}).parts || []).map(p => p.text || '').join('').trim();
+    } }
+};
+
+/* ---------- the tour (kickoff spine, expanded to 11 stops).
+   The tour never presses analyze, generate, or swap & rewrite —
+   it fills, points, and says whose move it is. Every action is
+   idempotent and re-run-safe; waits poll with the generation so
+   pause and tests cancel them cleanly. ---------- */
+const askPhrase = () => api.canListen ? 'press my microphone button and just ask'
+  : 'type in the box at the bottom of my panel and just ask';
+async function waitUntil(fn, g, polls){         // ~polls * 400ms live; collapses at test speed
+  for (let i = 0; i < polls; i++) { if (fn()) return true; await api.wait(api.demoMs(400), g); }
+  return fn();
+}
+const haveStory = () => state.tokens.length > 1;
+const filteredRow = layer => {                   // the app's own keep-rule, read-only
+  const m = state.readout; if (!m || !state.vocabMeta) return [];
+  const row = m.layers.find(r => r.layer === layer); if (!row) return [];
+  const wordStart = new Set(state.vocabMeta.wordStartIds);
+  const alias = state.vocabMeta.alias || {};
+  return row.jlens.filter(e => wordStart.has(e.id) || alias[String(e.id)])
+    .map(e => { const a = alias[String(e.id)];
+      return a ? 'the start of a name, maybe ' + a.names.map(x => x.name).join(' or ')
+               : speakablePiece(state.pieceById.get(e.id) || ('token ' + e.id)); });
+};
+
+const STEPS = [
+{ name: 'hello',
+  text: () => "Hi! I'm Maggie, the magpie detective on this case. The little model in here writes children's stories, and Thought Bubble is my magnifying glass: it shows what the model is thinking before it says it. I live in this panel and never run the big experiments myself. Click anywhere to pause me, and if you're curious about anything, " + askPhrase() + '.' },
+{ name: 'files', spot: '#loadCard',
+  skipIf: () => state.dictsReady,
+  text: () => "Every case needs its evidence first: the model and lens files. Press the fetch button, or drop the four files onto the dotted box. The first visit also builds the lens's word directions one time; after today everything is cached and opens in seconds." },
+{ name: 'starter', spot: () => [qs('#promptChips'), qs('#promptBox')].filter(Boolean),
+  prep(){ const box = qs('#promptBox');
+    if (box && (box.value.trim() === '' || box.value === DEFAULT_PROMPT)) box.value = VASE; },
+  text: () => { const mine = qs('#promptBox') && qs('#promptBox').value === VASE;
+    return (mine ? "I've put a good starter in the box: Ben broke his mom's favorite vase, and he heard her coming. A secret is exactly the kind of thing a mind holds quietly. "
+                 : 'You already have your own story in the box, so we will use yours. ')
+      + 'One thing to expect: a short story gives a thin readout, because the model has almost nothing to hold in mind yet. The lens gets interesting a few sentences in.'; } },
+{ name: 'your-move', spot: '#analyzeBtn',
+  text: () => state.dictsReady
+    ? 'Now press analyze, the microscope button. That reads the story through the model while the lens watches every layer. Pressing it is your move, not mine — I will wait right here.'
+    : 'When the files are ready, the analyze button lights up. Pressing it is your move, not mine — it reads the story through the model while the lens watches every layer.',
+  action: async g => { await waitUntil(haveStory, g, 90); } },
+{ name: 'story', spot: '#story',
+  text: () => haveStory()
+    ? 'Here is the story again, one token at a time — tokens are the little pieces the model actually reads. Click any word and the readout panel — beside the story on a wide screen, below it on a narrow one — shows what the model was holding in mind right there. Try one somewhere in the middle; I will pick one for us if you like.'
+    : 'Once a story is analyzed it appears here, one token at a time, and clicking any word opens the readout. We can keep walking and you can come back to this.',
+  action: async g => {
+    if (!haveStory()) return;
+    await waitUntil(() => state.selected >= 0, g, 12);
+    if (state.selected < 0) {                       // player left it to me: pick a mid-story token
+      const pos = Math.max(1, Math.floor((state.pieces.length - 1) * 0.6));
+      selectToken(pos);
+      await waitUntil(() => !!state.readout, g, 20);
+    } } },
+{ name: 'readout', spot: '#readout',
+  skipIf: () => !haveStory(),
+  text: () => { const words = filteredRow(7).slice(0, 3);
+    const at = state.selected >= 0 ? 'right after ' + speakablePiece(state.pieces[state.selected]) : 'at the selected token';
+    return (words.length
+      ? 'Look at the row called L7 — layer seven, deep inside the model. ' + at + ', it is holding in mind: ' + words.join(', ') + '. '
+      : 'Each row here is one layer of the model, L4 at the bottom of the range to L8. ')
+      + 'These are words the model is getting ready to say — maybe now, maybe a few sentences later. That is the J-lens — my magnifying glass — a translator from the model\u2019s hidden thoughts into words.'; } },
+{ name: 'diff', spot: () => [qs('#mD'), qs('#readout')].filter(Boolean), during: true,
+  skipIf: () => !haveStory() || !state.readout,
+  text: 'Now watch — I\u2019ll switch the view to DIFF. The logit lens shows what the model would blurt out if it stopped at that layer; DIFF keeps only the words the J-lens sees that the blurt-out view misses. The green words are its secret plans.',
+  action: async g => { await api.wait(api.demoMs(1500), g); if (state.mode !== 'D') setMode('D'); } },
+{ name: 'heat', spot: () => {
+    const chips = qsa('#readout .rchip.jonly');
+    const nice = chips.find(c => /hid|secret|found|sorry|quiet/i.test(c.textContent)) || chips[0];
+    return nice || qs('#readout .rchip') || qs('#readout');
+  },
+  skipIf: () => !haveStory() || !state.readout,
+  text: () => state.heatToken !== null
+    ? 'You lit the heat strip already! The glow shows where that word ranked high in the model\u2019s mind. Look along the story: where did it decide?'
+    : 'Here is my favorite piece of detective work. Click the shiny chip I\u2019m pointing at — or any chip that looks interesting — and the story lights up wherever that word was on the model\u2019s mind. Then ask yourself: where did it decide?',
+  action: async g => { await waitUntil(() => state.heatToken !== null, g, 25); } },
+{ name: 'swap', spot: '#swapSrc',
+  text: () => { const has = w => state.pieces.some(p => p === ' ' + w);
+    const pair = has('hole') ? 'take out hole and put in castle' :
+                 has('vase') ? 'take out vase and put in ball' :
+                 'pick a take-out word from the story and a put-in word from the list';
+    return 'The swap panel is the boldest experiment: swap what the model is thinking. First click a word in the story to anchor where the rethinking starts — just before the part you want to change; everything already written stays. My favorite true story: in Max dug a hole, swapping hole for castle made the model write moat — the castle-thing-you-dig. The edit lands on the concept, not the word. If you\u2019d like to try, ' + pair + ' — the list under each box only offers words the model knows — and then press swap and rewrite. That button is entirely your move.'; } },
+{ name: 'panes', spot: '.swapgrid',
+  text: 'When a swap runs, read the three panes left to right: the original story, a rewrite with no swap, and a rewrite with the swap. Both rewrites use the same dice, so the only difference between them is the swap itself. Words written before your anchor token stay put — the swap changes what the model is thinking from the anchor on, not text it already wrote. And your story and anchor stay right where they were: and if you like a rewrite, a make-this-the-story button under the panes loads it into the lens — nothing changes until you press one.' },
+{ name: 'wrap', spot: () => [qs('#rawToggle'), document.getElementById('vgIn')].filter(Boolean),
+  text: () => 'Two parting secrets. The raw toggle is the honest view: everything the lens sees, word-pieces and punctuation included — messier, but nothing hidden. And the pink chips are name fragments — shiny little clues: names split into pieces, so L with a dot-dot-dot means a word starting that way is on its mind. The lens gets smarter the longer your story gets, so let the model write on and try your own. If you ever wonder anything, ' + askPhrase() + '.' }
+];
+
+/* ---------- provenance: snapshot + one spoken line of what the
+   PLAYER changed. Analyze/generate force a deselect, a heat clear
+   and a readout reset — forced effects are suppressed, the cause
+   is reported. Two-fact cap. ---------- */
+function snapshot(){
+  return {
+    dictsReady: state.dictsReady, nTok: Math.max(0, state.tokens.length - 1),
+    lastText: state.lastText, selected: state.selected, mode: state.mode,
+    raw: state.raw, top20: state.top20, heat: state.heatToken,
+    heatLabel: state.heatLabel || '', swapSrc: (qs('#swapSrc') || {}).value || '',
+    swapTgt: (qs('#swapTgt') || {}).value || '',
+    strength: (qs('#swapStrength') || {}).value || '',
+    swapDone: ((qs('#swapWith') || {}).textContent || '') };
+}
+function diffRemark(o){
+  if (!o) return '';
+  const n = snapshot(), facts = [];
+  const newStory = n.lastText !== o.lastText || n.nTok !== o.nTok;
+  if (!o.dictsReady && n.dictsReady) facts.push('got the case files loaded and ready');
+  if (newStory) facts.push('put a new story under the lens, ' + n.nTok + ' tokens of it');
+  if (n.swapDone !== o.swapDone && n.swapDone && n.swapDone !== '\u2014')
+    facts.push('ran a swap — the three panes are ready to compare');
+  if (!newStory) {                                  // forced effects of a new story stay unspoken
+    if (n.selected !== o.selected && n.selected >= 0)
+      facts.push('looked inside at token ' + n.selected + ', ' + speakablePiece(state.pieces[n.selected] || ''));
+    if (n.heat !== o.heat && n.heat !== null)
+      facts.push('lit the heat strip for ' + (String(n.heatLabel).trim() || 'a word'));
+  }
+  if (n.mode !== o.mode) facts.push('switched the view to ' + MODE_NAMES[n.mode]);
+  if (n.raw !== o.raw) facts.push('turned the raw view ' + (n.raw ? 'on — the honest view' : 'off'));
+  if (!facts.length && n.top20 !== o.top20) facts.push('switched to ' + (n.top20 ? 'twenty' : 'eight') + ' guesses a layer');
+  if (!facts.length && (n.swapSrc !== o.swapSrc || n.swapTgt !== o.swapTgt) && (n.swapSrc || n.swapTgt))
+    facts.push('lined up a swap' + (n.swapSrc && n.swapTgt ? ': ' + n.swapSrc.trim() + ' for ' + n.swapTgt.trim() : ''));
+  if (!facts.length) return '';
+  return 'You ' + facts.slice(0, 2).join(' and ') + ' — carrying on!';
+}
+
+/* ---------- Q&A grounding: the kickoff glossary encoded exactly,
+   plus the model facts and a full screen enumeration (invariant
+   10: leave no binding implicit). ---------- */
+function systemPrompt(ctx){
+  const vocabN = state.pieceById.size ? String(state.pieceById.size) : 'about five thousand';
+  return 'You are Maggie, a friendly magpie detective who lives in a side panel of Thought Bubble, the instrument the visitor is using right now to watch a tiny story-writing AI think; the J-lens is your magnifying glass, and readout chips are the shiny clues you collect. The visitor may be a preteen: use plain, everyday words in every reply — for the glossary term disposed to say, speak it as getting ready to say. The visitor may be a child or a beginner: warm, simple, concrete words, short sentences, and never invent features or readings. ' +
+  (ctx.tourLive ? 'You are mid-tour, at the stop called ' + ctx.stopName + '. ' : '') +
+  'The model and the instrument, exactly: the model is stories110M, a twelve-layer model raised on TinyStories, a world of simple children\u2019s stories; readouts use a story vocabulary of ' + vocabN + ' tokens, and ranks are within that story vocabulary. The model carries a hidden vector per word per layer. The J-lens translates mid-layer vectors into words the model is DISPOSED TO SAY, now or a few sentences later. The logit lens shows what it would BLURT OUT if it stopped at that layer. DIFF shows only the words the J-lens sees and the logit lens misses, drawn in green: the layer\u2019s hidden anticipation. Layers L4 to L8 are shown because below that the readouts are static and above it the two lenses converge. Short prompts give thin readouts: the model has nothing to hold in mind yet, and the lens gets interesting a few sentences in. Names and rare words often split into pieces, like Lily into space-L plus ily; pink chips like L dot-dot-dot mean the model is thinking of a word that starts that way, and out-of-vocabulary names like Zog only ever appear as fragments. The raw toggle shows everything the lens sees, word-pieces and punctuation included: messier but nothing hidden; the filtered view shows whole words only. Swap semantics, precisely: from the anchor token, the model rewrites the story TWICE with the same seed, and the ONLY difference between the two rewrites is the swap. Rewrites default to surprise zero, so they are exact and repeatable. Words already written before the anchor stay, including the swapped word itself if it is there: the swap changes what the model is THINKING from the anchor on, not text it already wrote. The edit is self-gating: it scales with how much of the take-out concept is actually present, so swapping out a word that is not on its mind does nothing. The classic demo: in Max dug a hole, swapping hole for castle produced moat, the castle-thing-you-dig; the edit lands on the concept, not the word — tell that story when a child asks what swap is for. The heat strip: clicking any readout chip lights the story up wherever that word ranked high in the model\u2019s mind, by best mid-layer J-lens rank. ' +
+  'The screen, by panel NAME (the panels are deliberately not numbered; refer to them by name only): the files card loads the four model files, cached after the first visit; the story-in card takes a story, with starter chips, the analyze button to read a pasted story, the generate button to let the model write on, the surprise slider for how adventurous generation is, and max for how many new tokens; the story panel shows the story token by token, and clicking a word selects it; the readout panel — beside the story on a wide window, below it on a narrow one — shows what the model is holding in mind at the selected token, rows L4 to L8, with J-lens, logit lens and DIFF mode buttons, the raw and top-20 toggles, and the model\u2019s next word row; the swap panel has take-out and put-in boxes, the anchor is the selected token, a layer range, a strength slider with a green recommended band around point two to point five, a surprising-rewrites checkbox, and the swap and rewrite button that fills three panes: original, rewrite with no swap, rewrite with the swap. After a swap the story on screen AND the anchor stay exactly as they were; two make-this-the-story buttons below the panes load a chosen rewrite into the lens when the visitor presses one (which, like any new story, then resets the selection). There is no drag and drop anywhere except dropping the four model files onto the files card\u2019s dotted box. ' +
+  'Swap coaching doctrine, follow it strictly: a good swap needs, in order: first an anchor — a clicked token in the story; always name the exact word to click when suggesting a swap, chosen just before the part of the story you want to change. Second, the take-out concept must be ALIVE at that anchor: the swap is self-gating, so it only bites where the take-out word is on the model\u2019s mind. Before recommending a take-out word, check the STATUS readout rows and heat, and prefer words visible in the readout at the anchor; a take-out word that only appears in text BEFORE the anchor and is no longer being thought about will do nothing. Third, remember written words never change: if the take-out word already sits before the anchor, it stays in both rewrites, and only the thinking from the anchor on is steered. When the STATUS says the two rewrites are IDENTICAL or nearly so, say plainly that the edit found nothing to push on at that anchor, and offer exactly these remedies: an earlier anchor, a heat check on the take-out word to find where it IS on the model\u2019s mind, a take-out word from the current readout instead, or a slightly stronger push within the green band. The STATUS includes the readout rows at the anchor: read them yourself and NEVER ask the visitor to go check the readout for you. Because both rewrites use the same dice, any difference between them was caused by the swap — but never invent a story about the DIRECTION of the change: check the STATUS line saying whether the put-in word appears in the with-swap rewrite. If it does not appear, say honestly that the nudge changed the flow without landing the idea, and offer a bit more strength within the green band, the full layer range L4 to L8, or an anchor where the take-out word is hotter. Set expectations: this is a small model and a gentle instrument — swaps steer the drift of ideas and cannot guarantee a particular word shows up. ' +
+  F.selfKnowledge + ' ' + F.voiceRules + ' ' + F.statusRule +
+  ' You can also act on the app, only by ending your reply with a single DO line, its own last line, in the exact form: DO: VERB ARGUMENTS (the colon matters). The verbs, with every id bound to its visible name: ' +
+  'DO: SHOW place — point at and scroll to a place; place is one of load (the files card), prompt (the story-in card), story (the story panel), readout (the readout panel), modes (the J-lens, logit lens and DIFF buttons), raw (the raw toggle), top20 (the top-20 toggle), heat (the heat strip under the story), surprise (the surprise slider), max (the max box), swap (the swap panel\u2019s controls), strength (the strength slider), panes (the three comparison panes), ask (my own microphone and typing box). ' +
+  'DO: SELECTTOKEN n — click token number n in the story, numbered from one at the start. ' +
+  'DO: SETMODE m — switch the readout view; m is J (the J-lens), LOGIT (the logit lens) or DIFF. ' +
+  'DO: TOGGLERAW on or DO: TOGGLERAW off — the raw toggle. DO: TOGGLETOP20 on or off — the top-20 toggle. ' +
+  'DO: HEAT word — light the heat strip for a word the model knows; DO: HEAT off clears it. ' +
+  'DO: SETSWAP takeout putin — fill the swap boxes, and optionally three more arguments: first layer, last layer, strength, like DO: SETSWAP hole castle 4 8 0.4. Filling the boxes never runs anything. ' +
+  'Verbs allowed ONLY when the visitor clearly asked for that exact thing, because they replace what is on screen or start heavy compute: DO: ANALYZE text (reads the given text, or the prompt box if no text is given), DO: GENERATE (the model writes on from the prompt box), DO: STOP (halts generation), DO: SWAP (presses swap and rewrite with the boxes as they stand). ' + F.ratifyNotice + ' ' +
+  F.doLineMeta + ' In prose always use visible names like the analyze button, the raw toggle, layer seven — never the ids, and your prose must agree with the id on the DO line. ' +
+  F.consentScope({ pointExample: 'point at the swap panel', escalations: 'pressing analyze, generate, or swap and rewrite', safeVerb: 'SHOW' }) +
+  ' Filling the take-out and put-in boxes with SETSWAP is never consent to run the swap: SWAP needs its own fresh, explicit request from the visitor. ' +
+  F.pointNotDescribe({ pointVerbs: 'DO: SHOW' });
+}
+
+function statusText(){
+  const files = ['model:' + (state.haveModel ? 'yes' : 'no'), 'tokenizer:' + (state.haveTok ? 'yes' : 'no'),
+    'lens:' + (state.haveLens ? 'yes' : 'no'), 'vocab:' + (state.haveVocab ? 'yes' : 'no'),
+    'dictionaries:' + (state.dictsReady ? 'ready' : ((qs('#st-dict') || {}).textContent || 'not built'))].join(', ');
+  const nTok = Math.max(0, state.tokens.length - 1);
+  let story = 'none analyzed yet';
+  if (nTok) { const t = state.lastText || state.pieces.slice(1).join('');
+    story = nTok + ' tokens: ' + (t.length > 360 ? t.slice(0, 240) + ' \u2026 ' + t.slice(-100) : t); }
+  const sel = state.selected >= 0
+    ? 'token ' + state.selected + ' (' + JSON.stringify(state.pieces[state.selected] || '') + ')' : 'none';
+  const heat = state.heatToken !== null ? JSON.stringify(String(state.heatLabel || '').trim()) : 'off';
+  const anchor = state.selected >= 0 ? 'the selected token, position ' + state.selected : 'no anchor (no token selected)';
+  const la = window.__lastAnalyze;
+  return 'Files: ' + files + '. Story under the lens: ' + story + '. Selected token: ' + sel + '. ' +
+    'Readout mode: ' + MODE_NAMES[state.mode] + ', raw ' + (state.raw ? 'on' : 'off') + ', top-20 ' + (state.top20 ? 'on' : 'off') + '. ' +
+    'Heat strip: ' + heat + '. ' + readoutStatus() + 'Swap setup: take out ' + (JSON.stringify((qs('#swapSrc') || {}).value || '') || 'empty') +
+    ', put in ' + (JSON.stringify((qs('#swapTgt') || {}).value || '') || 'empty') +
+    ', layers L' + ((qs('#swapL0') || {}).value || '4') + ' to L' + ((qs('#swapL1') || {}).value || '8') +
+    ', strength ' + ((qs('#swapStrength') || {}).value || '?') +
+    ', surprising rewrites ' + ((qs('#swapUseTemp') || {}).checked ? 'on' : 'off') + ', anchor ' + anchor + '. ' +
+    'Surprise slider: ' + ((qs('#tempSlider') || {}).value || '?') + ', max new tokens: ' + ((qs('#maxNew') || {}).value || '?') + '. ' +
+    'Generating right now: ' + (state.generating ? 'yes' : 'no') + '. ' +
+    swapOutcome() +
+    (la ? 'Last analyze: ' + la.nPos + ' tokens in ' + (la.msTotal / 1000).toFixed(1) + ' seconds. ' : '') +
+    'App status line: ' + ((qs('#status') || {}).textContent || '').slice(0, 160);
+}
+
+/* readout grounding: the guide must SEE what the visitor sees, or it
+   ends up asking a child to go read the readout panel for it. */
+function readoutStatus(){
+  if (!state.readout || state.selected < 0 || !state.vocabMeta) return '';
+  const wordStart = new Set(state.vocabMeta.wordStartIds || []);
+  const alias = state.vocabMeta.alias || {};
+  const label = id => { const a = alias[String(id)];
+    return a ? a.display : String(state.pieceById.get(id) || ('#' + id)).trim(); };
+  const rows = state.readout.layers.slice().reverse().map(r => {
+    const inLogit = new Set(r.logit.map(e => e.id));
+    const words = r.jlens.filter(e => wordStart.has(e.id) || alias[String(e.id)]).slice(0, 6)
+      .map(e => label(e.id) + (inLogit.has(e.id) ? '' : ' [J-only]'));
+    return 'L' + r.layer + ': ' + (words.join(', ') || '(nothing past the filter)');
+  });
+  const nxt = (state.readout.model || []).slice(0, 4).map(e => label(e.id)).join(', ');
+  return 'Readout at the anchor, exactly as on screen (top J-lens words; [J-only] = hidden from the blurt-out view): '
+    + rows.join('; ') + ". Model's next word row: " + nxt + '. ';
+}
+
+/* swap-outcome grounding: the model must be able to SEE a swap that
+   did nothing (near-identical rewrites), where the take-out word sits
+   relative to the anchor (computed HERE, per occurrence — token
+   arithmetic is not left to the model), and whether the put-in idea
+   actually landed in the with-swap rewrite. */
+function swapOutcome(){
+  let out = '';
+  const src = resolveWord((qs('#swapSrc') || {}).value);
+  if (src && state.selected >= 0) {
+    out += 'Rewrites keep tokens 1 to ' + state.selected + ' (the anchor) unchanged and regenerate everything after. ';
+    const at = []; state.pieces.forEach((p, i) => { if (p === src.piece) at.push(i); });
+    if (at.length) out += 'Take-out word in the story: ' + at.map(i => 'token ' + i +
+        (i <= state.selected ? ' (at or before the anchor — stays written in every rewrite)'
+                             : ' (after the anchor — that text is regenerated, not kept)')).join(', ') + '. ';
+    else out += 'The take-out word is not written in the story — only its concept in the model\u2019s mind can be pushed on. ';
+  }
+  if (!(state.swapResults && state.swapResults.withswap)) return out;
+  const nsw = (qs('#swapNoSwap') || {}).textContent || '';
+  const wsw = (qs('#swapWith') || {}).textContent || '';
+  if (nsw === wsw) out += 'Last swap result: the two rewrites are IDENTICAL — the edit found nothing to push on at that anchor. ';
+  else { let i = 0; while (i < Math.min(nsw.length, wsw.length) && nsw[i] === wsw[i]) i++;
+    if (Math.max(nsw.length, wsw.length) - i < 12)
+      out += 'Last swap result: the two rewrites are nearly identical (they differ only in the last few characters) — the edit had almost nothing to push on at that anchor. ';
+    else out += 'Last swap result: the rewrites share the first ' + i + ' characters. After that, no-swap continues: '
+      + JSON.stringify(nsw.slice(i, i + 60)) + ' — with-swap continues: ' + JSON.stringify(wsw.slice(i, i + 60)) + '. '; }
+  const tgt = resolveWord((qs('#swapTgt') || {}).value);
+  if (tgt) out += 'The put-in word ' + JSON.stringify(tgt.piece.trim())
+    + (wsw.includes(tgt.piece) ? ' APPEARS' : ' does NOT appear') + ' in the with-swap rewrite. ';
+  return out;
+}
+
+/* ---------- SHOW targets ---------- */
+const SHOW_TARGETS = {
+  load: () => qs('#loadCard'),
+  prompt: () => [qs('#promptBox'), qs('#promptChips')].filter(Boolean),
+  story: () => qs('#story'),
+  readout: () => qs('#readout'),
+  modes: () => [qs('#mJ'), qs('#mL'), qs('#mD')].filter(Boolean),
+  raw: () => qs('#rawToggle') && qs('#rawToggle').closest('label'),
+  top20: () => qs('#top20Toggle') && qs('#top20Toggle').closest('label'),
+  heat: () => [qs('#heatCaption'), qs('#story')].filter(Boolean),
+  surprise: () => qs('#tempSlider') && qs('#tempSlider').closest('label'),
+  max: () => qs('#maxNew') && qs('#maxNew').closest('label'),
+  swap: () => [qs('#swapSrc'), qs('#swapTgt'), qs('#swapBtn')].filter(Boolean),
+  strength: () => qs('#swapStrength') && qs('#swapStrength').closest('label'),
+  panes: () => qs('.swapgrid'),
+  ask: () => [document.getElementById('vgMic'), document.getElementById('vgIn')].filter(Boolean)
+};
+
+/* ---------- tooltip -> guide bridge registry (core v1.1 seam).
+   One structure feeds the hover tooltip AND the guide entry point,
+   so control copy and guide knowledge cannot drift apart. Core
+   strips the native title from each bound element; the titles in
+   the HTML remain as a no-JS fallback. ---------- */
+const TOPICS = [
+  { id: 'surprise', target: () => qs('#tempSlider') && qs('#tempSlider').closest('label'),
+    oneLiner: 'How adventurous the word choices are. 0 = always its top pick (same story every time); higher = more surprises.',
+    guideQuestion: 'What does the surprise slider actually change in how the model writes?' },
+  { id: 'max', target: () => qs('#maxNew') && qs('#maxNew').closest('label'),
+    oneLiner: 'How many new tokens the model may add before stopping.',
+    guideQuestion: 'What happens when the story reaches the max length?' },
+  { id: 'raw', target: () => qs('#rawToggle') && qs('#rawToggle').closest('label'),
+    oneLiner: 'Show everything the lens sees \u2014 word-pieces, punctuation \u2014 not just whole words. Messier, but nothing hidden.',
+    guideQuestion: 'What does the raw view show that the normal view hides?' },
+  { id: 'top20', target: () => qs('#top20Toggle') && qs('#top20Toggle').closest('label'),
+    oneLiner: '20 guesses per layer instead of 8. Interesting things sometimes hide at rank 9\u201320.',
+    guideQuestion: 'Why would I want twenty guesses a layer instead of eight?' },
+  { id: 'modes', target: () => [qs('#mJ'), qs('#mL'), qs('#mD')].filter(Boolean),
+    oneLiner: 'Three views of one thought: what it\u2019s getting ready to say (J-lens), what it would blurt out (logit lens), and the difference (DIFF).',
+    guideQuestion: 'What is the difference between the J-lens, the logit lens, and DIFF?' },
+  { id: 'strength', target: () => qs('#swapStrength') && qs('#swapStrength').closest('label'),
+    oneLiner: 'How hard to push the swap. Low = a nudge the story can absorb; high = a shove that can break its grammar. Stay in the green.',
+    guideQuestion: 'What happens if I push the swap strength past the green band?' },
+  { id: 'surprising', target: () => qs('#swapUseTemp') && qs('#swapUseTemp').closest('label'),
+    oneLiner: 'Rewrites normally use surprise 0 so the comparison is exact and repeatable. This uses the story\u2019s surprise setting instead \u2014 livelier, but each run differs.',
+    guideQuestion: 'Why do the swap rewrites normally use surprise zero?' },
+  { id: 'swap', target: () => [qs('#swapSrc'), qs('#swapTgt')].filter(Boolean),
+    oneLiner: 'Swap what the model is thinking from your anchor token on \u2014 then compare rewrites with and without it.',
+    guideQuestion: 'How does swapping a thought actually work?' }
+];
+
+/* ---------- DO verb table. Core policy: validate BEFORE any
+   dialog; ANALYZE / GENERATE / SWAP are the story-movers — prompt-
+   gated to explicit requests AND player-ratified through the
+   dialog. Inspection verbs (select, mode, toggles, heat, filling
+   the swap boxes) stay frictionless: reversible views, no compute
+   the player didn't start. STOP is deliberately frictionless — a
+   ratification dialog would outlive the generation it halts. ---------- */
+const setVal = (el, v) => { if (!el) return; el.value = v;
+  el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); };
+const VERBS = {
+  SHOW: { exec(p){ const f = SHOW_TARGETS[(p[0] || '').toLowerCase()]; if (f) api.spot(() => f()); } },
+  SELECTTOKEN: {
+    validate(p){ const n = parseInt(p[0], 10);
+      return Number.isInteger(n) && n >= 1 && n < state.pieces.length ? { n } : null; },
+    exec(p, a, ctx){ selectToken(ctx.n); api.spot('#readout'); }
+  },
+  SETMODE: {
+    validate(p){ const m = { J: 'J', JLENS: 'J', L: 'L', LOGIT: 'L', D: 'D', DIFF: 'D' }[(p[0] || '').toUpperCase()];
+      return m ? { m } : null; },
+    exec(p, a, ctx){ setMode(ctx.m); api.spot(() => qs(ctx.m === 'J' ? '#mJ' : ctx.m === 'L' ? '#mL' : '#mD')); }
+  },
+  TOGGLERAW: {
+    validate(p){ const w = (p[0] || '').toLowerCase();
+      return { on: w === 'on' ? true : w === 'off' ? false : !state.raw }; },
+    exec(p, a, ctx){ const t = qs('#rawToggle'); if (t && t.checked !== ctx.on) t.click();
+      api.spot(() => t && t.closest('label')); }
+  },
+  TOGGLETOP20: {
+    validate(p){ const w = (p[0] || '').toLowerCase();
+      return { on: w === 'on' ? true : w === 'off' ? false : !state.top20 }; },
+    exec(p, a, ctx){ const t = qs('#top20Toggle'); if (t && t.checked !== ctx.on) t.click();
+      api.spot(() => t && t.closest('label')); }
+  },
+  HEAT: {
+    validate(p){ const w = (p[0] || '').toLowerCase();
+      if (w === 'off') return { off: true };
+      if (!haveStory()) return null;
+      const r = resolveWord(p[0]); return r ? { r } : null; },
+    exec(p, a, ctx){ if (ctx.off) { clearHeat(); return; }
+      if (state.heatToken !== ctx.r.id) toggleHeat(ctx.r.id, ctx.r.piece);   // idempotent: never toggles an asked-for heat off
+      api.spot('#story'); }
+  },
+  SETSWAP: {
+    validate(p){ if (p.length < 2) return null;
+      const src = resolveWord(p[0]), tgt = resolveWord(p[1]);
+      if (!src || !tgt) return null;
+      const l0 = p[2] ? parseInt(p[2], 10) : null, l1 = p[3] ? parseInt(p[3], 10) : null;
+      const st = p[4] ? parseFloat(p[4]) : null;
+      if (l0 !== null && !(l0 >= 4 && l0 <= 8)) return null;
+      if (l1 !== null && !(l1 >= 4 && l1 <= 8 && l1 >= (l0 || 4))) return null;
+      if (st !== null && !(st >= 0 && st <= 1.5)) return null;
+      return { src, tgt, l0, l1, st }; },
+    exec(p, a, ctx){
+      setVal(qs('#swapSrc'), ctx.src.piece); setVal(qs('#swapTgt'), ctx.tgt.piece);
+      if (ctx.l0 !== null) setVal(qs('#swapL0'), String(ctx.l0));
+      if (ctx.l1 !== null) setVal(qs('#swapL1'), String(ctx.l1));
+      if (ctx.st !== null) setVal(qs('#swapStrength'), String(ctx.st));
+      api.spot(() => [qs('#swapSrc'), qs('#swapTgt')].filter(Boolean)); }
+  },
+  STOP: {
+    validate(){ return state.generating ? {} : null; },
+    exec(){ const b = qs('#stopBtn'); if (b && !b.disabled) b.click(); }
+  },
+  ANALYZE: {
+    gated: true,
+    validate(p){ if (!state.dictsReady || state.generating) return null;
+      const text = p.length ? p.join(' ') : (qs('#promptBox') || {}).value || '';
+      return text.trim() ? { text: text.trim(), fromBox: !p.length } : null; },
+    ratifyText(p, ctx){ return 'The guide wants to analyze ' +
+      (ctx.fromBox ? 'the story in the prompt box' : 'a story it wrote into the prompt box') +
+      (haveStory() ? ', replacing the story and readouts on screen' : '') + '. OK?'; },
+    exec(p, a, ctx){ if (!ctx.fromBox) setVal(qs('#promptBox'), ctx.text);
+      const b = qs('#analyzeBtn'); if (b && !b.disabled) b.click();   // re-check the app's own gating
+      api.spot('#story'); }
+  },
+  GENERATE: {
+    gated: true,
+    validate(p){ if (!state.dictsReady || state.generating) return null;
+      const text = p.length ? p.join(' ') : (qs('#promptBox') || {}).value || '';
+      return text.trim() ? { text: text.trim(), fromBox: !p.length } : null; },
+    ratifyText(p, ctx){ return 'The guide wants the model to write onward from ' +
+      (ctx.fromBox ? 'the prompt box' : 'a prompt it typed in') +
+      (haveStory() ? ' — the new story replaces the one on screen when it finishes' : '') + '. OK?'; },
+    exec(p, a, ctx){ if (!ctx.fromBox) setVal(qs('#promptBox'), ctx.text);
+      const b = qs('#genBtn'); if (b && !b.disabled) b.click();
+      api.spot('#genOut'); }
+  },
+  SWAP: {
+    gated: true,
+    validate(){ if (state.selected < 0 || state.generating || state.swapPending) return null;
+      const src = resolveWord((qs('#swapSrc') || {}).value), tgt = resolveWord((qs('#swapTgt') || {}).value);
+      return src && tgt ? { src, tgt } : null; },
+    ratifyText(p, ctx){ return 'The guide wants to press swap and rewrite: take out ' + ctx.src.piece.trim() +
+      ', put in ' + ctx.tgt.piece.trim() + ', from token ' + state.selected +
+      ' onward. The model rewrites the story twice for comparison. OK?'; },
+    exec(){ const b = qs('#swapBtn'); if (b && !b.disabled) b.click(); api.spot('.swapgrid'); }
+  }
+};
+
+/* ---------- key dialog (the app has no LLM plumbing of its own;
+   the guide carries the usual three-provider setup) ---------- */
+function buildKeyDialog(){
+  const d = document.createElement('div');
+  d.id = 'vgKeyDlg';
+  d.innerHTML = '<div class="vg-jl-modal" style="width:330px"><h2>Live AI setup</h2>' +
+    '<p style="margin:0 0 4px">Inside a Claude artifact I answer on my own. Anywhere else, add a key from your grown-up:</p>' +
+    '<label>Provider</label><select id="vgKeyProv"></select>' +
+    '<label>API key</label><input id="vgKeyVal" type="password" spellcheck="false" placeholder="paste key, or leave empty to clear">' +
+    '<label>Model</label><input id="vgKeyModel" spellcheck="false">' +
+    '<div class="vg-jl-row"><button id="vgKeySave" class="vg-jl-yes">Save</button>' +
+    '<button id="vgKeyCancel" class="vg-jl-no">Cancel</button></div></div>';
+  document.body.appendChild(d);
+  const prov = d.querySelector('#vgKeyProv');
+  Object.keys(PROVIDERS).forEach(k => { const o = document.createElement('option');
+    o.value = k; o.textContent = PROVIDERS[k].label; prov.appendChild(o); });
+  prov.onchange = () => { d.querySelector('#vgKeyModel').value = PROVIDERS[prov.value].model; };
+  d.addEventListener('click', e => { if (e.target === d) d.classList.remove('show'); });
+  d.querySelector('#vgKeyCancel').onclick = () => d.classList.remove('show');
+  d.querySelector('#vgKeySave').onclick = () => {
+    const key = d.querySelector('#vgKeyVal').value.trim();
+    const cfg = key ? { provider: prov.value, key, model: d.querySelector('#vgKeyModel').value.trim() || PROVIDERS[prov.value].model } : {};
+    try { localStorage.setItem(LLM_STORE, JSON.stringify(cfg)); } catch (e) {}
+    d.classList.remove('show');
+    api.logAdd(key ? 'Live AI key saved — questions now use ' + PROVIDERS[cfg.provider].label + '.' : 'Live AI key cleared.');
+  };
+  return d;
+}
+function openKeyDialog(){
+  const d = document.getElementById('vgKeyDlg') || buildKeyDialog();
+  const cfg = llmConfig();
+  const prov = d.querySelector('#vgKeyProv');
+  prov.value = cfg.provider || 'anthropic';
+  d.querySelector('#vgKeyVal').value = cfg.key || '';
+  d.querySelector('#vgKeyModel').value = cfg.model || PROVIDERS[prov.value].model;
+  d.classList.add('show');
+}
+
+/* ---------- create ---------- */
+api = VoiceGuide.create({
+  id: 'jlens',
+  ui: {
+    title: 'Maggie', ariaLabel: 'Maggie the magpie detective, the voice guide',
+    mascot: '\u{1F426}\u200D\u2B1B', thinkFace: '\u{1F50D}',
+    tabLabel: 'Guide', tabTitle: 'Bring Maggie back',
+    askPlaceholder: 'Ask the detective\u2026',
+    greeting: canListen => "Hi, I'm Maggie, the magpie detective! Press the play button for a tour of this case, or " +
+      (canListen ? 'press the microphone' : 'type below') + ' and ask me anything about what the model is thinking.',
+    hideToast: 'Maggie is tucked away — the Guide tab on the edge brings me back.',
+    doneStatus: "Case toured — go collect some shiny clues! Ask me anything anytime.",
+    notify: showToast,
+    modal: { backdrop: 'vg-jl-backdrop', modal: 'vg-jl-modal', row: 'vg-jl-row', yes: 'vg-jl-yes', no: 'vg-jl-no' }
+  },
+  layout: {
+    panelWidth: PANEL_W, panelMargin: PANEL_M, narrowMax: 700,
+    appBreakpoint: 1100,                                    // the app's .grid2 stacking point
+    reflowCSS: {
+      mirrored: 'body.vg-open .grid2{grid-template-columns:1fr}',
+      bands: [{ max: 900 + PANEL_M, css: 'body.vg-open .swapgrid{grid-template-columns:1fr}' }]
+    }
+  },
+  takeover: { events: ['pointerdown', 'keydown'] },         // kickoff: not keyboard-heavy
+  topics: TOPICS,
+  /* Maggie's voice: female if the platform offers one (voice APIs
+     carry no gender field, so match well-known female voice names),
+     pitched up and slightly brisk for a bird-like chirp. Tunables. */
+  speech: {
+    prefer(vs){
+      const en = vs.filter(v => /^en/i.test(v.lang));
+      const fem = /female|samantha|victoria|karen|moira|tessa|fiona|zira|hazel|susan|aria|jenny|libby|sonia|salli|joanna|kendra|kimberly|ivy|amy|emma|nicole|olivia|serena|allison|ava|kate|catherine|martha|stephanie/i;
+      return en.find(v => fem.test(v.name) && /natural|neural|premium|enhanced|online/i.test(v.name))
+          || en.find(v => fem.test(v.name)) || null;
+    },
+    rate: 1.06, pitch: 1.3
+  },
+  tour: { steps: STEPS },
+  provenance: { snapshot, diffRemark },
+  prompts: { system: systemPrompt, status: statusText },
+  llm: {
+    hasKey(){ const c = llmConfig(); return !!(c.key && PROVIDERS[c.provider]); },
+    keyedCall(sys, usr){ const c = llmConfig();
+      return PROVIDERS[c.provider].call({ provider: c.provider, key: c.key, model: c.model || PROVIDERS[c.provider].model }, sys, usr); },
+    normalizeReply(t){ return String(t).replace(/\bL([1-9]\d?)\b/g, 'layer $1'); },
+    noAI: { spot: () => document.getElementById('vgKeyBtn'),
+      say: "I can't reach a live A I from here without a key. Press the little key button at the top of my panel and ask a grown-up to help set one up — or open this page as a Claude artifact, where I can answer on my own." }
+  },
+  verbs: VERBS,
+  confirmRules: [],                       // the app never calls confirm(); core's wrapper still guards it
+  strings: { micKeyHint: ', via the little key button at the top of my panel.' },
+  testHook: { app(){ return { state, setStatus, selectToken, setMode, toggleHeat, clearHeat,
+    llmConfig, PROVIDERS: Object.keys(PROVIDERS), snapshot, statusText, resolveWord,
+    SHOW_TARGETS: Object.keys(SHOW_TARGETS), TOPIC_IDS: TOPICS.map(t => t.id),
+    DEFAULT_PROMPT, VASE, worker }; } },
+  init(a){
+    /* key button in the panel controls (same judgment call as
+       Piskel: the app has no settings surface to host it) */
+    const btn = document.createElement('button');
+    btn.id = 'vgKeyBtn'; btn.className = 'vg-btn'; btn.title = 'Live AI setup (API key)';
+    btn.textContent = '\u{1F511}';
+    btn.onclick = openKeyDialog;
+    const controls = document.getElementById('vgControls');
+    if (controls) controls.insertBefore(btn, document.getElementById('vgSkip'));
+
+    /* below-the-fold reveal (invariant 9): at stacked widths the
+       readout panel (DOM-last card) fills in below the fold on the
+       first token click; scroll it into view and say so, once per
+       analyzed story. renderReadout is a script-level function
+       declaration, i.e. a window property — patchable from below
+       the splice without touching the app. */
+    const orig = window.renderReadout;
+    let announced = false, lastTokens = null;
+    window.renderReadout = function(){
+      const r = orig.apply(this, arguments);
+      try {
+        if (state.tokens !== lastTokens) { lastTokens = state.tokens; announced = false; }
+        const stacked = window.innerWidth <= 1100 + (document.body.classList.contains('vg-open') ? PANEL_M : 0);
+        if (!announced && stacked && state.selected >= 0 && window.__guide.state !== 'running') {
+          announced = true;
+          const el = qs('#readout');
+          if (el) { try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+            showToast('The readout filled in below \u2014 rows L4 to L8 for your token.'); }
+        }
+      } catch (e) {}
+      return r;
+    };
+  }
+});
+
+</script>
+</body></html>

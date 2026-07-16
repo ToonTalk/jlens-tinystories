@@ -1,0 +1,124 @@
+2026-07-14 12:29:14,145 HTTP Request: GET https://huggingface.co/api/models/Xenova/llama2.c-stories110M/tree/9a520bc089ff2385c93d8b7bcb70d34e270d8d98/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-14 12:29:14,361 HTTP Request: GET https://huggingface.co/api/models/Xenova/llama2.c-stories110M/tree/9a520bc089ff2385c93d8b7bcb70d34e270d8d98?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:29:19,066 HTTP Request: HEAD https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-14 12:29:19,067 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-14 12:29:19,186 HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Salesforce/wikitext/b08601e04326c79dfdd32d625aee71d232d685c3/README.md "HTTP/1.1 200 OK"
+2026-07-14 12:29:19,314 HTTP Request: GET https://huggingface.co/api/resolve-cache/datasets/Salesforce/wikitext/b08601e04326c79dfdd32d625aee71d232d685c3/README.md "HTTP/1.1 200 OK"
+2026-07-14 12:29:19,527 HTTP Request: HEAD https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext.py "HTTP/1.1 404 Not Found"
+2026-07-14 12:29:20,263 HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Salesforce/wikitext/Salesforce/wikitext.py "HTTP/1.1 404 Not Found"
+2026-07-14 12:29:20,557 HTTP Request: GET https://huggingface.co/api/datasets/Salesforce/wikitext/revision/b08601e04326c79dfdd32d625aee71d232d685c3 "HTTP/1.1 200 OK"
+2026-07-14 12:29:20,735 HTTP Request: HEAD https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-14 12:29:20,913 HTTP Request: GET https://huggingface.co/api/datasets/Salesforce/wikitext/tree/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:29:21,091 HTTP Request: GET https://huggingface.co/api/datasets/Salesforce/wikitext/tree/b08601e04326c79dfdd32d625aee71d232d685c3?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:29:21,276 HTTP Request: HEAD https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-14 12:29:21,476 HTTP Request: GET https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1/train-00000-of-00002.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:29:21,862 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/621ffdd236468d709f18200d/8d76dead9d8253b6b8ec0ebefbd6882c9f7894b6c227791c44a9f2db8bd20882?Expires=1784032161&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzYyMWZmZGQyMzY0NjhkNzA5ZjE4MjAwZC84ZDc2ZGVhZDlkODI1M2I2YjhlYzBlYmVmYmQ2ODgyYzlmNzg5NGI2YzIyNzc5MWM0NGE5ZjJkYjhiZDIwODgyKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMjE2MX19fV19&Signature=MEUCIQDAiC9avxaIHDmTTpLVTh5wkwh--sZakJmRAknfFzs-0AIgFAojNxgJOwGLVyoLPlfRJ%7EnqNbNKsZxoV9GK1ZcxprU_&Key-Pair-Id=K3EPXBYC3CKDRZ&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00002.parquet%3B+filename%3D%22train-00000-of-00002.parquet%22%3B&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T112921Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f176cb1da0c17ec814ed55a65f870706627f554572c7912ad8579acb61d4b3ec "HTTP/1.1 206 Partial Content"
+2026-07-14 12:29:22,060 HTTP Request: GET https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1/train-00000-of-00002.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:29:22,076 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/621ffdd236468d709f18200d/8d76dead9d8253b6b8ec0ebefbd6882c9f7894b6c227791c44a9f2db8bd20882?Expires=1784032162&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzYyMWZmZGQyMzY0NjhkNzA5ZjE4MjAwZC84ZDc2ZGVhZDlkODI1M2I2YjhlYzBlYmVmYmQ2ODgyYzlmNzg5NGI2YzIyNzc5MWM0NGE5ZjJkYjhiZDIwODgyKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMjE2Mn19fV19&Signature=MEUCIGTygVBdq574ddt07fSy%7EvRGopIoOA1v9jj96TxHQUnIAiEAv-8pNaU3flbtg6vsOd1ReXFLKQd0uZcVxtp3rvZCvLg_&Key-Pair-Id=K3EPXBYC3CKDRZ&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00002.parquet%3B+filename%3D%22train-00000-of-00002.parquet%22%3B&X-Xet-Cas-Uid=public&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T112922Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=2b1f377bfd363f2ccb4b78d6190060724d2441fc780cbf12edec9ab5b6cf3a9e "HTTP/1.1 206 Partial Content"
+2026-07-14 12:29:22,303 HTTP Request: GET https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1/train-00000-of-00002.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:29:22,313 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/621ffdd236468d709f18200d/8d76dead9d8253b6b8ec0ebefbd6882c9f7894b6c227791c44a9f2db8bd20882?Expires=1784032162&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzYyMWZmZGQyMzY0NjhkNzA5ZjE4MjAwZC84ZDc2ZGVhZDlkODI1M2I2YjhlYzBlYmVmYmQ2ODgyYzlmNzg5NGI2YzIyNzc5MWM0NGE5ZjJkYjhiZDIwODgyKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMjE2Mn19fV19&Signature=MEUCIGTygVBdq574ddt07fSy%7EvRGopIoOA1v9jj96TxHQUnIAiEAv-8pNaU3flbtg6vsOd1ReXFLKQd0uZcVxtp3rvZCvLg_&Key-Pair-Id=K3EPXBYC3CKDRZ&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00002.parquet%3B+filename%3D%22train-00000-of-00002.parquet%22%3B&X-Xet-Cas-Uid=public&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T112922Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=2b1f377bfd363f2ccb4b78d6190060724d2441fc780cbf12edec9ab5b6cf3a9e "HTTP/1.1 206 Partial Content"
+2026-07-14 12:29:26,022 fit: n_layers=12 d_model=768, fitting 11 source layers (target=L11) on 100 prompts
+2026-07-14 12:30:23,535 HTTP Request: GET https://huggingface.co/api/models/Xenova/llama2.c-stories110M/tree/9a520bc089ff2385c93d8b7bcb70d34e270d8d98/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-14 12:30:23,841 HTTP Request: GET https://huggingface.co/api/models/Xenova/llama2.c-stories110M/tree/9a520bc089ff2385c93d8b7bcb70d34e270d8d98?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:30:27,054 fit: n_layers=12 d_model=768, fitting 11 source layers (target=L11) on 100 prompts
+2026-07-14 12:30:30,281   prompt 1/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=4.780  max_d_mean=nan
+2026-07-14 12:30:33,216   prompt 2/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=3.714  max_d_mean=3.48e-01
+2026-07-14 12:30:36,151   prompt 3/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=4.115  max_d_mean=1.58e-01
+2026-07-14 12:30:39,110   prompt 4/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=3.754  max_d_mean=1.00e-01
+2026-07-14 12:30:42,121   prompt 5/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=3.442  max_d_mean=1.11e-01
+2026-07-14 12:30:45,126   prompt 6/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=3.346  max_d_mean=7.05e-02
+2026-07-14 12:30:48,144   prompt 7/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=3.134  max_d_mean=6.91e-02
+2026-07-14 12:30:51,186   prompt 8/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=4.085  max_d_mean=7.17e-02
+2026-07-14 12:30:54,405   prompt 9/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=4.173  max_d_mean=5.44e-02
+2026-07-14 12:30:58,081   prompt 10/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=4.663  max_d_mean=5.71e-02
+2026-07-14 12:31:02,346   prompt 11/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=4.027  max_d_mean=4.87e-02
+2026-07-14 12:31:06,854   prompt 12/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.905  max_d_mean=3.83e-02
+2026-07-14 12:31:11,356   prompt 13/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.100  max_d_mean=4.02e-02
+2026-07-14 12:31:15,863   prompt 14/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.186  max_d_mean=3.99e-02
+2026-07-14 12:31:20,353   prompt 15/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=3.435  max_d_mean=2.40e-02
+2026-07-14 12:31:24,852   prompt 16/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=3.868  max_d_mean=2.70e-02
+2026-07-14 12:31:29,368   prompt 17/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.750  max_d_mean=2.56e-02
+2026-07-14 12:31:34,479   prompt 18/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.188  max_d_mean=2.59e-02
+2026-07-14 12:31:39,589   prompt 19/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.817  max_d_mean=2.26e-02
+2026-07-14 12:31:44,719   prompt 20/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.450  max_d_mean=2.28e-02
+2026-07-14 12:31:49,853   prompt 21/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.907  max_d_mean=1.95e-02
+2026-07-14 12:31:54,995   prompt 22/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.217  max_d_mean=2.16e-02
+2026-07-14 12:32:00,135   prompt 23/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=2.824  max_d_mean=2.13e-02
+2026-07-14 12:32:05,317   prompt 24/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.231  max_d_mean=2.11e-02
+2026-07-14 12:32:10,578   prompt 25/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.688  max_d_mean=1.65e-02
+2026-07-14 12:32:16,469   prompt 26/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.084  max_d_mean=1.75e-02
+2026-07-14 12:32:22,310   prompt 27/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.024  max_d_mean=1.62e-02
+2026-07-14 12:32:27,447   prompt 28/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.244  max_d_mean=1.66e-02
+2026-07-14 12:32:32,625   prompt 29/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.389  max_d_mean=1.53e-02
+2026-07-14 12:32:38,185   prompt 30/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.016  max_d_mean=1.45e-02
+2026-07-14 12:32:44,244   prompt 31/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.778  max_d_mean=1.39e-02
+2026-07-14 12:32:50,283   prompt 32/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.802  max_d_mean=1.31e-02
+2026-07-14 12:32:55,601   prompt 33/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.258  max_d_mean=1.56e-02
+2026-07-14 12:33:00,882   prompt 34/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.992  max_d_mean=2.03e-02
+2026-07-14 12:33:06,217   prompt 35/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.702  max_d_mean=1.22e-02
+2026-07-14 12:33:11,648   prompt 36/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.553  max_d_mean=1.26e-02
+2026-07-14 12:33:17,932   prompt 37/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.095  max_d_mean=1.26e-02
+2026-07-14 12:33:24,119   prompt 38/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.229  max_d_mean=1.23e-02
+2026-07-14 12:33:29,529   prompt 39/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.995  max_d_mean=1.71e-02
+2026-07-14 12:33:34,983   prompt 40/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.081  max_d_mean=1.19e-02
+2026-07-14 12:33:40,448   prompt 41/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.922  max_d_mean=1.17e-02
+2026-07-14 12:33:45,942   prompt 42/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=4.112  max_d_mean=1.17e-02
+2026-07-14 12:33:52,381   prompt 43/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.889  max_d_mean=1.13e-02
+2026-07-14 12:33:58,700   prompt 44/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.655  max_d_mean=9.76e-03
+2026-07-14 12:34:04,327   prompt 45/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.936  max_d_mean=9.89e-03
+2026-07-14 12:34:09,978   prompt 46/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.963  max_d_mean=1.05e-02
+2026-07-14 12:34:15,625   prompt 47/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.760  max_d_mean=9.21e-03
+2026-07-14 12:34:21,283   prompt 48/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.766  max_d_mean=8.57e-03
+2026-07-14 12:34:26,949   prompt 49/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.365  max_d_mean=1.01e-02
+2026-07-14 12:34:32,614   prompt 50/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.548  max_d_mean=1.00e-02
+2026-07-14 12:34:38,268   prompt 51/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.103  max_d_mean=1.15e-02
+2026-07-14 12:34:44,804   prompt 52/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=2.895  max_d_mean=1.01e-02
+2026-07-14 12:34:51,140   prompt 53/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.194  max_d_mean=8.71e-03
+2026-07-14 12:34:56,810   prompt 54/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.267  max_d_mean=9.82e-03
+2026-07-14 12:35:02,493   prompt 55/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.342  max_d_mean=1.33e-02
+2026-07-14 12:35:08,173   prompt 56/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.188  max_d_mean=1.24e-02
+2026-07-14 12:35:13,948   prompt 57/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.571  max_d_mean=1.10e-02
+2026-07-14 12:35:19,721   prompt 58/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.159  max_d_mean=7.49e-03
+2026-07-14 12:35:26,320   prompt 59/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=3.917  max_d_mean=8.80e-03
+2026-07-14 12:35:32,598   prompt 60/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.120  max_d_mean=9.38e-03
+2026-07-14 12:35:38,408   prompt 61/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.846  max_d_mean=7.39e-03
+2026-07-14 12:35:44,266   prompt 62/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.737  max_d_mean=8.58e-03
+2026-07-14 12:35:50,118   prompt 63/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.232  max_d_mean=7.91e-03
+2026-07-14 12:35:55,973   prompt 64/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.643  max_d_mean=9.28e-03
+2026-07-14 12:36:01,867   prompt 65/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.041  max_d_mean=9.40e-03
+2026-07-14 12:36:07,739   prompt 66/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.318  max_d_mean=8.32e-03
+2026-07-14 12:36:13,638   prompt 67/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.040  max_d_mean=7.35e-03
+2026-07-14 12:36:19,517   prompt 68/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.170  max_d_mean=7.43e-03
+2026-07-14 12:36:25,422   prompt 69/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.742  max_d_mean=9.58e-03
+2026-07-14 12:36:31,373   prompt 70/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.839  max_d_mean=7.54e-03
+2026-07-14 12:36:37,336   prompt 71/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.562  max_d_mean=6.46e-03
+2026-07-14 12:36:43,310   prompt 72/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.968  max_d_mean=6.28e-03
+2026-07-14 12:36:49,305   prompt 73/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.862  max_d_mean=5.79e-03
+2026-07-14 12:36:56,192   prompt 74/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=3.046  max_d_mean=6.55e-03
+2026-07-14 12:37:02,317   prompt 75/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.473  max_d_mean=5.75e-03
+2026-07-14 12:37:08,397   prompt 76/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.177  max_d_mean=6.17e-03
+2026-07-14 12:37:14,509   prompt 77/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.006  max_d_mean=6.10e-03
+2026-07-14 12:37:20,564   prompt 78/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.389  max_d_mean=5.32e-03
+2026-07-14 12:37:26,666   prompt 79/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=2.912  max_d_mean=6.45e-03
+2026-07-14 12:37:32,755   prompt 80/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.571  max_d_mean=6.74e-03
+2026-07-14 12:37:38,845   prompt 81/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.695  max_d_mean=5.26e-03
+2026-07-14 12:37:44,957   prompt 82/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.425  max_d_mean=6.87e-03
+2026-07-14 12:37:51,009   prompt 83/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.716  max_d_mean=5.39e-03
+2026-07-14 12:37:56,499   prompt 84/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=3.726  max_d_mean=5.58e-03
+2026-07-14 12:38:02,534   prompt 85/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.540  max_d_mean=4.99e-03
+2026-07-14 12:38:08,558   prompt 86/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.037  max_d_mean=5.69e-03
+2026-07-14 12:38:14,584   prompt 87/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=2.999  max_d_mean=5.84e-03
+2026-07-14 12:38:20,592   prompt 88/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.075  max_d_mean=5.41e-03
+2026-07-14 12:38:26,613   prompt 89/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.171  max_d_mean=5.22e-03
+2026-07-14 12:38:32,614   prompt 90/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.841  max_d_mean=5.12e-03
+2026-07-14 12:38:38,679   prompt 91/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.168  max_d_mean=5.16e-03
+2026-07-14 12:38:44,769   prompt 92/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.691  max_d_mean=4.94e-03
+2026-07-14 12:38:51,703   prompt 93/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=3.631  max_d_mean=7.10e-03
+2026-07-14 12:38:58,228   prompt 94/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=3.192  max_d_mean=5.63e-03
+2026-07-14 12:39:04,080   prompt 95/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=2.990  max_d_mean=4.69e-03
+2026-07-14 12:39:09,938   prompt 96/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.443  max_d_mean=5.04e-03
+2026-07-14 12:39:15,856   prompt 97/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.127  max_d_mean=4.93e-03
+2026-07-14 12:39:21,809   prompt 98/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=4.033  max_d_mean=5.83e-03
+2026-07-14 12:39:28,323   prompt 99/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=3.613  max_d_mean=4.79e-03
+2026-07-14 12:39:35,232   prompt 100/100  seq_len=128 n_valid=111  7s  max||J||/sqrt(d)=3.271  max_d_mean=4.85e-03
+2026-07-14 12:39:35,294 fit: done, 100 prompts

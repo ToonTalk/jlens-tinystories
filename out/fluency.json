@@ -1,0 +1,36 @@
+{
+ "stories110M": {
+  "info": {
+   "model_key": "stories110M",
+   "repo": "Xenova/llama2.c-stories110M",
+   "revision": "9a520bc089ff2385c93d8b7bcb70d34e270d8d98",
+   "device": "cuda",
+   "dtype": "float32",
+   "n_layers": 12,
+   "d_model": 768,
+   "torch": "2.5.1+cu121",
+   "transformers": "5.13.1",
+   "python": "3.11.3",
+   "platform": "Windows-10-10.0.26200-SP0",
+   "gpu": "NVIDIA RTX A4000"
+  },
+  "greedy_completion": "Once upon a time, there was a little girl named Lily. She loved to play outside in the sunshine. One day, she saw a big, red apple on a tree. She wanted to eat it, but it was too high up.\nLily asked her friend, a little bird, \"Can you help me get the apple?\"\nThe bird said, \"Sure, I can fly up and get it for you.\"\nThe bird flew up to the apple and pecked it off the tree. Lily was so happy and took a big bite. But then,"
+ },
+ "stories15M": {
+  "info": {
+   "model_key": "stories15M",
+   "repo": "Xenova/llama2.c-stories15M",
+   "revision": "17c2f1eabe1e163acc15ad35e225794e7b907682",
+   "device": "cuda",
+   "dtype": "float32",
+   "n_layers": 6,
+   "d_model": 288,
+   "torch": "2.5.1+cu121",
+   "transformers": "5.13.1",
+   "python": "3.11.3",
+   "platform": "Windows-10-10.0.26200-SP0",
+   "gpu": "NVIDIA RTX A4000"
+  },
+  "greedy_completion": "Once upon a time, there was a little girl named Lily. She loved to play outside in the sunshine. One day, she saw a big, red ball in the sky. It was the sun! She thought it was so pretty.\nLily wanted to play with the ball, but it was too high up in the sky. She tried to jump and reach it, but she couldn't. Then, she had an idea. She would use a stick to knock the ball down.\nLily found a stick and tried to hit the ball. But the stick was too short. She"
+ }
+}

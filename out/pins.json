@@ -1,0 +1,26 @@
+{
+  "models": {
+    "stories110M": {
+      "repo": "Xenova/llama2.c-stories110M",
+      "sha": "9a520bc089ff2385c93d8b7bcb70d34e270d8d98"
+    },
+    "stories15M": {
+      "repo": "Xenova/llama2.c-stories15M",
+      "sha": "17c2f1eabe1e163acc15ad35e225794e7b907682"
+    }
+  },
+  "datasets": {
+    "tinystories": {
+      "repo": "roneneldan/TinyStories",
+      "config": null,
+      "split": "train",
+      "sha": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64"
+    },
+    "wikitext": {
+      "repo": "Salesforce/wikitext",
+      "config": "wikitext-103-raw-v1",
+      "split": "train",
+      "sha": "b08601e04326c79dfdd32d625aee71d232d685c3"
+    }
+  }
+}

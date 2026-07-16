@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jlens-app",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8749", "--directory", "app"],
+      "port": 8749
+    }
+  ]
+}

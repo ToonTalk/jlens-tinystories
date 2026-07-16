@@ -1,0 +1,125 @@
+2026-07-14 12:18:34,252 HTTP Request: GET https://huggingface.co/api/models/Xenova/llama2.c-stories110M/tree/9a520bc089ff2385c93d8b7bcb70d34e270d8d98/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-14 12:18:34,371 HTTP Request: GET https://huggingface.co/api/models/Xenova/llama2.c-stories110M/tree/9a520bc089ff2385c93d8b7bcb70d34e270d8d98?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:18:39,310 HTTP Request: HEAD https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-14 12:18:39,320 HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/roneneldan/TinyStories/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/README.md "HTTP/1.1 200 OK"
+2026-07-14 12:18:39,334 HTTP Request: GET https://huggingface.co/api/resolve-cache/datasets/roneneldan/TinyStories/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/README.md "HTTP/1.1 200 OK"
+2026-07-14 12:18:39,438 HTTP Request: HEAD https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/TinyStories.py "HTTP/1.1 404 Not Found"
+2026-07-14 12:18:39,438 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-14 12:18:39,741 HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/roneneldan/TinyStories/roneneldan/TinyStories.py "HTTP/1.1 404 Not Found"
+2026-07-14 12:18:39,857 HTTP Request: GET https://huggingface.co/api/datasets/roneneldan/TinyStories/revision/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64 "HTTP/1.1 200 OK"
+2026-07-14 12:18:39,961 HTTP Request: HEAD https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-14 12:18:40,066 HTTP Request: GET https://huggingface.co/api/datasets/roneneldan/TinyStories/tree/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:18:40,169 HTTP Request: GET https://huggingface.co/api/datasets/roneneldan/TinyStories/tree/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-14 12:18:40,290 HTTP Request: HEAD https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-14 12:18:40,408 HTTP Request: GET https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data/train-00000-of-00004-2d5a1467fff1081b.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:18:40,481 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/645e8da96320b0efe40ade7a/9d76d61814aace744933de591830e698b46395c8a875b83fd499c5fec9865dba?Expires=1784031520&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzY0NWU4ZGE5NjMyMGIwZWZlNDBhZGU3YS85ZDc2ZDYxODE0YWFjZTc0NDkzM2RlNTkxODMwZTY5OGI0NjM5NWM4YTg3NWI4M2ZkNDk5YzVmZWM5ODY1ZGJhKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMTUyMH19fV19&Signature=MEUCIFJFwEWKSMgLplSn1vxbNU18Mg3MwWmZ6GrWunkH83iHAiEA%7Eva8R6yNwrwFEGET3EChRQdOvbEOYAiAV59zZqf8Lpc_&Key-Pair-Id=K3EPXBYC3CKDRZ&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00004-2d5a1467fff1081b.parquet%3B+filename%3D%22train-00000-of-00004-2d5a1467fff1081b.parquet%22%3B&X-Xet-Cas-Uid=public&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T111840Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d94d179e763d2ab342666bb4cc0d0d5721e0acc092c73bc0bfcd86337453fe80 "HTTP/1.1 206 Partial Content"
+2026-07-14 12:18:40,604 HTTP Request: GET https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data/train-00000-of-00004-2d5a1467fff1081b.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:18:40,615 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/645e8da96320b0efe40ade7a/9d76d61814aace744933de591830e698b46395c8a875b83fd499c5fec9865dba?Expires=1784031520&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzY0NWU4ZGE5NjMyMGIwZWZlNDBhZGU3YS85ZDc2ZDYxODE0YWFjZTc0NDkzM2RlNTkxODMwZTY5OGI0NjM5NWM4YTg3NWI4M2ZkNDk5YzVmZWM5ODY1ZGJhKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMTUyMH19fV19&Signature=MEUCIFJFwEWKSMgLplSn1vxbNU18Mg3MwWmZ6GrWunkH83iHAiEA%7Eva8R6yNwrwFEGET3EChRQdOvbEOYAiAV59zZqf8Lpc_&Key-Pair-Id=K3EPXBYC3CKDRZ&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00004-2d5a1467fff1081b.parquet%3B+filename%3D%22train-00000-of-00004-2d5a1467fff1081b.parquet%22%3B&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T111840Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d94d179e763d2ab342666bb4cc0d0d5721e0acc092c73bc0bfcd86337453fe80 "HTTP/1.1 206 Partial Content"
+2026-07-14 12:18:40,857 HTTP Request: GET https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data/train-00000-of-00004-2d5a1467fff1081b.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:18:40,879 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/645e8da96320b0efe40ade7a/9d76d61814aace744933de591830e698b46395c8a875b83fd499c5fec9865dba?Expires=1784031520&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzY0NWU4ZGE5NjMyMGIwZWZlNDBhZGU3YS85ZDc2ZDYxODE0YWFjZTc0NDkzM2RlNTkxODMwZTY5OGI0NjM5NWM4YTg3NWI4M2ZkNDk5YzVmZWM5ODY1ZGJhKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMTUyMH19fV19&Signature=MEUCIFJFwEWKSMgLplSn1vxbNU18Mg3MwWmZ6GrWunkH83iHAiEA%7Eva8R6yNwrwFEGET3EChRQdOvbEOYAiAV59zZqf8Lpc_&Key-Pair-Id=K3EPXBYC3CKDRZ&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00004-2d5a1467fff1081b.parquet%3B+filename%3D%22train-00000-of-00004-2d5a1467fff1081b.parquet%22%3B&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T111840Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d94d179e763d2ab342666bb4cc0d0d5721e0acc092c73bc0bfcd86337453fe80 "HTTP/1.1 206 Partial Content"
+2026-07-14 12:18:40,986 HTTP Request: GET https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data/train-00000-of-00004-2d5a1467fff1081b.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:18:41,000 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/645e8da96320b0efe40ade7a/9d76d61814aace744933de591830e698b46395c8a875b83fd499c5fec9865dba?Expires=1784031520&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzY0NWU4ZGE5NjMyMGIwZWZlNDBhZGU3YS85ZDc2ZDYxODE0YWFjZTc0NDkzM2RlNTkxODMwZTY5OGI0NjM5NWM4YTg3NWI4M2ZkNDk5YzVmZWM5ODY1ZGJhKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMTUyMH19fV19&Signature=MEUCIFJFwEWKSMgLplSn1vxbNU18Mg3MwWmZ6GrWunkH83iHAiEA%7Eva8R6yNwrwFEGET3EChRQdOvbEOYAiAV59zZqf8Lpc_&Key-Pair-Id=K3EPXBYC3CKDRZ&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00004-2d5a1467fff1081b.parquet%3B+filename%3D%22train-00000-of-00004-2d5a1467fff1081b.parquet%22%3B&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T111840Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d94d179e763d2ab342666bb4cc0d0d5721e0acc092c73bc0bfcd86337453fe80 "HTTP/1.1 206 Partial Content"
+2026-07-14 12:18:41,186 HTTP Request: GET https://huggingface.co/datasets/roneneldan/TinyStories/resolve/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data/train-00000-of-00004-2d5a1467fff1081b.parquet "HTTP/1.1 302 Found"
+2026-07-14 12:18:41,199 HTTP Request: GET https://cas-bridge.xethub.hf.co/xet-bridge-us/645e8da96320b0efe40ade7a/9d76d61814aace744933de591830e698b46395c8a875b83fd499c5fec9865dba?Expires=1784031521&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jYXMtYnJpZGdlLnhldGh1Yi5oZi5jby94ZXQtYnJpZGdlLXVzLzY0NWU4ZGE5NjMyMGIwZWZlNDBhZGU3YS85ZDc2ZDYxODE0YWFjZTc0NDkzM2RlNTkxODMwZTY5OGI0NjM5NWM4YTg3NWI4M2ZkNDk5YzVmZWM5ODY1ZGJhKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc4NDAzMTUyMX19fV19&Signature=MEYCIQCJHUySCI7z1l7V7vMux3J7guxsz4Bz3Yk4sLAnVMJiZgIhALdF3pE3u3jOPHHFTfJjkWvkBbHYKFgtvtX2uhDWIAmp&Key-Pair-Id=K3EPXBYC3CKDRZ&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00004-2d5a1467fff1081b.parquet%3B+filename%3D%22train-00000-of-00004-2d5a1467fff1081b.parquet%22%3B&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=cas%2F20260714%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260714T111841Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=61e018196830ef1c8751e1694bf4edbb587334175d0e36c0a9547d1cd1b913be "HTTP/1.1 206 Partial Content"
+2026-07-14 12:18:44,588 fit: n_layers=12 d_model=768, fitting 11 source layers (target=L11) on 100 prompts
+2026-07-14 12:18:48,158   prompt 1/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.655  max_d_mean=nan
+2026-07-14 12:18:51,057   prompt 2/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.576  max_d_mean=4.31e-01
+2026-07-14 12:18:53,967   prompt 3/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.525  max_d_mean=2.46e-01
+2026-07-14 12:18:56,924   prompt 4/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.638  max_d_mean=2.11e-01
+2026-07-14 12:18:59,896   prompt 5/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.566  max_d_mean=1.50e-01
+2026-07-14 12:19:02,877   prompt 6/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.590  max_d_mean=1.22e-01
+2026-07-14 12:19:05,883   prompt 7/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.581  max_d_mean=1.02e-01
+2026-07-14 12:19:08,920   prompt 8/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.555  max_d_mean=9.32e-02
+2026-07-14 12:19:11,991   prompt 9/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.476  max_d_mean=7.65e-02
+2026-07-14 12:19:15,070   prompt 10/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.536  max_d_mean=7.12e-02
+2026-07-14 12:19:18,299   prompt 11/100  seq_len=128 n_valid=111  3s  max||J||/sqrt(d)=1.596  max_d_mean=7.93e-02
+2026-07-14 12:19:21,975   prompt 12/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.619  max_d_mean=6.34e-02
+2026-07-14 12:19:26,076   prompt 13/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.593  max_d_mean=6.02e-02
+2026-07-14 12:19:30,515   prompt 14/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.538  max_d_mean=5.18e-02
+2026-07-14 12:19:35,028   prompt 15/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.653  max_d_mean=5.04e-02
+2026-07-14 12:19:39,537   prompt 16/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.587  max_d_mean=4.65e-02
+2026-07-14 12:19:44,060   prompt 17/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.489  max_d_mean=3.94e-02
+2026-07-14 12:19:48,573   prompt 18/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.568  max_d_mean=3.90e-02
+2026-07-14 12:19:53,081   prompt 19/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.489  max_d_mean=3.94e-02
+2026-07-14 12:19:57,573   prompt 20/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.689  max_d_mean=4.09e-02
+2026-07-14 12:20:02,077   prompt 21/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.566  max_d_mean=3.49e-02
+2026-07-14 12:20:06,596   prompt 22/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.599  max_d_mean=3.32e-02
+2026-07-14 12:20:11,140   prompt 23/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.533  max_d_mean=3.24e-02
+2026-07-14 12:20:15,577   prompt 24/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.540  max_d_mean=3.17e-02
+2026-07-14 12:20:20,092   prompt 25/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.735  max_d_mean=3.22e-02
+2026-07-14 12:20:24,618   prompt 26/100  seq_len=128 n_valid=111  4s  max||J||/sqrt(d)=1.657  max_d_mean=2.92e-02
+2026-07-14 12:20:29,118   prompt 27/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.559  max_d_mean=2.67e-02
+2026-07-14 12:20:33,952   prompt 28/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.690  max_d_mean=2.66e-02
+2026-07-14 12:20:38,780   prompt 29/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.588  max_d_mean=2.32e-02
+2026-07-14 12:20:43,629   prompt 30/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.606  max_d_mean=2.29e-02
+2026-07-14 12:20:48,482   prompt 31/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.670  max_d_mean=2.54e-02
+2026-07-14 12:20:53,676   prompt 32/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.600  max_d_mean=2.17e-02
+2026-07-14 12:20:59,155   prompt 33/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.666  max_d_mean=2.36e-02
+2026-07-14 12:21:04,625   prompt 34/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.545  max_d_mean=2.18e-02
+2026-07-14 12:21:09,530   prompt 35/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.454  max_d_mean=1.93e-02
+2026-07-14 12:21:14,438   prompt 36/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.482  max_d_mean=1.83e-02
+2026-07-14 12:21:19,350   prompt 37/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.555  max_d_mean=1.68e-02
+2026-07-14 12:21:24,507   prompt 38/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.694  max_d_mean=2.13e-02
+2026-07-14 12:21:29,980   prompt 39/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.531  max_d_mean=1.88e-02
+2026-07-14 12:21:35,414   prompt 40/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.591  max_d_mean=1.66e-02
+2026-07-14 12:21:40,858   prompt 41/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.665  max_d_mean=1.97e-02
+2026-07-14 12:21:46,317   prompt 42/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.640  max_d_mean=1.91e-02
+2026-07-14 12:21:51,749   prompt 43/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.550  max_d_mean=1.65e-02
+2026-07-14 12:21:57,187   prompt 44/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.650  max_d_mean=1.59e-02
+2026-07-14 12:22:02,624   prompt 45/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.615  max_d_mean=1.52e-02
+2026-07-14 12:22:08,097   prompt 46/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.529  max_d_mean=1.44e-02
+2026-07-14 12:22:13,054   prompt 47/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.558  max_d_mean=1.57e-02
+2026-07-14 12:22:18,459   prompt 48/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.428  max_d_mean=1.45e-02
+2026-07-14 12:22:24,346   prompt 49/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.560  max_d_mean=1.71e-02
+2026-07-14 12:22:30,269   prompt 50/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.655  max_d_mean=1.69e-02
+2026-07-14 12:22:35,863   prompt 51/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.541  max_d_mean=1.56e-02
+2026-07-14 12:22:41,495   prompt 52/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.620  max_d_mean=1.77e-02
+2026-07-14 12:22:46,741   prompt 53/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.546  max_d_mean=1.49e-02
+2026-07-14 12:22:52,525   prompt 54/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.616  max_d_mean=1.58e-02
+2026-07-14 12:22:58,344   prompt 55/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.517  max_d_mean=1.43e-02
+2026-07-14 12:23:04,135   prompt 56/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.565  max_d_mean=1.34e-02
+2026-07-14 12:23:09,912   prompt 57/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.479  max_d_mean=1.31e-02
+2026-07-14 12:23:15,682   prompt 58/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.501  max_d_mean=1.37e-02
+2026-07-14 12:23:21,394   prompt 59/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.560  max_d_mean=1.92e-02
+2026-07-14 12:23:26,716   prompt 60/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.518  max_d_mean=1.33e-02
+2026-07-14 12:23:31,846   prompt 61/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.657  max_d_mean=1.63e-02
+2026-07-14 12:23:37,243   prompt 62/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.539  max_d_mean=1.20e-02
+2026-07-14 12:23:43,445   prompt 63/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.614  max_d_mean=1.28e-02
+2026-07-14 12:23:49,538   prompt 64/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.482  max_d_mean=1.25e-02
+2026-07-14 12:23:55,316   prompt 65/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.359  max_d_mean=1.15e-02
+2026-07-14 12:24:00,672   prompt 66/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.539  max_d_mean=1.23e-02
+2026-07-14 12:24:06,154   prompt 67/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.954  max_d_mean=2.25e-02
+2026-07-14 12:24:11,510   prompt 68/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.474  max_d_mean=1.13e-02
+2026-07-14 12:24:17,484   prompt 69/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.577  max_d_mean=1.28e-02
+2026-07-14 12:24:23,504   prompt 70/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.495  max_d_mean=1.04e-02
+2026-07-14 12:24:29,556   prompt 71/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.471  max_d_mean=1.06e-02
+2026-07-14 12:24:34,961   prompt 72/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.562  max_d_mean=1.09e-02
+2026-07-14 12:24:40,331   prompt 73/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=2.327  max_d_mean=2.63e-02
+2026-07-14 12:24:46,439   prompt 74/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.533  max_d_mean=9.62e-03
+2026-07-14 12:24:52,600   prompt 75/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.780  max_d_mean=1.74e-02
+2026-07-14 12:24:58,665   prompt 76/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=3.295  max_d_mean=3.77e-02
+2026-07-14 12:25:04,369   prompt 77/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.562  max_d_mean=9.59e-03
+2026-07-14 12:25:09,761   prompt 78/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.492  max_d_mean=8.99e-03
+2026-07-14 12:25:15,182   prompt 79/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.525  max_d_mean=9.26e-03
+2026-07-14 12:25:20,989   prompt 80/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.545  max_d_mean=8.50e-03
+2026-07-14 12:25:27,208   prompt 81/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.658  max_d_mean=1.42e-02
+2026-07-14 12:25:33,391   prompt 82/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.544  max_d_mean=8.96e-03
+2026-07-14 12:25:39,526   prompt 83/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.697  max_d_mean=9.47e-03
+2026-07-14 12:25:45,024   prompt 84/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.545  max_d_mean=8.57e-03
+2026-07-14 12:25:50,465   prompt 85/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.646  max_d_mean=9.89e-03
+2026-07-14 12:25:55,932   prompt 86/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.651  max_d_mean=1.06e-02
+2026-07-14 12:26:02,136   prompt 87/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.618  max_d_mean=1.03e-02
+2026-07-14 12:26:08,359   prompt 88/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=2.533  max_d_mean=2.30e-02
+2026-07-14 12:26:13,817   prompt 89/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.487  max_d_mean=9.00e-03
+2026-07-14 12:26:19,291   prompt 90/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.520  max_d_mean=7.61e-03
+2026-07-14 12:26:25,399   prompt 91/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.525  max_d_mean=7.60e-03
+2026-07-14 12:26:31,564   prompt 92/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.906  max_d_mean=1.52e-02
+2026-07-14 12:26:37,723   prompt 93/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.437  max_d_mean=7.10e-03
+2026-07-14 12:26:43,863   prompt 94/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.532  max_d_mean=8.78e-03
+2026-07-14 12:26:49,968   prompt 95/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.512  max_d_mean=6.82e-03
+2026-07-14 12:26:56,076   prompt 96/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.406  max_d_mean=6.51e-03
+2026-07-14 12:27:01,709   prompt 97/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.510  max_d_mean=7.18e-03
+2026-07-14 12:27:07,062   prompt 98/100  seq_len=128 n_valid=111  5s  max||J||/sqrt(d)=1.514  max_d_mean=7.21e-03
+2026-07-14 12:27:12,968   prompt 99/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.510  max_d_mean=6.62e-03
+2026-07-14 12:27:19,317   prompt 100/100  seq_len=128 n_valid=111  6s  max||J||/sqrt(d)=1.511  max_d_mean=7.49e-03
+2026-07-14 12:27:19,388 fit: done, 100 prompts

@@ -1,0 +1,45 @@
+{
+  "fit_id": "A",
+  "model": {
+    "model_key": "stories110M",
+    "repo": "Xenova/llama2.c-stories110M",
+    "revision": "9a520bc089ff2385c93d8b7bcb70d34e270d8d98",
+    "device": "cuda",
+    "dtype": "float32",
+    "n_layers": 12,
+    "d_model": 768,
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1",
+    "python": "3.11.3",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "gpu": "NVIDIA RTX A4000"
+  },
+  "corpus": "tinystories",
+  "n_prompts": 5,
+  "n_prompts_used": 5,
+  "seq_len": 128,
+  "dim_batch": 32,
+  "skip_first": 16,
+  "target_layer": 11,
+  "source_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "seed": 0,
+  "wall_clock_s": 16.3,
+  "s_per_prompt": 3.25,
+  "hardware": "NVIDIA RTX A4000",
+  "deviations": {
+    "dim_batch": "32 (repo default 8; perf only)",
+    "checkpoint_every": "25 (repo default 1; perf only)"
+  }
+}
