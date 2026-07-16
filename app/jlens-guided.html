@@ -110,7 +110,7 @@
   <button id="fetchBtn" class="go">⬇ fetch files from this folder</button>
   <span class="hint">or drop them below (works from file://)</span>
   <div id="dropzone">drop stories110M.bin · tokenizer.bin · stories110M.jlens · vocab.json here</div>
-  <div id="driveHint" class="hint" style="display:none;margin-top:.35rem">Running inside Claude, so files can’t download by themselves here. Get the model file from <a href="https://drive.google.com/file/d/1qPsqGX7QEMbIgi3QtCPFvvfvfMjMmmUD/view?usp=sharing" target="_blank" rel="noopener">Google Drive</a>, then drop it on the dotted box above (plus the three small files, if you have them).</div>
+  <div id="driveHint" class="hint" style="display:none;margin-top:.35rem">Running inside Claude, so files can’t download by themselves here. Get the model file from <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin" target="_blank" rel="noopener">Hugging Face</a>, then drop it on the dotted box above (plus the three small files, if you have them).</div>
   <div class="filerow" style="margin-top:.4rem"><span class="nm">readout dictionaries</span><span class="st" id="st-dict">—</span><div class="prog" style="flex:1"><div id="pg-dict"></div></div></div>
 </div>
 
@@ -1714,8 +1714,8 @@ function deliverPending() {
 
 const FETCH_URL = {
   // GitHub Pages caps files well under the model's ~420 MB; the model
-  // comes from Google Drive instead (confirm=t skips the scan page)
-  'stories110M.bin': 'https://drive.usercontent.google.com/download?id=1qPsqGX7QEMbIgi3QtCPFvvfvfMjMmmUD&export=download&confirm=t',
+  // comes from Hugging Face (CORS-open; Karpathy's canonical checkpoint)
+  'stories110M.bin': 'https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin',
 };
 async function fetchWithProgress(name) {
   const spec = FILES[name];
@@ -1724,7 +1724,7 @@ async function fetchWithProgress(name) {
   const res = await fetch(FETCH_URL[name] || name);
   if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
   if (FETCH_URL[name] && /text\/html/i.test(res.headers.get('Content-Type') || ''))
-    throw new Error(`Google Drive sent a web page instead of ${name} — open the Drive link in a new tab, download the file, and drop it on the dotted box`);
+    throw new Error(`the server sent a web page instead of ${name} — open the download link in a new tab, save the file, and drop it on the dotted box`);
   const total = +res.headers.get('Content-Length') || 0;
   const reader = res.body.getReader();
   const chunks = [];
