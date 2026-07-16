@@ -44,6 +44,7 @@
   <nav>Kid-facing guides: <a href="thought-bubble-guide-kids.html">for kids (8–11)</a> ·
     <a href="thought-bubble-guide-older-kids.html">for older kids (11–14)</a> ·
     <a href="thought-bubble-making-of.html">background &amp; making-of</a></nav>
+  <nav>Open Thought Bubble: <a href="https://toontalk.github.io/jlens-tinystories/">hosted version</a> · <a href="https://claude.ai/public/artifacts/b7ef2b01-5946-4a89-a333-6f40c786bf92">Claude artifact</a></nav>
 </header>
 
 <h2>What this is</h2>
@@ -97,16 +98,36 @@ prediction, and negative results in one sitting.</div>
       do that to a big AI? Who checks?</li>
 </ul>
 
+<h2>Two ways to run it</h2>
+<ul>
+  <li><b>The hosted version:</b> <a href="https://toontalk.github.io/jlens-tinystories/"
+      target="_blank" rel="noopener">toontalk.github.io/jlens-tinystories</a>. Press
+      <b>fetch</b> and everything downloads itself (details under Setup below). Maggie's
+      question-answering here needs an adult to add an AI-provider key via the little key
+      button; the tour and every instrument work without one.</li>
+  <li><b>The Claude artifact:</b>
+      <a href="https://claude.ai/public/artifacts/b7ef2b01-5946-4a89-a333-6f40c786bf92"
+      target="_blank" rel="noopener">open it on claude.ai</a>. For anyone with a Claude
+      account, <b>Maggie answers questions with no API key at all</b> — the artifact
+      uses Claude directly. The trade-off: an artifact can't fetch files by itself, so on
+      first use you download the model and drop it on the dotted box — or just drop
+      <a href="https://drive.google.com/file/d/1EkVlfK5DuqInN6jZwjn9ZlMI9KXrA7U-/view?usp=sharing"> the starter .zip</a>, and the app unpacks it itself. After that first drop, files are
+      cached like everywhere else.</li>
+</ul>
+
 <h2>Setup</h2>
 <ol>
   <li><b>Hosting.</b> The app is one HTML file; the guides live in a sibling
       <span class="chip">guides/</span> folder. GitHub Pages works, with one exception —</li>
-  <li><b>The model file is too big for GitHub Pages</b> (~420&nbsp;MB). The app's fetch
-      button pulls <span class="chip">stories110M.bin</span> from
-      <a href="https://drive.google.com/file/d/1qPsqGX7QEMbIgi3QtCPFvvfvfMjMmmUD/view?usp=sharing"
-      target="_blank" rel="noopener">Google Drive</a> automatically; the three small files
+  <li><b>The model file is too big for GitHub Pages</b> (~420&nbsp;MB). The hosted app's
+      fetch button pulls <span class="chip">stories110M.bin</span> from
+      <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin"
+      target="_blank" rel="noopener">Hugging Face</a> (the model author's own
+      repository) automatically; the three small files
       (tokenizer, lens, vocabulary) come from the hosting folder. If an automatic fetch is
-      blocked, download the model from that link and drop it on the app's dotted box.</li>
+      blocked — or you're in the Claude artifact — download the model from that
+      link and drop it on the app's dotted box, or drop the starter .zip: the app
+      unpacks zips by itself.</li>
   <li><b>First run builds a word map</b> ("one-time setup: building the lens's
       word-directions") — a few minutes on a school laptop. Everything is then cached in the
       browser: revisits open in seconds, offline included. Budget one patient first session
