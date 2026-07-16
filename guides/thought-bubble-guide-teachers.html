@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thought Bubble — a guide for teachers &amp; parents</title>
+<style>
+  :root { --bg:#0f1115; --card:#1b1f28; --edge:#2b3140; --ink:#dde3ec; --dim:#8791a3;
+          --blue:#9ecbff; --gold:#ffd27f; --green:#8fd3a7; --pink:#f2a2c4; --accent:var(--blue); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16.5px/1.65 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  .wrap { max-width: 780px; margin:0 auto; padding: 1.2rem 1.2rem 4rem; }
+  header { border-bottom: 2px solid var(--accent); padding: 1.6rem 0 1rem; }
+  h1, h2, h3 { font-family: Palatino, "Palatino Linotype", Georgia, serif; line-height:1.25; }
+  h1 { font-size: 2.1rem; margin:.2rem 0; }
+  h1 .bubble { color: var(--accent); }
+  .whofor { color:var(--dim); font-size:.95rem; }
+  nav { font-size:.9rem; color:var(--dim); margin-top:.6rem; }
+  a { color: var(--blue); }
+  nav a { text-decoration: none; }
+  h2 { color:var(--accent); font-size:1.4rem; margin:2.2rem 0 .5rem; }
+  h3 { font-size:1.05rem; margin:1.3rem 0 .3rem; }
+  .card { background:var(--card); border:1px solid var(--edge); border-radius:10px;
+          padding:.9rem 1.1rem; margin:1rem 0; }
+  .act { border-left:4px solid var(--accent); }
+  .act b:first-child { color:var(--accent); }
+  .chip { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.85em;
+          background:#232a38; border:1px solid var(--edge); border-radius:999px; padding:.1em .6em; }
+  table { border-collapse: collapse; width:100%; font-size:.95rem; }
+  td, th { border:1px solid var(--edge); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--accent); background:#141925; font-weight:600; }
+  ul, ol { padding-left:1.2rem; } li { margin:.35rem 0; }
+  .note { color:var(--dim); font-size:.92rem; }
+  footer { margin-top:3rem; border-top:1px solid var(--edge); padding-top:1rem;
+           color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>💭 <span class="bubble">Thought Bubble</span><br>a guide for teachers &amp; parents</h1>
+  <div class="whofor">What it teaches, how to run it, and what happens to the data.</div>
+  <nav>Kid-facing guides: <a href="thought-bubble-guide-kids.html">for kids (8–11)</a> ·
+    <a href="thought-bubble-guide-older-kids.html">for older kids (11–14)</a> ·
+    <a href="thought-bubble-making-of.html">background &amp; making-of</a></nav>
+</header>
+
+<h2>What this is</h2>
+<p>Thought Bubble is a hands-on instrument for looking <em>inside</em> a small AI language
+model while it writes children's stories. The model (about 110 million parameters, trained on
+the TinyStories dataset) runs entirely in the browser. A trained "lens" translates the
+model's internal state at each layer back into words, so a child can see what the model is
+holding in mind at any point in a story — and, in the boldest feature, gently <em>steer</em>
+that thinking and watch the story change.</p>
+<p>An optional voice guide — Maggie, a magpie detective — gives a spoken tour and answers
+questions. She points and explains; the experiments always stay in the child's hands.</p>
+
+<h2>What it teaches</h2>
+<ul>
+  <li><b>AI systems have internal states.</b> A language model isn't a lookup table; ideas
+      form across layers before words appear. That single intuition inoculates against both
+      "it's magic" and "it's just autocomplete."</li>
+  <li><b>Ideas precede words.</b> The DIFF view shows plans the model holds sentences before
+      writing them — the same thinking-ahead behavior researchers have documented in
+      frontier models.</li>
+  <li><b>Claims about minds can be tested.</b> The heat strip ("where did it decide?") and
+      the controlled swap experiment (two rewrites, same random seed, one changed variable)
+      are genuine experimental method in miniature.</li>
+  <li><b>Interpretability is a real field.</b> Researchers at labs like Anthropic build
+      grown-up versions of exactly these tools to audit and steer large models — see the
+      <a href="thought-bubble-making-of.html">background page</a>.</li>
+</ul>
+
+<h2>Classroom activities</h2>
+<div class="card act"><b>Spot the plan (15–20 min, ages 8+).</b> Analyze the vase starter.
+Students click the token after <span class="chip">vase.</span>, switch to DIFF, and write
+down two green words. Discussion: the model hasn't written what Ben does yet — how does it
+already "know"? Where else do we see plans before actions?</div>
+<div class="card act"><b>Where did it decide? (20–30 min, ages 9+).</b> Generate a longer
+story, then pick its most interesting late word. Use the heat strip to trace when that idea
+first lit up. Students mark the "decision point" in the printed story. Discussion: did the
+ending cause the beginning, or the other way round?</div>
+<div class="card act"><b>The controlled experiment (30–40 min, ages 11+).</b> Teams design a
+swap: pick an anchor, predict what will change, run it, compare the two rewrites (same
+dice — the only difference is the swap). Include one deliberate "null" run where the
+take-out word isn't in the readout, so the rewrites come out identical. Discussion: what
+made the difference between a swap that bit and one that didn't? This is variable control,
+prediction, and negative results in one sitting.</div>
+
+<h3>Discussion questions that work</h3>
+<ul>
+  <li>Is what the lens shows the model's "real thoughts," or a translation? What's the
+      difference?</li>
+  <li>If the model plans an ending early, is it deciding — or just leaning?</li>
+  <li>We steered the story's ideas without touching its words. Should anyone be allowed to
+      do that to a big AI? Who checks?</li>
+</ul>
+
+<h2>Setup</h2>
+<ol>
+  <li><b>Hosting.</b> The app is one HTML file; the guides live in a sibling
+      <span class="chip">guides/</span> folder. GitHub Pages works, with one exception —</li>
+  <li><b>The model file is too big for GitHub Pages</b> (~420&nbsp;MB). The app's fetch
+      button pulls <span class="chip">stories110M.bin</span> from
+      <a href="https://drive.google.com/file/d/1qPsqGX7QEMbIgi3QtCPFvvfvfMjMmmUD/view?usp=sharing"
+      target="_blank" rel="noopener">Google Drive</a> automatically; the three small files
+      (tokenizer, lens, vocabulary) come from the hosting folder. If an automatic fetch is
+      blocked, download the model from that link and drop it on the app's dotted box.</li>
+  <li><b>First run builds a word map</b> ("one-time setup: building the lens's
+      word-directions") — a few minutes on a school laptop. Everything is then cached in the
+      browser: revisits open in seconds, offline included. Budget one patient first session
+      per machine.</li>
+  <li><b>Works from file://</b> too — download everything and drop the four files.</li>
+</ol>
+
+<h2>Privacy &amp; safety</h2>
+<ul>
+  <li>The story model runs <b>locally in the browser</b>. No accounts, no telemetry;
+      students' stories never leave the machine.</li>
+  <li>The <b>tour is fully local</b>. Maggie's <b>question-answering</b> is the one optional
+      online feature: inside a Claude artifact it uses the built-in service, and elsewhere it
+      needs an adult to configure an AI-provider key (the little key button). Questions sent
+      to Maggie go to that provider; nothing else does. Without a key, the tour and every
+      instrument still work — Maggie will say she can't answer live questions.</li>
+  <li>The model writes TinyStories-style content: simple, gentle children's fiction. It is
+      still a text generator; spot-check anything you'll print.</li>
+</ul>
+
+<h2>Honest limitations</h2>
+<ul>
+  <li>This is a ~110M-parameter model — a minnow. Its "thoughts" are real internal states,
+      but shallow ones; don't generalize its simplicity to frontier systems.</li>
+  <li>The lens is a trained translation of hidden states, not ground truth. Treat readouts
+      as strong evidence, not gospel — that caveat is itself worth teaching.</li>
+  <li>Swaps steer idea-drift; they don't guarantee a chosen word appears. Null results are
+      normal and pedagogically precious.</li>
+</ul>
+
+<h2>Vocabulary cheat-sheet</h2>
+<table>
+  <tr><th>Term in app</th><th>Grown-up term</th></tr>
+  <tr><td>token</td><td>subword unit from the tokenizer</td></tr>
+  <tr><td>getting ready to say (J-lens)</td><td>trained lens over intermediate hidden states</td></tr>
+  <tr><td>blurt out (logit lens)</td><td>projecting hidden states through the output head</td></tr>
+  <tr><td>DIFF's green words</td><td>lens-only anticipations absent from the logit-lens top-k</td></tr>
+  <tr><td>heat strip</td><td>per-token best mid-layer rank of a chosen vocabulary item</td></tr>
+  <tr><td>swap</td><td>activation steering between two concept directions, from the anchor on</td></tr>
+  <tr><td>surprise</td><td>sampling temperature</td></tr>
+</table>
+
+<footer>Questions or classroom stories? The author's write-up is linked from the app's
+footer. · Everything on this page applies to the standalone app and the Claude-artifact
+version alike.</footer>
+</div>
+</body>
+</html>

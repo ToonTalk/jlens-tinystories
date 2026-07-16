@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thought Bubble — a guide for kids</title>
+<style>
+  :root { --bg:#0f1115; --card:#1b1f28; --edge:#2b3140; --ink:#dde3ec; --dim:#8791a3;
+          --blue:#9ecbff; --gold:#ffd27f; --green:#8fd3a7; --pink:#f2a2c4; --accent:var(--gold); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:17px/1.65 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 1.2rem 1.2rem 4rem; }
+  header { border-bottom: 2px solid var(--accent); padding: 1.6rem 0 1rem; }
+  h1, h2 { font-family: Palatino, "Palatino Linotype", Georgia, serif; line-height:1.25; }
+  h1 { font-size: 2.3rem; margin: .2rem 0; }
+  h1 .bubble { color: var(--accent); }
+  .whofor { color: var(--dim); font-size: .95rem; }
+  nav { font-size: .9rem; color: var(--dim); margin-top: .6rem; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h2 { color: var(--accent); font-size: 1.45rem; margin: 2.2rem 0 .5rem; }
+  .mission { background: var(--card); border: 1px solid var(--edge); border-left: 4px solid var(--accent);
+             border-radius: 10px; padding: .9rem 1.1rem; margin: 1rem 0; }
+  .mission b:first-child { color: var(--accent); }
+  .maggie { display:flex; gap:.8rem; align-items:flex-start; background:#141925;
+            border:1px solid var(--edge); border-radius:12px; padding:.8rem 1rem; margin:1.2rem 0; }
+  .maggie .face { font-size: 1.9rem; line-height:1; }
+  .maggie p { margin:.1rem 0; }
+  .maggie .who { color: var(--dim); font-size:.8rem; }
+  .chip { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:.85em;
+          background:#232a38; border:1px solid var(--edge); border-radius:999px; padding:.1em .6em;
+          white-space:nowrap; }
+  .chip.green { color: var(--green); border-color: var(--green); }
+  .chip.pink  { color: var(--pink);  border-color: var(--pink); }
+  .story { font-family: ui-monospace, Menlo, Consolas, monospace; background:#12151c;
+           border:1px solid var(--edge); border-radius:8px; padding:.7rem .9rem; }
+  .story .hot { background:#5a2a1a; border-radius:4px; padding:0 .15em; }
+  ul { padding-left: 1.2rem; }
+  li { margin: .35rem 0; }
+  a { color: var(--blue); }
+  footer { margin-top:3rem; border-top:1px solid var(--edge); padding-top:1rem;
+           color:var(--dim); font-size:.9rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .maggie .face { transition: transform .2s; }
+    .maggie:hover .face { transform: rotate(-8deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>💭 <span class="bubble">Thought Bubble</span><br>a guide for kids</h1>
+  <div class="whofor">For explorers about 8–11 years old. Grown-up needed for setup only.</div>
+  <nav>Other guides: <a href="thought-bubble-guide-older-kids.html">for older kids</a> ·
+    <a href="thought-bubble-guide-teachers.html">for teachers &amp; parents</a> ·
+    <a href="thought-bubble-making-of.html">how this app was made</a></nav>
+</header>
+
+<div class="maggie"><div class="face">🐦‍⬛</div><div>
+  <div class="who">Maggie the magpie detective</div>
+  <p>Hi! I live inside Thought Bubble. It's my magnifying glass: it lets us peek at what a
+  tiny robot writer is <em>thinking</em> before it says anything. Press my play button in the
+  app and I'll show you around — or read on!</p>
+</div></div>
+
+<h2>What is Thought Bubble?</h2>
+<p>Inside this app lives a very small robot that writes children's stories, one word at a
+time. Before it picks each word, lots of half-formed ideas float around in its head — like
+thought bubbles in a comic. Thought Bubble lets you <b>see those bubbles</b>. No other toy
+you own can do that.</p>
+
+<h2>Your missions</h2>
+
+<div class="mission"><b>Mission 1 — wake it up.</b> The robot needs its brain files first.
+Ask a grown-up to press the <b>fetch</b> button, or to download the big model file and drop
+it on the dotted box. The very first visit takes a while (it's building a word map) — after
+that it opens in seconds.</div>
+
+<div class="mission"><b>Mission 2 — give it a story.</b> Press one of the story chips, like
+the one about Ben and the broken vase. Then press <b>analyze</b>. The robot reads the story
+while the magnifying glass watches its brain.</div>
+
+<div class="mission"><b>Mission 3 — click a word.</b> The story appears in little pieces
+called <span class="chip">tokens</span>. Click any word. The readout panel fills with the
+words the robot was <b>getting ready to say</b> right at that spot — maybe now, maybe a few
+sentences later. It thinks ahead, just like you do!</div>
+
+<div class="mission"><b>Mission 4 — find the secret plans.</b> Press the <b>DIFF</b> button.
+The <span class="chip green">green words</span> are ideas the robot is quietly holding that
+it wasn't about to blurt out. Those are its secret plans.</div>
+
+<div class="mission"><b>Mission 5 — where did it decide?</b> Click any word-chip in the
+readout. The story lights up wherever that idea was glowing in the robot's mind:</div>
+
+<p class="story">Ben broke his mom's favorite vase. <span class="hot">He</span>
+<span class="hot">heard</span> her coming.</p>
+
+<p>Look along the glow and ask the detective question: <b>where did it decide?</b></p>
+
+<div class="mission"><b>Mission 6 — swap a thought!</b> This is the boldest trick. First
+click a word in the story — that's the <b>anchor</b>, where the rethinking starts. Type a
+word to take out and a word to put in (the list only offers words the robot knows). Then
+press <b>swap &amp; rewrite</b>. The robot writes the story again twice — once normally, once
+with the swapped thought — so you can spot exactly what changed.</div>
+
+<div class="maggie"><div class="face">🔍</div><div>
+  <div class="who">Maggie's favorite true story</div>
+  <p>Once, in a story that said <span class="chip">Max dug a hole</span>, we took out
+  <b>hole</b> and put in <b>castle</b>. The robot wrote <b>moat</b> — the castle-thing-you-dig!
+  It caught the <em>idea</em> of a castle, not just the word. That's what swapping thoughts
+  can do.</p>
+</div></div>
+
+<h2>Detective tips</h2>
+<ul>
+  <li>The <b>raw</b> switch is the honest view — every little word-piece, nothing hidden.
+      Messier, but true.</li>
+  <li><span class="chip pink">Pink chips</span> are bits of names. Names get chopped into
+      pieces, so <span class="chip pink">L…</span> means a word starting like
+      <em>Lily</em> is on its mind.</li>
+  <li>Short stories make thin readouts. Let the robot keep writing with <b>generate</b> —
+      the longer the story, the more it has on its mind.</li>
+  <li>Stuck or curious? Ask Maggie! Type in her panel (or use the microphone) and ask
+      anything, like <em>"why is castle green?"</em></li>
+</ul>
+
+<footer>Thought Bubble is a Tiny Mind instrument. Everything runs on your own computer —
+your stories never leave it. · <a href="thought-bubble-guide-older-kids.html">Ready for the
+deeper guide?</a></footer>
+</div>
+</body>
+</html>

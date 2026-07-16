@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The making of Thought Bubble — and the research behind it</title>
+<style>
+  :root { --bg:#0f1115; --card:#1b1f28; --edge:#2b3140; --ink:#dde3ec; --dim:#8791a3;
+          --blue:#9ecbff; --gold:#ffd27f; --green:#8fd3a7; --pink:#f2a2c4; --accent:var(--pink); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:17px/1.7 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  .wrap { max-width: 700px; margin:0 auto; padding: 1.2rem 1.2rem 4rem; }
+  header { border-bottom:2px solid var(--accent); padding:1.6rem 0 1rem; }
+  h1, h2 { font-family: Palatino, "Palatino Linotype", Georgia, serif; line-height:1.28; }
+  h1 { font-size:2rem; margin:.2rem 0; }
+  h1 em { color:var(--accent); font-style:normal; }
+  .whofor { color:var(--dim); font-size:.95rem; }
+  nav { font-size:.9rem; color:var(--dim); margin-top:.6rem; }
+  a { color:var(--blue); }
+  nav a { text-decoration:none; }
+  h2 { color:var(--accent); font-size:1.35rem; margin:2.4rem 0 .5rem; }
+  .chip { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.85em;
+          background:#232a38; border:1px solid var(--edge); border-radius:999px; padding:.1em .6em; }
+  .pull { background:var(--card); border:1px solid var(--edge); border-left:4px solid var(--accent);
+          border-radius:10px; padding:.9rem 1.1rem; margin:1.3rem 0; font-size:1.02em; }
+  ul { padding-left:1.2rem; } li { margin:.4rem 0; }
+  .refs li { margin:.55rem 0; font-size:.95rem; }
+  footer { margin-top:3rem; border-top:1px solid var(--edge); padding-top:1rem;
+           color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>The model wrote <em>moat</em>:<br>the making of Thought Bubble</h1>
+  <div class="whofor">Background reading for a curious non-technical audience — high-school
+  and up. No math, no code.</div>
+  <nav>The app's guides: <a href="thought-bubble-guide-kids.html">kids</a> ·
+    <a href="thought-bubble-guide-older-kids.html">older kids</a> ·
+    <a href="thought-bubble-guide-teachers.html">teachers &amp; parents</a></nav>
+</header>
+
+<p>In one of Thought Bubble's stories, a boy named Max is digging on a beach:
+<span class="chip">Max dug a hole</span>. Using the app's swap panel, we nudged the model's
+<em>thinking</em> — take out the idea of a hole, put in the idea of a castle — and let it
+rewrite the story. It never used the word castle. It wrote <b>moat</b>: the castle-thing
+you dig.</p>
+<p>That small moment is the whole point of this app. The model didn't match a word; it
+carried an <em>idea</em>, and the idea shaped what came next. Thought Bubble exists so that a
+child — or you — can watch that happen, and poke at it.</p>
+
+<h2>What a language model actually does</h2>
+<p>A language model is a program trained on lots of text to do one deceptively simple thing:
+predict the next little piece of text (a <em>token</em> — a word or part of one). Write with
+it in a loop — predict, append, repeat — and stories come out.</p>
+<p>"Just predicting the next word" sounds shallow. The catch is <em>how</em> the prediction
+is made. Between reading and answering, the text flows through a stack of processing layers.
+At each layer, for each token, the model maintains a long list of numbers — a kind of
+working thought. Early layers hold something close to the raw words; by the last layer the
+thought has sharpened into the next word. Everything interesting happens in between — and
+"in between" is normally invisible.</p>
+
+<h2>Lenses: making the invisible legible</h2>
+<p>In 2020, a researcher writing as <em>nostalgebraist</em> tried something charmingly
+direct, called the <b>logit lens</b>: take the model's half-finished thought at some middle
+layer and push it through the model's own final say-a-word machinery, as if the model had
+stopped thinking right there. The result: readable snapshots of a thought in progress —
+often meaningful surprisingly early.</p>
+<p>The logit lens has a known flaw: middle layers don't speak quite the same "language" as
+the final layer, so the raw projection can distort. Later work (the <b>tuned lens</b>,
+Belrose and colleagues, 2023) fixed this by <em>training a small translator for each
+layer</em>. Thought Bubble's <b>J-lens</b> is in this family: a per-layer translator fitted
+to this specific story-writing model. The app keeps the plain logit lens too, as the
+"blurt-out" comparison view — and its DIFF mode shows exactly what the trained lens sees
+that the naive one misses: the model's quiet anticipations, drawn in green.</p>
+
+<h2>The research behind it, in plain terms</h2>
+<p>This little instrument is a scale model of a serious research field:
+<b>interpretability</b> — the science of understanding what is going on inside neural
+networks, rather than only measuring what comes out. Anthropic, the AI-safety company behind
+Claude, has made it a central bet, sometimes describing the work as doing <em>biology</em>
+on a grown organism nobody hand-designed. Three findings are especially relevant to what
+you see in Thought Bubble:</p>
+<ul>
+  <li><b>Thoughts decompose into features.</b> In 2023–2024, Anthropic researchers showed
+      that the tangled activity inside a model can be unmixed into millions of
+      <em>features</em> — directions of activity that track concepts, from "the Golden Gate
+      Bridge" to "code with a bug in it" ("Towards Monosemanticity," then "Scaling
+      Monosemanticity" on Claude 3 Sonnet). Thought Bubble's readout chips are a
+      kid-sized cousin: directions in the model's thought-space, translated to words.</li>
+  <li><b>Steering thoughts changes behavior.</b> In a famous 2024 demo, Anthropic turned the
+      Golden Gate Bridge feature <em>up</em> inside Claude — and for a day, "Golden Gate
+      Claude" steered nearly every conversation toward the bridge. Thought Bubble's swap
+      panel is precisely this kind of intervention in miniature: push the thought, not the
+      text, and watch the story bend. Same-seed rewrites make it a controlled experiment a
+      child can read.</li>
+  <li><b>Models plan ahead.</b> In 2025, Anthropic's circuit-tracing work ("On the Biology
+      of a Large Language Model") showed that when Claude writes a rhyming couplet, it
+      often settles on the rhyme word first, then writes the line that arrives there. That
+      is exactly what Thought Bubble's DIFF view and heat strip let you catch in a tiny
+      model: words the model is <em>getting ready to say</em>, sentences early — and the
+      moment it decided.</li>
+</ul>
+
+<div class="pull">Why does any of this matter? Because if we're going to trust AI systems
+with consequential work, "it usually behaves well" isn't enough — we want to see the
+machinery, audit it, and correct it. Interpretability is how that becomes possible. An
+eight-year-old with a heat strip asking <em>"where did it decide?"</em> is practicing the
+exact question the field exists to answer.</div>
+
+<h2>Why a tiny model can carry big ideas</h2>
+<p>Thought Bubble's writer is <span class="chip">stories110M</span> — about 110 million
+parameters, thousands of times smaller than frontier models. It comes from a lovely 2023
+result: Microsoft researchers (Eldan &amp; Li, <em>TinyStories</em>) showed that if you train
+small models on simple synthetic children's stories, they learn to write coherently — tiny
+minds with a complete, child-sized world. Andrej Karpathy's open-source
+<span class="chip">llama2.c</span> project trained and published this checkpoint. Small
+enough to run in a web page, real enough to have genuine hidden thoughts: the perfect lab
+animal for a classroom observatory.</p>
+
+<h2>How the app itself is built</h2>
+<ul>
+  <li><b>One file, no server.</b> The whole instrument is a single HTML page. The model runs
+      in your browser using web workers (a small pool, so the page stays responsive), and
+      everything is cached locally after the first visit — stories never leave your machine.</li>
+  <li><b>An honest UI.</b> The "raw" toggle shows the unfiltered lens; the strength slider
+      marks the sane range in green; rewrites use the same random seed so the only variable
+      is your swap. Where the instrument is approximate, the app says so.</li>
+  <li><b>Maggie, the guide who never grabs the controls.</b> The voice layer (a reusable
+      "voice-guide" core plus a per-app adapter) gives tours, answers questions, and can
+      point at anything — but story-changing actions always need the visitor's explicit
+      go-ahead. Getting an AI guide's manners right turned out to be its own design problem:
+      whose move is the analyze button? Is filling the swap boxes consent to press swap?
+      (No.) The guide was itself built in collaboration with AI assistants, with automated
+      test suites checking everything from consent dialogs to what Maggie is allowed to see.</li>
+  <li><b>Grounded answers.</b> When Maggie answers a question, she receives a precise
+      snapshot of the screen — the story, the selected token, the actual readout rows, the
+      outcome of the last swap — so her explanations are anchored to what you're looking at,
+      not to guesswork.</li>
+</ul>
+
+<h2>Further reading</h2>
+<ul class="refs">
+  <li>Anthropic — <a href="https://www.anthropic.com/news/mapping-mind-language-model"
+      target="_blank" rel="noopener">Mapping the Mind of a Large Language Model</a> (the
+      accessible overview of features, 2024) and the research paper
+      <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html"
+      target="_blank" rel="noopener">Scaling Monosemanticity</a>.</li>
+  <li>Anthropic — <a href="https://www.anthropic.com/news/golden-gate-claude"
+      target="_blank" rel="noopener">Golden Gate Claude</a> (steering a thought, 2024).</li>
+  <li>Anthropic — <a href="https://transformer-circuits.pub/2025/attribution-graphs/biology.html"
+      target="_blank" rel="noopener">On the Biology of a Large Language Model</a> (circuit
+      tracing; includes the poem-planning result, 2025).</li>
+  <li>nostalgebraist — <a href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens"
+      target="_blank" rel="noopener">Interpreting GPT: the logit lens</a> (2020).</li>
+  <li>Belrose et&nbsp;al. — <a href="https://arxiv.org/abs/2303.08112" target="_blank"
+      rel="noopener">Eliciting Latent Predictions with the Tuned Lens</a> (2023).</li>
+  <li>Eldan &amp; Li — <a href="https://arxiv.org/abs/2305.07759" target="_blank"
+      rel="noopener">TinyStories</a> (2023) · Karpathy —
+      <a href="https://github.com/karpathy/llama2.c" target="_blank"
+      rel="noopener">llama2.c</a> (the stories110M checkpoint).</li>
+</ul>
+
+<footer>Thought Bubble is a Tiny Mind instrument. This page is background; the author's own
+account of building the app is linked from the app's footer.</footer>
+</div>
+</body>
+</html>

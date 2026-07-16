@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thought Bubble — a guide for older kids</title>
+<style>
+  :root { --bg:#0f1115; --card:#1b1f28; --edge:#2b3140; --ink:#dde3ec; --dim:#8791a3;
+          --blue:#9ecbff; --gold:#ffd27f; --green:#8fd3a7; --pink:#f2a2c4; --accent:var(--green); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16.5px/1.65 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 1.2rem 1.2rem 4rem; }
+  header { border-bottom: 2px solid var(--accent); padding: 1.6rem 0 1rem; }
+  h1, h2, h3 { font-family: Palatino, "Palatino Linotype", Georgia, serif; line-height:1.25; }
+  h1 { font-size: 2.2rem; margin:.2rem 0; }
+  h1 .bubble { color: var(--accent); }
+  .whofor { color: var(--dim); font-size:.95rem; }
+  nav { font-size:.9rem; color:var(--dim); margin-top:.6rem; }
+  nav a, a { color: var(--blue); }
+  nav a { text-decoration:none; }
+  h2 { color: var(--accent); font-size:1.4rem; margin:2.2rem 0 .5rem; }
+  h3 { color: var(--ink); font-size:1.1rem; margin:1.4rem 0 .3rem; }
+  .chip { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:.85em;
+          background:#232a38; border:1px solid var(--edge); border-radius:999px; padding:.1em .6em;
+          white-space:nowrap; }
+  .chip.green { color:var(--green); border-color:var(--green); }
+  .chip.pink { color:var(--pink); border-color:var(--pink); }
+  .card { background:var(--card); border:1px solid var(--edge); border-radius:10px;
+          padding: .9rem 1.1rem; margin: 1rem 0; }
+  .exp { border-left: 4px solid var(--accent); }
+  .exp b:first-child { color: var(--accent); }
+  .maggie { display:flex; gap:.8rem; align-items:flex-start; background:#141925;
+            border:1px solid var(--edge); border-radius:12px; padding:.8rem 1rem; margin:1.2rem 0; }
+  .maggie .face { font-size:1.8rem; line-height:1; }
+  .maggie .who { color:var(--dim); font-size:.8rem; }
+  .maggie p { margin:.1rem 0; }
+  table { border-collapse: collapse; width:100%; font-size:.95rem; }
+  td, th { border:1px solid var(--edge); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  th { color:var(--accent); background:#141925; font-weight:600; }
+  ul { padding-left:1.2rem; } li { margin:.35rem 0; }
+  footer { margin-top:3rem; border-top:1px solid var(--edge); padding-top:1rem;
+           color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>💭 <span class="bubble">Thought Bubble</span><br>a guide for older kids</h1>
+  <div class="whofor">For explorers about 11–14 who want to know how it actually works.</div>
+  <nav>Other guides: <a href="thought-bubble-guide-kids.html">for kids</a> ·
+    <a href="thought-bubble-guide-teachers.html">for teachers &amp; parents</a> ·
+    <a href="thought-bubble-making-of.html">how this app was made</a></nav>
+</header>
+
+<h2>What you're actually looking at</h2>
+<p>The writer inside Thought Bubble is a small AI language model called
+<span class="chip">stories110M</span>. It learned to write by reading millions of simple
+children's stories, and it writes the same way it learned: <b>one token at a time</b>, always
+picking what comes next. Tokens are the pieces it reads and writes — usually a word, sometimes
+just part of one (names like <em>Lily</em> get chopped into <span class="chip pink">L</span> +
+<span class="chip">ily</span>).</p>
+<p>Here's the interesting part. The model doesn't jump straight to its next word. Inside, the
+text passes through <b>twelve layers</b> of processing, and at every layer, for every token,
+the model holds a big bundle of numbers — you can think of it as a <em>thought in progress</em>.
+Thought Bubble reads those bundles and translates them back into words. That translator is
+called the <b>J-lens</b>.</p>
+
+<h2>The two lenses, and DIFF</h2>
+<table>
+  <tr><th>View</th><th>What it shows</th></tr>
+  <tr><td><b>J-lens</b></td><td>Words the model is <b>getting ready to say</b> — maybe as the
+    very next word, maybe a few sentences later. Ideas being carried, not yet spoken.</td></tr>
+  <tr><td><b>logit lens</b></td><td>What the model would <b>blurt out</b> if it stopped
+    thinking at that layer and answered immediately.</td></tr>
+  <tr><td><b>DIFF</b></td><td>Only the words the J-lens sees that the blurt-out view misses —
+    drawn in <span class="chip green">green</span>. That's the layer's hidden anticipation:
+    its quiet plans.</td></tr>
+</table>
+<p>The app shows layers L4 to L8. Below L4 the readouts barely change; above L8 the two
+lenses agree — the thought has become the word.</p>
+
+<div class="maggie"><div class="face">🐦‍⬛</div><div>
+  <div class="who">Maggie</div>
+  <p>Real AI researchers found the same thing in much bigger models: when one writes a rhyming
+  poem, it picks the rhyme word <em>before</em> writing the line that leads to it. Thinking
+  ahead isn't a trick of this little model — it's how these systems work.</p>
+</div></div>
+
+<h2>The heat strip: where did it decide?</h2>
+<p>Click any chip in the readout and the story lights up wherever that word ranked high in
+the model's mind. It answers the best detective question there is: not <em>what</em> did it
+think, but <em>when did it start thinking it</em>. Often an ending is quietly decided
+sentences before it appears.</p>
+
+<h2>Swap: steering a thought</h2>
+<p>The swap panel doesn't edit the text — it edits the <b>thinking</b>. Here is exactly what
+happens when you press <b>swap &amp; rewrite</b>:</p>
+<ul>
+  <li><b>The anchor.</b> The token you clicked. Everything up to and including it stays
+      exactly as written; the model rewrites everything after.</li>
+  <li><b>Two rewrites, same dice.</b> The model writes the continuation twice with the same
+      random choices — once untouched, once with your swap. So <em>any</em> difference between
+      the two panes was caused by the swap. Nothing else changed.</li>
+  <li><b>The edit is a nudge, not a command.</b> From the anchor on, the app pushes the
+      model's thought-bundle away from the take-out idea and toward the put-in idea. The
+      strength slider says how hard to push — stay in the green band; too hard and the story
+      breaks.</li>
+  <li><b>It's self-gating.</b> The push only bites where the take-out idea is actually
+      active. Swapping out a word the model isn't thinking about does nothing — check the
+      readout or the heat strip first.</li>
+</ul>
+
+<div class="maggie"><div class="face">🔍</div><div>
+  <div class="who">Maggie's case file</div>
+  <p>In <span class="chip">Max dug a hole</span>, swapping <b>hole</b> → <b>castle</b> once
+  made the model write <b>moat</b>. It never used the word castle — it used the <em>idea</em>
+  of one. That's the difference between editing text and editing thoughts.</p>
+</div></div>
+
+<h2>Three experiments to run</h2>
+<div class="card exp"><b>1. Catch a plan forming.</b> Analyze the vase story. Click the token
+right after <span class="chip">vase.</span> and switch to DIFF. Is <em>hid</em> or
+<em>sorry</em> already green — before Ben has done anything? Now use the heat strip on that
+word: where did the idea first glow?</div>
+<div class="card exp"><b>2. A swap that does nothing (on purpose).</b> Pick an anchor where
+your take-out word is <em>not</em> in the readout, and run the swap. The two rewrites should
+come out identical — you've just proven the edit is self-gating. Then move the anchor to
+where the word is hot and run it again.</div>
+<div class="card exp"><b>3. Same dice, different worlds.</b> Run one swap, read the two
+panes side by side, and find the exact word where they split apart. Everything before it is
+identical — that's the same-dice guarantee. Everything after is the swap's doing.</div>
+
+<h2>Honest instrument notes</h2>
+<ul>
+  <li>The <b>raw</b> toggle shows everything the lens sees — word-pieces and punctuation
+      included. The filtered view is friendlier; raw is truer.</li>
+  <li>The lens is a translation, not a mind-reading X-ray. It's trained to be good, but
+      it can blur or miss things — especially on very short stories.</li>
+  <li>This is a tiny model. Swaps steer the drift of ideas; they can't guarantee a
+      particular word shows up. When a swap barely changes anything, that's data too.</li>
+</ul>
+
+<h2>Word list</h2>
+<table>
+  <tr><th>Word</th><th>Meaning here</th></tr>
+  <tr><td>token</td><td>A piece of text the model reads or writes — a word or part of one.</td></tr>
+  <tr><td>layer</td><td>One of twelve processing steps inside the model. Early layers = raw
+      reading; later layers = nearly-decided words.</td></tr>
+  <tr><td>anchor</td><td>The token you clicked; the swap rethinks everything after it.</td></tr>
+  <tr><td>rank</td><td>A word's position on the model's mental list at some layer — rank 1 is
+      the strongest.</td></tr>
+  <tr><td>surprise</td><td>How adventurous generation is. 0 = always the top pick (the exact
+      same story every time).</td></tr>
+</table>
+
+<footer>Everything runs in your browser — no accounts, and your stories never leave your
+computer. · Curious how it was built? Read
+<a href="thought-bubble-making-of.html">the making of Thought Bubble</a>.</footer>
+</div>
+</body>
+</html>
