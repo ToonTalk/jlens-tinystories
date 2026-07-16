@@ -109,8 +109,8 @@
   <div class="filerow"><span class="nm">vocab.json</span><span class="st" id="st-vocab">—</span><div class="prog" style="flex:1"><div id="pg-vocab"></div></div></div>
   <button id="fetchBtn" class="go">⬇ fetch files from this folder</button>
   <span class="hint">or drop them below (works from file://)</span>
-  <div id="dropzone">drop stories110M.bin · tokenizer.bin · stories110M.jlens · vocab.json here</div>
-  <div id="driveHint" class="hint" style="display:none;margin-top:.35rem">Running inside Claude, so files can’t download by themselves here. Get the model file from <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin" target="_blank" rel="noopener">Hugging Face</a>, then drop it on the dotted box above (plus the three small files, if you have them).</div>
+  <div id="dropzone">drop stories110M.bin · tokenizer.bin · stories110M.jlens · vocab.json here — or a .zip of them</div>
+  <div id="driveHint" class="hint" style="display:none;margin-top:.35rem">Running inside Claude, so files can’t download by themselves here. Get the model file from <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin" target="_blank" rel="noopener">Hugging Face</a>, then drop it on the dotted box above (plus the three small files, if you have them) — or drop the starter .zip and the app unpacks it itself.</div>
   <div class="filerow" style="margin-top:.4rem"><span class="nm">readout dictionaries</span><span class="st" id="st-dict">—</span><div class="prog" style="flex:1"><div id="pg-dict"></div></div></div>
 </div>
 
@@ -1750,12 +1750,58 @@ $('fetchBtn').onclick = async () => {
     catch (e) { setStatus(`fetch failed: ${e.message} — drop the file instead`, 'err'); }
   }
 };
+async function inflateRaw(bytes) {
+  const ds = new DecompressionStream('deflate-raw');
+  const w = ds.writable.getWriter();
+  w.write(bytes); w.close();
+  const rd = ds.readable.getReader(), chunks = [];
+  let n = 0;
+  for (;;) { const { done, value } = await rd.read(); if (done) break; chunks.push(value); n += value.length; }
+  const outBuf = new Uint8Array(n); let o = 0;
+  for (const c of chunks) { outBuf.set(c, o); o += c.length; }
+  return outBuf.buffer;
+}
+async function handleZip(zipName, buffer) {
+  const b = new Uint8Array(buffer), dv = new DataView(buffer);
+  // end-of-central-directory: scan back over the (tiny) comment window
+  let eocd = -1;
+  for (let i = b.length - 22; i >= Math.max(0, b.length - 22 - 65536); i--)
+    if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+  if (eocd < 0) { setStatus(zipName + ': not a readable zip file', 'warn-t'); return; }
+  const count = dv.getUint16(eocd + 10, true);
+  let p = dv.getUint32(eocd + 16, true);   // central directory offset
+  let used = 0;
+  for (let i = 0; i < count; i++) {
+    if (dv.getUint32(p, true) !== 0x02014b50) break;
+    const method = dv.getUint16(p + 10, true);
+    const csize = dv.getUint32(p + 20, true);
+    const nlen = dv.getUint16(p + 28, true), xlen = dv.getUint16(p + 30, true), clen = dv.getUint16(p + 32, true);
+    const lho = dv.getUint32(p + 42, true);
+    const full = new TextDecoder().decode(b.subarray(p + 46, p + 46 + nlen));
+    p += 46 + nlen + xlen + clen;
+    const base = full.split('/').pop();
+    if (!base || full.startsWith('__MACOSX/') || base.startsWith('.')) continue;
+    if (!FILES[base]) continue;                               // only the four expected files
+    const lnlen = dv.getUint16(lho + 26, true), lxlen = dv.getUint16(lho + 28, true);
+    const start = lho + 30 + lnlen + lxlen;
+    const raw = b.subarray(start, start + csize);
+    let data;
+    if (method === 0) data = raw.slice().buffer;
+    else if (method === 8) data = await inflateRaw(raw);
+    else { setStatus(base + ': unsupported zip compression', 'warn-t'); continue; }
+    fileArrived(base, data); used++;
+  }
+  if (!used) setStatus(zipName + ': no expected files inside (need the four model files)', 'warn-t');
+}
 const dz = $('dropzone');
 dz.ondragover = (e) => { e.preventDefault(); dz.classList.add('over'); };
 dz.ondragleave = () => dz.classList.remove('over');
 dz.ondrop = async (e) => {
   e.preventDefault(); dz.classList.remove('over');
-  for (const f of e.dataTransfer.files) fileArrived(f.name, await f.arrayBuffer());
+  for (const f of e.dataTransfer.files) {
+    if (/\.zip$/i.test(f.name)) await handleZip(f.name, await f.arrayBuffer());
+    else fileArrived(f.name, await f.arrayBuffer());
+  }
 };
 
 // ---- worker messages ----
@@ -2993,7 +3039,7 @@ const PROVIDERS = {
       if (!res.ok) throw new Error((data.error && data.error.message) || ('HTTP ' + res.status));
       return (data.content || []).map(c => c.text || '').join('\n').trim();
     } },
-  openai: { label: 'OpenAI', model: 'gpt-5.1',
+  openai: { label: 'OpenAI', model: 'gpt-5.4-mini',
     async call(cfg, sys, usr){
       const res = await fetch('https://api.openai.com/v1/chat/completions', { method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.key },
