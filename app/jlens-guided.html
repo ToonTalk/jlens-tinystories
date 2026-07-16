@@ -88,6 +88,7 @@
     transform: translateY(-50%); background: rgba(143,211,167,.28);
     border: 1px solid rgba(143,211,167,.55); border-radius: 4px; pointer-events: none; }
   .bandwrap input { position: relative; }
+  #guideLinks a, #driveHint a { color: var(--blue); }
   label.inl { color: var(--dim); font-size: 12.5px; margin-right: .6rem; }
   datalist { display: none; }
 </style>
@@ -109,6 +110,7 @@
   <button id="fetchBtn" class="go">⬇ fetch files from this folder</button>
   <span class="hint">or drop them below (works from file://)</span>
   <div id="dropzone">drop stories110M.bin · tokenizer.bin · stories110M.jlens · vocab.json here</div>
+  <div id="driveHint" class="hint" style="display:none;margin-top:.35rem">Running inside Claude, so files can’t download by themselves here. Get the model file from <a href="https://drive.google.com/file/d/1qPsqGX7QEMbIgi3QtCPFvvfvfMjMmmUD/view?usp=sharing" target="_blank" rel="noopener">Google Drive</a>, then drop it on the dotted box above (plus the three small files, if you have them).</div>
   <div class="filerow" style="margin-top:.4rem"><span class="nm">readout dictionaries</span><span class="st" id="st-dict">—</span><div class="prog" style="flex:1"><div id="pg-dict"></div></div></div>
 </div>
 
@@ -199,6 +201,7 @@
 <!-- ============================ worker source ============================
      Plain-text script: booted as a Blob Worker by the page, extractable and
      eval-able by the Node parity harness (test/parity.mjs). DOM-free. -->
+<div class="hint" id="guideLinks" style="margin:1.2rem 0 .5rem">New here? Three guides live alongside this app: <a href="../guides/thought-bubble-guide-kids.html">for kids</a> · <a href="../guides/thought-bubble-guide-older-kids.html">for older kids</a> · <a href="../guides/thought-bubble-guide-teachers.html">for teachers &amp; parents</a> — and here is <a href="https://docs.google.com/document/d/183Gd3-_9Lv2wlkybDgr1qIvsFUuUBmsx_yg83bBGWxk/edit?usp=sharing" target="_blank" rel="noopener">the story behind this app</a>.</div>
 <script id="workerSrc" type="text/plain">
 'use strict';
 // ---- bin-reader (verbatim from Tiny Mind src/bin-reader.js, reader only) ----
@@ -1665,12 +1668,18 @@ function fileArrived(name, buffer, fromCache = false) {
   // fetch entirely — this is what makes revisits interactive in seconds.
   // (~430 MB of origin storage for the model; a prototype trade-off.)
   if (!fromCache) idbKV.set('file:' + name, buffer.slice(0)).catch(() => {});
+  if (spec.key === 'model') { const dh = $('driveHint'); if (dh) dh.style.display = 'none'; }
   pending[spec.key] = { name, buffer };
   $('st-' + spec.key).textContent = fromCache ? 'cached ✓' : 'loaded';
   $('st-' + spec.key).className = 'st ok';
   $('pg-' + spec.key).style.width = '100%';
   deliverPending();
 }
+// inside a Claude artifact with an empty cache, surface the download path
+setTimeout(() => {
+  if (/claudeusercontent\.com$/i.test(location.hostname) && !state.haveModel && !pending.model)
+    $('driveHint').style.display = '';
+}, 1200);
 // startup: restore whatever the cache has (typically all four files)
 (async () => {
   for (const name of Object.keys(FILES)) {
@@ -1703,12 +1712,19 @@ function deliverPending() {
   }
 }
 
+const FETCH_URL = {
+  // GitHub Pages caps files well under the model's ~420 MB; the model
+  // comes from Google Drive instead (confirm=t skips the scan page)
+  'stories110M.bin': 'https://drive.usercontent.google.com/download?id=1qPsqGX7QEMbIgi3QtCPFvvfvfMjMmmUD&export=download&confirm=t',
+};
 async function fetchWithProgress(name) {
   const spec = FILES[name];
   const el = $('pg-' + spec.key), st = $('st-' + spec.key);
   st.textContent = 'fetching…'; st.className = 'st';
-  const res = await fetch(name);
+  const res = await fetch(FETCH_URL[name] || name);
   if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
+  if (FETCH_URL[name] && /text\/html/i.test(res.headers.get('Content-Type') || ''))
+    throw new Error(`Google Drive sent a web page instead of ${name} — open the Drive link in a new tab, download the file, and drop it on the dotted box`);
   const total = +res.headers.get('Content-Length') || 0;
   const reader = res.body.getReader();
   const chunks = [];
@@ -1748,6 +1764,7 @@ worker.onmessage = (e) => {
   switch (m.type) {
     case 'model-ready':
       state.haveModel = true;
+      { const dh = $('driveHint'); if (dh) dh.style.display = 'none'; }
       setStatus(`model: ${m.config.nLayers} layers, dim ${m.config.dim}, vocab ${m.config.vocabSize}`);
       deliverPending(); break;
     case 'tokenizer-ready': state.haveTok = true; deliverPending(); break;
