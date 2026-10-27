@@ -1,0 +1,8 @@
+**No.** The question was whether J++ widens 15M's usable band beyond L2–L3, or surfaces non-surface content there. It does neither in a way a child could use:
+
+- **Band.** J++ lifts period-readout recall at L0–L1 from 0% to 5–9%, which is a few items. At those layers its display reads `fle / body / bird / creature / gun / moved` for "Ben broke his mom's favorite vase. He heard her coming." and `held / hold / carefully / holds` (J++ mixed) for the dark-night prompt. That is noise, not a usable band. In the band itself, J++'s readouts are *less* legible than J's: at L3 a prompt-independent `the / was / sad / did` fills 41% of the display slots (J: 22%), and future-word precision halves (0.6% vs 1.2%).
+- **Content.** The one place J++ helps is the "feeling" family at the period (23% → 50%). Hide, name and riddle stay at 0% for every lens at 15M. The model doesn't hold those in a form any linear lens reads out at 15M scale.
+- **Reliability.** J++'s 15M maps change three quarters of their display between a 100-prompt and a 1000-prompt fit. For in-browser fitting (the original reason 15M was attractive), that is disqualifying. The plain J reproduces at 90%.
+- **Swaps** don't work on 15M with any lens at the app band and strength.
+
+So J++ does not change the Tiny Mind decision. A Microscope thought bubble on stories15M would still be the plain J at L2–L3, with the surface-level content `out/report.md` described: `hole / castle`, `months / days`, `Finally / until`. It is weakly better than the logit lens (future-word precision 1.1–1.2% vs 0.7–0.9% at L2–L3; word-position recall about equal). Whether that is worth a bubble is a design call. J++ doesn't make it more worthwhile.

@@ -1,0 +1,6008 @@
+[
+ {
+  "name": "need/cold/Tom",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 5,
+  "readout_pos": 15,
+  "candidate_ids": [
+   2455,
+   3056,
+   24296,
+   25966
+  ],
+  "continuation": "He put on his coat, hat, and gloves and went outside. He saw a big hill with snow on top. He wanted to slide down the hill.\nHe ran to the hill and climbed up the hill. He saw",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/cold/Lucy",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 15,
+  "candidate_ids": [
+   2455,
+   3056,
+   24296,
+   25966
+  ],
+  "continuation": "She put on her warm coat, hat, and gloves and went outside. She saw a big hill with snow on top. She wanted to slide down the hill.\nShe ran to the hill and climbed up the hill. She",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/cold/Bob",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 15,
+  "candidate_ids": [
+   2455,
+   3056,
+   24296,
+   25966
+  ],
+  "continuation": "He put on his warm coat, hat, and gloves and went outside. He saw a big hill and decided to slide down it. He ran as fast as he could and slid down the hill. It was so much fun!",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/cold/Amy",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 5,
+  "readout_pos": 15,
+  "candidate_ids": [
+   2455,
+   3056,
+   24296,
+   25966
+  ],
+  "continuation": "She put on her coat, hat, and gloves and went outside. She saw a big hill with snow on top. She wanted to slide down the hill.\nShe ran to the hill and climbed up the hill. She saw",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/cold/Mark",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 15,
+  "candidate_ids": [
+   2455,
+   3056,
+   24296,
+   25966
+  ],
+  "continuation": "He put on his warm coat, hat, and gloves and went outside. He saw a big hill with snow on top. He wanted to slide down the hill.\nHe ran to the hill and climbed up the hill. He",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/cold/Jane",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 15,
+  "candidate_ids": [
+   2455,
+   3056,
+   24296,
+   25966
+  ],
+  "continuation": "She put on her warm coat, hat, and gloves and went outside. She saw a big hill and decided to slide down it. She ran and ran, but when she got to the bottom, she saw something strange.\nIt",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/thirsty/Jen",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4094,
+   13062,
+   13405,
+   27274
+  ],
+  "continuation": "She looked around and saw a big tree with a lot of shade. She ran to the tree and sat down. She felt much better.\nSuddenly, she heard a loud noise. It was a big truck.",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/thirsty/Billy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4094,
+   13062,
+   13405,
+   27274
+  ],
+  "continuation": "He looked around and saw a big tree with lots of shade. He ran over to it and sat down.\nBilly looked up at the tree and saw a big, red apple. He wanted to eat it, but it was",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/thirsty/Kim",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 34,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4094,
+   13062,
+   13405,
+   27274
+  ],
+  "continuation": "She looked around and saw a big tree with lots of shade. She ran to the tree and sat down.\n\"Mommy, can I have some water?\" she asked.\n\"Yes, of course,\" said Mom",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/thirsty/Leo",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4094,
+   13062,
+   13405,
+   27274
+  ],
+  "continuation": "He looked around and saw a big tree with a lot of shade. He ran to the tree and lay down in the shade. He felt much better.\nSuddenly, he heard a loud noise. It was a",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/thirsty/Lisa",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4094,
+   13062,
+   13405,
+   27274
+  ],
+  "continuation": "She looked for a place to drink. She saw a big tree with a lot of shade. She ran to the tree and sat down. She felt much better.\nShe saw a boy with a red ball. He was playing with",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/thirsty/Paul",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4094,
+   13062,
+   13405,
+   27274
+  ],
+  "continuation": "He looked around and saw a big tree with lots of shade. He ran to the tree and sat down.\nPaul looked up at the tree and said, \"I wish I could have a drink.\"\nJust then, a voice",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/hungry/Andy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9687,
+   11548,
+   12113,
+   15327,
+   17545,
+   18423,
+   21046,
+   21509,
+   22300,
+   24914,
+   25453,
+   26163
+  ],
+  "continuation": "He was so hungry. He wanted to eat something yummy.\nHe asked his mom, \"Mom, can I have something to eat?\"\nHis mom smiled and said, \"Yes, of course you can. What",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/hungry/Lucy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 17,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9687,
+   11548,
+   12113,
+   15327,
+   17545,
+   18423,
+   21046,
+   21509,
+   22300,
+   24914,
+   25453,
+   26163
+  ],
+  "continuation": "She was hungry and wanted a snack. She saw a big box of cookies on the table. She liked cookies. They were sweet and soft. She ran to the table and grabbed a cookie.\n\"Mommy",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/hungry/Jack",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9687,
+   11548,
+   12113,
+   15327,
+   17545,
+   18423,
+   21046,
+   21509,
+   22300,
+   24914,
+   25453,
+   26163
+  ],
+  "continuation": "He was very hungry. He wanted to eat something yummy.\nHis mom said, \"Let's go to the kitchen and see what we can find.\"\nJack was excited. He ran to the kitchen and saw a",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/hungry/Amy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9687,
+   11548,
+   12113,
+   15327,
+   17545,
+   18423,
+   21046,
+   21509,
+   22300,
+   24914,
+   25453,
+   26163
+  ],
+  "continuation": "She was very hungry. She wanted to eat something yummy.\nShe ran to the kitchen and saw a big bowl of soup on the table. It smelled good. She smiled and took a spoon. She put some",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/hungry/Joe",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 9,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9687,
+   11548,
+   12113,
+   15327,
+   17545,
+   18423,
+   21046,
+   21509,
+   22300,
+   24914,
+   25453,
+   26163
+  ],
+  "continuation": "He was hungry. He wanted to eat something yummy.\nHe went to the kitchen and saw a big bowl of soup. It smelled so good. He wanted to eat it all.\nHe took a spoon and",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/hungry/Jane",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9687,
+   11548,
+   12113,
+   15327,
+   17545,
+   18423,
+   21046,
+   21509,
+   22300,
+   24914,
+   25453,
+   26163
+  ],
+  "continuation": "She was very hungry. She wanted to eat something yummy.\nShe saw her mom in the kitchen. She ran to her and said, \"Mom, I'm hungry. Can I have some food?\"\nHer",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/dark/Jen",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "She felt scared and alone. She heard a loud noise and saw a big shadow. She felt something move in the corner. She screamed and jumped.\n\"Who are you?\" a voice said. Jen was surprised and",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/dark/Ted",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "He felt scared and alone. He heard a noise and saw a big, scary monster. Ted was so scared he started to cry.\nSuddenly, a voice said, \"Don't be scared",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/dark/Kim",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "She felt scared and alone. Suddenly, she heard a loud noise. She looked around and saw a big, scary monster. It was huge and had sharp teeth.\nKim was so scared that she started",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/dark/Roy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "He was scared and he started to cry.\nSuddenly, he heard a voice. It was a friendly voice. It said, \"Don't be scared, I'm here to help you.\"\nRo",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/dark/Lisa",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "She felt scared and alone. She heard a loud noise and saw a big shadow. She felt something move in the corner. She screamed and jumped.\n\"Who are you?\" a voice said. Lisa was surprised and",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/dark/Peter",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "He felt scared and alone. Suddenly, he heard a loud noise. He looked around and saw a big, scary monster. It was huge and had sharp teeth. Peter was so scared he started to cry.",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/shelf/Paul",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 27,
+  "readout_pos": 18,
+  "candidate_ids": [
+   1884,
+   3313,
+   3800,
+   11773,
+   11774,
+   24193
+  ],
+  "continuation": "He tried to jump, but he couldn't. He was so sad.\nThen he had an idea. He got a chair and stood on it. He reached up and grabbed the jar. He was so happy! He",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "need/shelf/Lucy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 28,
+  "readout_pos": 18,
+  "candidate_ids": [
+   1884,
+   3313,
+   3800,
+   11773,
+   11774,
+   24193
+  ],
+  "continuation": "She tried to jump, but she couldn't. She was so sad.\nThen, Lucy had an idea. She got a chair and climbed on it. She was so close to the jar. She reached out and grabb",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "need/shelf/Tom",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 18,
+  "candidate_ids": [
+   1884,
+   3313,
+   3800,
+   11773,
+   11774,
+   24193
+  ],
+  "continuation": "He tried to jump, but he couldn't. He was so sad.\nTom's mom saw him and said, \"Tom, why are you so sad?\"\nTom said, \"I want to get the jar, but",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/shelf/Amy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 18,
+  "candidate_ids": [
+   1884,
+   3313,
+   3800,
+   11773,
+   11774,
+   24193
+  ],
+  "continuation": "She tried to jump, but she couldn't. She was so sad.\nThen, her mom came in. She saw Amy trying to reach the jar. She said, \"Amy, why are you so sad?\"\nA",
+  "word_pos": 17,
+  "word_ok": false
+ },
+ {
+  "name": "need/shelf/Bob",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 28,
+  "readout_pos": 18,
+  "candidate_ids": [
+   1884,
+   3313,
+   3800,
+   11773,
+   11774,
+   24193
+  ],
+  "continuation": "He tried to jump, but he couldn't. He was so sad.\nThen, Bob had an idea. He got a chair and put it next to the shelf. He climbed on the chair and then onto the sh",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "need/shelf/Jane",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 28,
+  "readout_pos": 18,
+  "candidate_ids": [
+   1884,
+   3313,
+   3800,
+   11773,
+   11774,
+   24193
+  ],
+  "continuation": "She tried to jump, but she couldn't. She was so sad.\nThen, Jane had an idea. She got a chair and stood on it. She reached up and grabbed the jar. She was so happy!",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "need/locked/Jen",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 31,
+  "readout_pos": 16,
+  "candidate_ids": [
+   1820,
+   1989,
+   2558,
+   7670
+  ],
+  "continuation": "She tried to open it, but it wouldn't budge. She asked her mom for help, but her mom said she had to find the key.\nJen was very sad. She wanted to see what was inside the ch",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "need/locked/John",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   1820,
+   1989,
+   2558,
+   7670
+  ],
+  "continuation": "He tried to open it, but he couldn't. He asked his mom for help.\n\"Mom, can you help me open this chest?\" he asked.\nHis mom smiled and said, \"Yes, I",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/locked/Kim",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   1820,
+   1989,
+   2558,
+   7670
+  ],
+  "continuation": "She tried to open it but she couldn't. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kim asked.\n\"Yes, I can help you,\" her mom said.",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/locked/Billy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   1820,
+   1989,
+   2558,
+   7670
+  ],
+  "continuation": "He tried to open it but he couldn't. He asked his mom for help.\n\"Mom, can you help me open this chest?\" he asked.\nHis mom smiled and said, \"Yes, I can",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/locked/Lisa",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 31,
+  "readout_pos": 16,
+  "candidate_ids": [
+   1820,
+   1989,
+   2558,
+   7670
+  ],
+  "continuation": "She tried to open it, but it wouldn't budge. She asked her mom for help, but her mom said she had to find the key.\n\"I don't know where the key is,\" Lisa said.\n",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "need/locked/Leo",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   1820,
+   1989,
+   2558,
+   7670
+  ],
+  "continuation": "He tried to open it, but he couldn't. He asked his mom for help.\n\"Mom, can you help me open this chest?\" he said.\n\"Sure, Leo. Let's see what",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "need/island/Peter",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   3527,
+   7751,
+   12945,
+   13006,
+   16230,
+   18419
+  ],
+  "continuation": "He was very excited and wanted to explore. He asked his mom if he could go, but she said no. She said it was too dangerous.\nPeter was sad, but he decided to go anyway. He walked to the island and",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/island/Lucy",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   3527,
+   7751,
+   12945,
+   13006,
+   16230,
+   18419
+  ],
+  "continuation": "She asked her mom if she could go. Her mom said yes, but she had to be careful and stay close to the shore.\nLucy was so excited. She ran to the shore and started to explore. She saw a big",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/island/Andy",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   3527,
+   7751,
+   12945,
+   13006,
+   16230,
+   18419
+  ],
+  "continuation": "He was so excited to explore it. He asked his mom if he could go, but she said no. She said it was too dangerous.\nSo Andy decided to go anyway. He walked and walked until he reached the island. He",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/island/Amy",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   3527,
+   7751,
+   12945,
+   13006,
+   16230,
+   18419
+  ],
+  "continuation": "She asked her mom if she could go. Her mom said yes, but she had to be careful and stay close to her.\nAmy was very excited. She packed her bag and put on her shoes and hat. She",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/island/Jack",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   3527,
+   7751,
+   12945,
+   13006,
+   16230,
+   18419
+  ],
+  "continuation": "He was so excited to see all the different kinds of animals and plants. He asked his mom if he could go and she said yes.\nWhen Jack arrived at the island, he saw a big, tall tree. He wanted to clim",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/island/Jane",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   3527,
+   7751,
+   12945,
+   13006,
+   16230,
+   18419
+  ],
+  "continuation": "She was very excited and wanted to explore. She asked her mom if she could go, but her mom said no. Jane was very sad and started to cry.\nHer mom said, \"Don't worry, sweetheart. I",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/catch/Jen",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   1212,
+   5964,
+   6779,
+   7733,
+   7787,
+   12670,
+   15382,
+   15831,
+   22775
+  ],
+  "continuation": "She ran to the edge of the pond and reached out her hand. But the fish was too fast and swam away. Jen was sad and angry.\nShe saw a big rock near the pond. She had an idea.",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/catch/Mark",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   1212,
+   5964,
+   6779,
+   7733,
+   7787,
+   12670,
+   15382,
+   15831,
+   22775
+  ],
+  "continuation": "He ran to the edge of the pond and tried to grab the fish with his hands. But the fish was too fast and swam away.\n\"Come back, fish!\" Mark shouted. He was very angry and sad.",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/catch/Kim",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 44,
+  "readout_pos": 15,
+  "candidate_ids": [
+   1212,
+   5964,
+   6779,
+   7733,
+   7787,
+   12670,
+   15382,
+   15831,
+   22775
+  ],
+  "continuation": "She ran to the edge of the pond and tried to grab the fish with her hands. But the fish was too fast and swam away. Kim felt sad and angry.\nShe saw a man with a net and a net.",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/catch/Ted",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   1212,
+   5964,
+   6779,
+   7733,
+   7787,
+   12670,
+   15382,
+   15831,
+   22775
+  ],
+  "continuation": "He ran to the edge of the pond and tried to grab the fish with his hands. But the fish was too fast and swam away.\n\"Come back, fish!\" Ted shouted. He was so close to the fish",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/catch/Lisa",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 40,
+  "readout_pos": 15,
+  "candidate_ids": [
+   1212,
+   5964,
+   6779,
+   7733,
+   7787,
+   12670,
+   15382,
+   15831,
+   22775
+  ],
+  "continuation": "She ran to the edge of the pond and reached out her hand. But the fish was scared and swam away. Lisa felt sad and angry.\nShe saw a man with a net and a net. He was fishing",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/catch/Roy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   1212,
+   5964,
+   6779,
+   7733,
+   7787,
+   12670,
+   15382,
+   15831,
+   22775
+  ],
+  "continuation": "He asked his mom, \"Mom, can I catch the big fish?\" His mom said, \"No, it's too dangerous. You can't catch it.\"\nBut Robert was very curious and he wanted to catch the",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/tired/Leo",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 13,
+  "candidate_ids": [
+   2580,
+   6592,
+   8344,
+   8709,
+   8971,
+   9709,
+   14195,
+   17059
+  ],
+  "continuation": "He wanted to go to bed, but he was scared of the dark. He asked his mom if he could go to bed, but she said no. She said it was too dark and he might get lost. Leo was sad,",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/tired/Lucy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   2580,
+   6592,
+   8344,
+   8709,
+   8971,
+   9709,
+   14195,
+   17059
+  ],
+  "continuation": "She had been playing all day and was feeling very sleepy. She wanted to go to bed, but she was too tired to do so.\nSuddenly, she heard a noise. It was coming from the kitchen. She",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/tired/Paul",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   2580,
+   6592,
+   8344,
+   8709,
+   8971,
+   9709,
+   14195,
+   17059
+  ],
+  "continuation": "He had been playing all day and was feeling very sleepy. He wanted to go to bed, but he was too tired to do so.\nPaul's mom came into his room and said, \"Paul, it's time",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/tired/Amy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   2580,
+   6592,
+   8344,
+   8709,
+   8971,
+   9709,
+   14195,
+   17059
+  ],
+  "continuation": "She had been playing all day and was feeling very sleepy. She wanted to go to bed, but she was too tired to do so.\nSuddenly, she heard a noise. It was coming from the kitchen. She",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/tired/Tom",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   2580,
+   6592,
+   8344,
+   8709,
+   8971,
+   9709,
+   14195,
+   17059
+  ],
+  "continuation": "He had been playing all day and was feeling very sleepy. He wanted to go to bed, but he was too tired to do so.\nTom's mom came into his room and said, \"Tom, it's time",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/tired/Jane",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   2580,
+   6592,
+   8344,
+   8709,
+   8971,
+   9709,
+   14195,
+   17059
+  ],
+  "continuation": "She had been playing all day and was feeling very sleepy. She wanted to go to bed, but she was too tired to do so.\nSuddenly, she heard a noise. It was coming from the kitchen. Jane",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/dirty/Jen",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   4094,
+   5941,
+   13062,
+   13405,
+   14941,
+   21993,
+   27683,
+   28256,
+   29559
+  ],
+  "continuation": "She was so tired that she had to take a bath. She went to the bathroom and saw the big tub. She was so excited to get in and play with her toys.\nBut when she tried to get in, she",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/dirty/Joe",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 15,
+  "readout_pos": 13,
+  "candidate_ids": [
+   4094,
+   5941,
+   13062,
+   13405,
+   14941,
+   21993,
+   27683,
+   28256,
+   29559
+  ],
+  "continuation": "His mom saw him and said, \"Joe, you need to clean up before dinner.\" Joe was sad and said, \"But I don't want to.\" His mom said, \"If you don't clean up, you",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/dirty/Kim",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   4094,
+   5941,
+   13062,
+   13405,
+   14941,
+   21993,
+   27683,
+   28256,
+   29559
+  ],
+  "continuation": "She was so tired that she had to take a bath. She went to the bathroom and saw a big, shiny towel. She grabbed it and started to rub it.\nSuddenly, she heard a",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/dirty/John",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 14,
+  "readout_pos": 13,
+  "candidate_ids": [
+   4094,
+   5941,
+   13062,
+   13405,
+   14941,
+   21993,
+   27683,
+   28256,
+   29559
+  ],
+  "continuation": "His mom saw him and said, \"John, you need to clean up before dinner.\"\nJohn said, \"But Mom, I don't want to clean. I want to play more.\"\nHis mom said, \"",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/dirty/Lisa",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 13,
+  "candidate_ids": [
+   4094,
+   5941,
+   13062,
+   13405,
+   14941,
+   21993,
+   27683,
+   28256,
+   29559
+  ],
+  "continuation": "She had to take a bath and wash her hands and face. She was so happy to be clean and smell nice.\nWhen she got home, her mom said, \"Lisa, you need to wash your hands and",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/dirty/Billy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 15,
+  "readout_pos": 13,
+  "candidate_ids": [
+   4094,
+   5941,
+   13062,
+   13405,
+   14941,
+   21993,
+   27683,
+   28256,
+   29559
+  ],
+  "continuation": "His mom saw him and said, \"Billy, you need to clean up before dinner.\"\nBilly was sad and said, \"But I don't want to clean up. I want to play.\"\nHis mom said",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "need/broken/Roy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 9,
+  "readout_pos": 10,
+  "candidate_ids": [
+   2329,
+   5878,
+   24778
+  ],
+  "continuation": "He was so sad and he wanted to fix it. He asked his mom for help.\n\"Mom, can you help me fix my doll?\" he asked.\nHis mom smiled and said, \"Of course, I can",
+  "word_pos": 9,
+  "word_ok": true
+ },
+ {
+  "name": "need/broken/Lucy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 10,
+  "candidate_ids": [
+   2329,
+   5878,
+   24778
+  ],
+  "continuation": "She was very sad and cried a lot. She loved her doll very much and did not want to share it with anyone.\nOne day, her mom came to her room and saw the broken doll. She said, \"Oh, Lucy",
+  "word_pos": 9,
+  "word_ok": false
+ },
+ {
+  "name": "need/broken/Peter",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 9,
+  "readout_pos": 10,
+  "candidate_ids": [
+   2329,
+   5878,
+   24778
+  ],
+  "continuation": "He was so sad and he wanted to fix it. He asked his mom for help.\n\"Mom, can you help me fix my doll?\" he asked.\nHis mom smiled and said, \"Yes, of course I",
+  "word_pos": 9,
+  "word_ok": true
+ },
+ {
+  "name": "need/broken/Amy",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 10,
+  "candidate_ids": [
+   2329,
+   5878,
+   24778
+  ],
+  "continuation": "She was very sad and cried a lot. She loved her doll very much and did not want to share it with anyone.\nOne day, her mom came to her room and saw the broken doll. She said, \"Oh, Amy",
+  "word_pos": 9,
+  "word_ok": false
+ },
+ {
+  "name": "need/broken/Andy",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 9,
+  "readout_pos": 10,
+  "candidate_ids": [
+   2329,
+   5878,
+   24778
+  ],
+  "continuation": "He was so sad and he wanted to fix it. He asked his mom for help.\n\"Mom, can you help me fix my doll?\" he asked.\n\"Yes, of course,\" said his mom.\nSo they",
+  "word_pos": 9,
+  "word_ok": true
+ },
+ {
+  "name": "need/broken/Jane",
+  "family": "need",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 13,
+  "readout_pos": 10,
+  "candidate_ids": [
+   2329,
+   5878,
+   24778
+  ],
+  "continuation": "She was very sad and cried a lot. She wanted to fix her doll, but she didn't know how.\nOne day, Jane's mom came into her room and saw her daughter crying. She asked her what was",
+  "word_pos": 9,
+  "word_ok": true
+ },
+ {
+  "name": "need/garden/Jen",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   6038,
+   13062,
+   13405,
+   17251,
+   21431
+  ],
+  "continuation": "She was sad and wanted to go outside. She asked her mom, \"Can I go outside and play?\" Her mom said, \"Yes, but be careful.\"\nJen went outside and saw a big puddle. She",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/garden/Bob",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   6038,
+   13062,
+   13405,
+   17251,
+   21431
+  ],
+  "continuation": "He was sad because he wanted to play with them. He asked his mom, \"Can I play with the flowers?\"\nHis mom said, \"No, Bob. We don't want to get wet. We need to find",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/garden/Kim",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   6038,
+   13062,
+   13405,
+   17251,
+   21431
+  ],
+  "continuation": "She was sad and wanted to go outside. She asked her mom, \"Can I go outside and play?\" Her mom said, \"Yes, but be careful.\"\nKim went outside and saw a big puddle. She",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/garden/Mark",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   6038,
+   13062,
+   13405,
+   17251,
+   21431
+  ],
+  "continuation": "He was sad and wanted to go outside and play. He asked his mom, \"Can I go outside and play?\" His mom said, \"Yes, but be careful.\"\nMark went outside and saw a big puddle.",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/garden/Lisa",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   6038,
+   13062,
+   13405,
+   17251,
+   21431
+  ],
+  "continuation": "She was sad and wanted to go outside. She asked her mom, \"Can I go outside and play?\" Her mom said, \"Yes, but be careful.\"\nSo Lisa went outside and started to play. She ran around the garden",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/garden/Ted",
+  "family": "need",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   6038,
+   13062,
+   13405,
+   17251,
+   21431
+  ],
+  "continuation": "He was sad and wanted to go outside. He asked his mom, \"Can I go outside and play?\" His mom said, \"Yes, but be careful.\"\nTed went outside and saw a big puddle. He",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/bowl/Billy",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   9687,
+   13062,
+   13405,
+   17545,
+   25453
+  ],
+  "continuation": "He was so sad. He wanted to play with his dog, but he couldn't. He looked around and saw a big, red ball. He ran over to it and started to play with it.\nBilly's dog",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/bowl/Lucy",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 9,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   9687,
+   13062,
+   13405,
+   17545,
+   25453
+  ],
+  "continuation": "He was very hungry and wanted to eat. He saw a big bone on the table and ran to get it. But he did not see the cat that was watching him. The cat was curious and wanted to play with the b",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "need/bowl/Leo",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   9687,
+   13062,
+   13405,
+   17545,
+   25453
+  ],
+  "continuation": "He was very sad and angry. He wanted to play with his dog, but he had no place to put his bowl. He looked around and saw a big box. He had an idea. He ran to the box and jumped",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/bowl/Amy",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 9,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   9687,
+   13062,
+   13405,
+   17545,
+   25453
+  ],
+  "continuation": "He was very hungry and wanted to eat. He saw a big bone on the table and ran to get it. But the bone was not his. It was a trap. A trap is a trap for traps.\n",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "need/bowl/Paul",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   9687,
+   13062,
+   13405,
+   17545,
+   25453
+  ],
+  "continuation": "He was so sad. He wanted to make his dog happy.\nPaul's mom saw him and said, \"Paul, why are you so sad?\"\nPaul said, \"My dog is empty. I want to make him happy",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/bowl/Jane",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 14,
+  "candidate_ids": [
+   4094,
+   9687,
+   13062,
+   13405,
+   17545,
+   25453
+  ],
+  "continuation": "He was so sad. He wanted to play with his dog, but he had no one to play with. He looked around the house and saw a big box. He thought it might be a toy. He ran to the box and",
+  "word_pos": 13,
+  "word_ok": false
+ },
+ {
+  "name": "need/read/Jen",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "She looked around, but she couldn't find the book she wanted. She started to cry.\nSuddenly, she heard a noise. It was coming from the closet. Jen was scared, but she was brave",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/read/Jack",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "He looked around and saw a big, black book. He opened it and started to read.\nSuddenly, he heard a loud noise. He looked around and saw a big, black bear! Jack was scared and he",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/read/Kim",
+  "family": "need",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 33,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "She looked around and saw a big, bright book. She opened it and started to read.\nKim was so excited that she forgot to turn off the light. She was too busy reading. Suddenly, the light went out",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "need/read/Joe",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "He looked around and saw a big, black book. He opened it and started to read.\nSuddenly, he heard a loud noise. He looked up and saw a big, black bear! Joe was scared and he",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/read/Lisa",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "She looked around her room, but she couldn't find it. She asked her mom, \"Where is my book?\"\nHer mom smiled and said, \"It's in the drawer, Lisa. You can look in the",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "need/read/John",
+  "family": "need",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3578,
+   4366,
+   12790,
+   20769,
+   28692
+  ],
+  "continuation": "He looked around and saw a big, black book. He opened it and started to read.\nSuddenly, he heard a loud noise. He looked up and saw a big, black bear! John was scared and started",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/lost/Tom",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 22,
+  "candidate_ids": [
+   10680,
+   10901,
+   14610,
+   21772,
+   22121
+  ],
+  "continuation": "He felt very sad and scared. He asked his mom and dad if they had seen his teddy bear, but they did not know where it was.\n\"Mom, dad, I can't find my ted",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/lost/Lucy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 22,
+  "candidate_ids": [
+   10680,
+   10901,
+   14610,
+   21772,
+   22121
+  ],
+  "continuation": "She was very sad and cried a lot. Her mom and dad tried to help her find it, but they could not.\nThen, a kind lady came to them and asked what was wrong. Lucy told her about her lost ted",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/lost/Bob",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 22,
+  "candidate_ids": [
+   10680,
+   10901,
+   14610,
+   21772,
+   22121
+  ],
+  "continuation": "He was very sad.\nThen he saw a little girl playing with a ball. He asked her, \"Can I play with you?\"\nThe little girl smiled and said, \"Yes, of course!\"\nBob was so happy.",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/lost/Amy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 22,
+  "candidate_ids": [
+   10680,
+   10901,
+   14610,
+   21772,
+   22121
+  ],
+  "continuation": "She felt very sad and cried. She asked her mom, \"Mom, where is my teddy bear?\"\nHer mom said, \"I don't know, sweetie. Maybe you left it at the park. Let'",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/lost/Mark",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 22,
+  "candidate_ids": [
+   10680,
+   10901,
+   14610,
+   21772,
+   22121
+  ],
+  "continuation": "He was very sad and cried a lot. His mom saw him crying and asked him what was wrong.\n\"I lost my teddy bear,\" Mark said.\n\"Don't worry, we will find it,\" his mom",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/lost/Jane",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 22,
+  "candidate_ids": [
+   10680,
+   10901,
+   14610,
+   21772,
+   22121
+  ],
+  "continuation": "She was very sad.\nThen, she saw a man with a big bag. He was walking towards her. She was scared.\nThe man said, \"Don't be scared, little one. I'm here",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/gift/Jen",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9796,
+   17819,
+   24173,
+   28569
+  ],
+  "continuation": "She was so excited to have a new friend. She hugged the puppy and said, \"I love you!\"\nThe puppy was so happy to be with Jen. He licked her face and wagged his tail",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/gift/Billy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9796,
+   17819,
+   24173,
+   28569
+  ],
+  "continuation": "He was so excited to have a new friend.\nBilly's mom said, \"Let's go outside and play with the puppy!\"\nBilly was so happy. He ran outside and the puppy followed him.",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/gift/Kim",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9796,
+   17819,
+   24173,
+   28569
+  ],
+  "continuation": "She was so excited to have a new friend. She hugged the puppy and said, \"I love you!\"\nKim's mom said, \"Let's go outside and play with the puppy.\" Kim was",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/gift/Leo",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9796,
+   17819,
+   24173,
+   28569
+  ],
+  "continuation": "He was so excited to have a new friend. He hugged the puppy and said, \"I'm so happy you're here!\"\nThe puppy was so happy to be with Leo. He licked his face",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/gift/Lisa",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9796,
+   17819,
+   24173,
+   28569
+  ],
+  "continuation": "She was so excited to have a new friend. She hugged the puppy and said, \"I love you!\"\nThe puppy was so happy to be with Lisa. He licked her face and wagged his tail",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/gift/Paul",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9796,
+   17819,
+   24173,
+   28569
+  ],
+  "continuation": "He was so excited to have a new friend. He hugged the puppy and said, \"I'm so happy you're here!\"\nPaul and the puppy played together all day. They ran around the garden and",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/thunder/Andy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "He was scared and ran to his mom.\n\"Mommy, what was that?\" he asked.\n\"That was thunder,\" his mom said. \"It was loud and scary. It scared me.\"\n",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/thunder/Lucy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "She was scared and ran to her mom.\n\"Mommy, what was that?\" Lucy asked.\n\"That was thunder,\" her mom said. \"It was loud and scary.\"\nLucy was still sc",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/thunder/Jack",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "He was scared and ran to his mom.\n\"Mommy, what was that?\" Jack asked.\n\"That was thunder,\" his mom said. \"It was loud and scary.\"\nJack was still scared",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/thunder/Amy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "She was scared and ran to her mom. \"Mommy, what was that?\" she asked.\nHer mom smiled and said, \"That was thunder, Amy. It was loud and scary, but it was nothing",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/thunder/Joe",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "He was scared and ran to his mom.\n\"Mommy, what was that?\" Joe asked.\n\"That was thunder,\" his mom said. \"It was loud and scary.\"\nJoe was still sc",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/thunder/Jane",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "She was scared and ran to her mom.\n\"Mommy, what was that?\" Jane asked.\n\"That was thunder,\" her mom said. \"It was loud and scary.\"\n\"I'm not",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/grabbed/Jen",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4104,
+   10395,
+   14610,
+   19581,
+   21772,
+   21878,
+   26230
+  ],
+  "continuation": "He was so excited to fly it in the sky. He ran outside and held the kite tightly in his hands.\n\"Look, Jen! I'm flying my kite!\" he shouted.\nJen was so",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/grabbed/Ted",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4104,
+   10395,
+   14610,
+   19581,
+   21772,
+   21878,
+   26230
+  ],
+  "continuation": "She was so excited to fly it in the sky. She ran outside and held the kite tightly in her hands.\n\"Oh no!\" she said. \"My kite is broken!\"\nJust then, her mom came outside",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/grabbed/Kim",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4104,
+   10395,
+   14610,
+   19581,
+   21772,
+   21878,
+   26230
+  ],
+  "continuation": "He wanted to make it fly high in the sky. He ran to the park with Kim and his kite.\n\"Look, Kim, I have a kite!\" Tom said. He held the kite in his hand and let",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/grabbed/Roy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4104,
+   10395,
+   14610,
+   19581,
+   21772,
+   21878,
+   26230
+  ],
+  "continuation": "She was so excited to fly it in the sky. She ran outside and held the kite tightly in her hands.\n\"Look, I'm flying it!\" she shouted.\nHer mom smiled and said, \"That",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/grabbed/Lisa",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4104,
+   10395,
+   14610,
+   19581,
+   21772,
+   21878,
+   26230
+  ],
+  "continuation": "He was so excited to fly it in the sky. He ran outside and started to run. He was so happy to be flying his kite.\nSuddenly, a big gust of wind came and blew the k",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/grabbed/Peter",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4104,
+   10395,
+   14610,
+   19581,
+   21772,
+   21878,
+   26230
+  ],
+  "continuation": "He was so excited to fly it in the sky. He ran outside and held the kite tightly in his hands.\n\"Look, Mommy!\" he shouted. \"I'm flying my kite!\"\nM",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/painting/Paul",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   22314,
+   28569
+  ],
+  "continuation": "He was so proud of his work and wanted to show it to his mom. He ran to the kitchen and grabbed the paintbrush. He was so excited to show his mom.\nPaul ran back to the living room and",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/painting/Lucy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   22314,
+   28569
+  ],
+  "continuation": "She was so proud of her work and wanted to show it to her mom. She ran to the kitchen and saw her mom standing in the kitchen.\n\"Mom, look at my painting!\" Lucy said.\nHer mom smiled and",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/painting/Tom",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   22314,
+   28569
+  ],
+  "continuation": "He was so proud of his work and wanted to show it to his dad. He ran to the living room and shouted, \"Dad, look at my painting!\"\nHis dad smiled and said, \"That'",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/painting/Amy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   22314,
+   28569
+  ],
+  "continuation": "She was so proud of her work and wanted to show it to her mom. She ran to the kitchen and saw her mom standing in the kitchen.\n\"Mom, look at my painting!\" Amy said.\nHer mom smiled and",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/painting/Bob",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   22314,
+   28569
+  ],
+  "continuation": "He was so proud of his work and wanted to show it to his mom. He ran to the kitchen and grabbed the paintbrush. He was so excited to show his mom.\nBut when he got to the kitchen,",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/painting/Jane",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   22314,
+   28569
+  ],
+  "continuation": "She was so proud of her work and wanted to show it to her mom. She ran to the kitchen and saw her mom standing in the kitchen.\n\"Mom, look at my painting!\" Jane said.\nHer mom smiled and",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/pushed/Jen",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   7423,
+   8221
+  ],
+  "continuation": "She was so sad and hurt. Her mom came running and hugged her. She said, \"It's ok, sweetheart. I'm here to comfort you.\"\nJen's mom put a bandage on",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/pushed/John",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   7423,
+   8221
+  ],
+  "continuation": "She was so sad and hurt. John felt bad and wanted to help her. He ran to get her mom.\nJohn's mom came and saw what had happened. She was very angry and said, \"John, why did you",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/pushed/Kim",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   7423,
+   8221
+  ],
+  "continuation": "She was so sad and hurt. Her mom came running and saw what had happened. She hugged Kim and said, \"It's ok, I'm here to help.\"\nMom took Kim to the doctor. The",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/pushed/Billy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 22,
+  "readout_pos": 13,
+  "candidate_ids": [
+   7423,
+   8221
+  ],
+  "continuation": "She was so sad and hurt.\nBilly ran to her sister and said, \"I'm sorry, I didn't mean to hurt you.\"\nHis sister looked up at him with a sad face and said, \"",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/pushed/Lisa",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   7423,
+   8221
+  ],
+  "continuation": "Her sister was so scared and she ran to her mom.\n\"Mommy, I'm scared!\" cried Lisa.\nHer mom hugged her and said, \"It's okay, sweetheart. I",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/pushed/Leo",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 13,
+  "candidate_ids": [
+   7423,
+   8221
+  ],
+  "continuation": "She was so sad and hurt. Leo was so sorry that he had made her cry. He wanted to make her feel better.\nLeo ran to his sister and gave her a big hug. He said, \"It's",
+  "word_pos": 12,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/moved/Peter",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3052,
+   4750,
+   9894,
+   14610,
+   18552,
+   21772
+  ],
+  "continuation": "Peter was sad because he would miss his friend. He wanted to go with him, but he was too scared.\nOne day, Peter's mom said, \"Let's go to the new town. It will be fun",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/moved/Lucy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3052,
+   4750,
+   9894,
+   14610,
+   18552,
+   21772
+  ],
+  "continuation": "Lucy was very sad and missed her old home. She wanted to go with her friend but she didn't know how.\nOne day, Lucy's mom said, \"Let's go to the new town and see if we",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/moved/Andy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3052,
+   4750,
+   9894,
+   14610,
+   18552,
+   21772
+  ],
+  "continuation": "He was sad and lonely, but he knew he had to go. He had to pack his bag and get ready to go.\nOn the way, Andy saw a big, scary dog. He was so scared that he",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/moved/Amy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3052,
+   4750,
+   9894,
+   14610,
+   18552,
+   21772
+  ],
+  "continuation": "Amy was very sad and missed her old friend. She wanted to go with her, but she didn't know how.\nOne day, Amy's mom said, \"Let's go to the new town and see if we",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/moved/Jack",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3052,
+   4750,
+   9894,
+   14610,
+   18552,
+   21772
+  ],
+  "continuation": "Jack was sad because he couldn't go with his friend. He wanted to go with him, but he didn't know what to do.\nOne day, Jack's friend came to visit him. He said, \"I",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/moved/Jane",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 15,
+  "candidate_ids": [
+   3052,
+   4750,
+   9894,
+   14610,
+   18552,
+   21772
+  ],
+  "continuation": "Jane was sad because she would miss her friend. But then, she had an idea. She decided to make a special surprise for her friend.\nJane went to the store and bought some paint. She painted a beautiful picture of a",
+  "word_pos": 14,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/splash/Jen",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10569,
+   19090
+  ],
+  "continuation": "Jen was so happy and laughed. She laughed and laughed.\nSuddenly, Jen heard a loud noise. She looked around and saw a big, scary monster. The monster was very angry and it started to ch",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/splash/Mark",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10569,
+   19090
+  ],
+  "continuation": "Mark laughed and laughed. He was having so much fun.\nSuddenly, Mark heard a loud noise. He looked around and saw a big, scary monster. The monster was very angry and it started to ch",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/splash/Kim",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10569,
+   19090
+  ],
+  "continuation": "Kim laughed and said, \"That was fun!\"\nKim laughed too and said, \"Let's do it again!\"\nSo they both jumped in the bath again and again. They splashed and laughed until they were both",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/splash/Ted",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 7,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10569,
+   19090
+  ],
+  "continuation": "He was so happy and he laughed and laughed. He was so playful and he loved to splash around.\nSuddenly, Ted heard a loud noise. He looked around and saw a big, scary monster!",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/splash/Lisa",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10569,
+   19090
+  ],
+  "continuation": "She laughed and giggled as she watched the water splash around her.\nSuddenly, Lisa heard a loud noise. She looked up and saw a big, scary monster! It was huge and it was coming",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/splash/Roy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 7,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10569,
+   19090
+  ],
+  "continuation": "He was so happy and he laughed and laughed. He was so playful and he loved to splash around.\nSuddenly, a big dog came running towards him. The puppy was scared and he started to cry",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/coin/Leo",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   18014,
+   24173,
+   28569
+  ],
+  "continuation": "He was very happy and wanted to keep it. He ran to his mom and said, \"Mom, look what I found! Can I keep it?\"\nMom looked at the coin and said, \"That's a very",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/coin/Lucy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   18014,
+   24173,
+   28569
+  ],
+  "continuation": "She was so excited and wanted to keep it. She picked it up and put it in her pocket.\nSuddenly, a voice called out from behind her. \"That's mine!\" it said. Lucy was scared",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/coin/Paul",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   18014,
+   24173,
+   28569
+  ],
+  "continuation": "He was so excited and wanted to keep it forever. He ran to his mom and said, \"Mommy, look what I found!\"\nHis mom smiled and said, \"That's a very special coin, Paul.",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/coin/Amy",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   18014,
+   24173,
+   28569
+  ],
+  "continuation": "She was so excited and wanted to keep it. She ran to her mom and said, \"Mommy, look what I found! Can I keep it?\"\nHer mom smiled and said, \"Yes, you can keep it.",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/coin/Tom",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   18014,
+   24173,
+   28569
+  ],
+  "continuation": "He was very happy and wanted to keep it. He ran to his mom and showed her the coin.\n\"Look, mom, I found a gold coin!\" he said.\n\"Wow, that's great, Tom!",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/coin/Jane",
+  "family": "feeling",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 14,
+  "candidate_ids": [
+   9796,
+   18014,
+   24173,
+   28569
+  ],
+  "continuation": "She was so excited and wanted to keep it. She picked it up and put it in her pocket.\nSuddenly, a voice called out from behind her. \"That's mine!\" it said. Jane turned around and",
+  "word_pos": 13,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/brokecar/Jen",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 16,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7423,
+   8221,
+   14610,
+   21772
+  ],
+  "continuation": "Jen felt bad and wanted to help. She said, \"I'm sorry, I didn't mean to break your toy car.\"\nThe friend said, \"It's okay, but please be careful next time.\"\n",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/brokecar/Joe",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7423,
+   8221,
+   14610,
+   21772
+  ],
+  "continuation": "Joe felt bad and said sorry. He asked his friend if he could fix it. His friend said yes. Joe was happy. He fixed the toy car and it was good as new. His friend was happy too. They played together",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/brokecar/Kim",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7423,
+   8221,
+   14610,
+   21772
+  ],
+  "continuation": "Kim felt bad and said sorry. She asked her friend to forgive her. Her friend said yes.\nKim was happy. She said thank you and gave her a big hug. She was so excited to play with her friend",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/brokecar/John",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7423,
+   8221,
+   14610,
+   21772
+  ],
+  "continuation": "John felt bad and said sorry. He asked his friend to forgive him. His friend said yes and they hugged.\nJohn and his friend played together. They had lots of fun. They laughed and smiled. John was happy",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/brokecar/Lisa",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7423,
+   8221,
+   14610,
+   21772
+  ],
+  "continuation": "Lisa felt bad and said sorry. She gave the toy car back to her friend. Her friend stopped crying and smiled. They played together and had fun.\nThe friend's mom saw them and said, \"You two are",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/brokecar/Billy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 6,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7423,
+   8221,
+   14610,
+   21772
+  ],
+  "continuation": "Billy felt bad and said sorry. He asked his friend if he could fix it. His friend said yes and gave him a screwdriver. Billy was happy and started to fix the car. He worked hard and soon the car was as",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/forest/Roy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "He was so scared that he started to cry. Suddenly, he heard a voice. It was a little girl. She said, \"Don't be scared, I'm here to help you.\"\nThe girl",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/forest/Lucy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "She was scared and wanted to go home, but she was too scared to move. Suddenly, she heard a voice.\n\"Don't be scared, little one,\" said the voice.\nLucy looked",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/forest/Peter",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "He was scared and wanted to go home, but he was too scared to move. He looked around and saw a big tree. He decided to climb it and see if he could find his way home.\nAs he clim",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/forest/Amy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "She was scared and wanted to go home, but she was too scared to move. Suddenly, she heard a voice.\n\"Don't be scared, little one,\" said the voice.\nAmy looked",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/forest/Andy",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "He was so scared that he started to cry. Suddenly, he heard a voice. It was a little girl. She said, \"Don't be scared, I'm here to help you.\"\nThe little",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/forest/Jane",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   13421
+  ],
+  "continuation": "She was scared and wanted to go home, but she was too scared to move. Suddenly, she heard a voice.\n\"Don't be scared, little one,\" said the voice.\nJane looked",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "feeling/won/Jen",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 11,
+  "candidate_ids": [
+   9796,
+   22314,
+   24173,
+   28569
+  ],
+  "continuation": "She was so happy and proud. She wanted to show everyone her skills. She ran to her mom and dad and said, \"Look, I won! I won!\"\nHer mom and dad hugged her and said,",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/won/Bob",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 11,
+  "candidate_ids": [
+   9796,
+   22314,
+   24173,
+   28569
+  ],
+  "continuation": "He was so excited! He was so proud of himself. He was so happy that he jumped up and down.\nBob's team was winning the race. He was so happy that he jumped up and down. He was",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/won/Kim",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 11,
+  "candidate_ids": [
+   9796,
+   22314,
+   24173,
+   28569
+  ],
+  "continuation": "She was so happy and proud of her team. She wanted to show everyone how fast she could run. She ran and ran until she got tired. She sat down on the grass and looked at the sky. She saw a bird flying high",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/won/Mark",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 11,
+  "candidate_ids": [
+   9796,
+   22314,
+   24173,
+   28569
+  ],
+  "continuation": "Mark was very happy for his team. He wanted to be the best and win the game. He wanted to be the best.\nBut Mark was not happy. He was sad and angry. He did not like to lose. He did",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/won/Lisa",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 11,
+  "candidate_ids": [
+   9796,
+   22314,
+   24173,
+   28569
+  ],
+  "continuation": "She was very happy and proud. She wanted to show her mom and dad how good she was. She ran to the park where her team was playing.\n\"Look, look!\" she shouted. \"I won!\"\nHer",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "feeling/won/Ted",
+  "family": "feeling",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 11,
+  "candidate_ids": [
+   9796,
+   22314,
+   24173,
+   28569
+  ],
+  "continuation": "He was so excited and proud of himself. He was so happy that he jumped up and down.\nBut then, his team got a bit too competitive. They all wanted to win the race. They started to argue and fight",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "name/named/Tom",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   4335,
+   6454,
+   15135,
+   21599
+  ],
+  "continuation": "One day, he found a very special berry. It was a bright red berry. He was so excited that he ran to show his mum.\n\"Mum, look what I found!\" he said.\nMum",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Lucy",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   28846
+  ],
+  "continuation": "One day, she found a big, juicy berry and she was so excited. She picked it and put it in her pocket.\nSuddenly, she heard a voice. It was a small voice, but it was",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Bob",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 31,
+  "readout_pos": 24,
+  "candidate_ids": [
+   7991,
+   29362
+  ],
+  "continuation": "One day, he was picking berries when he heard a voice.\n\"Hey, what are you doing?\" said the voice.\nBob looked around and saw a small rabbit.\n\"I'm picking ber",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Amy",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   25934,
+   28533
+  ],
+  "continuation": "One day, she found a big, juicy berry and she was so excited. She picked it and put it in her pocket.\nSuddenly, she heard a voice. It was a small voice, but it was",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Mark",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 21,
+  "readout_pos": 24,
+  "candidate_ids": [
+   2791,
+   3502,
+   4485,
+   9802
+  ],
+  "continuation": "One day, he was picking berries when he heard a voice.\n\"Hey, Mark! What are you doing?\"\nMark looked up and saw a small bird perched on a branch.\n\"I'm pick",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Jane",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   10447
+  ],
+  "continuation": "One day, she found a big, juicy berry and she was so excited. She picked it and put it in her pocket.\nSuddenly, she heard a voice. It was a small voice, but it was",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Ted",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   9446,
+   22040,
+   29748
+  ],
+  "continuation": "One day, he was picking berries when he heard a voice. It was a small voice, but it was coming from the bushes.\nTed looked around and saw a small rabbit. The rabbit said, \"",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/named/Ann",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   812,
+   2889,
+   8081
+  ],
+  "continuation": "One day, she found a big, juicy berry and she was so excited. She picked it and put it in her pocket.\nAnn went back to the woods and saw a big, scary bear. She was sc",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/ball/Kim",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 27,
+  "readout_pos": 19,
+  "candidate_ids": [
+   12931,
+   20903
+  ],
+  "continuation": "She would throw it, kick it, and roll it. She liked to make it bounce and roll.\nOne day, Kim saw a big dog in the yard. The dog was brown and furry. It had a long tail",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/ball/Leo",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   22533
+  ],
+  "continuation": "He would throw it, kick it, and roll it. He liked to make it bounce and roll.\nOne day, he saw a new ball in the yard. It was bigger and shinier than his old ball. It",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "name/ball/Lisa",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 37,
+  "readout_pos": 19,
+  "candidate_ids": [
+   29420
+  ],
+  "continuation": "She liked to throw it, kick it, and roll it. She did not like to share it with anyone.\nOne day, a boy came to the yard. He saw Lisa's ball and wanted to play with it. He",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/ball/Paul",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 21,
+  "readout_pos": 19,
+  "candidate_ids": [
+   3739,
+   18275
+  ],
+  "continuation": "One day, he was playing with it when he accidentally threw it too hard and it broke. Paul was very sad.\nHe went to his mom and said, \"Mommy, I broke my ball. Can you fix it",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/ball/Sue",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 37,
+  "readout_pos": 19,
+  "candidate_ids": [
+   12991,
+   28674
+  ],
+  "continuation": "She liked to throw it, kick it, and roll it. She did not like to share it with anyone.\nOne day, a boy came to the yard. He saw Sue's ball and wanted to play with it. He",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/ball/Tom",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 43,
+  "readout_pos": 19,
+  "candidate_ids": [
+   4335,
+   6454,
+   15135,
+   21599
+  ],
+  "continuation": "He liked to throw it, kick it, and roll it. He did not like to share it with anyone.\nOne day, a new boy came to the yard. His name was Sam. He saw Tom's ball and wanted",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/ball/Kate",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 16,
+  "readout_pos": 19,
+  "candidate_ids": [
+   23738
+  ],
+  "continuation": "One day, she was playing with her ball when it suddenly rolled away. Kate was very sad. She looked for her ball but couldn't find it.\nKate started to cry. She was so sad that she couldn't",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/ball/Bob",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 21,
+  "readout_pos": 19,
+  "candidate_ids": [
+   7991,
+   29362
+  ],
+  "continuation": "One day, he was playing with it when he accidentally threw it too hard and it broke. Bob was very sad.\nHe went to his mom and said, \"Mom, I broke my ball. Can you fix it?\"",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "name/store/Joe",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   11131
+  ],
+  "continuation": "Joe was excited to see all the different kinds of apples.\nWhen they got to the store, Joe's mom asked him to help her pick out the apples. Joe was a bit scared, but he was also excited",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/Jane",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   10447
+  ],
+  "continuation": "Jane was excited to see all the different kinds of apples.\nWhen they got to the store, Jane saw a big, red apple. She asked her mom if she could have it. Her mom said yes and Jane was so happy",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/John",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   2259,
+   11639
+  ],
+  "continuation": "John was excited to see all the different kinds of apples.\nJohn's mom said, \"Let's get some apples, John. They look so yummy!\"\nJohn said, \"Yes, mommy! I",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/Ann",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   812,
+   2889,
+   8081
+  ],
+  "continuation": "Ann saw a big, red apple and asked her mom if she could have it. Her mom said yes and they went to the checkout.\nThe store was very busy with lots of people. Ann saw a big, red apple and asked",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/Billy",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   18299
+  ],
+  "continuation": "Billy was excited to see all the different kinds of apples.\nWhen they got to the checkout, the cashier said, \"What do you want to buy?\"\nBilly's mom said, \"I want to buy",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/Ruby",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9453,
+   9754,
+   15847
+  ],
+  "continuation": "Ruby was excited to see all the different kinds of apples.\nWhen they got to the store, Ruby's mom said, \"Let's get some apples, Ruby!\"\nRuby was so excited. She ran around",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/Leo",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   22533
+  ],
+  "continuation": "Leo was very excited to see all the different kinds of apples.\nWhen they got to the store, Leo's mom asked him to help her pick out the apples. Leo was a bit scared, but he was also",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/store/Mary",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 23,
+  "candidate_ids": [
+   5219,
+   6182
+  ],
+  "continuation": "Mary was very excited to go to the store.\nWhen they got to the store, Mary saw a big, red apple. She wanted it so badly! She asked her mom if she could have it. Her mom said yes and Mary",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "name/elder/Sue",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 18,
+  "readout_pos": 26,
+  "candidate_ids": [
+   12991,
+   28674
+  ],
+  "continuation": "Every day, she would go out and pick some roses.\nOne day, Sue was walking in the garden when she saw a little girl. The girl was sad. Sue asked her, \"Why are you sad?\"\nThe girl",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/elder/Andy",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 29,
+  "readout_pos": 26,
+  "candidate_ids": [
+   13910,
+   21828
+  ],
+  "continuation": "Every day he would go to the garden and pick the roses. He would give them to his friends and family.\nOne day, Andy was walking in the garden when he saw a little girl. She was only three years old.",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/elder/Kate",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 29,
+  "readout_pos": 26,
+  "candidate_ids": [
+   23738
+  ],
+  "continuation": "Every day she would go to the garden and pick the roses. She would give them to her friends and family.\nOne day, Kate was picking roses when she saw a little girl. The little girl was very sad.",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/elder/Jack",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 29,
+  "readout_pos": 26,
+  "candidate_ids": [
+   5457,
+   21452,
+   27006,
+   28015
+  ],
+  "continuation": "Every day he would go to the garden and pick the roses. He would give them to his friends and family.\nOne day, Jack was walking in the garden when he saw a little girl. She was only three years old.",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/elder/Emma",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 29,
+  "readout_pos": 26,
+  "candidate_ids": [
+   26422
+  ],
+  "continuation": "Every day she would go to the garden and pick the roses. She would give them to her friends and family.\nOne day, Emma was picking roses when she heard a loud noise. She looked around and saw a big",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/elder/Joe",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer is the next token",
+  "first_hit": 1,
+  "readout_pos": 26,
+  "candidate_ids": [
+   11131
+  ],
+  "continuation": "Joe loved to smell the roses and he would often go to the garden to pick them.\nOne day, Joe was walking in the garden when he saw a little girl. She was only three years old. Joe smiled and said",
+  "word_pos": 25,
+  "word_ok": false
+ },
+ {
+  "name": "name/elder/Jen",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 4,
+  "readout_pos": 26,
+  "candidate_ids": [
+   4142,
+   21116
+  ],
+  "continuation": "Every day, Jen would go out and pick the roses. She would give them to her friends and family.\nOne day, Jen was picking roses when she heard a loud noise. She looked around and saw a big,",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/elder/John",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 29,
+  "readout_pos": 26,
+  "candidate_ids": [
+   2259,
+   11639
+  ],
+  "continuation": "Every day he would go to the garden and pick the roses. He would give them to his friends and family.\nOne day, John was walking in the garden when he saw a little girl. She was only three years old.",
+  "word_pos": 25,
+  "word_ok": true
+ },
+ {
+  "name": "name/sick/Ted",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   5219,
+   6182
+  ],
+  "continuation": "He wanted to help her feel better. He asked his mom if he could go to school and she said yes.\nTed was so excited! He put on his coat and ran to the school. When he got there, he saw",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "name/sick/Ruby",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   4335,
+   6454,
+   15135,
+   21599
+  ],
+  "continuation": "She wanted to help him feel better. She asked her mom if she could go to the doctor and he said yes. Ruby was happy and excited.\nShe put on her coat and hat and ran to the car. She saw her mom",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "name/sick/Roy",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   28846
+  ],
+  "continuation": "She was very sad and didn't know what to do.\nOne day, she asked her mom, \"Mommy, why can't I come to school?\"\nHer mom replied, \"I'm sorry, sweet",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "name/sick/Mary",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 47,
+  "readout_pos": 16,
+  "candidate_ids": [
+   5457,
+   21452,
+   27006,
+   28015
+  ],
+  "continuation": "She wanted to help him feel better. She asked her mom if she could give him a hug. Her mom said yes and gave her a big hug.\nMary went to the doctor and he said he could help Jack.",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "name/sick/Peter",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   25934,
+   28533
+  ],
+  "continuation": "He wanted to help her feel better. He asked his mom if he could go to the doctor. His mom said yes, but he had to be careful.\nPeter put on his coat and hat and ran to the car. He was",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "name/sick/Lucy",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 17,
+  "readout_pos": 16,
+  "candidate_ids": [
+   7991,
+   29362
+  ],
+  "continuation": "She wanted to help him feel better. She asked her mom if she could take Bob to school.\n\"No, sweetheart,\" her mom said. \"Bob is sick and he needs to rest. He will be back soon.\"\n",
+  "word_pos": 15,
+  "word_ok": true
+ },
+ {
+  "name": "name/sick/Andy",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   10447
+  ],
+  "continuation": "He wanted to help her feel better. He asked his mom if he could go to school and she said yes.\nWhen they got to school, Andy was so excited. He saw lots of other kids and they were all playing.",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "name/sick/Amy",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   11131
+  ],
+  "continuation": "She wanted to help him feel better. She asked her mom if she could give him a hug. Her mom said yes and gave her a big hug.\nAmy went to the doctor's office and saw a nurse",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "name/shy/Emma",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 15,
+  "readout_pos": 24,
+  "candidate_ids": [
+   26422
+  ],
+  "continuation": "One day, she saw a boy named Tim playing with a ball. Emma wanted to play with Tim, but she was too shy to ask.\nEmma walked up to Tim and said, \"Hi, I am Emma. Can",
+  "word_pos": 23,
+  "word_ok": true
+ },
+ {
+  "name": "name/shy/Bob",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   7991,
+   29362
+  ],
+  "continuation": "One day, he decided to go for a walk in the park. As he was walking, he saw a big, red ball. He wanted to play with it, but he was too shy to ask.\nSuddenly",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/shy/Jen",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 46,
+  "readout_pos": 24,
+  "candidate_ids": [
+   4142,
+   21116
+  ],
+  "continuation": "One day, she saw a boy named Tom playing with a ball. She wanted to play with him, but she was too shy to ask.\nJen walked up to Tom and said, \"Hi, I am Jen. Can",
+  "word_pos": 23,
+  "word_ok": true
+ },
+ {
+  "name": "name/shy/Mark",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 20,
+  "readout_pos": 24,
+  "candidate_ids": [
+   2791,
+   3502,
+   4485,
+   9802
+  ],
+  "continuation": "One day, he saw a girl named Lily. Lily was playing with a ball. Mark wanted to play with her, but he was too shy to ask.\nMark walked up to Lily and said, \"Hi,",
+  "word_pos": 23,
+  "word_ok": true
+ },
+ {
+  "name": "name/shy/Kim",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 15,
+  "readout_pos": 24,
+  "candidate_ids": [
+   12931,
+   20903
+  ],
+  "continuation": "One day, she saw a boy named Tom playing with a ball. Kim wanted to play with Tom, but she was too shy to ask.\nKim walked up to Tom and said, \"Hi, I am Kim. Can",
+  "word_pos": 23,
+  "word_ok": true
+ },
+ {
+  "name": "name/shy/Ted",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   9446,
+   22040,
+   29748
+  ],
+  "continuation": "One day, he decided to go for a walk to find someone to play with.\nAs he walked, he saw a big tree. He thought, \"Maybe I can find a friend here.\" So, he climbed the tree and",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/shy/Lisa",
+  "family": "name",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 15,
+  "readout_pos": 24,
+  "candidate_ids": [
+   29420
+  ],
+  "continuation": "One day, she saw a boy named Tom playing with a ball. Lisa wanted to play with Tom, but she was too shy to ask.\nLisa walked up to Tom and said, \"Hi, I am Lisa. Can",
+  "word_pos": 23,
+  "word_ok": true
+ },
+ {
+  "name": "name/shy/Roy",
+  "family": "name",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 24,
+  "candidate_ids": [
+   4727,
+   15793,
+   20258
+  ],
+  "continuation": "One day, he decided to go for a walk to find someone to play with.\nAs he walked, he saw a big tree. He thought, \"Maybe I can find a friend here.\" So, he climbed the tree and",
+  "word_pos": 23,
+  "word_ok": false
+ },
+ {
+  "name": "name/cake/Leo",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 25,
+  "candidate_ids": [
+   25934,
+   28533
+  ],
+  "continuation": "She was very sad.\n\"Oh no!\" she cried. \"My cake is ruined!\"\nLeo ran to the kitchen and saw the mess. He saw the cake on the floor and the bowl on the table",
+  "word_pos": 24,
+  "word_ok": false
+ },
+ {
+  "name": "name/cake/Lucy",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 25,
+  "candidate_ids": [
+   4727,
+   15793,
+   20258
+  ],
+  "continuation": "Lucy was very sad. She cried and said, \"Our cake is ruined!\"\nMom heard Lucy and came to see what happened. She saw the mess and said, \"Oh, Lucy, I'm sorry.",
+  "word_pos": 24,
+  "word_ok": false
+ },
+ {
+  "name": "name/cake/Paul",
+  "family": "name",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 15,
+  "readout_pos": 25,
+  "candidate_ids": [
+   10447
+  ],
+  "continuation": "Paul said, \"Let's mix the ingredients together!\" Jane smiled and said, \"Yes!\"\nThey mixed the ingredients together and put the cake in the oven. After a while, the cake was",
+  "word_pos": 24,
+  "word_ok": true
+ },
+ {
+  "name": "name/cake/Amy",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 25,
+  "candidate_ids": [
+   22533
+  ],
+  "continuation": "He looked at the mess and felt sorry.\n\"Oh no, Mommy will be mad!\" he said. \"She will be mad at us!\"\nMommy came into the kitchen and saw the mess. She was not",
+  "word_pos": 24,
+  "word_ok": false
+ },
+ {
+  "name": "name/cake/Tom",
+  "family": "name",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 25,
+  "candidate_ids": [
+   812,
+   2889,
+   8081
+  ],
+  "continuation": "She tried to pick them up, but they were too slippery. She dropped them on the floor and the bowl broke.\n\"Oh no!\" Tom said. \"We made a mess. Mom will be mad.\"\n",
+  "word_pos": 24,
+  "word_ok": false
+ },
+ {
+  "name": "name/cake/Jane",
+  "family": "name",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 22,
+  "readout_pos": 25,
+  "candidate_ids": [
+   5310,
+   23686
+  ],
+  "continuation": "Jane was very sad. She said, \"Oh no! The cake is all messy!\"\nPeter said, \"Don't worry, Jane. I can help you clean it up.\"\nSo, Peter and Jane got a",
+  "word_pos": 24,
+  "word_ok": true
+ },
+ {
+  "name": "name/cake/Bob",
+  "family": "name",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 12,
+  "readout_pos": 25,
+  "candidate_ids": [
+   9453,
+   9754,
+   15847
+  ],
+  "continuation": "Bob said, \"Let's mix the batter!\" Ruby said, \"Yes!\"\nThey mixed the batter and put it in the oven. After a while, the cake was ready. Bob and Ruby took it out of the",
+  "word_pos": 24,
+  "word_ok": true
+ },
+ {
+  "name": "name/cake/Ann",
+  "family": "name",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 16,
+  "readout_pos": 25,
+  "candidate_ids": [
+   3739,
+   18275
+  ],
+  "continuation": "Ann said, \"Oh no! We need to clean up the mess!\" Paul said, \"I'm sorry, Ann. I didn't mean to.\" Ann said, \"It's okay. Let's clean it up",
+  "word_pos": 24,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/meow/Tom",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   4117,
+   6635,
+   9694,
+   10459
+  ],
+  "continuation": "He was curious and wanted to see what it was. He slowly crawled under the bed and peeked out. He saw a small kitten with a red collar. It was meowing and meowing.\n\"",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/meow/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   4117,
+   6635,
+   9694,
+   10459
+  ],
+  "continuation": "She was scared, but she slowly stepped closer. She saw a little kitten in the corner. It was meowing loudly and looked very scared.\nLucy slowly stepped closer and saw that it was a small,",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/meow/Bob",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   4117,
+   6635,
+   9694,
+   10459
+  ],
+  "continuation": "He looked and saw a little kitten. He was so excited and wanted to get a closer look. He slowly walked over to the bed and saw the kitten. He was so happy to see it. He reached out to pet it",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/meow/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   4117,
+   6635,
+   9694,
+   10459
+  ],
+  "continuation": "She was curious and wanted to find out what it was. She slowly walked over to the bed and peeked under it. She saw a small, fluffy kitten. It was meowing softly and seemed to be",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/meow/Mark",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   4117,
+   6635,
+   9694,
+   10459
+  ],
+  "continuation": "He was curious and wanted to find out what it was. He slowly walked over to the bed and peeked under it. He saw a little kitten, meowing softly. Mark was so excited and wanted to get a",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/meow/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   4117,
+   6635,
+   9694,
+   10459
+  ],
+  "continuation": "She looked and saw a little kitten. She was so excited and wanted to take it home. She asked her mom, \"Can I keep it?\" Her mom said, \"Yes, but you must take care of it.\"\nJ",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/woof/Jen",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 12,
+  "candidate_ids": [
+   11203,
+   18776,
+   26169
+  ],
+  "continuation": "She ran to the door and saw a big dog. The dog was barking and growling. Jen was scared. She did not like the dog.\n\"Go away, dog!\" Jen shouted. \"You are not",
+  "word_pos": 11,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/woof/Billy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   11203,
+   18776,
+   26169
+  ],
+  "continuation": "He ran over to see what it was. He saw a big, red truck with a loud siren. It was a fire truck!\nBilly was so excited. He ran over to the fire truck and asked the",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/woof/Kim",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 24,
+  "readout_pos": 12,
+  "candidate_ids": [
+   11203,
+   18776,
+   26169
+  ],
+  "continuation": "She was curious and wanted to know what it was. She ran over to the yard and saw a big, brown dog. The dog was barking and running around.\nKim was scared and ran back to her house.",
+  "word_pos": 11,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/woof/Leo",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 13,
+  "readout_pos": 12,
+  "candidate_ids": [
+   11203,
+   18776,
+   26169
+  ],
+  "continuation": "He ran to the door and saw a big, furry dog. The dog was barking and growling. Leo was scared. He did not know what to do.\nHe ran to his mom and dad and told",
+  "word_pos": 11,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/woof/Lisa",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 12,
+  "candidate_ids": [
+   11203,
+   18776,
+   26169
+  ],
+  "continuation": "She ran to the door and saw a big dog. The dog was barking and growling. Lisa was scared. She did not like the dog.\n\"Mommy, mommy, there is a big dog!\"",
+  "word_pos": 11,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/woof/Paul",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   11203,
+   18776,
+   26169
+  ],
+  "continuation": "He ran over to see what it was. He saw a big, red truck with a loud siren. It was a fire truck!\nPaul was so excited. He ran over to the fire truck and asked the driver",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/moo/Andy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   20587,
+   21282,
+   21638
+  ],
+  "continuation": "He was scared and ran to see what it was. He saw a big, scary animal. It was a bear! Andy was so scared that he started to cry.\nThe bear said, \"Don't be sc",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/moo/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 34,
+  "readout_pos": 13,
+  "candidate_ids": [
+   20587,
+   21282,
+   21638
+  ],
+  "continuation": "She was scared and ran to her mom. \"Mommy, what is that?\" she asked.\nHer mom smiled and said, \"That is a cow. She is very strong and can do many things.\"\nLucy",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/moo/Jack",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   20587,
+   21282,
+   21638
+  ],
+  "continuation": "He was scared and ran to see what it was. He saw a big, hairy bear. The bear was very big and Jack was scared.\nJack said, \"Please, Mr. Bear, don't hurt me",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/moo/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   20587,
+   21282,
+   21638
+  ],
+  "continuation": "She was scared and ran to her mom. \"Mom, what is that?\" she asked. Her mom said, \"That is a big animal, Amy. It is not a big animal, but it is very strong.\"\n",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/moo/Joe",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 13,
+  "candidate_ids": [
+   20587,
+   21282,
+   21638
+  ],
+  "continuation": "He was scared and ran to see what it was. He saw a big, scary animal. It was a bear! Joe was so scared that he started to cry.\nThe bear said, \"Don't be sc",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/moo/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 34,
+  "readout_pos": 13,
+  "candidate_ids": [
+   20587,
+   21282,
+   21638
+  ],
+  "continuation": "She was scared and ran to her mom. \"Mommy, what is that?\" Jane asked.\nHer mom smiled and said, \"That is a cow. She is very gentle and she likes to eat grass.\"\n",
+  "word_pos": 12,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/feathers/Jen",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 11,
+  "candidate_ids": [
+   11199,
+   17777,
+   18513
+  ],
+  "continuation": "She was so excited and wanted to get closer. She ran to the tree and started to climb. She was so happy when she reached the branch and looked around.\nSuddenly, she heard a loud noise. It was",
+  "word_pos": 10,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/feathers/Ted",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 11,
+  "candidate_ids": [
+   11199,
+   17777,
+   18513
+  ],
+  "continuation": "He was so excited and he wanted to get closer. He ran to the branch and tried to reach it, but it was too high. He tried to jump, but he couldn't reach it. He was so sad.\nThen",
+  "word_pos": 10,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/feathers/Kim",
+  "family": "riddle",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 35,
+  "readout_pos": 11,
+  "candidate_ids": [
+   11199,
+   17777,
+   18513
+  ],
+  "continuation": "She was so excited and wanted to get closer to it. She ran to the tree and started to climb.\nWhen she got to the top, she saw a bird's nest. She was so excited and wanted to get closer",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/feathers/Roy",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 11,
+  "candidate_ids": [
+   11199,
+   17777,
+   18513
+  ],
+  "continuation": "He was so excited and he wanted to get closer to it. He ran to the branch and started to climb. He was so happy when he reached the feather. He was so proud of himself.\nBut then he heard a",
+  "word_pos": 10,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/feathers/Lisa",
+  "family": "riddle",
+  "split": "fit",
+  "correct": true,
+  "reason": null,
+  "first_hit": 38,
+  "readout_pos": 11,
+  "candidate_ids": [
+   11199,
+   17777,
+   18513
+  ],
+  "continuation": "She was curious and wanted to see it. She ran to the branch and reached out her hand.\n\"Hello, little girl,\" a voice said. Lisa looked up and saw a bird. The bird was blue and yellow and had a",
+  "word_pos": 10,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/feathers/Peter",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 11,
+  "candidate_ids": [
+   11199,
+   17777,
+   18513
+  ],
+  "continuation": "He was so excited and he wanted to get closer to it. He ran to the branch and tried to reach it, but it was too high. He tried to jump, but he couldn't reach it. He was so sad.",
+  "word_pos": 10,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fins/Paul",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9427,
+   12030,
+   15161
+  ],
+  "continuation": "He was so excited to see what it was! He wanted to get closer and see what it was.\nPaul slowly walked towards the edge of the pond. He was so excited to get a closer look. He reached out his hand",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fins/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 40,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9427,
+   12030,
+   15161
+  ],
+  "continuation": "She wanted to touch them, but she was scared. She had never seen shiny scales before.\n\"Mommy, what is that?\" she asked.\n\"That is a fish, Lucy. It is a special fish",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/fins/Tom",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 25,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9427,
+   12030,
+   15161
+  ],
+  "continuation": "He wanted to touch them, but he was scared. He thought they might be dangerous.\nHe saw a big fish swimming near the edge of the pond. It had a long tail and a big mouth. It looked at",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/fins/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 40,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9427,
+   12030,
+   15161
+  ],
+  "continuation": "She wanted to touch them, but she was scared. She had never seen shiny scales before.\n\"Mommy, what is that?\" she asked.\n\"That is a fish, Amy. It is a special fish",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/fins/Bob",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 44,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9427,
+   12030,
+   15161
+  ],
+  "continuation": "He wanted to touch them, but he was scared. He was a bit fearful, but he wanted to be brave.\nHe slowly walked closer to the edge of the pond. He saw a big fish swimming around.",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/fins/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 30,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9427,
+   12030,
+   15161
+  ],
+  "continuation": "She wanted to touch it, but she was scared. She had never seen anything like it before.\nSuddenly, a big fish jumped out of the water and landed on the edge of the pond. Jane",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/neigh/Jen",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   10435
+  ],
+  "continuation": "She wanted to make a cake for her mom. She put some hay in a bowl and mixed it with water. She poured some eggs and milk into the bowl. She poured some flour and sugar and eggs.",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/neigh/John",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   10435
+  ],
+  "continuation": "He was so excited to see it! He wanted to take it home and show it to his friends.\nJohn asked his mom if he could take the hay home. She said yes, but only if he was very careful.\nJohn",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/neigh/Kim",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   10435
+  ],
+  "continuation": "She wanted to make a cage for the animal. She had a small box and some tools. She put some hay in the box and closed the lid. She was very proud of her cage.\nBut the animal did not like",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/neigh/Billy",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   10435
+  ],
+  "continuation": "He was very proud of his work. He wanted to show it to his friends.\nHe ran to the barn and called out to them. \"Hey, friends! Come and see my hay!\"\nHis friends came running",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/neigh/Lisa",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   10435
+  ],
+  "continuation": "She wanted to make a cake for her mom. She put some hay in a bowl and mixed it with water. She poured some eggs and milk into the bowl. She poured some flour and sugar and eggs.",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/neigh/Leo",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 12,
+  "candidate_ids": [
+   10435
+  ],
+  "continuation": "He wanted to make a cage for the animal. He had a hammer and a screwdriver. He was very proud of his work.\nHe went to the barn and found some wood and nails. He hammer",
+  "word_pos": 11,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/wool/Peter",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 33,
+  "readout_pos": 20,
+  "candidate_ids": [
+   29735
+  ],
+  "continuation": "He was so excited to see it!\nPeter asked his mom, \"What is it?\"\nHis mom smiled and said, \"It's a sheep. It's very soft and white.\"\nPeter was so excited.",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/wool/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 24,
+  "readout_pos": 20,
+  "candidate_ids": [
+   29735
+  ],
+  "continuation": "She was so excited to see it!\n\"What is it?\" asked Lucy.\n\"It's a sheep,\" said Mom.\n\"What's a sheep?\" asked Lucy.\n\"A sheep is a big,",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/wool/Andy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   29735
+  ],
+  "continuation": "He was so excited to see it!\nHe asked his mom, \"Can I touch it?\"\nHis mom smiled and said, \"Yes, but be careful. It's very soft.\"\nSo Andy carefully touched the w",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/wool/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   29735
+  ],
+  "continuation": "She was so excited to see it!\nAmy asked her mom, \"Can I touch it?\"\nHer mom smiled and said, \"Yes, but be careful. It's very soft.\"\nAmy carefully touched the w",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/wool/Jack",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   29735
+  ],
+  "continuation": "He was so excited to see it!\nJack asked the farmer, \"Can I touch it?\"\nThe farmer smiled and said, \"Yes, you can touch it. But be careful, it's very soft.\"\n",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/wool/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   29735
+  ],
+  "continuation": "Jane was so excited to see the animals. She wanted to pet them, but she was a bit scared.\n\"Come on, Jane,\" said her mom. \"Let's go and see the animals.\"\nSo Jane and",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fruit/Jen",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   11548,
+   12113,
+   26163
+  ],
+  "continuation": "It was sweet and juicy. She smiled and said, \"Yummy!\"\nJen's mom smiled and said, \"That's a nice fruit, Jen. What do you want to do with it?\"\nJen",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fruit/Mark",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   11548,
+   12113,
+   26163
+  ],
+  "continuation": "He was so excited to eat it! He took a bite and it was so yummy. He wanted to share it with his friends.\nMark ran to his friends and said, \"Look what I found! It's a",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fruit/Kim",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   11548,
+   12113,
+   26163
+  ],
+  "continuation": "She was so excited to eat it! She took a bite and it was so yummy. She wanted to share it with her friends.\nKim ran to her friends and said, \"Look what I found! It's",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fruit/Ted",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   11548,
+   12113,
+   26163
+  ],
+  "continuation": "He was so excited to taste it! He took a bite and it was so yummy. He wanted to share it with his friends.\nHe ran to his friends and said, \"Look what I found! It's a",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fruit/Lisa",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   11548,
+   12113,
+   26163
+  ],
+  "continuation": "It was sweet and juicy and made her smile. She wanted to eat more, but she was also a bit scared. She had never eaten a fruit before, but she was curious and brave.\nShe looked around and saw",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/fruit/Roy",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 15,
+  "candidate_ids": [
+   11548,
+   12113,
+   26163
+  ],
+  "continuation": "He was so excited to eat it that he quickly ate it. But when he looked up, he saw that the fruit was gone! He was so sad and started to cry.\nHis mom came over and asked him what was",
+  "word_pos": 14,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/drink/Leo",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   27274
+  ],
+  "continuation": "He was so excited to eat it, but he was also a bit scared. He had never tried coffee before, but he was curious.\nLeo took a sip of the coffee and it tasted so good! He was",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/drink/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 25,
+  "readout_pos": 20,
+  "candidate_ids": [
+   27274
+  ],
+  "continuation": "She was so excited to eat it! But when she took a sip, she made a funny face. The milk was too sweet and it tasted bad. Lucy was so sad.\nShe tried to pour the milk into her",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/drink/Paul",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   27274
+  ],
+  "continuation": "He was so excited to eat it, but he was also a bit scared. He had never tried coffee before, but he was curious.\nPaul took a sip of the coffee and it tasted so good! He was so",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/drink/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 20,
+  "candidate_ids": [
+   27274
+  ],
+  "continuation": "She took a sip and smiled. The milk was so sweet and yummy.\nSuddenly, the cow started to move! Amy was so surprised. She looked around and saw that the cow was not moving. She was",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/drink/Tom",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   27274
+  ],
+  "continuation": "He wanted to drink it all, but he was too small to reach the cup. He tried to jump, but he was too small. He tried to reach the cup, but he was too small. He tried to climb, but",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/drink/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 10,
+  "readout_pos": 20,
+  "candidate_ids": [
+   27274
+  ],
+  "continuation": "She smiled as she watched the cow drink the milk.\nSuddenly, the cow started to move! Jane was so surprised. She watched as the cow walked around the field, carrying the milk in its mouth.\nJane",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/night/Jen",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   17549,
+   18786
+  ],
+  "continuation": "She was so excited and wanted to go outside and explore. She asked her mom if she could go outside and her mom said yes.\nJen ran outside and saw a big, bright light in the sky. She was so happy and",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/night/Joe",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   17549,
+   18786
+  ],
+  "continuation": "He was so excited and he wanted to go outside and explore. He ran to the door and opened it.\nHe stepped outside and saw a big, bright light in the sky. He was so happy and he wanted to go closer.",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/night/Kim",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   17549,
+   18786
+  ],
+  "continuation": "She was so excited and wanted to go outside and explore. She asked her mom if she could go outside and her mom said yes.\nKim ran outside and saw a big, bright light in the sky. She was so happy and",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/night/John",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   17549,
+   18786
+  ],
+  "continuation": "He was so excited and he wanted to go outside and explore. He asked his mom if he could go outside and she said yes.\nJohn ran outside and saw a big, bright light in the sky. He was so happy and he",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/night/Lisa",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   17549,
+   18786
+  ],
+  "continuation": "She was curious and wanted to know what it was. She asked her mom, \"What is that?\"\nHer mom smiled and said, \"That is a comet, Lisa. It is a big rock that flies through space.",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/night/Billy",
+  "family": "riddle",
+  "split": "fit",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 16,
+  "candidate_ids": [
+   17549,
+   18786
+  ],
+  "continuation": "He was so excited that he ran to his mom and said, \"Mommy, look! A light!\" His mom smiled and said, \"Yes, it's a comet. It's very bright and beautiful.\"\n",
+  "word_pos": 15,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/squeak/Roy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 30,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9495,
+   14346,
+   15769,
+   25992
+  ],
+  "continuation": "He was scared and ran to his mom.\n\"Mommy, what is that?\" he asked.\n\"That's a mouse,\" his mom said. \"It's a small, gray mouse. It's",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/squeak/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 30,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9495,
+   14346,
+   15769,
+   25992
+  ],
+  "continuation": "She was scared and ran to her mom.\n\"Mommy, what is that?\" Lucy asked.\n\"That's a mouse,\" her mom said. \"It's a small animal that lives in the house.",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/squeak/Peter",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 25,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9495,
+   14346,
+   15769,
+   25992
+  ],
+  "continuation": "He was curious and wanted to know what it was. He slowly walked over to the table and saw a small, white mouse.\n\"Hello,\" said Peter. \"What are you doing?\"\nThe mouse looked up at Peter and said",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/squeak/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 47,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9495,
+   14346,
+   15769,
+   25992
+  ],
+  "continuation": "She was curious and wanted to see what it was. She slowly walked towards the table and peeked inside.\n\"Hello,\" she said softly.\nThe animal looked up and saw her. It was a small brown mouse with",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/squeak/Andy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9495,
+   14346,
+   15769,
+   25992
+  ],
+  "continuation": "He was so excited and ran over to see what it was.\n\"Hello, little one,\" said the animal.\n\"Hi,\" said Andy.\nThe animal looked at him and said, \"I'm so hungry.",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/squeak/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 30,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9495,
+   14346,
+   15769,
+   25992
+  ],
+  "continuation": "She was scared and ran to her mom.\n\"Mommy, what is that?\" Jane asked.\n\"That's a mouse,\" her mom said. \"It's a small, gray mouse. It's",
+  "word_pos": 21,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/morning/Jen",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 17,
+  "candidate_ids": [
+   6575,
+   8991,
+   11445
+  ],
+  "continuation": "The sun shone brightly and the birds sang.\nThe little girl was so excited. She ran to her mom and said, \"Mommy, look! The sun is rising!\"\nHer mom smiled and said, \"Yes",
+  "word_pos": 16,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/morning/Bob",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 17,
+  "candidate_ids": [
+   6575,
+   8991,
+   11445
+  ],
+  "continuation": "The sun shone brightly and the birds sang.\nThe little girl was so excited. She ran to her mom and said, \"Mommy, look! The sun is rising!\"\nHer mom smiled and said, \"Yes",
+  "word_pos": 16,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/morning/Kim",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 17,
+  "candidate_ids": [
+   6575,
+   8991,
+   11445
+  ],
+  "continuation": "The sun shone brightly and the birds sang.\nThe little girl was so excited. She ran to her mom and said, \"Mommy, look! The sun is rising!\"\nHer mom smiled and said, \"Yes",
+  "word_pos": 16,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/morning/Mark",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 17,
+  "candidate_ids": [
+   6575,
+   8991,
+   11445
+  ],
+  "continuation": "The sun shone brightly and the birds sang.\nThe little girl was so excited. She ran to her mom and said, \"Mommy, look! The sun is rising!\"\nHer mom smiled and said, \"Yes",
+  "word_pos": 16,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/morning/Lisa",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 17,
+  "candidate_ids": [
+   6575,
+   8991,
+   11445
+  ],
+  "continuation": "The sun shone brightly and the birds sang.\nThe little girl was so excited. She ran to her mom and said, \"Mommy, look! The sun is rising!\"\nHer mom smiled and said, \"Yes",
+  "word_pos": 16,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/morning/Ted",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 2,
+  "readout_pos": 17,
+  "candidate_ids": [
+   6575,
+   8991,
+   11445
+  ],
+  "continuation": "The sun shone brightly and the birds sang.\nThe little girl was so excited. She ran to her mom and said, \"Mommy, look! The sun is rising!\"\nHer mom smiled and said, \"Yes",
+  "word_pos": 16,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/growl/Billy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   11460,
+   23606
+  ],
+  "continuation": "Billy was scared and ran away.\nBilly's mom saw him and said, \"Billy, don't be scared. That animal is just a deer. It won't hurt you.\"\nBilly",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/growl/Lucy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   11460,
+   23606
+  ],
+  "continuation": "Lucy was scared and ran away.\n\"Mommy, mommy, look!\" she shouted.\nMommy came running and saw the animal. She was very angry.\n\"That animal is not nice,\" she",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/growl/Leo",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   11460,
+   23606
+  ],
+  "continuation": "Leo was scared and ran away. He hid behind a tree and watched the animal.\nThe animal was a rabbit. It had long ears and a fluffy tail. It looked at Leo and said, \"Hello, little",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/growl/Amy",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   11460,
+   23606
+  ],
+  "continuation": "She was scared and ran away.\n\"Mommy, mommy, look!\" she shouted.\nMommy came running and saw the animal. She was not scared. She smiled and said, \"That'",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/growl/Paul",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 37,
+  "readout_pos": 19,
+  "candidate_ids": [
+   11460,
+   23606
+  ],
+  "continuation": "Paul was scared and ran away.\nPaul's mom saw what happened and said, \"Paul, don't be scared. That animal is just a big brown bear. He is not going to hurt you.\"\nPaul",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/growl/Jane",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 37,
+  "readout_pos": 19,
+  "candidate_ids": [
+   11460,
+   23606
+  ],
+  "continuation": "Jane was scared and ran away.\nJane's mom saw her and said, \"Don't be scared, Jane. That animal is just a big brown bear.\"\nJane was still scared, but she",
+  "word_pos": 18,
+  "word_ok": true
+ },
+ {
+  "name": "riddle/nest/Jen",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   19710,
+   29808
+  ],
+  "continuation": "She was very curious and wanted to know what it was. She asked her mom, \"What is this?\"\nHer mom smiled and said, \"That is a cauliflower. It is a vegetable that we eat. It",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/nest/Jack",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   19710,
+   29808
+  ],
+  "continuation": "He was very curious and wanted to know what it was. He asked his mom, \"What is this?\"\nHis mom smiled and said, \"That is a cauliflower. It is a vegetable that we can eat",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/nest/Kim",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   19710,
+   29808
+  ],
+  "continuation": "She was very curious and wanted to know what it was. She asked her mom, \"What is this?\"\nHer mom said, \"That is a cauliflower. It is a vegetable that we eat. It is very",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/nest/Joe",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   19710,
+   29808
+  ],
+  "continuation": "He was very curious and wanted to know what it was. He asked his mom, \"What is this?\"\nHis mom smiled and said, \"That is a cauliflower. It is a vegetable that we can eat",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/nest/Lisa",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   19710,
+   29808
+  ],
+  "continuation": "She was very curious and wanted to know what it was. She asked her mom, \"What is this?\"\nHer mom smiled and said, \"That is a cauliflower. It is a vegetable that we eat. It",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "riddle/nest/John",
+  "family": "riddle",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 17,
+  "candidate_ids": [
+   19710,
+   29808
+  ],
+  "continuation": "He was very curious and wanted to know what it was. He asked his mom, \"What is this?\"\nHis mom smiled and said, \"That is a cauliflower. It is a vegetable that we can eat",
+  "word_pos": 16,
+  "word_ok": false
+ },
+ {
+  "name": "hide/cup/Tom",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 19,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "Tom was scared. He did not want his dad to see his cup. He hid the cup under his bed.\nHis dad came in and saw the cup. He was angry. He said, \"Tom, what",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "hide/cup/Lucy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 7,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared. She hid under the bed.\n\"Lucy, what did you do?\" her dad asked. He looked under the bed. He saw Lucy. She was crying.\n\"I broke my cup,\"",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "hide/cup/Bob",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 11,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "Bob was scared. He knew he had to hide. He ran to his room and hid under his bed.\nHis dad came in and saw the cup. He said, \"Bob, what are you doing? That cup",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "hide/cup/Amy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 7,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared. She hid under the bed.\n\"Where are you, Amy?\" her dad asked. He looked around the room. He saw the cup on the floor. He picked it up.\n\"I'm",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "hide/cup/Mark",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 16,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "Mark was scared. He knew his dad would be angry. He hid the cup under his bed.\nHis dad came in and saw the cup. He was very angry. He said, \"Mark, what did you",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "hide/cup/Jane",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 7,
+  "readout_pos": 18,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared. She hid the cup under her bed.\nHer dad came in and saw the cup. He said, \"Jane, why did you break the cup? You know it's not yours.\"\nJ",
+  "word_pos": 17,
+  "word_ok": true
+ },
+ {
+  "name": "hide/cookies/Jen",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She said, \"Jen, what are you doing? You are not supposed to eat all the cookies. They are for the party. You have to share with your friends.\"\nJen felt sad and angry. She did not want",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "hide/cookies/Billy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She said, \"Billy, you must have eaten all the cookies!\"\nBilly was so sad. He had been so hungry and he didn't want to eat any more cookies. He started to cry.\nM",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "hide/cookies/Kim",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was very angry. She shouted at Kim and said, \"You ate all the cookies! You are a bad girl!\"\nKim was scared. She did not mean to make mom angry. She said, \"I",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "hide/cookies/Leo",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She said, \"Leo, you ate all the cookies! You have to say sorry!\"\nLeo was scared. He did not want to say sorry. He said, \"No, mom, I don't want",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "hide/cookies/Lisa",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She saw Lisa and said, \"Lisa, what are you doing? You are not supposed to eat all the cookies. They are for the party. You are being naughty.\"\nLisa felt sad and scared. She",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "hide/cookies/Paul",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 23,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She said, \"Paul, you must have eaten all the cookies!\" Paul was so sad. He had wanted to eat all the cookies, but mom said no. He had to eat them all.\nPaul was so sad. He",
+  "word_pos": 22,
+  "word_ok": false
+ },
+ {
+  "name": "hide/paint/Andy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 8,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He was scared and ran to hide.\n\"What happened?\" his mom asked.\n\"I spilled paint on the rug,\" Andy said.\n\"Oh no,\" his mom said. \"Let's clean it up.\"",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/paint/Lucy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared. She ran to her mom and dad and said, \"Mommy, Daddy, help!\"\nMom and Dad came to the hall. They saw the mess and the angry faces. They were",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/paint/Jack",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 8,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He was scared and ran to hide.\n\"What happened?\" asked his mom.\n\"I spilled paint on the rug,\" said Jack.\n\"Oh no!\" said his mom. \"Let's clean it up.\"",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/paint/Amy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared. She ran to her mom and dad and said, \"Mom, Dad, help! I made a mess!\"\nMom and Dad looked at the rug. They saw the paint on the floor",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/paint/Joe",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 8,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He was scared and ran to hide.\nMommy saw the mess and said, \"Oh no! What happened here?\"\nJoe said, \"I spilled paint on the rug.\"\nMommy said, \"",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/paint/Jane",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 8,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared and ran to hide.\n\"Mommy, what is that?\" she asked.\n\"It's okay, sweetheart,\" her mom said. \"It's just a little mess.\"\nJane",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/crayon/Jen",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\n\"Jen, come here! I need your help!\"\nJen ran to her mom. She saw her mom holding a big box.\n\"What's in the box, Mom?\" Jen asked.\n\"It",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/crayon/Ted",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"Ted, what are you doing?\" she asked. Ted looked up and saw his mom standing in the room. He smiled and said, \"I'm drawing on the wall.\" His mom smiled and said, \"That's",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/crayon/Kim",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"Kim, come here!\" she said.\nKim ran to the kitchen. She saw her mom holding a big box. \"What's in the box?\" she asked.\n\"It's a surprise,\" her mom",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/crayon/Roy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"Roar!\" She said.\n\"Roar!\" said Robert.\n\"Roar!\" said his mom.\nRobert was so excited. He wanted to show his mom how he could draw on the wall. He grabb",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/crayon/Lisa",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\n\"Lisa, come here! I need your help!\"\nLisa ran to the kitchen. She saw her mom holding a big box.\n\"What's in the box, Mom?\" Lisa asked.\n\"It",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/crayon/Peter",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"Peter, stop! You're making a mess!\"\nPeter looked up and saw his mom. She was holding a big, white paper. \"What are you doing, Peter?\"\nPeter smiled. \"I'm drawing on",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/lamp/Paul",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He quickly ran to the door and saw his mom.\n\"Paul, what happened?\" his mom asked.\nPaul looked up and said, \"I broke the lamp.\"\nHis mom smiled and said, \"It's okay",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "hide/lamp/Lucy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\n\"Oh no!\" she said.\nLucy's mom came in and saw the broken lamp.\n\"What happened?\" she asked.\n\"I knocked over the lamp,\" Lucy said.\n\"It's okay",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "hide/lamp/Tom",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He was scared and ran to the door.\n\"What happened?\" asked his mom.\n\"I broke the lamp,\" he said.\n\"Oh no,\" said his mom. \"Let's go and see if we can",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "hide/lamp/Amy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\n\"Oh no!\" she said.\nAmy's mom came in and saw the broken lamp.\n\"What happened here?\" she asked.\nAmy looked up and said, \"I'm sorry, Mommy",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "hide/lamp/Bob",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He quickly ran to the door and saw his mom.\n\"Bob, what happened?\" his mom asked.\n\"I broke the lamp,\" Bob said.\n\"Oh no,\" his mom said. \"Let's go and get",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "hide/lamp/Jane",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 22,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was scared and ran to her mom.\n\"Mommy, I broke the lamp!\" Jane said.\nHer mom looked at the broken lamp and said, \"Oh no, that's not good. We need to",
+  "word_pos": 21,
+  "word_ok": false
+ },
+ {
+  "name": "hide/seek/Jen",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "Jen was very good at counting and she won the game!\nJen was so happy and she ran to her friends to show them her prize. But when she got there, she saw that her friends were not happy. They were angry",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/seek/John",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She said, \"One, two, three...\"\nJohn was very excited. He said, \"I can count to ten!\"\nEmma smiled and said, \"That's great! I can count to ten too!\"\nJohn",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/seek/Kim",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"One, two, three,\" he said.\nKim was very excited. She ran to the kitchen and saw a big bowl of cream. She was so happy and started to eat it.\nSuddenly,",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/seek/Billy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"One, two, three...\" she said.\nBilly was very excited. He ran to the kitchen and opened the door. He saw a big bowl of cereal on the table. He smiled and said, \"I",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/seek/Lisa",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "Lisa and her friends ran around the park, counting and counting.\nSuddenly, they heard a loud noise. It was a big truck. The truck was carrying a lot of boxes. The truck stopped in front",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/seek/Leo",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 19,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "\"One, two, three...\" she said.\n\"One, two, three, four, five,\" she said.\n\"That's a good number,\" said Leo. \"But I'm not very good at counting.",
+  "word_pos": 18,
+  "word_ok": false
+ },
+ {
+  "name": "hide/jar/Peter",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He quickly hid the cookie under the table.\nHis sister asked, \"Where's the cookie?\"\nPeter said, \"I hid it.\"\nHis sister said, \"Let's go and get it!\"\nSo",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "hide/jar/Lucy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was very angry.\n\"Lucy, what are you doing?\" her sister asked.\n\"I'm taking a cookie,\" Lucy said.\n\"But you know you shouldn't eat cookies without asking me,\" her sister",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/jar/Andy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He quickly hid the cookie under the table.\nHis sister asked, \"What are you doing, Andy?\"\n\"I'm taking a cookie,\" he said.\nHis sister said, \"That's not nice.",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "hide/jar/Amy",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was very angry.\n\"Amy, what are you doing?\" her sister asked.\n\"I'm taking a cookie,\" Amy said.\n\"But you know you shouldn't eat cookies without asking me,\" her sister",
+  "word_pos": 19,
+  "word_ok": false
+ },
+ {
+  "name": "hide/jar/Jack",
+  "family": "hide",
+  "split": "held-out",
+  "correct": true,
+  "reason": null,
+  "first_hit": 3,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "He quickly hid the cookie under the table.\nHis sister asked, \"What are you doing, Jack?\"\nJack said, \"I'm taking a cookie.\"\nHis sister said, \"That's not fair!",
+  "word_pos": 19,
+  "word_ok": true
+ },
+ {
+  "name": "hide/jar/Jane",
+  "family": "hide",
+  "split": "held-out",
+  "correct": false,
+  "reason": "answer not said within 48 tokens",
+  "first_hit": null,
+  "readout_pos": 20,
+  "candidate_ids": [
+   9563,
+   11458,
+   20552,
+   25508
+  ],
+  "continuation": "She was very angry.\n\"Jane, what are you doing?\" her sister asked.\n\"I'm taking a cookie,\" Jane said.\n\"But you know you shouldn't eat cookies without asking me,\" her sister",
+  "word_pos": 19,
+  "word_ok": false
+ }
+]

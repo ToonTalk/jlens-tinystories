@@ -1,0 +1,227 @@
+{
+ "n_prompts": 100,
+ "position_counts": {
+  "0": [
+   524,
+   117,
+   79,
+   3302,
+   3455,
+   1229,
+   257,
+   2137
+  ],
+  "1": [
+   1882,
+   112,
+   78,
+   2471,
+   4117,
+   184,
+   1241,
+   1015
+  ],
+  "2": [
+   1359,
+   112,
+   78,
+   581,
+   3214,
+   2705,
+   2055,
+   996
+  ],
+  "3": [
+   1358,
+   112,
+   68,
+   2233,
+   845,
+   3308,
+   1085,
+   2091
+  ],
+  "4": [
+   1350,
+   114,
+   62,
+   2235,
+   838,
+   3420,
+   1079,
+   2002
+  ],
+  "5": [
+   1389,
+   125,
+   65,
+   2655,
+   2294,
+   2557,
+   1066,
+   949
+  ],
+  "6": [
+   1412,
+   130,
+   64,
+   2726,
+   2511,
+   2231,
+   1065,
+   961
+  ],
+  "7": [
+   1268,
+   134,
+   62,
+   1016,
+   2654,
+   3555,
+   1166,
+   1245
+  ],
+  "8": [
+   1381,
+   132,
+   57,
+   1538,
+   929,
+   3391,
+   1203,
+   2469
+  ],
+  "9": [
+   1255,
+   131,
+   55,
+   1099,
+   3673,
+   1402,
+   962,
+   2523
+  ],
+  "10": [
+   2656,
+   136,
+   908,
+   1115,
+   2474,
+   1175,
+   1263,
+   1373
+  ]
+ },
+ "fallback": {
+  "0": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "1": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "2": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "3": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "4": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "5": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "6": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "7": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "8": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "9": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "10": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ }
+}

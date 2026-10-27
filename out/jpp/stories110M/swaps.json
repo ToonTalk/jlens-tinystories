@@ -1,0 +1,1137 @@
+{
+ "strength": 0.4,
+ "max_new": 120,
+ "bands": {
+  "band": [
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "L2-L8": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ },
+ "results": [
+  {
+   "prompt": "Lily and Max went to the beach. Lily built a castle. Max dug a",
+   "src": "hole",
+   "tgt": "castle",
+   "no_swap": "hole. They were happy.\n\"Look at my castle!\" Lily said. \"It is big and pretty.\"\n\"Look at my hole!\" Max said. \"It is deep and dark.\"\nThey wanted to see what was in the hole. They went closer. They saw something sh",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\n\"Look at my castle, Max!\" Lily said. \"It has a flag and a door and a moat.\"\n\"Wow, Lily, your castle is very nice!\" Max said. \"But look at my moat. It",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, look out!\" Max ran away just in time. The wave crashed on the shore.\nLily said, \"That was scary. Let'",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "moat. They were having fun.\nSuddenly, Lily saw a big wave coming. She shouted, \"Max, we have to go!\" Max said, \"Wait, I want to finish my moat first.\" Lily said, \"Okay, but hurry",
+     "first_words": "moat. They were having",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    }
+   }
+  },
+  {
+   "prompt": "Ann played in the hot sun all day. She was very thirsty. She asked her mom for some",
+   "src": "water",
+   "tgt": "milk",
+   "no_swap": "water. Her mom said, \"Yes, I will give you some water.\" Ann was so happy. She drank the water and felt much better.\nAnn went to play with her friends. They were playing a game. Ann was very good at the game. She won the game.",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "juice. Her mom said, \"Yes, you can have some juice.\" Ann was so happy. She ran to the kitchen and opened the fridge. She saw a big bottle of juice. She grabbed it and ran back to the living room.\nAnn opened",
+     "first_words": "juice. Her mom said,",
+     "exact": false,
+     "switched": true,
+     "changed": true
+    }
+   }
+  },
+  {
+   "prompt": "Kate found an old chest in the attic, but it was locked. She needed a",
+   "src": "key",
+   "tgt": "box",
+   "no_swap": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a key and opened the chest. Inside, there was a",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a box with a big lock on it. She took out a",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a box with a big lock on it. She took out a",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Sure, sweetheart,\" her mom said. \"Let's see if we can find a way to open it.\"\nKate and",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Sure, sweetheart,\" her mom said. \"Let's see if we can find a way to open it.\"\nKate and",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Sure, sweetheart,\" her mom said. \"Let's see if we can find a way to open it.\"\nKate and",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Sure, sweetheart,\" her mom said. \"Let's see if we can find a way to open it.\"\nKate and",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a key and opened the chest. Inside, there was a",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a key and opened the chest. Inside, there was a",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a box with a lock on it. She took out a key",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "key to open it. She asked her mom for help.\n\"Mom, can you help me open this chest?\" Kate asked.\n\"Yes, of course,\" her mom said.\nKate's mom found a box with a lock on it. She took out a key",
+     "first_words": "key to open it.",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    }
+   }
+  },
+  {
+   "prompt": "Tom had a pet cat. Every morning, he gave milk to his",
+   "src": "cat",
+   "tgt": "dog",
+   "no_swap": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink the milk.\nOne day, Tom saw a big dog outside. The dog was barking and running around. Tom was scared of the dog. He ran inside and told his cat,",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink the milk.\nOne day, Tom saw a big dog outside. The dog was barking and running around. Tom was scared of the dog. He ran inside and told his mom.",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom loved his pet cat very much.\nOne day, Tom's mom said they had to go to the store. Tom wanted to bring his pet cat, but his mom said no. She said the store was too far and",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink milk.\nOne day, Tom saw a big dog outside. The dog was loud and scary. Tom was afraid of the dog. He ran inside and locked the door. He forgot to give",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom loved his pet cat very much.\nOne day, Tom's mom said, \"Tom, you need to feed your pet dog too.\" Tom did not want to feed his dog. He wanted to play with his pet cat",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink milk.\nOne day, Tom saw a big dog outside. The dog was barking and running around. Tom was scared of the dog. He ran inside and told his mom. His",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink milk.\nOne day, Tom saw a big dog outside. The dog was barking and running around. Tom was scared of the dog. He ran inside and locked the door. He",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink the milk.\nOne day, Tom saw a big dog outside. The dog was barking and running around. Tom was scared of the dog. He ran inside and told his mom.",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom loved his pet cat very much.\nOne day, Tom's mom said they had to sell the pet dog. Tom was very sad and angry. He did not want to sell his pet dog. He hugged his",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. The cat was very happy and purred a lot. Tom liked to watch his cat drink the milk.\nOne day, Tom saw a big dog outside. The dog was barking and running around. Tom was scared of the dog. He ran inside and told his mom.",
+     "first_words": "cat. The cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cat. His cat was very happy and purred a lot. Tom liked to play with his cat and make him run and jump.\nOne day, Tom saw a big dog in his yard. The dog was barking and growling. Tom was scared of the dog. He ran",
+     "first_words": "cat. His cat was",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    }
+   }
+  },
+  {
+   "prompt": "The little bird flew high up into the",
+   "src": "sky",
+   "tgt": "tree",
+   "no_swap": "sky. He was so happy to be free. He flew around and around, enjoying the sunshine.\nSuddenly, he saw a big, dark cloud. He was scared and flew away quickly. He flew and flew until he was far away from",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for something special. He saw a big, shiny thing in the tree. He flew closer and saw it was a big, red apple. He was so excited! He flew down and grabbed the apple with his beak.\nThe little bird fle",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for something special. He saw a big, shiny thing in the tree. He flew closer and saw it was a big, red apple. He was so excited! He flew down and grabbed the apple with his beak.\nThe little bird fle",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for something special. He saw a big, shiny thing in the tree. He flew closer and saw it was a big, red apple. He was so excited! He flew down and grabbed the apple with his beak.\nThe little bird fle",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for something special. He saw a big, shiny thing in the tree. He flew closer and saw it was a big, red apple. He was so excited! He flew down and grabbed the apple with his beak.\nThe little bird fle",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for a place to rest. He saw a big branch and decided to land on it. But the branch was too weak and it broke! The little bird fell to the ground and hurt his wing.\nA kind girl saw the little bird and wanted to help him. She",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for a place to rest. He saw a big branch and decided to land on it. But the branch was too weak and it broke! The little bird fell to the ground and hurt his wing.\nA kind girl saw the little bird and wanted to help him. She",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "sky. He was so happy to be free. He flew around and around, enjoying the view.\nSuddenly, he saw a big, scary cat. The cat was looking up at him with its big, yellow eyes. The little bird was so scared that he",
+     "first_words": "sky. He was so",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "sky. He was so happy to be free. He flew around and around, enjoying the view.\nSuddenly, he saw a big, scary cat. The cat was looking up at him with hungry eyes. The little bird was scared and flew away as",
+     "first_words": "sky. He was so",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "sky. He was so happy to be free. He flew around and around, enjoying the view.\nSuddenly, he saw a big, scary cat. The cat was looking up at him with its big, yellow eyes. The little bird was so scared that he",
+     "first_words": "sky. He was so",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tree. He was looking for something special. He saw a big, shiny thing in the tree. He flew closer and saw it was a big, red apple. He was so excited! He flew down and grabbed the apple with his beak.\nThe little bird fle",
+     "first_words": "tree. He was looking",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    }
+   }
+  },
+  {
+   "prompt": "Ben was hungry, so he ate a big red",
+   "src": "apple",
+   "tgt": "cookie",
+   "no_swap": "apple. He liked apples, they were sweet and crunchy. He saw a big yellow banana on the table. He wanted to eat it too, but he did not know how to peel it.\nHe asked his mom, \"Mom, how do I peel the",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "cookie. He liked cookies a lot. He wanted to eat more, but Mom said no. She said he had to eat his lunch first. Ben did not want to eat his lunch. He wanted to eat more cookies.\nHe saw a jar of cookies on the shelf.",
+     "first_words": "cookie. He liked cookies",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    }
+   }
+  },
+  {
+   "prompt": "The dog barked and wagged its",
+   "src": "tail",
+   "tgt": "head",
+   "no_swap": "tail. It wanted to play with the boy. The boy smiled and threw a ball. The dog ran and caught the ball in its mouth. It brought the ball back to the boy. The boy petted the dog and said, \"You are a good dog. Do you want to play",
+   "control_first_is_src": true,
+   "swaps": {
+    "J band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "head. It was a happy dog. It liked to play with the children in the park. They threw a ball and the dog ran after it. They laughed and clapped.\nOne day, a new boy came to the park. He had a big bike and a loud voice. He",
+     "first_words": "head. It was a",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "head. It was a happy dog. It liked to play with the children in the park. It liked to run and jump and roll on the grass.\nOne day, the dog saw a big ball. It wanted to play with the ball. It ran to the ball and bit it. The",
+     "first_words": "head. It was a",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "head. It was a happy dog. It liked to play with the children in the park. They threw a ball and the dog ran after it. They laughed and clapped.\nOne day, a new boy came to the park. He had a big bike and a loud voice. He",
+     "first_words": "head. It was a",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "LRP-only L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "head. It was a happy dog. It liked to play with the children in the park. They threw a ball and the dog ran after it. They laughed and clapped.\nOne day, a new boy came to the park. He had a big bike and a loud voice. He",
+     "first_words": "head. It was a",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    },
+    "J++ band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tail. It was a happy dog. It liked to play with the children in the park. It liked to run and jump and roll on the grass.\nOne day, the dog saw a big ball. It wanted to play with the ball. It ran to the ball and bit it. But",
+     "first_words": "tail. It was a",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tail. It was happy to see the little girl. She smiled and petted the dog. The dog licked her face and she giggled.\nThe little girl's mom came outside and saw the dog. She said, \"What a cute dog! Can we keep it",
+     "first_words": "tail. It was happy",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tail. It was a happy dog. It liked to play with the children in the park. It liked to run and jump and roll on the grass.\nOne day, the dog saw a big ball. It wanted to play with the ball. It ran to the ball and bit it. But",
+     "first_words": "tail. It was a",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "J++ mixed L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tail. It was a happy dog. It liked to play with the children in the park. It liked to run and jump and roll on the grass.\nOne day, the dog saw a big ball. It wanted to play with the ball. It ran to the ball and bit it. The",
+     "first_words": "tail. It was a",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 band": {
+     "layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "tail. It was a happy dog. It liked to play with the children in the park. It liked to run and jump and roll on the grass.\nOne day, the dog saw a big ball. It wanted to play with the ball. It ran to the ball and bit it. But",
+     "first_words": "tail. It was a",
+     "exact": false,
+     "switched": false,
+     "changed": true
+    },
+    "experts-noLRP n100 L2-L8": {
+     "layers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "text": "head. It was a happy dog. It liked to play with the children in the park. It liked to run and jump and roll on the grass.\nOne day, the dog saw a big ball. It wanted to play with the ball. It ran to the ball and bit it. The",
+     "first_words": "head. It was a",
+     "exact": true,
+     "switched": true,
+     "changed": true
+    }
+   }
+  }
+ ]
+}

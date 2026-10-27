@@ -1,0 +1,13 @@
+{
+ "model": "stories15M",
+ "lrp_mode": "rlens",
+ "skip_first": 16,
+ "n_prompts": 1000,
+ "num_clusters": 8,
+ "projection_dim": 64,
+ "rows_per_pass": 32,
+ "fit_wall_s_this_run": 0.0,
+ "fit_wall_s_total": 0.0,
+ "torch": "2.11.0+cu128",
+ "gpu": "NVIDIA RTX A4000"
+}

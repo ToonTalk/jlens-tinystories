@@ -1,0 +1,107 @@
+{
+ "n_prompts": 100,
+ "position_counts": {
+  "0": [
+   789,
+   112,
+   1672,
+   1699,
+   822,
+   2621,
+   1317,
+   2068
+  ],
+  "1": [
+   1028,
+   332,
+   2265,
+   1269,
+   767,
+   3185,
+   1023,
+   1231
+  ],
+  "2": [
+   806,
+   992,
+   1247,
+   2230,
+   1216,
+   3373,
+   233,
+   1003
+  ],
+  "3": [
+   527,
+   127,
+   2262,
+   1671,
+   847,
+   3189,
+   936,
+   1541
+  ],
+  "4": [
+   580,
+   134,
+   2091,
+   1614,
+   1018,
+   3459,
+   925,
+   1279
+  ]
+ },
+ "fallback": {
+  "0": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "1": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "2": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "3": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "4": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ }
+}

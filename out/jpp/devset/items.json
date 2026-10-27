@@ -1,0 +1,4032 @@
+[
+ {
+  "family": "need",
+  "template": "need/cold",
+  "name": "need/cold/Tom",
+  "prompt": "Tom wanted to play in the snow, but it was very cold outside.",
+  "answers": [
+   "coat",
+   "hat"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/cold",
+  "name": "need/cold/Lucy",
+  "prompt": "Lucy wanted to play in the snow, but it was very cold outside.",
+  "answers": [
+   "coat",
+   "hat"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/cold",
+  "name": "need/cold/Bob",
+  "prompt": "Bob wanted to play in the snow, but it was very cold outside.",
+  "answers": [
+   "coat",
+   "hat"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/cold",
+  "name": "need/cold/Amy",
+  "prompt": "Amy wanted to play in the snow, but it was very cold outside.",
+  "answers": [
+   "coat",
+   "hat"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/cold",
+  "name": "need/cold/Mark",
+  "prompt": "Mark wanted to play in the snow, but it was very cold outside.",
+  "answers": [
+   "coat",
+   "hat"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/cold",
+  "name": "need/cold/Jane",
+  "prompt": "Jane wanted to play in the snow, but it was very cold outside.",
+  "answers": [
+   "coat",
+   "hat"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/thirsty",
+  "name": "need/thirsty/Jen",
+  "prompt": "Jen played in the hot sun all day. She was very thirsty.",
+  "answers": [
+   "water",
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/thirsty",
+  "name": "need/thirsty/Billy",
+  "prompt": "Billy played in the hot sun all day. He was very thirsty.",
+  "answers": [
+   "water",
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/thirsty",
+  "name": "need/thirsty/Kim",
+  "prompt": "Kim played in the hot sun all day. She was very thirsty.",
+  "answers": [
+   "water",
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/thirsty",
+  "name": "need/thirsty/Leo",
+  "prompt": "Leo played in the hot sun all day. He was very thirsty.",
+  "answers": [
+   "water",
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/thirsty",
+  "name": "need/thirsty/Lisa",
+  "prompt": "Lisa played in the hot sun all day. She was very thirsty.",
+  "answers": [
+   "water",
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/thirsty",
+  "name": "need/thirsty/Paul",
+  "prompt": "Paul played in the hot sun all day. He was very thirsty.",
+  "answers": [
+   "water",
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/hungry",
+  "name": "need/hungry/Andy",
+  "prompt": "Andy came home after a long day at school. His tummy was rumbling.",
+  "answers": [
+   "food",
+   "eat",
+   "cookie",
+   "cookies",
+   "bread",
+   "soup",
+   "apple"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/hungry",
+  "name": "need/hungry/Lucy",
+  "prompt": "Lucy came home after a long day at school. Her tummy was rumbling.",
+  "answers": [
+   "food",
+   "eat",
+   "cookie",
+   "cookies",
+   "bread",
+   "soup",
+   "apple"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/hungry",
+  "name": "need/hungry/Jack",
+  "prompt": "Jack came home after a long day at school. His tummy was rumbling.",
+  "answers": [
+   "food",
+   "eat",
+   "cookie",
+   "cookies",
+   "bread",
+   "soup",
+   "apple"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/hungry",
+  "name": "need/hungry/Amy",
+  "prompt": "Amy came home after a long day at school. Her tummy was rumbling.",
+  "answers": [
+   "food",
+   "eat",
+   "cookie",
+   "cookies",
+   "bread",
+   "soup",
+   "apple"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/hungry",
+  "name": "need/hungry/Joe",
+  "prompt": "Joe came home after a long day at school. His tummy was rumbling.",
+  "answers": [
+   "food",
+   "eat",
+   "cookie",
+   "cookies",
+   "bread",
+   "soup",
+   "apple"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/hungry",
+  "name": "need/hungry/Jane",
+  "prompt": "Jane came home after a long day at school. Her tummy was rumbling.",
+  "answers": [
+   "food",
+   "eat",
+   "cookie",
+   "cookies",
+   "bread",
+   "soup",
+   "apple"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dark",
+  "name": "need/dark/Jen",
+  "prompt": "Jen walked into the dark room. She could not see anything at all.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dark",
+  "name": "need/dark/Ted",
+  "prompt": "Ted walked into the dark room. He could not see anything at all.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dark",
+  "name": "need/dark/Kim",
+  "prompt": "Kim walked into the dark room. She could not see anything at all.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dark",
+  "name": "need/dark/Roy",
+  "prompt": "Roy walked into the dark room. He could not see anything at all.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dark",
+  "name": "need/dark/Lisa",
+  "prompt": "Lisa walked into the dark room. She could not see anything at all.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dark",
+  "name": "need/dark/Peter",
+  "prompt": "Peter walked into the dark room. He could not see anything at all.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/shelf",
+  "name": "need/shelf/Paul",
+  "prompt": "The jar was on a very high shelf. Paul was too small to reach it.",
+  "answers": [
+   "chair",
+   "box"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/shelf",
+  "name": "need/shelf/Lucy",
+  "prompt": "The jar was on a very high shelf. Lucy was too small to reach it.",
+  "answers": [
+   "chair",
+   "box"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/shelf",
+  "name": "need/shelf/Tom",
+  "prompt": "The jar was on a very high shelf. Tom was too small to reach it.",
+  "answers": [
+   "chair",
+   "box"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/shelf",
+  "name": "need/shelf/Amy",
+  "prompt": "The jar was on a very high shelf. Amy was too small to reach it.",
+  "answers": [
+   "chair",
+   "box"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/shelf",
+  "name": "need/shelf/Bob",
+  "prompt": "The jar was on a very high shelf. Bob was too small to reach it.",
+  "answers": [
+   "chair",
+   "box"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/shelf",
+  "name": "need/shelf/Jane",
+  "prompt": "The jar was on a very high shelf. Jane was too small to reach it.",
+  "answers": [
+   "chair",
+   "box"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/locked",
+  "name": "need/locked/Jen",
+  "prompt": "Jen found an old chest in the attic, but it was locked.",
+  "answers": [
+   "key"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/locked",
+  "name": "need/locked/John",
+  "prompt": "John found an old chest in the attic, but it was locked.",
+  "answers": [
+   "key"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/locked",
+  "name": "need/locked/Kim",
+  "prompt": "Kim found an old chest in the attic, but it was locked.",
+  "answers": [
+   "key"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/locked",
+  "name": "need/locked/Billy",
+  "prompt": "Billy found an old chest in the attic, but it was locked.",
+  "answers": [
+   "key"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/locked",
+  "name": "need/locked/Lisa",
+  "prompt": "Lisa found an old chest in the attic, but it was locked.",
+  "answers": [
+   "key"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/locked",
+  "name": "need/locked/Leo",
+  "prompt": "Leo found an old chest in the attic, but it was locked.",
+  "answers": [
+   "key"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/island",
+  "name": "need/island/Peter",
+  "prompt": "Peter wanted to visit the little island in the middle of the lake.",
+  "answers": [
+   "boat",
+   "ship",
+   "bridge"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/island",
+  "name": "need/island/Lucy",
+  "prompt": "Lucy wanted to visit the little island in the middle of the lake.",
+  "answers": [
+   "boat",
+   "ship",
+   "bridge"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/island",
+  "name": "need/island/Andy",
+  "prompt": "Andy wanted to visit the little island in the middle of the lake.",
+  "answers": [
+   "boat",
+   "ship",
+   "bridge"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/island",
+  "name": "need/island/Amy",
+  "prompt": "Amy wanted to visit the little island in the middle of the lake.",
+  "answers": [
+   "boat",
+   "ship",
+   "bridge"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/island",
+  "name": "need/island/Jack",
+  "prompt": "Jack wanted to visit the little island in the middle of the lake.",
+  "answers": [
+   "boat",
+   "ship",
+   "bridge"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/island",
+  "name": "need/island/Jane",
+  "prompt": "Jane wanted to visit the little island in the middle of the lake.",
+  "answers": [
+   "boat",
+   "ship",
+   "bridge"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/catch",
+  "name": "need/catch/Jen",
+  "prompt": "Jen saw a big fish in the pond and wanted to catch it.",
+  "answers": [
+   "net",
+   "rod",
+   "pole"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/catch",
+  "name": "need/catch/Mark",
+  "prompt": "Mark saw a big fish in the pond and wanted to catch it.",
+  "answers": [
+   "net",
+   "rod",
+   "pole"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/catch",
+  "name": "need/catch/Kim",
+  "prompt": "Kim saw a big fish in the pond and wanted to catch it.",
+  "answers": [
+   "net",
+   "rod",
+   "pole"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/catch",
+  "name": "need/catch/Ted",
+  "prompt": "Ted saw a big fish in the pond and wanted to catch it.",
+  "answers": [
+   "net",
+   "rod",
+   "pole"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/catch",
+  "name": "need/catch/Lisa",
+  "prompt": "Lisa saw a big fish in the pond and wanted to catch it.",
+  "answers": [
+   "net",
+   "rod",
+   "pole"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/catch",
+  "name": "need/catch/Roy",
+  "prompt": "Roy saw a big fish in the pond and wanted to catch it.",
+  "answers": [
+   "net",
+   "rod",
+   "pole"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/tired",
+  "name": "need/tired/Leo",
+  "prompt": "It was very late at night, and Leo was very tired.",
+  "answers": [
+   "bed",
+   "sleep",
+   "nap"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/tired",
+  "name": "need/tired/Lucy",
+  "prompt": "It was very late at night, and Lucy was very tired.",
+  "answers": [
+   "bed",
+   "sleep",
+   "nap"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/tired",
+  "name": "need/tired/Paul",
+  "prompt": "It was very late at night, and Paul was very tired.",
+  "answers": [
+   "bed",
+   "sleep",
+   "nap"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/tired",
+  "name": "need/tired/Amy",
+  "prompt": "It was very late at night, and Amy was very tired.",
+  "answers": [
+   "bed",
+   "sleep",
+   "nap"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/tired",
+  "name": "need/tired/Tom",
+  "prompt": "It was very late at night, and Tom was very tired.",
+  "answers": [
+   "bed",
+   "sleep",
+   "nap"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/tired",
+  "name": "need/tired/Jane",
+  "prompt": "It was very late at night, and Jane was very tired.",
+  "answers": [
+   "bed",
+   "sleep",
+   "nap"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dirty",
+  "name": "need/dirty/Jen",
+  "prompt": "Jen played in the mud all afternoon and came home very dirty.",
+  "answers": [
+   "bath",
+   "soap",
+   "clean",
+   "water"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dirty",
+  "name": "need/dirty/Joe",
+  "prompt": "Joe played in the mud all afternoon and came home very dirty.",
+  "answers": [
+   "bath",
+   "soap",
+   "clean",
+   "water"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dirty",
+  "name": "need/dirty/Kim",
+  "prompt": "Kim played in the mud all afternoon and came home very dirty.",
+  "answers": [
+   "bath",
+   "soap",
+   "clean",
+   "water"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dirty",
+  "name": "need/dirty/John",
+  "prompt": "John played in the mud all afternoon and came home very dirty.",
+  "answers": [
+   "bath",
+   "soap",
+   "clean",
+   "water"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dirty",
+  "name": "need/dirty/Lisa",
+  "prompt": "Lisa played in the mud all afternoon and came home very dirty.",
+  "answers": [
+   "bath",
+   "soap",
+   "clean",
+   "water"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/dirty",
+  "name": "need/dirty/Billy",
+  "prompt": "Billy played in the mud all afternoon and came home very dirty.",
+  "answers": [
+   "bath",
+   "soap",
+   "clean",
+   "water"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/broken",
+  "name": "need/broken/Roy",
+  "prompt": "Roy's favorite doll broke into two pieces.",
+  "answers": [
+   "fix"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/broken",
+  "name": "need/broken/Lucy",
+  "prompt": "Lucy's favorite doll broke into two pieces.",
+  "answers": [
+   "fix"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/broken",
+  "name": "need/broken/Peter",
+  "prompt": "Peter's favorite doll broke into two pieces.",
+  "answers": [
+   "fix"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/broken",
+  "name": "need/broken/Amy",
+  "prompt": "Amy's favorite doll broke into two pieces.",
+  "answers": [
+   "fix"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/broken",
+  "name": "need/broken/Andy",
+  "prompt": "Andy's favorite doll broke into two pieces.",
+  "answers": [
+   "fix"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/broken",
+  "name": "need/broken/Jane",
+  "prompt": "Jane's favorite doll broke into two pieces.",
+  "answers": [
+   "fix"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/garden",
+  "name": "need/garden/Jen",
+  "prompt": "The flowers in Jen's garden were dry and drooping.",
+  "answers": [
+   "water",
+   "rain"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/garden",
+  "name": "need/garden/Bob",
+  "prompt": "The flowers in Bob's garden were dry and drooping.",
+  "answers": [
+   "water",
+   "rain"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/garden",
+  "name": "need/garden/Kim",
+  "prompt": "The flowers in Kim's garden were dry and drooping.",
+  "answers": [
+   "water",
+   "rain"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/garden",
+  "name": "need/garden/Mark",
+  "prompt": "The flowers in Mark's garden were dry and drooping.",
+  "answers": [
+   "water",
+   "rain"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/garden",
+  "name": "need/garden/Lisa",
+  "prompt": "The flowers in Lisa's garden were dry and drooping.",
+  "answers": [
+   "water",
+   "rain"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/garden",
+  "name": "need/garden/Ted",
+  "prompt": "The flowers in Ted's garden were dry and drooping.",
+  "answers": [
+   "water",
+   "rain"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/bowl",
+  "name": "need/bowl/Billy",
+  "prompt": "Billy's dog looked at his empty bowl and whined.",
+  "answers": [
+   "food",
+   "eat",
+   "water"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/bowl",
+  "name": "need/bowl/Lucy",
+  "prompt": "Lucy's dog looked at his empty bowl and whined.",
+  "answers": [
+   "food",
+   "eat",
+   "water"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/bowl",
+  "name": "need/bowl/Leo",
+  "prompt": "Leo's dog looked at his empty bowl and whined.",
+  "answers": [
+   "food",
+   "eat",
+   "water"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/bowl",
+  "name": "need/bowl/Amy",
+  "prompt": "Amy's dog looked at his empty bowl and whined.",
+  "answers": [
+   "food",
+   "eat",
+   "water"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/bowl",
+  "name": "need/bowl/Paul",
+  "prompt": "Paul's dog looked at his empty bowl and whined.",
+  "answers": [
+   "food",
+   "eat",
+   "water"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/bowl",
+  "name": "need/bowl/Jane",
+  "prompt": "Jane's dog looked at his empty bowl and whined.",
+  "answers": [
+   "food",
+   "eat",
+   "water"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/read",
+  "name": "need/read/Jen",
+  "prompt": "It was dark, and Jen wanted to read her new book in bed.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/read",
+  "name": "need/read/Jack",
+  "prompt": "It was dark, and Jack wanted to read his new book in bed.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/read",
+  "name": "need/read/Kim",
+  "prompt": "It was dark, and Kim wanted to read her new book in bed.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/read",
+  "name": "need/read/Joe",
+  "prompt": "It was dark, and Joe wanted to read his new book in bed.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/read",
+  "name": "need/read/Lisa",
+  "prompt": "It was dark, and Lisa wanted to read her new book in bed.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "need",
+  "template": "need/read",
+  "name": "need/read/John",
+  "prompt": "It was dark, and John wanted to read his new book in bed.",
+  "answers": [
+   "light",
+   "lamp"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/lost",
+  "name": "feeling/lost/Tom",
+  "prompt": "Tom lost his favorite teddy bear at the park. He looked everywhere, but he could not find it.",
+  "answers": [
+   "sad",
+   "cry",
+   "cried"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/lost",
+  "name": "feeling/lost/Lucy",
+  "prompt": "Lucy lost her favorite teddy bear at the park. She looked everywhere, but she could not find it.",
+  "answers": [
+   "sad",
+   "cry",
+   "cried"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/lost",
+  "name": "feeling/lost/Bob",
+  "prompt": "Bob lost his favorite teddy bear at the park. He looked everywhere, but he could not find it.",
+  "answers": [
+   "sad",
+   "cry",
+   "cried"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/lost",
+  "name": "feeling/lost/Amy",
+  "prompt": "Amy lost her favorite teddy bear at the park. She looked everywhere, but she could not find it.",
+  "answers": [
+   "sad",
+   "cry",
+   "cried"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/lost",
+  "name": "feeling/lost/Mark",
+  "prompt": "Mark lost his favorite teddy bear at the park. He looked everywhere, but he could not find it.",
+  "answers": [
+   "sad",
+   "cry",
+   "cried"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/lost",
+  "name": "feeling/lost/Jane",
+  "prompt": "Jane lost her favorite teddy bear at the park. She looked everywhere, but she could not find it.",
+  "answers": [
+   "sad",
+   "cry",
+   "cried"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/gift",
+  "name": "feeling/gift/Jen",
+  "prompt": "On her birthday, Jen opened a big box and found the puppy she had always wanted.",
+  "answers": [
+   "happy",
+   "excited",
+   "smile"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/gift",
+  "name": "feeling/gift/Billy",
+  "prompt": "On his birthday, Billy opened a big box and found the puppy he had always wanted.",
+  "answers": [
+   "happy",
+   "excited",
+   "smile"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/gift",
+  "name": "feeling/gift/Kim",
+  "prompt": "On her birthday, Kim opened a big box and found the puppy she had always wanted.",
+  "answers": [
+   "happy",
+   "excited",
+   "smile"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/gift",
+  "name": "feeling/gift/Leo",
+  "prompt": "On his birthday, Leo opened a big box and found the puppy he had always wanted.",
+  "answers": [
+   "happy",
+   "excited",
+   "smile"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/gift",
+  "name": "feeling/gift/Lisa",
+  "prompt": "On her birthday, Lisa opened a big box and found the puppy she had always wanted.",
+  "answers": [
+   "happy",
+   "excited",
+   "smile"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/gift",
+  "name": "feeling/gift/Paul",
+  "prompt": "On his birthday, Paul opened a big box and found the puppy he had always wanted.",
+  "answers": [
+   "happy",
+   "excited",
+   "smile"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/thunder",
+  "name": "feeling/thunder/Andy",
+  "prompt": "In the middle of the night, a loud boom of thunder shook Andy's window.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/thunder",
+  "name": "feeling/thunder/Lucy",
+  "prompt": "In the middle of the night, a loud boom of thunder shook Lucy's window.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/thunder",
+  "name": "feeling/thunder/Jack",
+  "prompt": "In the middle of the night, a loud boom of thunder shook Jack's window.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/thunder",
+  "name": "feeling/thunder/Amy",
+  "prompt": "In the middle of the night, a loud boom of thunder shook Amy's window.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/thunder",
+  "name": "feeling/thunder/Joe",
+  "prompt": "In the middle of the night, a loud boom of thunder shook Joe's window.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/thunder",
+  "name": "feeling/thunder/Jane",
+  "prompt": "In the middle of the night, a loud boom of thunder shook Jane's window.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/grabbed",
+  "name": "feeling/grabbed/Jen",
+  "prompt": "Andy grabbed Jen's new kite and broke it on purpose.",
+  "answers": [
+   "angry",
+   "mad",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/grabbed",
+  "name": "feeling/grabbed/Ted",
+  "prompt": "Emma grabbed Ted's new kite and broke it on purpose.",
+  "answers": [
+   "angry",
+   "mad",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/grabbed",
+  "name": "feeling/grabbed/Kim",
+  "prompt": "Tom grabbed Kim's new kite and broke it on purpose.",
+  "answers": [
+   "angry",
+   "mad",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/grabbed",
+  "name": "feeling/grabbed/Roy",
+  "prompt": "Jen grabbed Roy's new kite and broke it on purpose.",
+  "answers": [
+   "angry",
+   "mad",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/grabbed",
+  "name": "feeling/grabbed/Lisa",
+  "prompt": "Jack grabbed Lisa's new kite and broke it on purpose.",
+  "answers": [
+   "angry",
+   "mad",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/grabbed",
+  "name": "feeling/grabbed/Peter",
+  "prompt": "Kim grabbed Peter's new kite and broke it on purpose.",
+  "answers": [
+   "angry",
+   "mad",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/painting",
+  "name": "feeling/painting/Paul",
+  "prompt": "Paul worked hard all morning and finished a beautiful painting for his mom.",
+  "answers": [
+   "proud",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/painting",
+  "name": "feeling/painting/Lucy",
+  "prompt": "Lucy worked hard all morning and finished a beautiful painting for her mom.",
+  "answers": [
+   "proud",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/painting",
+  "name": "feeling/painting/Tom",
+  "prompt": "Tom worked hard all morning and finished a beautiful painting for his mom.",
+  "answers": [
+   "proud",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/painting",
+  "name": "feeling/painting/Amy",
+  "prompt": "Amy worked hard all morning and finished a beautiful painting for her mom.",
+  "answers": [
+   "proud",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/painting",
+  "name": "feeling/painting/Bob",
+  "prompt": "Bob worked hard all morning and finished a beautiful painting for his mom.",
+  "answers": [
+   "proud",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/painting",
+  "name": "feeling/painting/Jane",
+  "prompt": "Jane worked hard all morning and finished a beautiful painting for her mom.",
+  "answers": [
+   "proud",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/pushed",
+  "name": "feeling/pushed/Jen",
+  "prompt": "Jen pushed her little sister, and she fell down and cried.",
+  "answers": [
+   "sorry"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/pushed",
+  "name": "feeling/pushed/John",
+  "prompt": "John pushed his little sister, and she fell down and cried.",
+  "answers": [
+   "sorry"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/pushed",
+  "name": "feeling/pushed/Kim",
+  "prompt": "Kim pushed her little sister, and she fell down and cried.",
+  "answers": [
+   "sorry"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/pushed",
+  "name": "feeling/pushed/Billy",
+  "prompt": "Billy pushed his little sister, and she fell down and cried.",
+  "answers": [
+   "sorry"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/pushed",
+  "name": "feeling/pushed/Lisa",
+  "prompt": "Lisa pushed her little sister, and she fell down and cried.",
+  "answers": [
+   "sorry"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/pushed",
+  "name": "feeling/pushed/Leo",
+  "prompt": "Leo pushed his little sister, and she fell down and cried.",
+  "answers": [
+   "sorry"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/moved",
+  "name": "feeling/moved/Peter",
+  "prompt": "Peter's best friend had to move far away to a new town.",
+  "answers": [
+   "sad",
+   "miss"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/moved",
+  "name": "feeling/moved/Lucy",
+  "prompt": "Lucy's best friend had to move far away to a new town.",
+  "answers": [
+   "sad",
+   "miss"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/moved",
+  "name": "feeling/moved/Andy",
+  "prompt": "Andy's best friend had to move far away to a new town.",
+  "answers": [
+   "sad",
+   "miss"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/moved",
+  "name": "feeling/moved/Amy",
+  "prompt": "Amy's best friend had to move far away to a new town.",
+  "answers": [
+   "sad",
+   "miss"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/moved",
+  "name": "feeling/moved/Jack",
+  "prompt": "Jack's best friend had to move far away to a new town.",
+  "answers": [
+   "sad",
+   "miss"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/moved",
+  "name": "feeling/moved/Jane",
+  "prompt": "Jane's best friend had to move far away to a new town.",
+  "answers": [
+   "sad",
+   "miss"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/splash",
+  "name": "feeling/splash/Jen",
+  "prompt": "The puppy jumped into the bath and splashed water all over Jen.",
+  "answers": [
+   "laugh",
+   "laughed"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/splash",
+  "name": "feeling/splash/Mark",
+  "prompt": "The puppy jumped into the bath and splashed water all over Mark.",
+  "answers": [
+   "laugh",
+   "laughed"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/splash",
+  "name": "feeling/splash/Kim",
+  "prompt": "The puppy jumped into the bath and splashed water all over Kim.",
+  "answers": [
+   "laugh",
+   "laughed"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/splash",
+  "name": "feeling/splash/Ted",
+  "prompt": "The puppy jumped into the bath and splashed water all over Ted.",
+  "answers": [
+   "laugh",
+   "laughed"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/splash",
+  "name": "feeling/splash/Lisa",
+  "prompt": "The puppy jumped into the bath and splashed water all over Lisa.",
+  "answers": [
+   "laugh",
+   "laughed"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/splash",
+  "name": "feeling/splash/Roy",
+  "prompt": "The puppy jumped into the bath and splashed water all over Roy.",
+  "answers": [
+   "laugh",
+   "laughed"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/coin",
+  "name": "feeling/coin/Leo",
+  "prompt": "Leo found a shiny gold coin under a rock in the garden.",
+  "answers": [
+   "surprised",
+   "excited",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/coin",
+  "name": "feeling/coin/Lucy",
+  "prompt": "Lucy found a shiny gold coin under a rock in the garden.",
+  "answers": [
+   "surprised",
+   "excited",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/coin",
+  "name": "feeling/coin/Paul",
+  "prompt": "Paul found a shiny gold coin under a rock in the garden.",
+  "answers": [
+   "surprised",
+   "excited",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/coin",
+  "name": "feeling/coin/Amy",
+  "prompt": "Amy found a shiny gold coin under a rock in the garden.",
+  "answers": [
+   "surprised",
+   "excited",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/coin",
+  "name": "feeling/coin/Tom",
+  "prompt": "Tom found a shiny gold coin under a rock in the garden.",
+  "answers": [
+   "surprised",
+   "excited",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/coin",
+  "name": "feeling/coin/Jane",
+  "prompt": "Jane found a shiny gold coin under a rock in the garden.",
+  "answers": [
+   "surprised",
+   "excited",
+   "happy"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/brokecar",
+  "name": "feeling/brokecar/Jen",
+  "prompt": "Jen broke her friend's toy car. The friend started to cry.",
+  "answers": [
+   "sorry",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/brokecar",
+  "name": "feeling/brokecar/Joe",
+  "prompt": "Joe broke his friend's toy car. The friend started to cry.",
+  "answers": [
+   "sorry",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/brokecar",
+  "name": "feeling/brokecar/Kim",
+  "prompt": "Kim broke her friend's toy car. The friend started to cry.",
+  "answers": [
+   "sorry",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/brokecar",
+  "name": "feeling/brokecar/John",
+  "prompt": "John broke his friend's toy car. The friend started to cry.",
+  "answers": [
+   "sorry",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/brokecar",
+  "name": "feeling/brokecar/Lisa",
+  "prompt": "Lisa broke her friend's toy car. The friend started to cry.",
+  "answers": [
+   "sorry",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/brokecar",
+  "name": "feeling/brokecar/Billy",
+  "prompt": "Billy broke his friend's toy car. The friend started to cry.",
+  "answers": [
+   "sorry",
+   "sad"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/forest",
+  "name": "feeling/forest/Roy",
+  "prompt": "Roy was all alone in the big dark forest, and a wolf howled.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/forest",
+  "name": "feeling/forest/Lucy",
+  "prompt": "Lucy was all alone in the big dark forest, and a wolf howled.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/forest",
+  "name": "feeling/forest/Peter",
+  "prompt": "Peter was all alone in the big dark forest, and a wolf howled.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/forest",
+  "name": "feeling/forest/Amy",
+  "prompt": "Amy was all alone in the big dark forest, and a wolf howled.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/forest",
+  "name": "feeling/forest/Andy",
+  "prompt": "Andy was all alone in the big dark forest, and a wolf howled.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/forest",
+  "name": "feeling/forest/Jane",
+  "prompt": "Jane was all alone in the big dark forest, and a wolf howled.",
+  "answers": [
+   "afraid"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/won",
+  "name": "feeling/won/Jen",
+  "prompt": "Jen's team won the big race at school.",
+  "answers": [
+   "happy",
+   "proud",
+   "excited"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/won",
+  "name": "feeling/won/Bob",
+  "prompt": "Bob's team won the big race at school.",
+  "answers": [
+   "happy",
+   "proud",
+   "excited"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/won",
+  "name": "feeling/won/Kim",
+  "prompt": "Kim's team won the big race at school.",
+  "answers": [
+   "happy",
+   "proud",
+   "excited"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/won",
+  "name": "feeling/won/Mark",
+  "prompt": "Mark's team won the big race at school.",
+  "answers": [
+   "happy",
+   "proud",
+   "excited"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/won",
+  "name": "feeling/won/Lisa",
+  "prompt": "Lisa's team won the big race at school.",
+  "answers": [
+   "happy",
+   "proud",
+   "excited"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "feeling",
+  "template": "feeling/won",
+  "name": "feeling/won/Ted",
+  "prompt": "Ted's team won the big race at school.",
+  "answers": [
+   "happy",
+   "proud",
+   "excited"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Tom",
+  "prompt": "Long ago, a little boy called Tom lived in a small house near the woods. He liked to pick berries.",
+  "answers": [
+   "Tom"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Lucy",
+  "prompt": "Long ago, a little girl called Lucy lived in a small house near the woods. She liked to pick berries.",
+  "answers": [
+   "Lucy"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Bob",
+  "prompt": "Long ago, a little boy called Bob lived in a small house near the woods. He liked to pick berries.",
+  "answers": [
+   "Bob"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Amy",
+  "prompt": "Long ago, a little girl called Amy lived in a small house near the woods. She liked to pick berries.",
+  "answers": [
+   "Amy"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Mark",
+  "prompt": "Long ago, a little boy called Mark lived in a small house near the woods. He liked to pick berries.",
+  "answers": [
+   "Mark"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Jane",
+  "prompt": "Long ago, a little girl called Jane lived in a small house near the woods. She liked to pick berries.",
+  "answers": [
+   "Jane"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Ted",
+  "prompt": "Long ago, a little boy called Ted lived in a small house near the woods. He liked to pick berries.",
+  "answers": [
+   "Ted"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/named",
+  "name": "name/named/Ann",
+  "prompt": "Long ago, a little girl called Ann lived in a small house near the woods. She liked to pick berries.",
+  "answers": [
+   "Ann"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Kim",
+  "prompt": "Kim had a big red ball. She loved to play with it every day in the yard.",
+  "answers": [
+   "Kim"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Leo",
+  "prompt": "Leo had a big red ball. He loved to play with it every day in the yard.",
+  "answers": [
+   "Leo"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Lisa",
+  "prompt": "Lisa had a big red ball. She loved to play with it every day in the yard.",
+  "answers": [
+   "Lisa"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Paul",
+  "prompt": "Paul had a big red ball. He loved to play with it every day in the yard.",
+  "answers": [
+   "Paul"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Sue",
+  "prompt": "Sue had a big red ball. She loved to play with it every day in the yard.",
+  "answers": [
+   "Sue"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Tom",
+  "prompt": "Tom had a big red ball. He loved to play with it every day in the yard.",
+  "answers": [
+   "Tom"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Kate",
+  "prompt": "Kate had a big red ball. She loved to play with it every day in the yard.",
+  "answers": [
+   "Kate"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/ball",
+  "name": "name/ball/Bob",
+  "prompt": "Bob had a big red ball. He loved to play with it every day in the yard.",
+  "answers": [
+   "Bob"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Joe",
+  "prompt": "Joe and his mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Joe"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Jane",
+  "prompt": "Jane and her mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Jane"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/John",
+  "prompt": "John and his mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "John"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Ann",
+  "prompt": "Ann and her mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Ann"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Billy",
+  "prompt": "Billy and his mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Billy"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Ruby",
+  "prompt": "Ruby and her mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Ruby"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Leo",
+  "prompt": "Leo and his mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Leo"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/store",
+  "name": "name/store/Mary",
+  "prompt": "Mary and her mom went to the store to buy some apples. The store was big and full of people.",
+  "answers": [
+   "Mary"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Sue",
+  "prompt": "There was a kind old woman in the village. Everyone called her Sue. She had a big garden full of roses.",
+  "answers": [
+   "Sue"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Andy",
+  "prompt": "There was a kind old man in the village. Everyone called him Andy. He had a big garden full of roses.",
+  "answers": [
+   "Andy"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Kate",
+  "prompt": "There was a kind old woman in the village. Everyone called her Kate. She had a big garden full of roses.",
+  "answers": [
+   "Kate"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Jack",
+  "prompt": "There was a kind old man in the village. Everyone called him Jack. He had a big garden full of roses.",
+  "answers": [
+   "Jack"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Emma",
+  "prompt": "There was a kind old woman in the village. Everyone called her Emma. She had a big garden full of roses.",
+  "answers": [
+   "Emma"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Joe",
+  "prompt": "There was a kind old man in the village. Everyone called him Joe. He had a big garden full of roses.",
+  "answers": [
+   "Joe"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/Jen",
+  "prompt": "There was a kind old woman in the village. Everyone called her Jen. She had a big garden full of roses.",
+  "answers": [
+   "Jen"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/elder",
+  "name": "name/elder/John",
+  "prompt": "There was a kind old man in the village. Everyone called him John. He had a big garden full of roses.",
+  "answers": [
+   "John"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Ted",
+  "prompt": "Ted was sad because his friend Mary was sick and could not come to school.",
+  "answers": [
+   "Mary"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Ruby",
+  "prompt": "Ruby was sad because her friend Tom was sick and could not come to school.",
+  "answers": [
+   "Tom"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Roy",
+  "prompt": "Roy was sad because his friend Lucy was sick and could not come to school.",
+  "answers": [
+   "Lucy"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Mary",
+  "prompt": "Mary was sad because her friend Jack was sick and could not come to school.",
+  "answers": [
+   "Jack"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Peter",
+  "prompt": "Peter was sad because his friend Amy was sick and could not come to school.",
+  "answers": [
+   "Amy"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Lucy",
+  "prompt": "Lucy was sad because her friend Bob was sick and could not come to school.",
+  "answers": [
+   "Bob"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Andy",
+  "prompt": "Andy was sad because his friend Jane was sick and could not come to school.",
+  "answers": [
+   "Jane"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/sick",
+  "name": "name/sick/Amy",
+  "prompt": "Amy was sad because her friend Joe was sick and could not come to school.",
+  "answers": [
+   "Joe"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Emma",
+  "prompt": "In a small town, there lived a girl named Emma. She was very shy and did not have many friends.",
+  "answers": [
+   "Emma"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Bob",
+  "prompt": "In a small town, there lived a boy named Bob. He was very shy and did not have many friends.",
+  "answers": [
+   "Bob"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Jen",
+  "prompt": "In a small town, there lived a girl named Jen. She was very shy and did not have many friends.",
+  "answers": [
+   "Jen"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Mark",
+  "prompt": "In a small town, there lived a boy named Mark. He was very shy and did not have many friends.",
+  "answers": [
+   "Mark"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Kim",
+  "prompt": "In a small town, there lived a girl named Kim. She was very shy and did not have many friends.",
+  "answers": [
+   "Kim"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Ted",
+  "prompt": "In a small town, there lived a boy named Ted. He was very shy and did not have many friends.",
+  "answers": [
+   "Ted"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Lisa",
+  "prompt": "In a small town, there lived a girl named Lisa. She was very shy and did not have many friends.",
+  "answers": [
+   "Lisa"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/shy",
+  "name": "name/shy/Roy",
+  "prompt": "In a small town, there lived a boy named Roy. He was very shy and did not have many friends.",
+  "answers": [
+   "Roy"
+  ],
+  "split": "held-out",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Leo",
+  "prompt": "Leo and Amy were baking a cake. Amy cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Amy"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Lucy",
+  "prompt": "Lucy and Roy were baking a cake. Roy cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Roy"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Paul",
+  "prompt": "Paul and Jane were baking a cake. Jane cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Jane"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Amy",
+  "prompt": "Amy and Leo were baking a cake. Leo cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Leo"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Tom",
+  "prompt": "Tom and Ann were baking a cake. Ann cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Ann"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Jane",
+  "prompt": "Jane and Peter were baking a cake. Peter cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Peter"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Bob",
+  "prompt": "Bob and Ruby were baking a cake. Ruby cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Ruby"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "name",
+  "template": "name/cake",
+  "name": "name/cake/Ann",
+  "prompt": "Ann and Paul were baking a cake. Paul cracked the eggs, and the bowl fell on the floor.",
+  "answers": [
+   "Paul"
+  ],
+  "split": "fit",
+  "copy_allowed": true
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/meow",
+  "name": "riddle/meow/Tom",
+  "prompt": "Tom heard a soft meow coming from under the bed.",
+  "answers": [
+   "cat"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/meow",
+  "name": "riddle/meow/Lucy",
+  "prompt": "Lucy heard a soft meow coming from under the bed.",
+  "answers": [
+   "cat"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/meow",
+  "name": "riddle/meow/Bob",
+  "prompt": "Bob heard a soft meow coming from under the bed.",
+  "answers": [
+   "cat"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/meow",
+  "name": "riddle/meow/Amy",
+  "prompt": "Amy heard a soft meow coming from under the bed.",
+  "answers": [
+   "cat"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/meow",
+  "name": "riddle/meow/Mark",
+  "prompt": "Mark heard a soft meow coming from under the bed.",
+  "answers": [
+   "cat"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/meow",
+  "name": "riddle/meow/Jane",
+  "prompt": "Jane heard a soft meow coming from under the bed.",
+  "answers": [
+   "cat"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/woof",
+  "name": "riddle/woof/Jen",
+  "prompt": "Jen heard a loud woof from the yard next door.",
+  "answers": [
+   "dog"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/woof",
+  "name": "riddle/woof/Billy",
+  "prompt": "Billy heard a loud woof from the yard next door.",
+  "answers": [
+   "dog"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/woof",
+  "name": "riddle/woof/Kim",
+  "prompt": "Kim heard a loud woof from the yard next door.",
+  "answers": [
+   "dog"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/woof",
+  "name": "riddle/woof/Leo",
+  "prompt": "Leo heard a loud woof from the yard next door.",
+  "answers": [
+   "dog"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/woof",
+  "name": "riddle/woof/Lisa",
+  "prompt": "Lisa heard a loud woof from the yard next door.",
+  "answers": [
+   "dog"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/woof",
+  "name": "riddle/woof/Paul",
+  "prompt": "Paul heard a loud woof from the yard next door.",
+  "answers": [
+   "dog"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/moo",
+  "name": "riddle/moo/Andy",
+  "prompt": "On the farm, Andy heard a big animal go moo.",
+  "answers": [
+   "cow"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/moo",
+  "name": "riddle/moo/Lucy",
+  "prompt": "On the farm, Lucy heard a big animal go moo.",
+  "answers": [
+   "cow"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/moo",
+  "name": "riddle/moo/Jack",
+  "prompt": "On the farm, Jack heard a big animal go moo.",
+  "answers": [
+   "cow"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/moo",
+  "name": "riddle/moo/Amy",
+  "prompt": "On the farm, Amy heard a big animal go moo.",
+  "answers": [
+   "cow"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/moo",
+  "name": "riddle/moo/Joe",
+  "prompt": "On the farm, Joe heard a big animal go moo.",
+  "answers": [
+   "cow"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/moo",
+  "name": "riddle/moo/Jane",
+  "prompt": "On the farm, Jane heard a big animal go moo.",
+  "answers": [
+   "cow"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/feathers",
+  "name": "riddle/feathers/Jen",
+  "prompt": "Jen saw something with feathers singing on a branch.",
+  "answers": [
+   "bird"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/feathers",
+  "name": "riddle/feathers/Ted",
+  "prompt": "Ted saw something with feathers singing on a branch.",
+  "answers": [
+   "bird"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/feathers",
+  "name": "riddle/feathers/Kim",
+  "prompt": "Kim saw something with feathers singing on a branch.",
+  "answers": [
+   "bird"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/feathers",
+  "name": "riddle/feathers/Roy",
+  "prompt": "Roy saw something with feathers singing on a branch.",
+  "answers": [
+   "bird"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/feathers",
+  "name": "riddle/feathers/Lisa",
+  "prompt": "Lisa saw something with feathers singing on a branch.",
+  "answers": [
+   "bird"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/feathers",
+  "name": "riddle/feathers/Peter",
+  "prompt": "Peter saw something with feathers singing on a branch.",
+  "answers": [
+   "bird"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fins",
+  "name": "riddle/fins/Paul",
+  "prompt": "Paul looked into the pond. Something with shiny scales and fins was swimming there.",
+  "answers": [
+   "fish"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fins",
+  "name": "riddle/fins/Lucy",
+  "prompt": "Lucy looked into the pond. Something with shiny scales and fins was swimming there.",
+  "answers": [
+   "fish"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fins",
+  "name": "riddle/fins/Tom",
+  "prompt": "Tom looked into the pond. Something with shiny scales and fins was swimming there.",
+  "answers": [
+   "fish"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fins",
+  "name": "riddle/fins/Amy",
+  "prompt": "Amy looked into the pond. Something with shiny scales and fins was swimming there.",
+  "answers": [
+   "fish"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fins",
+  "name": "riddle/fins/Bob",
+  "prompt": "Bob looked into the pond. Something with shiny scales and fins was swimming there.",
+  "answers": [
+   "fish"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fins",
+  "name": "riddle/fins/Jane",
+  "prompt": "Jane looked into the pond. Something with shiny scales and fins was swimming there.",
+  "answers": [
+   "fish"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/neigh",
+  "name": "riddle/neigh/Jen",
+  "prompt": "Jen gave some hay to the big animal that said neigh.",
+  "answers": [
+   "horse"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/neigh",
+  "name": "riddle/neigh/John",
+  "prompt": "John gave some hay to the big animal that said neigh.",
+  "answers": [
+   "horse"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/neigh",
+  "name": "riddle/neigh/Kim",
+  "prompt": "Kim gave some hay to the big animal that said neigh.",
+  "answers": [
+   "horse"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/neigh",
+  "name": "riddle/neigh/Billy",
+  "prompt": "Billy gave some hay to the big animal that said neigh.",
+  "answers": [
+   "horse"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/neigh",
+  "name": "riddle/neigh/Lisa",
+  "prompt": "Lisa gave some hay to the big animal that said neigh.",
+  "answers": [
+   "horse"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/neigh",
+  "name": "riddle/neigh/Leo",
+  "prompt": "Leo gave some hay to the big animal that said neigh.",
+  "answers": [
+   "horse"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/wool",
+  "name": "riddle/wool/Peter",
+  "prompt": "Peter visited the farm. An animal on the hill had soft white wool and said baa.",
+  "answers": [
+   "sheep"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/wool",
+  "name": "riddle/wool/Lucy",
+  "prompt": "Lucy visited the farm. An animal on the hill had soft white wool and said baa.",
+  "answers": [
+   "sheep"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/wool",
+  "name": "riddle/wool/Andy",
+  "prompt": "Andy visited the farm. An animal on the hill had soft white wool and said baa.",
+  "answers": [
+   "sheep"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/wool",
+  "name": "riddle/wool/Amy",
+  "prompt": "Amy visited the farm. An animal on the hill had soft white wool and said baa.",
+  "answers": [
+   "sheep"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/wool",
+  "name": "riddle/wool/Jack",
+  "prompt": "Jack visited the farm. An animal on the hill had soft white wool and said baa.",
+  "answers": [
+   "sheep"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/wool",
+  "name": "riddle/wool/Jane",
+  "prompt": "Jane visited the farm. An animal on the hill had soft white wool and said baa.",
+  "answers": [
+   "sheep"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fruit",
+  "name": "riddle/fruit/Jen",
+  "prompt": "Jen picked a round red fruit from the tree and took a bite.",
+  "answers": [
+   "apple"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fruit",
+  "name": "riddle/fruit/Mark",
+  "prompt": "Mark picked a round red fruit from the tree and took a bite.",
+  "answers": [
+   "apple"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fruit",
+  "name": "riddle/fruit/Kim",
+  "prompt": "Kim picked a round red fruit from the tree and took a bite.",
+  "answers": [
+   "apple"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fruit",
+  "name": "riddle/fruit/Ted",
+  "prompt": "Ted picked a round red fruit from the tree and took a bite.",
+  "answers": [
+   "apple"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fruit",
+  "name": "riddle/fruit/Lisa",
+  "prompt": "Lisa picked a round red fruit from the tree and took a bite.",
+  "answers": [
+   "apple"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/fruit",
+  "name": "riddle/fruit/Roy",
+  "prompt": "Roy picked a round red fruit from the tree and took a bite.",
+  "answers": [
+   "apple"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/drink",
+  "name": "riddle/drink/Leo",
+  "prompt": "The baby was hungry, so Leo poured the white drink from the cow into a cup.",
+  "answers": [
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/drink",
+  "name": "riddle/drink/Lucy",
+  "prompt": "The baby was hungry, so Lucy poured the white drink from the cow into a cup.",
+  "answers": [
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/drink",
+  "name": "riddle/drink/Paul",
+  "prompt": "The baby was hungry, so Paul poured the white drink from the cow into a cup.",
+  "answers": [
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/drink",
+  "name": "riddle/drink/Amy",
+  "prompt": "The baby was hungry, so Amy poured the white drink from the cow into a cup.",
+  "answers": [
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/drink",
+  "name": "riddle/drink/Tom",
+  "prompt": "The baby was hungry, so Tom poured the white drink from the cow into a cup.",
+  "answers": [
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/drink",
+  "name": "riddle/drink/Jane",
+  "prompt": "The baby was hungry, so Jane poured the white drink from the cow into a cup.",
+  "answers": [
+   "milk"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/night",
+  "name": "riddle/night/Jen",
+  "prompt": "Jen looked up at the night sky and saw a big round light shining.",
+  "answers": [
+   "moon"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/night",
+  "name": "riddle/night/Joe",
+  "prompt": "Joe looked up at the night sky and saw a big round light shining.",
+  "answers": [
+   "moon"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/night",
+  "name": "riddle/night/Kim",
+  "prompt": "Kim looked up at the night sky and saw a big round light shining.",
+  "answers": [
+   "moon"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/night",
+  "name": "riddle/night/John",
+  "prompt": "John looked up at the night sky and saw a big round light shining.",
+  "answers": [
+   "moon"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/night",
+  "name": "riddle/night/Lisa",
+  "prompt": "Lisa looked up at the night sky and saw a big round light shining.",
+  "answers": [
+   "moon"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/night",
+  "name": "riddle/night/Billy",
+  "prompt": "Billy looked up at the night sky and saw a big round light shining.",
+  "answers": [
+   "moon"
+  ],
+  "split": "fit",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/squeak",
+  "name": "riddle/squeak/Roy",
+  "prompt": "Roy heard a tiny squeak and saw a little gray animal with a long tail run under the table.",
+  "answers": [
+   "mouse"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/squeak",
+  "name": "riddle/squeak/Lucy",
+  "prompt": "Lucy heard a tiny squeak and saw a little gray animal with a long tail run under the table.",
+  "answers": [
+   "mouse"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/squeak",
+  "name": "riddle/squeak/Peter",
+  "prompt": "Peter heard a tiny squeak and saw a little gray animal with a long tail run under the table.",
+  "answers": [
+   "mouse"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/squeak",
+  "name": "riddle/squeak/Amy",
+  "prompt": "Amy heard a tiny squeak and saw a little gray animal with a long tail run under the table.",
+  "answers": [
+   "mouse"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/squeak",
+  "name": "riddle/squeak/Andy",
+  "prompt": "Andy heard a tiny squeak and saw a little gray animal with a long tail run under the table.",
+  "answers": [
+   "mouse"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/squeak",
+  "name": "riddle/squeak/Jane",
+  "prompt": "Jane heard a tiny squeak and saw a little gray animal with a long tail run under the table.",
+  "answers": [
+   "mouse"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/morning",
+  "name": "riddle/morning/Jen",
+  "prompt": "In the morning, the big yellow ball rose in the sky and made everything warm.",
+  "answers": [
+   "sun"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/morning",
+  "name": "riddle/morning/Bob",
+  "prompt": "In the morning, the big yellow ball rose in the sky and made everything warm.",
+  "answers": [
+   "sun"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/morning",
+  "name": "riddle/morning/Kim",
+  "prompt": "In the morning, the big yellow ball rose in the sky and made everything warm.",
+  "answers": [
+   "sun"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/morning",
+  "name": "riddle/morning/Mark",
+  "prompt": "In the morning, the big yellow ball rose in the sky and made everything warm.",
+  "answers": [
+   "sun"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/morning",
+  "name": "riddle/morning/Lisa",
+  "prompt": "In the morning, the big yellow ball rose in the sky and made everything warm.",
+  "answers": [
+   "sun"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/morning",
+  "name": "riddle/morning/Ted",
+  "prompt": "In the morning, the big yellow ball rose in the sky and made everything warm.",
+  "answers": [
+   "sun"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/growl",
+  "name": "riddle/growl/Billy",
+  "prompt": "Billy saw a big brown animal in the woods. It stood on two legs and growled.",
+  "answers": [
+   "bear"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/growl",
+  "name": "riddle/growl/Lucy",
+  "prompt": "Lucy saw a big brown animal in the woods. It stood on two legs and growled.",
+  "answers": [
+   "bear"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/growl",
+  "name": "riddle/growl/Leo",
+  "prompt": "Leo saw a big brown animal in the woods. It stood on two legs and growled.",
+  "answers": [
+   "bear"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/growl",
+  "name": "riddle/growl/Amy",
+  "prompt": "Amy saw a big brown animal in the woods. It stood on two legs and growled.",
+  "answers": [
+   "bear"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/growl",
+  "name": "riddle/growl/Paul",
+  "prompt": "Paul saw a big brown animal in the woods. It stood on two legs and growled.",
+  "answers": [
+   "bear"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/growl",
+  "name": "riddle/growl/Jane",
+  "prompt": "Jane saw a big brown animal in the woods. It stood on two legs and growled.",
+  "answers": [
+   "bear"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/nest",
+  "name": "riddle/nest/Jen",
+  "prompt": "On the farm, Jen found something white and round in the hen's nest.",
+  "answers": [
+   "egg",
+   "eggs"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/nest",
+  "name": "riddle/nest/Jack",
+  "prompt": "On the farm, Jack found something white and round in the hen's nest.",
+  "answers": [
+   "egg",
+   "eggs"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/nest",
+  "name": "riddle/nest/Kim",
+  "prompt": "On the farm, Kim found something white and round in the hen's nest.",
+  "answers": [
+   "egg",
+   "eggs"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/nest",
+  "name": "riddle/nest/Joe",
+  "prompt": "On the farm, Joe found something white and round in the hen's nest.",
+  "answers": [
+   "egg",
+   "eggs"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/nest",
+  "name": "riddle/nest/Lisa",
+  "prompt": "On the farm, Lisa found something white and round in the hen's nest.",
+  "answers": [
+   "egg",
+   "eggs"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "riddle",
+  "template": "riddle/nest",
+  "name": "riddle/nest/John",
+  "prompt": "On the farm, John found something white and round in the hen's nest.",
+  "answers": [
+   "egg",
+   "eggs"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cup",
+  "name": "hide/cup/Tom",
+  "prompt": "Tom broke his dad's favorite cup. Then he heard his dad coming.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cup",
+  "name": "hide/cup/Lucy",
+  "prompt": "Lucy broke her dad's favorite cup. Then she heard her dad coming.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cup",
+  "name": "hide/cup/Bob",
+  "prompt": "Bob broke his dad's favorite cup. Then he heard his dad coming.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cup",
+  "name": "hide/cup/Amy",
+  "prompt": "Amy broke her dad's favorite cup. Then she heard her dad coming.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cup",
+  "name": "hide/cup/Mark",
+  "prompt": "Mark broke his dad's favorite cup. Then he heard his dad coming.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cup",
+  "name": "hide/cup/Jane",
+  "prompt": "Jane broke her dad's favorite cup. Then she heard her dad coming.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cookies",
+  "name": "hide/cookies/Jen",
+  "prompt": "Jen ate all the cookies that mom had baked for the party. Then she heard mom open the door.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cookies",
+  "name": "hide/cookies/Billy",
+  "prompt": "Billy ate all the cookies that mom had baked for the party. Then he heard mom open the door.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cookies",
+  "name": "hide/cookies/Kim",
+  "prompt": "Kim ate all the cookies that mom had baked for the party. Then she heard mom open the door.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cookies",
+  "name": "hide/cookies/Leo",
+  "prompt": "Leo ate all the cookies that mom had baked for the party. Then he heard mom open the door.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cookies",
+  "name": "hide/cookies/Lisa",
+  "prompt": "Lisa ate all the cookies that mom had baked for the party. Then she heard mom open the door.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/cookies",
+  "name": "hide/cookies/Paul",
+  "prompt": "Paul ate all the cookies that mom had baked for the party. Then he heard mom open the door.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/paint",
+  "name": "hide/paint/Andy",
+  "prompt": "Andy spilled red paint all over the new rug. He heard footsteps coming down the hall.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/paint",
+  "name": "hide/paint/Lucy",
+  "prompt": "Lucy spilled red paint all over the new rug. She heard footsteps coming down the hall.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/paint",
+  "name": "hide/paint/Jack",
+  "prompt": "Jack spilled red paint all over the new rug. He heard footsteps coming down the hall.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/paint",
+  "name": "hide/paint/Amy",
+  "prompt": "Amy spilled red paint all over the new rug. She heard footsteps coming down the hall.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/paint",
+  "name": "hide/paint/Joe",
+  "prompt": "Joe spilled red paint all over the new rug. He heard footsteps coming down the hall.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/paint",
+  "name": "hide/paint/Jane",
+  "prompt": "Jane spilled red paint all over the new rug. She heard footsteps coming down the hall.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/crayon",
+  "name": "hide/crayon/Jen",
+  "prompt": "Jen drew on the kitchen wall with a crayon. Then she heard her mom calling.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/crayon",
+  "name": "hide/crayon/Ted",
+  "prompt": "Ted drew on the kitchen wall with a crayon. Then he heard his mom calling.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/crayon",
+  "name": "hide/crayon/Kim",
+  "prompt": "Kim drew on the kitchen wall with a crayon. Then she heard her mom calling.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/crayon",
+  "name": "hide/crayon/Roy",
+  "prompt": "Roy drew on the kitchen wall with a crayon. Then he heard his mom calling.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/crayon",
+  "name": "hide/crayon/Lisa",
+  "prompt": "Lisa drew on the kitchen wall with a crayon. Then she heard her mom calling.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/crayon",
+  "name": "hide/crayon/Peter",
+  "prompt": "Peter drew on the kitchen wall with a crayon. Then he heard his mom calling.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/lamp",
+  "name": "hide/lamp/Paul",
+  "prompt": "While playing ball inside, Paul knocked over the lamp and it broke. He heard the front door open.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/lamp",
+  "name": "hide/lamp/Lucy",
+  "prompt": "While playing ball inside, Lucy knocked over the lamp and it broke. She heard the front door open.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/lamp",
+  "name": "hide/lamp/Tom",
+  "prompt": "While playing ball inside, Tom knocked over the lamp and it broke. He heard the front door open.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/lamp",
+  "name": "hide/lamp/Amy",
+  "prompt": "While playing ball inside, Amy knocked over the lamp and it broke. She heard the front door open.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/lamp",
+  "name": "hide/lamp/Bob",
+  "prompt": "While playing ball inside, Bob knocked over the lamp and it broke. He heard the front door open.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/lamp",
+  "name": "hide/lamp/Jane",
+  "prompt": "While playing ball inside, Jane knocked over the lamp and it broke. She heard the front door open.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/seek",
+  "name": "hide/seek/Jen",
+  "prompt": "Jen and her friends wanted to play a game. John closed his eyes and started to count.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/seek",
+  "name": "hide/seek/John",
+  "prompt": "John and his friends wanted to play a game. Emma closed her eyes and started to count.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/seek",
+  "name": "hide/seek/Kim",
+  "prompt": "Kim and her friends wanted to play a game. Ted closed his eyes and started to count.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/seek",
+  "name": "hide/seek/Billy",
+  "prompt": "Billy and his friends wanted to play a game. Jen closed her eyes and started to count.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/seek",
+  "name": "hide/seek/Lisa",
+  "prompt": "Lisa and her friends wanted to play a game. Billy closed his eyes and started to count.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/seek",
+  "name": "hide/seek/Leo",
+  "prompt": "Leo and his friends wanted to play a game. Kim closed her eyes and started to count.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/jar",
+  "name": "hide/jar/Peter",
+  "prompt": "Peter took a cookie from the jar without asking. Then he heard his sister coming into the kitchen.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/jar",
+  "name": "hide/jar/Lucy",
+  "prompt": "Lucy took a cookie from the jar without asking. Then she heard her sister coming into the kitchen.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/jar",
+  "name": "hide/jar/Andy",
+  "prompt": "Andy took a cookie from the jar without asking. Then he heard his sister coming into the kitchen.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/jar",
+  "name": "hide/jar/Amy",
+  "prompt": "Amy took a cookie from the jar without asking. Then she heard her sister coming into the kitchen.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/jar",
+  "name": "hide/jar/Jack",
+  "prompt": "Jack took a cookie from the jar without asking. Then he heard his sister coming into the kitchen.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ },
+ {
+  "family": "hide",
+  "template": "hide/jar",
+  "name": "hide/jar/Jane",
+  "prompt": "Jane took a cookie from the jar without asking. Then she heard her sister coming into the kitchen.",
+  "answers": [
+   "hide",
+   "hid",
+   "hiding"
+  ],
+  "split": "held-out",
+  "copy_allowed": false
+ }
+]
